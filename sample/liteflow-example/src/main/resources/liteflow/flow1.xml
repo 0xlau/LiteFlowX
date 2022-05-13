@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+    <nodes>
+        <node id="a" class="com.yomahub.liteflow.example.component.CheckCmp"/>
+        <node id="c" class="com.yomahub.liteflow.example.component.PromotionConvertCmp"/>
+        <node id="d" class="com.yomahub.liteflow.example.component.PriceStepInitCmp" />
+        <node id="e" class="com.yomahub.liteflow.example.component.StepPrintCmp"></node>
+    </nodes>
+    <chain name="mainChain">
+        <pre value="b[test]"/>
+        <then value="slotInitCmp, priceStepInitCmp"/>
+        <then value="a"></then>
+        <then value="promotionConvertCmp"/>
+        <then value="promotionChain" />
+        <then value="memberDiscountCmp"/>
+        <then value="promotionChain"/>
+        <then value="chain1"/>
+        <then value="couponCmp"/>
+        <then value="postageCondCmp[test2]( postageCmp[test2] | overseaPostageCmp[test2] )"/>
+        <when value="priceResultCmp, stepPrintCmp"/>
+    </chain>
+</flow>

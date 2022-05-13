@@ -1,0 +1,32 @@
+{
+  "flow": {
+    "nodes": {
+      "node": [
+        {
+          "id": "b",
+          "name": "b节点",
+          "class": "com.yomahub.liteflow.example.component.SlotInitCmp"
+        }
+      ]
+    },
+    "chain": [
+      {
+        "name": "chain1",
+        "condition": [
+          {
+            "type": "then",
+            "value": "checkCmp[tag], slotInitCmp, priceStepInitCmp"
+          },
+          {
+            "type": "when",
+            "value": "memberDiscountCmp"
+          },
+          {
+            "type": "then",
+            "value": "promotionChain"
+          }
+        ]
+      }
+    ]
+  }
+}

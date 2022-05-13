@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <link rel="stylesheet" href="/lib/jsoneditor/jsoneditor.css" type="text/css">
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lib/jsoneditor/jsoneditor.js"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+</div>
+<div class="layui-fluid">
+    <form class="layui-form-pane">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-body ">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">请求的商品包数据</label>
+                            <div class="layui-input-block">
+                                <div id="reqDiv" style="height: 800px">
+                                </div>
+                                <!--<textarea id="reqData" placeholder="请输入内容" lay-verify="required" class="layui-textarea" style="height: 800px" th:text="${req}">
+                                </textarea>-->
+
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <input type="button" class="layui-btn" onclick="submitReq()" value="提交请求">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">返回的价格步骤日志</label>
+                            <blockquote id="stepArea" class="layui-elem-quote" style="white-space: pre;height: 800px">
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    layui.use(['form','util'], function () {
+
+    });
+
+    // create the editor
+    const container = document.getElementById('reqDiv')
+    const options = {}
+    const editor = new JSONEditor(container, options)
+
+    editor.setText([[${req}]])
+
+    function submitReq() {
+        let reqData = editor.getText();
+
+        $.ajax({
+            url:'/submit',
+            type:'post',
+            contentType:'application/json',
+            data:reqData,
+            success:function (data) {
+                $("#stepArea").html(data);
+            }
+        })
+    }
+</script>
+</html>
