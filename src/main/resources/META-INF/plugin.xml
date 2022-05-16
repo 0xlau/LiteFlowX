@@ -6,7 +6,6 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.java</depends>
-    <depends config-file="spring.xml">com.intellij.spring</depends>
 
     <extensions defaultExtensionNs="com.intellij">
 
