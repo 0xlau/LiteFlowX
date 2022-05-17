@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.0.1-alpha.2.1] - 2022-05-16
+### Changed
+- Change plugin icon
+
 ## [0.0.1-alpha.2] - 2022-05-16
 ### Enhanced
 - Compatible with IDEA Community Edition
