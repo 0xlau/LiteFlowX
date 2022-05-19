@@ -6,10 +6,25 @@ import javax.swing.*;
 
 public interface Icons {
 
-    Icon STATEMENT_LINE_MARKER_ICON = IconLoader.getIcon("/images/Editor_Java.png", Icons.class);
+    /** 组件LINEMARKER图标 */
+    Icon COMPONENT_LINE_MARKER_ICON = IconLoader.getIcon("/images/component_12x12.png", Icons.class);
 
-    Icon NODE_LINE_MARKER_ICON = IconLoader.getIcon("/images/Editor_Xml.png", Icons.class);
+    /** 节点LINEMARKER图标 */
+    Icon NODE_LINE_MARKER_ICON = IconLoader.getIcon("/images/node_12x12.png", Icons.class);
 
-    Icon CHAIN_LINE_MARKER_ICON = IconLoader.getIcon("/images/Editor_Other.png", Icons.class);
+    /** 链条LINEMARKER图标 */
+    Icon CHAIN_LINE_MARKER_ICON = IconLoader.getIcon("/images/chain_12x12.png", Icons.class);
+
+    /** XML文件图标 */
+    Icon XML_FILE_ICON = IconLoader.getIcon("/images/xml_16x16.png", Icons.class);
+
+    /** JSON文件图标 */
+    Icon JSON_FILE_ICON = IconLoader.getIcon("/images/json_16x16.png", Icons.class);
+
+    /** YML文件图标 */
+    Icon YML_FILE_ICON = IconLoader.getIcon("/images/yml_16x16.png", Icons.class);
+
+    /** 组件类图标 */
+    Icon COMPONENT_CLASS_FILE_ICON = COMPONENT_LINE_MARKER_ICON;
 
 }

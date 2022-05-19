@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Slot初始化组件
  */
-@Component("slotInitCmp")
+@Component
 public class SlotInitCmp extends NodeComponent {
     @Override
     public void process() throws Exception {

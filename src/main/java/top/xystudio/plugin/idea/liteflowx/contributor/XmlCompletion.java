@@ -7,13 +7,10 @@ import com.intellij.json.psi.JsonObject;
 import com.intellij.json.psi.JsonStringLiteral;
 import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
-import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.java.stubs.index.JavaFullClassNameIndex;
 import com.intellij.psi.impl.source.xml.XmlTagImpl;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlElementType;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
@@ -22,6 +19,7 @@ import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.ComponentElement;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
 
 import java.util.Optional;
@@ -39,7 +37,7 @@ public class XmlCompletion extends CompletionContributor {
                 Project project = parameters.getEditor().getProject();
 
                 /* Find Component */
-                for (PsiClass psiClass : LiteFlowUtils.findAllLiteFlowComponent(project)) {
+                for (PsiClass psiClass : LiteFlowService.getInstance(project).findAllLiteFlowComponent()) {
                     PsiAnnotation liteFlowAnnotation = LiteFlowUtils.getLiteFlowAnnotationByClass(psiClass);
                     if (liteFlowAnnotation != null){
                         String value = liteFlowAnnotation.findAttributeValue("value").getText().replace("\"", "");
