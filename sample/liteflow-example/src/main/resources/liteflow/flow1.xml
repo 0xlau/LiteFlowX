@@ -11,12 +11,11 @@
         <then value="slotInitCmp, priceStepInitCmp"/>
         <then value="a"></then>
         <then value="memberDiscountCmp, promotionConvertCmp, promotionChain"/>
-        <then value="promotionChain" />
+        <then value="ok" />
         <then value="memberDiscountCmp"/>
         <then value="promotionChain"/>
-        <then value="chain1"/>
         <then value="couponCmp"/>
         <then value="postageCondCmp[test2]( postageCmp[test2] | overseaPostageCmp[test2])"/>
-        <when value="priceResultCmp, stepPrintCmp"/>
+        <when value="chain1"/>
     </chain>
 </flow>

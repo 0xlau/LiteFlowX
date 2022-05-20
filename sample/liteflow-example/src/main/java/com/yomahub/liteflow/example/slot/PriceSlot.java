@@ -1,6 +1,7 @@
 package com.yomahub.liteflow.example.slot;
 
 import com.yomahub.liteflow.entity.data.AbsSlot;
+import com.yomahub.liteflow.entity.data.DefaultSlot;
 import com.yomahub.liteflow.example.bean.PriceStepVO;
 import com.yomahub.liteflow.example.bean.ProductPackVO;
 import com.yomahub.liteflow.example.bean.PromotionPackVO;
