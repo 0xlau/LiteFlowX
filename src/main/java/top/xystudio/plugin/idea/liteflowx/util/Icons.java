@@ -24,10 +24,10 @@ public interface Icons {
     /** YML文件图标 */
     Icon YML_FILE_ICON = IconLoader.getIcon("/images/yml_16x16.png", Icons.class);
 
-    /** YML文件图标 */
+    /** SLOT类文件图标 */
     Icon SLOT_CLASS_FILE_ICON = IconLoader.getIcon("/images/slot_16x16.png", Icons.class);
 
-    /** 组件类图标 */
+    /** COMPONENT类文件图标 */
     Icon COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/component_16x16.png", Icons.class);
 
 }
