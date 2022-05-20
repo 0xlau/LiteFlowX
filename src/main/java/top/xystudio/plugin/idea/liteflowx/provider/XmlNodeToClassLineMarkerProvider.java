@@ -14,6 +14,10 @@ import top.xystudio.plugin.idea.liteflowx.util.Icons;
 import javax.swing.*;
 import java.util.Optional;
 
+/**
+ * 实现对Node的识别以及获取Class的位置
+ * @author Coder-XiaoYi
+ */
 public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
 
     @Override

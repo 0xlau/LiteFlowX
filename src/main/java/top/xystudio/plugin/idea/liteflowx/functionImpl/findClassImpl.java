@@ -26,36 +26,10 @@ public class findClassImpl implements BiFunction<Project, RegexNodeEntity, PsiEl
         PsiClass[] allComponent = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
 
         for (PsiClass psiClass : allComponent) {
-            String componentValue =
-                    JavaService.getInstance(project).getAnnotationAttributeValueByClass(psiClass, Annotation.Component, "value");
 
-            if (componentValue != null){
-
-                /** 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
-                if (componentValue.equals("")){
-                    componentValue = StringUtils.lowerFirst(psiClass.getName());
-                }
-
-                if (componentValue.equals(componentId)){
-                    return psiClass;
-                }
-
-            }
-
-            String liteFlowComponentValue =
-                    JavaService.getInstance(project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "value");
-
-            if (liteFlowComponentValue != null){
-
-                /** 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
-                if (liteFlowComponentValue.equals("")){
-                    liteFlowComponentValue = StringUtils.lowerFirst(psiClass.getName());
-                }
-
-                if (liteFlowComponentValue.equals(componentId)){
-                    return psiClass;
-                }
-
+            String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentName(psiClass);
+            if (componentName != null && componentName.equals(componentId)){
+                return psiClass;
             }
 
         }

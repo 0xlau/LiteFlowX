@@ -26,10 +26,11 @@
                                         implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlNodeToClassLineMarkerProvider"/>
         <iconProvider id="liteflowx.FileIconProvider"
                 implementation="top.xystudio.plugin.idea.liteflowx.provider.FileIconProvider"></iconProvider>
-<!--        &lt;!&ndash; xml 自动完成 &ndash;&gt;-->
-<!--        <completion.contributor-->
-<!--                language="XML"-->
-<!--                implementationClass="top.xystudio.plugin.idea.liteflowx.contributor.XmlCompletion"/>-->
+
+        <!-- xml 自动完成 -->
+        <completion.contributor
+                language="XML"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.contributor.XmlComponentCompletionContributor"/>
 
 
     </extensions>

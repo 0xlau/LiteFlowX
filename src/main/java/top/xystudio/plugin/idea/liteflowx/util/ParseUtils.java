@@ -12,7 +12,9 @@ public class ParseUtils {
         String[] condArray = expression.split(",");
         for (String s : condArray){
             String itemExpression = s.trim();
-            result.add(RegexEntity.parse(itemExpression));
+            if (!itemExpression.equals("")) {
+                result.add(RegexEntity.parse(itemExpression));
+            }
         }
         return result;
     }

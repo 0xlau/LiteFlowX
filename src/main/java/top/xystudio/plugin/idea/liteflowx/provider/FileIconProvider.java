@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
+import top.xystudio.plugin.idea.liteflowx.util.DomUtils;
 import top.xystudio.plugin.idea.liteflowx.util.Icons;
 
 import javax.swing.*;
@@ -29,7 +30,24 @@ public class FileIconProvider extends IconProvider {
         if (isLiteFlowComponentClassFile(element)){
             return Icons.COMPONENT_CLASS_FILE_ICON;
         }
+        if (isLiteFlowSlotClassFile(element)){
+            return Icons.SLOT_CLASS_FILE_ICON;
+        }
         return null;
+    }
+
+    private boolean isLiteFlowSlotClassFile(PsiElement element) {
+        Language language = element.getLanguage();
+        if (!language.isKindOf(JavaLanguage.INSTANCE)){
+            return false;
+        }
+        if (!(element instanceof PsiClass)){
+            return false;
+        }
+        if (!LiteFlowService.getInstance(element.getProject()).isLiteFlowSlot((PsiClass) element)){
+            return false;
+        }
+        return true;
     }
 
     private boolean isLiteFlowComponentClassFile(PsiElement element) {
@@ -51,20 +69,6 @@ public class FileIconProvider extends IconProvider {
         if (!language.isKindOf(XMLLanguage.INSTANCE)){
             return false;
         }
-        PsiFile file = element.getContainingFile();
-        if (file == null){
-            return false;
-        }
-        if (!(file instanceof XmlFile)){
-            return false;
-        }
-        XmlTag rootTag = ((XmlFile) file).getRootTag();
-        if (rootTag == null){
-            return false;
-        }
-        if (!Flow.class.getSimpleName().toLowerCase().equals(rootTag.getName())){
-            return false;
-        }
-        return true;
+        return DomUtils.isLiteFlowXmlFile(element.getContainingFile());
     }
 }
