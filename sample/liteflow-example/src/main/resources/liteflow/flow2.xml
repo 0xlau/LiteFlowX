@@ -2,5 +2,6 @@
 <flow>
     <chain name="promotionChain">
         <then value="fullCutCmp, fullDiscountCmp, rushBuyCmp"/>
+        <then value=""/>
     </chain>
 </flow>

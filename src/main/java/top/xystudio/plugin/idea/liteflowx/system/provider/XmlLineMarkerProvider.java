@@ -1,10 +1,9 @@
-package top.xystudio.plugin.idea.liteflowx.provider;
+package top.xystudio.plugin.idea.liteflowx.system.provider;
 
 import com.google.common.collect.ImmutableSet;
+import com.intellij.ide.util.PsiElementListCellRenderer;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.*;
@@ -23,6 +22,15 @@ public abstract class XmlLineMarkerProvider extends CommonLineMarkerProvider<Xml
             Finally.class.getSimpleName().toLowerCase(),
             Node.class.getSimpleName().toLowerCase()
     );
+
+    /**
+     * 元素列表Cell渲染，默认返回null，则表示不做任何渲染，使用默认渲染处理
+     * @return
+     */
+    @Override
+    public PsiElementListCellRenderer getCellRenderer() {
+        return null;
+    }
 
     /**
      * 判断是不是LiteFlow的XML文件

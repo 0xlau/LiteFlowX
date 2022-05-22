@@ -1,15 +1,15 @@
-package top.xystudio.plugin.idea.liteflowx.provider;
+package top.xystudio.plugin.idea.liteflowx.system.provider;
 
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.xml.XmlToken;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
+import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
 import top.xystudio.plugin.idea.liteflowx.service.JavaService;
-import top.xystudio.plugin.idea.liteflowx.util.Icons;
 
 import javax.swing.*;
 import java.util.Optional;
@@ -51,7 +51,7 @@ public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
 
     @Override
     public @Nullable Icon getIcon() {
-        return Icons.COMPONENT_LINE_MARKER_ICON;
+        return LiteFlowIcons.COMPONENT_LINE_MARKER_ICON;
     }
 
     @Override

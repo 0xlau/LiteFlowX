@@ -1,8 +1,9 @@
-package top.xystudio.plugin.idea.liteflowx.provider;
+package top.xystudio.plugin.idea.liteflowx.system.provider;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
+import com.intellij.ide.util.PsiElementListCellRenderer;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
@@ -29,16 +30,24 @@ public abstract class CommonLineMarkerProvider<T extends PsiElement> extends Rel
             if (arrays.length == 0) {
                 return;
             }
-            RelatedItemLineMarkerInfo<PsiElement> lineMarkerInfo = NavigationGutterIconBuilder
+            NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
                     .create(getIcon())
                     .setNamer(psiElement -> psiElement.getContainingFile().getVirtualFile().getName())
                     .setAlignment(GutterIconRenderer.Alignment.CENTER)
                     .setTooltipTitle(getTooltip(arrays[0], element))
-                    .setTargets(arrays)
-                    .createLineMarkerInfo(element);
-            result.add(lineMarkerInfo);
+                    .setTargets(arrays);
+            if (getCellRenderer() != null){
+                builder.setCellRenderer(getCellRenderer());
+            }
+            result.add(builder.createLineMarkerInfo(element));
         }
     }
+
+    /**
+     * 元素列表Cell渲染
+     * @return
+     */
+    public abstract PsiElementListCellRenderer getCellRenderer();
 
     @NotNull
     public abstract String getTooltip(PsiElement to, @NotNull PsiElement from);

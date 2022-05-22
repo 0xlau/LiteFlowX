@@ -11,28 +11,47 @@
 
         <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
+        <projectService serviceInterface="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.LiteFlowToolWindowService"
+                        serviceImplementation="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.impl.LiteFlowToolWindowServiceImpl"/>
 
         <!-- flow.xml文件属性提示 -->
         <dom.fileMetaData id="liteflowx.FlowDescription" rootTagName="flow" implementation="top.xystudio.plugin.idea.liteflowx.dom.description.FlowDescription"/>
 
         <!--代码行插件，实现代码导航功能-->
         <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToClassLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlComponentToClassLineMarkerProvider"/>
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToClassLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToChainLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlComponentToChainLineMarkerProvider"/>
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToChainLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToNodeLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlComponentToNodeLineMarkerProvider"/>
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToNodeLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider id="liteflowx.XmlNodeToClassLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlNodeToClassLineMarkerProvider"/>
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlNodeToClassLineMarkerProvider"/>
+
+        <!-- 文件图标提供 -->
         <iconProvider id="liteflowx.FileIconProvider"
-                implementation="top.xystudio.plugin.idea.liteflowx.provider.FileIconProvider"></iconProvider>
+                implementation="top.xystudio.plugin.idea.liteflowx.system.provider.FileIconProvider"></iconProvider>
 
         <!-- xml 自动完成 -->
         <completion.contributor
                 language="XML"
-                implementationClass="top.xystudio.plugin.idea.liteflowx.contributor.XmlComponentCompletionContributor"/>
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.contributor.XmlComponentCompletionContributor"/>\
 
+        <!-- 结构工具窗口 -->
+        <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="true"
+                factoryClass="top.xystudio.plugin.idea.liteflowx.system.toolWindow.LiteFlowToolWindowFactory"/>
 
     </extensions>
+
+    <actions>
+
+        <group id="LiteFlowTool.Toolbar">
+
+            <action class="top.xystudio.plugin.idea.liteflowx.system.toolWindow.actions.RefreshAction"/>
+
+            <separator text="Separator"/>
+
+        </group>
+
+    </actions>
 
 </idea-plugin>

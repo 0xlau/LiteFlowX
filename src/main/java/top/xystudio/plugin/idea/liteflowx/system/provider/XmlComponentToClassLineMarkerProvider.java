@@ -1,16 +1,18 @@
-package top.xystudio.plugin.idea.liteflowx.provider;
+package top.xystudio.plugin.idea.liteflowx.system.provider;
 
+import com.intellij.ide.util.PsiElementListCellRenderer;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.xml.XmlToken;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
+import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.ComponentElement;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findClassImpl;
 import top.xystudio.plugin.idea.liteflowx.parse.RegexEntity;
-import top.xystudio.plugin.idea.liteflowx.util.Icons;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
 import top.xystudio.plugin.idea.liteflowx.util.ParseUtils;
 
@@ -50,12 +52,40 @@ public class XmlComponentToClassLineMarkerProvider extends XmlLineMarkerProvider
 
     @Override
     public @Nullable Icon getIcon() {
-        return Icons.COMPONENT_LINE_MARKER_ICON;
+        return LiteFlowIcons.COMPONENT_LINE_MARKER_ICON;
     }
 
     @Override
     public String getName() {
         return "Component statement line marker";
+    }
+
+    @Override
+    public PsiElementListCellRenderer getCellRenderer() {
+        return new PsiElementListCellRenderer() {
+            @Override
+            public @NlsSafe String getElementText(PsiElement element) {
+                if (!(element instanceof PsiClass)){
+                    return null;
+                }
+                return ((PsiClass) element).getName();
+            }
+
+            @Override
+            protected @Nullable @NlsSafe String getContainerText(PsiElement element, String name) {
+                return element.getContainingFile().getName();
+            }
+
+            @Override
+            protected int getIconFlags() {
+                return 0;
+            }
+
+            @Override
+            protected Icon getIcon(PsiElement element) {
+                return LiteFlowIcons.COMPONENT_LINE_MARKER_ICON;
+            }
+        };
     }
 
 }
