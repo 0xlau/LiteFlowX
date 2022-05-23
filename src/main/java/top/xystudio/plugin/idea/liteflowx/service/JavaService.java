@@ -6,6 +6,7 @@ import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.impl.search.ClassesWithAnnotatedMembersSearcher;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.AllClassesSearch;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
@@ -55,11 +56,11 @@ public class JavaService implements Serializable {
      * @return 含有指定qualifiedName的注解的所有Class
      */
     public Collection<PsiClass> getClassesByAnnotationQualifiedName(@NotNull String qualifiedName){
-        PsiClass psiClass = javaPsiFacade.findClass(qualifiedName, GlobalSearchScope.allScope(this.project));
+        PsiClass psiClass = getClassByQualifiedName(qualifiedName);
         if (psiClass == null){
             return new ArrayList<>();
         }
-        return ClassesWithAnnotatedMembersSearch.search(psiClass, GlobalSearchScope.allScope(this.project)).findAll();
+        return ClassesWithAnnotatedMembersSearch.search(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
     }
 
     /**
