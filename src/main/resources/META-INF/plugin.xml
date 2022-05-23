@@ -11,7 +11,7 @@
 
         <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
-        <projectService serviceInterface="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.LiteFlowToolWindowService"
+        <projectService id="liteflowx.LiteFlowToolWindowService" serviceInterface="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.LiteFlowToolWindowService"
                         serviceImplementation="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.impl.LiteFlowToolWindowServiceImpl"/>
 
         <!-- flow.xml文件属性提示 -->
@@ -46,7 +46,7 @@
 
         <group id="LiteFlowTool.Toolbar">
 
-            <action class="top.xystudio.plugin.idea.liteflowx.system.toolWindow.actions.RefreshAction"/>
+            <action id="liteflowx.RefreshAction" class="top.xystudio.plugin.idea.liteflowx.system.toolWindow.actions.RefreshAction"/>
 
             <separator text="Separator"/>
 
