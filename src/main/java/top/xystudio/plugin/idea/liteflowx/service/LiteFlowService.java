@@ -125,7 +125,7 @@ public class LiteFlowService implements Serializable {
         }
 
         String liteFlowComponentValue =
-                JavaService.getInstance(project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "value");
+                JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "value");
         if (liteFlowComponentValue != null){
             /** 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
             if (liteFlowComponentValue.equals("")){
