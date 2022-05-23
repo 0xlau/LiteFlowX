@@ -20,7 +20,7 @@
 </div>
 
 <!-- Plugin description -->
-<h4>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h4>
+<h3>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h3>
 
 目前 LiteFlowX 的特色:
 - 能够正确识别 Component、Node 以及 Chain

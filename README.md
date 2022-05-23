@@ -20,7 +20,7 @@ English | [简体中文](./README.zh-CN.md)
 </div>
 
 <!-- Plugin description -->
-<h4>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h4>
+<h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
 
 LiteFlowX Plugin Features:
