@@ -2,6 +2,21 @@
 
 ## [Unreleased]
 
+## [0.0.1-alpha.3.1] - 2022-05-23
+### Added
+- Added LiteFlowTool Windows
+- Added file icon processing, able to identify xml files and component files
+- Added recognition of Slot files
+### Changed
+- Modify the style of XML intellisense
+- Re-optimize the code structure and add comments to important classes
+- Temporarily remove support for JSON files
+- Using the LiteFlow native Parser for parsing expression
+- LineMarker icon modification
+### Bug fixed
+- Some components could not be found
+- Fix the problem of not being able to autocomplete
+
 ## [0.0.1-alpha.3] - 2022-05-23
 ### Added
 - Added LiteFlowTool Windows
