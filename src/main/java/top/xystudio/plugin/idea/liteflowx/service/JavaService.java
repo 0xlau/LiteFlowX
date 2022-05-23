@@ -7,6 +7,7 @@ import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.AllClassesSearch;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,14 @@ public class JavaService implements Serializable {
 
     public static JavaService getInstance(@NotNull Project project){
         return ServiceManager.getService(project, JavaService.class);
+    }
+
+    /**
+     * 获取项目里的所有Class
+     * @return
+     */
+    public Collection<PsiClass> getAllClasses(){
+        return AllClassesSearch.search(GlobalSearchScope.projectScope(project), project).findAll();
     }
 
     /**

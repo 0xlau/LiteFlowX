@@ -19,7 +19,7 @@ public class LiteFlowToolWindowFactory implements ToolWindowFactory {
     public static final String TOOL_WINDOW_ID = "LiteFlowTool";
 
     /**
-     * 获取RestfulTool的toolWindow窗口内容
+     * 获取LiteFlowTool的toolWindow窗口内容
      *
      * @param project auto
      * @return LiteFlowToolWindow
@@ -30,7 +30,7 @@ public class LiteFlowToolWindowFactory implements ToolWindowFactory {
     }
 
     /**
-     * 获取RestfulTool的toolWindow窗口内容
+     * 获取LiteFlowTool的toolWindow窗口内容
      *
      * @param project auto
      * @return LiteFlowToolWindow

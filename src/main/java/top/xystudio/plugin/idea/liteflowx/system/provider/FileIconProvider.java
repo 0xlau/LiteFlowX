@@ -54,7 +54,7 @@ public class FileIconProvider extends IconProvider {
         if (!(element instanceof PsiClass)){
             return false;
         }
-        if (!LiteFlowService.getInstance(element.getProject()).isLiteFlowComponent((PsiClass) element)){
+        if (!LiteFlowService.getInstance(element.getProject()).isLiteFlowClass((PsiClass) element)){
             return false;
         }
         return true;

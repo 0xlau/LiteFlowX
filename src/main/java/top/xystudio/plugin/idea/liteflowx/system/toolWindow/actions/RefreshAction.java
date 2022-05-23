@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.LiteFlowToolWindowFactory;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame.LiteFlowToolWindow;
 
+/**
+ * toolWindow刷新按钮
+ */
 public class RefreshAction extends DumbAwareAction {
 
     public RefreshAction() {
