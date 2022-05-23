@@ -7,16 +7,15 @@
         <node id="e" class="com.yomahub.liteflow.example.component.StepPrintCmp"></node>
     </nodes>
     <chain name="mainChain">
-        <pre value="b[test]"/>
+        <pre value="slotInitCmp, priceStepInitCmp, b[test]"/>
         <then value="slotInitCmp, priceStepInitCmp"/>
-        <then value="a"></then>
-        <then value="promotionConvertCmp"/>
-        <then value="promotionChain" />
+        <then value="a,c,d,e"></then>
+        <then value="memberDiscountCmp, promotionConvertCmp, promotionChain"/>
+        <then value="ok" />
         <then value="memberDiscountCmp"/>
-        <then value="promotionChain"/>
+        <then value="promotionChain, mainChain"/>
         <then value="chain1"/>
-        <then value="couponCmp"/>
-        <then value="postageCondCmp[test2]( postageCmp[test2] | overseaPostageCmp[test2] )"/>
-        <when value="priceResultCmp, stepPrintCmp"/>
+        <then value="postageCondCmp[test2]( postageCmp[test2] | overseaPostageCmp[test2])"/>
+        <when value="chain1"/>
     </chain>
 </flow>

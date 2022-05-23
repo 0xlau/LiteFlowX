@@ -10,7 +10,7 @@ public interface Node extends DomElement {
     GenericAttributeValue<String> getId();
 
     @Attribute("class")
-    GenericAttributeValue<String> getClassA();
+    GenericAttributeValue<String> getClazz();
 
     @Attribute("name")
     GenericAttributeValue<String> getName();

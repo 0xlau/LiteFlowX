@@ -9,47 +9,49 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
+        <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
+        <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
+        <projectService id="liteflowx.LiteFlowToolWindowService" serviceInterface="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.LiteFlowToolWindowService"
+                        serviceImplementation="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.impl.LiteFlowToolWindowServiceImpl"/>
+
+        <!-- flow.xml文件属性提示 -->
         <dom.fileMetaData id="liteflowx.FlowDescription" rootTagName="flow" implementation="top.xystudio.plugin.idea.liteflowx.dom.description.FlowDescription"/>
 
-        <!-- xml 跳转到 component -->
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlComponentLineMarkerProvider"/>
-
-        <!-- xml 跳转到 chain -->
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlChainLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlChainLineMarkerProvider"/>
-
-        <!-- xml 跳转到 node -->
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlNodeLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlNodeLineMarkerProvider"/>
-
-        <!-- xml node 跳转到 class -->
+        <!--代码行插件，实现代码导航功能-->
+        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToClassLineMarkerProvider" language="XML"
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToClassLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToChainLineMarkerProvider" language="XML"
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToChainLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToNodeLineMarkerProvider" language="XML"
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToNodeLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider id="liteflowx.XmlNodeToClassLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.XmlNodeToClassLineMarkerProvider"/>
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlNodeToClassLineMarkerProvider"/>
 
-        <!-- json 跳转到 component -->
-        <codeInsight.lineMarkerProvider id="liteflowx.JsonComponentLineMarkerProvider" language="JSON"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.JsonComponentMarkerProvider"/>
-
-        <!-- json 跳转到 chain -->
-        <codeInsight.lineMarkerProvider id="liteflowx.JsonChainLineMarkerProvider" language="JSON"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.JsonChainMarkerProvider"/>
-
-        <!-- json node 跳转到 class -->
-        <codeInsight.lineMarkerProvider id="liteflowx.JsonNodeToClassLineMarkerProvider" language="JSON"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.JsonNodeToClassLineMarkerProvider"/>
+        <!-- 文件图标提供 -->
+        <iconProvider id="liteflowx.FileIconProvider"
+                implementation="top.xystudio.plugin.idea.liteflowx.system.provider.FileIconProvider"></iconProvider>
 
         <!-- xml 自动完成 -->
         <completion.contributor
                 language="XML"
-                implementationClass="top.xystudio.plugin.idea.liteflowx.contributor.XmlCompletion"/>
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.contributor.XmlComponentCompletionContributor"/>\
 
-        <!-- json 自动完成 -->
-        <completion.contributor
-                language="JSON"
-                implementationClass="top.xystudio.plugin.idea.liteflowx.contributor.JsonCompletion"/>
-
+        <!-- 结构工具窗口 -->
+        <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="true"
+                factoryClass="top.xystudio.plugin.idea.liteflowx.system.toolWindow.LiteFlowToolWindowFactory"/>
 
     </extensions>
+
+    <actions>
+
+        <group id="LiteFlowTool.Toolbar">
+
+            <action id="liteflowx.RefreshAction" class="top.xystudio.plugin.idea.liteflowx.system.toolWindow.actions.RefreshAction"/>
+
+            <separator text="Separator"/>
+
+        </group>
+
+    </actions>
 
 </idea-plugin>

@@ -6,12 +6,10 @@
 <img src='https://img.shields.io/badge/Gitee-white?logo=gitee&logoColor=black'></img>
 </a>
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
-<img src="https://img.shields.io/jetbrains/plugin/v/19145-liteflowx?logo=JetBrains&label=Marketplace" />
+<img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=Marketplace" />
 </a>
-<img src="https://img.shields.io/badge/IDEA--Ultimate->=2020.3-brightgreen?logo=IntelliJ IDEA"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue"/>
-
-
 
 ![LITEFLOWX](https://s1.ax1x.com/2022/05/12/O0Aw4K.png)
 
@@ -22,7 +20,7 @@ English | [简体中文](./README.zh-CN.md)
 </div>
 
 <!-- Plugin description -->
-<h4>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h4>
+<h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
 
 LiteFlowX Plugin Features:

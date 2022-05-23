@@ -6,9 +6,9 @@
 <img src='https://img.shields.io/badge/Gitee-white?logo=gitee&logoColor=black'></img>
 </a>
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
-<img src="https://img.shields.io/jetbrains/plugin/v/19145-liteflowx?logo=JetBrains&label=Marketplace" />
+<img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=Marketplace" />
 </a>
-<img src="https://img.shields.io/badge/IDEA--Ultimate->=2020.3-brightgreen?logo=IntelliJ IDEA"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue"/>
 
 ![LITEFLOWX](https://s1.ax1x.com/2022/05/12/O0Aw4K.png)
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Plugin description -->
-<h4>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h4>
+<h3>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h3>
 
 目前 LiteFlowX 的特色:
 - 能够正确识别 Component、Node 以及 Chain
