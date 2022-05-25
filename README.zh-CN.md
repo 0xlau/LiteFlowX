@@ -6,9 +6,9 @@
 <img src='https://img.shields.io/badge/Gitee-white?logo=gitee&logoColor=black'></img>
 </a>
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
-<img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=Marketplace" />
+<img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2017.1-brightgreen?logo=IntelliJ IDEA"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue"/>
 
 ![LITEFLOWX](https://s1.ax1x.com/2022/05/12/O0Aw4K.png)
@@ -25,8 +25,8 @@
 目前 LiteFlowX 的特色:
 - 能够正确识别 Component、Node 以及 Chain
 - Class 组件与 XML 标题能够相互跳转
-- Class 组件与 Json 标签能够相互跳转
 - Component名称、Node名称与Chain名称的智能提示与自动完成
+- LiteFlow工具箱，Component、Node、Chain、Slot 一目了然
 - ...更多特性敬请期待
 
 <!-- Plugin description end -->
