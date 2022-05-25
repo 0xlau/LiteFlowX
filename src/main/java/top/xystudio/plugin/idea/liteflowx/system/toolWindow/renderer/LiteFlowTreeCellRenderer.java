@@ -25,6 +25,10 @@ public class LiteFlowTreeCellRenderer extends ColoredTreeCellRenderer {
             LiteFlowElement data = node.getData();
             setIcon(data.getIcon());
             append(data.getName());
+            String subName = data.getSubName();
+            if (subName != null){
+                append(" - " + subName, SimpleTextAttributes.GRAYED_ATTRIBUTES);
+            }
         }else if (value instanceof LiteFlowTree.TreeNode<?>) {
             LiteFlowTree.TreeNode<?> node = (LiteFlowTree.TreeNode<?>) value;
             append(node.toString());

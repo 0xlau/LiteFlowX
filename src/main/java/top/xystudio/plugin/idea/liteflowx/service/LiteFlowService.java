@@ -109,7 +109,7 @@ public class LiteFlowService implements Serializable {
      * @param psiClass
      * @return
      */
-    public String getLiteFlowComponentName(@NotNull PsiClass psiClass){
+    public String getLiteFlowComponentNameByPsiClass(@NotNull PsiClass psiClass){
 
         if (!this.isLiteFlowClass(psiClass)){
             return null;

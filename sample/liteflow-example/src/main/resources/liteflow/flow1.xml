@@ -16,6 +16,6 @@
         <then value="promotionChain, mainChain"/>
         <then value="chain1"/>
         <then value="postageCondCmp[test2]( postageCmp[test2] | overseaPostageCmp[test2])"/>
-        <when value="chain1"/>
+        <when value="mainChain"/>
     </chain>
 </flow>

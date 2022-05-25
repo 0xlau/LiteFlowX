@@ -33,7 +33,7 @@ public class XmlComponentCompletionContributor extends CompletionContributor {
 
                 /** 搜索全部LiteFlowComponent */
                 for (PsiClass psiClass : liteFlowService.findAllLiteFlowComponent()) {
-                    String componentName = liteFlowService.getLiteFlowComponentName(psiClass);
+                    String componentName = liteFlowService.getLiteFlowComponentNameByPsiClass(psiClass);
                     if (componentName != null){
                         result.addElement(
                                 JavaLookupElementBuilder.forClass(psiClass, componentName)

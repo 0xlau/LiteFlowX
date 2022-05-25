@@ -24,7 +24,7 @@ public class findClassImpl implements BiFunction<Project, RegexNodeEntity, PsiEl
 
         for (PsiClass psiClass : allComponent) {
 
-            String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentName(psiClass);
+            String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentNameByPsiClass(psiClass);
             if (componentName != null && componentName.equals(componentId)){
                 return psiClass;
             }

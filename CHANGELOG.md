@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.0.1] - 2022-05-25
+### 新增
+- 支持 Java 代码跳转到 Chain
+- 支持 LiteFlowTool 工具中显示元素位置
+- 支持 IDEA 2017.1 以后的版本
+### 更改
+- 图标全部更换使用 svg 图标文件
+### 修复
+- 解决了插件不稳定的部分情况
+
 ## [0.0.1-alpha.3.1] - 2022-05-23
 ### Added
 - Added LiteFlowTool Windows
