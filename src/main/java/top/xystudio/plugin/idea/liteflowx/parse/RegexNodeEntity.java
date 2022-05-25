@@ -18,6 +18,13 @@ public class RegexNodeEntity {
 
     private String tag;
 
+    public RegexNodeEntity(){}
+
+    public RegexNodeEntity(String id, String tag){
+        this.id = id;
+        this.tag = tag;
+    }
+
     public static RegexNodeEntity parse(String itemStr) {
         List<String> list = new ArrayList<String>();
         Matcher m = p.matcher(itemStr);

@@ -1,6 +1,7 @@
 package top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans;
 
 import com.intellij.psi.NavigatablePsiElement;
+import com.intellij.psi.PsiClass;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,13 +17,41 @@ public class LiteFlowElement {
     private LiteFlowElementType liteFlowElementType;
     @Nullable
     private String name;
+    @Nullable
+    private String subName;
 
     public LiteFlowElement(LiteFlowElementType elementType, @Nullable String name, @Nullable NavigatablePsiElement psiElement) {
+
+        this.setLiteFlowElementType(elementType);
+
+        if (name != null) {
+            this.setName(name);
+        }
+        this.psiElement = psiElement;
+
+        switch (elementType){
+            case COMPONENT:
+            case SLOT:
+                this.subName = ((PsiClass)psiElement).getQualifiedName();
+                break;
+            case NODE:
+            case CHAIN:
+                this.subName = psiElement.getContainingFile().getVirtualFile().getName();
+                break;
+            case Element:
+            default:
+                this.subName = null;
+                break;
+        }
+    }
+
+    public LiteFlowElement(LiteFlowElementType elementType, @Nullable String name, @Nullable String subName, @Nullable NavigatablePsiElement psiElement) {
         this.setLiteFlowElementType(elementType);
         if (name != null) {
             this.setName(name);
         }
         this.psiElement = psiElement;
+        this.subName = subName;
     }
 
     public void navigate(boolean focus) {
@@ -51,6 +80,11 @@ public class LiteFlowElement {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Nullable
+    public String getSubName(){
+        return this.subName;
     }
 
     @NotNull

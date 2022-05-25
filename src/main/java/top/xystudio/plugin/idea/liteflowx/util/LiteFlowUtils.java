@@ -33,4 +33,16 @@ public class LiteFlowUtils {
         }
         return Optional.of(result.toArray(new PsiElement[0]));
     }
+
+    /**
+     * 根据名称 查找对应的目标PsiElement
+     * @param project
+     * @param name
+     * @param biFunction
+     * @return
+     */
+    public static Optional<? extends PsiElement> findTargetByName(Project project, String name, BiFunction<Project, RegexNodeEntity, PsiElement> biFunction) {
+        RegexNodeEntity node = new RegexNodeEntity(name, null);
+        return Optional.ofNullable(biFunction.apply(project, node));
+    }
 }

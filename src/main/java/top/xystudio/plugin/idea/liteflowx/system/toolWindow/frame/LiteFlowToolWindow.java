@@ -101,7 +101,7 @@ public class LiteFlowToolWindow extends JPanel {
                     if (o instanceof XmlTag){
                         String id = ((XmlTag) o).getAttributeValue("id");
                         String clazz = ((XmlTag) o).getAttributeValue("class");
-                        return new LiteFlowElement(LiteFlowElementType.NODE, String.format("%s -> %s", id, clazz), o.getContainingFile());
+                        return new LiteFlowElement(LiteFlowElementType.NODE, id, clazz, o.getContainingFile());
                     }
                     return null;
                 })
