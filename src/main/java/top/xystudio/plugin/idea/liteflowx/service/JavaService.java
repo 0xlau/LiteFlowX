@@ -6,6 +6,8 @@ import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.AllClassesSearch;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
@@ -28,7 +30,7 @@ public class JavaService implements Serializable {
         this.javaPsiFacade = JavaPsiFacade.getInstance(project);
     }
 
-    public static JavaService getInstance(@NotNull Project project){
+    public static JavaService getInstance(@NotNull Project project) {
         return ServiceManager.getService(project, JavaService.class);
     }
 
@@ -36,7 +38,7 @@ public class JavaService implements Serializable {
      * 获取项目里的所有Class
      * @return
      */
-    public Collection<PsiClass> getAllClasses(){
+    public Collection<PsiClass> getAllClasses() {
         return AllClassesSearch.search(GlobalSearchScope.projectScope(project), project).findAll();
     }
 
@@ -45,7 +47,7 @@ public class JavaService implements Serializable {
      * @param qualifiedName
      * @return
      */
-    public PsiClass getClassByQualifiedName(@NotNull String qualifiedName){
+    public PsiClass getClassByQualifiedName(@NotNull String qualifiedName) {
         return javaPsiFacade.findClass(qualifiedName, GlobalSearchScope.allScope(this.project));
     }
 
@@ -54,9 +56,9 @@ public class JavaService implements Serializable {
      * @param qualifiedName 注解的全名
      * @return 含有指定qualifiedName的注解的所有Class
      */
-    public Collection<PsiClass> getClassesByAnnotationQualifiedName(@NotNull String qualifiedName){
+    public Collection<PsiClass> getClassesByAnnotationQualifiedName(@NotNull String qualifiedName) {
         PsiClass psiClass = getClassByQualifiedName(qualifiedName);
-        if (psiClass == null){
+        if (psiClass == null) {
             return new ArrayList<>();
         }
         return ClassesWithAnnotatedMembersSearch.search(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
@@ -69,15 +71,31 @@ public class JavaService implements Serializable {
      * @param attribute 属性名
      * @return 属性值
      */
-    public String getAnnotationAttributeValueByClass(@NotNull PsiClass psiClass, @NotNull String qualifiedName, String attribute){
+    public String getAnnotationAttributeValueByClass(@NotNull PsiClass psiClass, @NotNull String qualifiedName, String attribute) {
         PsiAnnotation annotation = psiClass.getAnnotation(qualifiedName);
-        if (annotation == null){
+        if (annotation == null) {
             return null;
         }
         PsiAnnotationMemberValue attributeValue = annotation.findAttributeValue(attribute);
-        if (attributeValue == null){
+        if (attributeValue == null) {
             return null;
         }
+        /*处理注解value是引用表达式*/
+        if (attributeValue instanceof PsiReferenceExpressionImpl) {
+            PsiElement resolve = ((PsiReferenceExpressionImpl) attributeValue).resolve();
+            if (resolve == null) {
+                return null;
+            }
+            String[] split = resolve.getText().split("=");
+            int length = split.length;
+            if (length == 2) {
+                return split[1].trim().replace("\"", "").replace(";", "");
+            } else if (length == 1) {
+                return split[0].trim().replace("\"", "").replace(";", "");
+            }
+        }
+
+
         return attributeValue.getText().replace("\"", "");
     }
 }
