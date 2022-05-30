@@ -5,12 +5,15 @@
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.properties</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
     <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
 
         <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
+        <projectService id="liteflowx.FileService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.FileService"/>
         <projectService id="liteflowx.LiteFlowToolWindowService" serviceInterface="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.LiteFlowToolWindowService"
                         serviceImplementation="top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.impl.LiteFlowToolWindowServiceImpl"/>
 
@@ -29,6 +32,8 @@
 
         <!-- Java to Chain 跳转 Ctrl+左键 或 Ctrl+B-->
         <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.JavaToChainGotoDeclarationHandler"/>
+        <!-- ruleSource to File 跳转 Ctrl+左键 或 Ctrl+B-->
+        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.ruleSourceToFileGotoDeclarationHandler" />
 
         <!-- 文件图标提供 -->
         <iconProvider id="liteflowx.FileIconProvider"
