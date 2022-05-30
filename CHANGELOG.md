@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.0.2] - 2022-05-30
+### 新增
+- 新增对yml、properties、beanXml的rule-source文件跳转的支持
+### 修复
+- 修复Component或LitefloeComponent注解value为表达式不能识别跳转问题
+
 ## [0.0.1] - 2022-05-25
 ### 新增
 - 支持 Java 代码跳转到 Chain
