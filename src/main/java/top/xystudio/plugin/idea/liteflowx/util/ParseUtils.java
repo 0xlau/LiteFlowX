@@ -7,6 +7,11 @@ import java.util.List;
 
 public class ParseUtils {
 
+    /**
+     * 解析liteFlow组件表达式
+     * @param expression
+     * @return
+     */
     public static List<RegexEntity> parseExpression(String expression) {
         List<RegexEntity> result = new ArrayList<>();
         String[] condArray = expression.split(",");
