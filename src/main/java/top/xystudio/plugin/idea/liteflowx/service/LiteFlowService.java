@@ -1,12 +1,21 @@
 package top.xystudio.plugin.idea.liteflowx.service;
 
+import com.intellij.find.findUsages.PsiElement2UsageTargetAdapter;
+import com.intellij.find.usages.api.UsageSearcher;
+import com.intellij.ide.lightEdit.LightEditService;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
+import com.intellij.psi.javadoc.JavadocManager;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.PsiSearchHelper;
+import com.intellij.psi.search.UsageSearchContext;
+import com.intellij.usages.UsageSearchPresentation;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.jps.javac.ast.api.JavacRef;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
 import top.xystudio.plugin.idea.liteflowx.constant.Interface;
@@ -126,12 +135,16 @@ public class LiteFlowService implements Serializable {
 
         String liteFlowComponentValue =
                 JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "value");
-        if (liteFlowComponentValue != null){
-            /** 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
-            if (liteFlowComponentValue.equals("")){
-                liteFlowComponentValue = StringUtils.lowerFirst(psiClass.getName());
+        String liteFlowComponentId =
+                JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "id");
+
+        String name = StringUtil.isEmpty(liteFlowComponentValue)? liteFlowComponentId : liteFlowComponentValue;
+        if (name != null){
+            /** 如果获取的value或者id值为空，则默认使用字符串首字母小写的Class名称 */
+            if (name.equals("")){
+                name = StringUtils.lowerFirst(psiClass.getName());
             }
-            return liteFlowComponentValue;
+            return name;
         }
         return null;
     }
