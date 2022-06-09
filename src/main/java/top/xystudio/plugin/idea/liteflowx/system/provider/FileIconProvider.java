@@ -10,7 +10,7 @@ import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
-import top.xystudio.plugin.idea.liteflowx.util.DomUtils;
+import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 import javax.swing.*;
 
@@ -65,6 +65,6 @@ public class FileIconProvider extends IconProvider {
         if (!language.isKindOf(XMLLanguage.INSTANCE)){
             return false;
         }
-        return DomUtils.isLiteFlowXmlFile(element.getContainingFile());
+        return XmlUtils.isLiteFlowXmlFile(element.getContainingFile());
     }
 }

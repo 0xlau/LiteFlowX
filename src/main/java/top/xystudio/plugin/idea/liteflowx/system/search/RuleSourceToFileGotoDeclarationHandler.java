@@ -30,7 +30,7 @@ import java.util.Collection;
 /**
  * 从properties以及yml或ymal文件中的liteflow.ruleSource跳转至指定文件
  */
-public class ruleSourceToFileGotoDeclarationHandler implements GotoDeclarationHandler {
+public class RuleSourceToFileGotoDeclarationHandler implements GotoDeclarationHandler {
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
         Project project = sourceElement.getProject();
