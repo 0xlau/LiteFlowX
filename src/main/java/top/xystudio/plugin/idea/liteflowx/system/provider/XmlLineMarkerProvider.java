@@ -7,21 +7,13 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.*;
-import top.xystudio.plugin.idea.liteflowx.util.DomUtils;
+import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 /**
  * 扩展公共LineMarkerProvider，使其更加注重XML的解析
  * @author Coder-XiaoYi
  */
 public abstract class XmlLineMarkerProvider extends CommonLineMarkerProvider<XmlToken> {
-
-    private static final ImmutableSet<String> TARGET_TYPES = ImmutableSet.of(
-            Then.class.getSimpleName().toLowerCase(),
-            When.class.getSimpleName().toLowerCase(),
-            Pre.class.getSimpleName().toLowerCase(),
-            Finally.class.getSimpleName().toLowerCase(),
-            Node.class.getSimpleName().toLowerCase()
-    );
 
     /**
      * 元素列表Cell渲染，默认返回null，则表示不做任何渲染，使用默认渲染处理
@@ -40,7 +32,7 @@ public abstract class XmlLineMarkerProvider extends CommonLineMarkerProvider<Xml
      */
     @Override
     public boolean isLiteflowFile(PsiElement element) {
-        return DomUtils.isLiteFlowXmlFile(element.getContainingFile());
+        return XmlUtils.isLiteFlowXmlFile(element.getContainingFile());
     }
 
     /**
@@ -51,20 +43,7 @@ public abstract class XmlLineMarkerProvider extends CommonLineMarkerProvider<Xml
      */
     @Override
     public boolean isTargetElement(PsiElement element) {
-        if (!(element instanceof XmlToken)){
-            return false;
-        }
-        XmlToken token = (XmlToken) element;
-        if (TARGET_TYPES.contains(token.getText())){
-            PsiElement parent = token.getParent();
-            if (parent instanceof XmlTag){
-                PsiElement nextSibling = token.getNextSibling();
-                if (nextSibling instanceof PsiWhiteSpace){
-                    return true;
-                }
-            }
-        }
-        return false;
+        return XmlUtils.isLiteflowXmlTarget(element);
     }
 
 }

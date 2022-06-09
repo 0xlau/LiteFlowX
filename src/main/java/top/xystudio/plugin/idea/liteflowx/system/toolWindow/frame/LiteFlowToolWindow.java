@@ -2,24 +2,19 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.impl.PsiElementBase;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.JBSplitter;
-import com.intellij.util.ArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElement;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElementType;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.topic.LiteFlowTreeTopic;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.service.topic.RefreshLiteFlowTreeTopic;
+import top.xystudio.plugin.idea.liteflowx.util.AsyncUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +59,9 @@ public class LiteFlowToolWindow extends JPanel {
     public void refreshTree() {
 
         LiteFlowTreeTopic liteFlowTreeTopic = project.getMessageBus().syncPublisher(LiteFlowTreeTopic.TOPIC);
-        DumbService.getInstance(project).runWhenSmart(() -> liteFlowTreeTopic.action(getElements()));
+        DumbService.getInstance(project).runWhenSmart(() -> {
+            AsyncUtils.runRead(project, this::getElements, data -> liteFlowTreeTopic.action(data));
+        });
 
     }
 

@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2022-06-09
+### 新增
+- 特性 #I5B89P Xml文件中支持Ctrl+鼠标左键点击表达式直接跳转到定义
+### 增强
+- 适配 liteFlow 2.7.x 版本
+- LiteFlowTool内扫描的不足1的元素分类不显示
+### 修复
+- 修复 #I5A2TT 解决LiteFlowTool刷新元素时卡顿问题
+- 修复 #I5B85N 不能够正常识别组件问题
+
 ## [0.0.2] - 2022-05-30
 ### 新增
 - 新增对yml、properties、beanXml的rule-source文件跳转的支持

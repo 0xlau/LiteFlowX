@@ -87,12 +87,14 @@ public class LiteFlowTree extends JBScrollPane{
         TreeNode<String> root = new TreeNode<>("Not found any liteflow elements");
         map.forEach((itemName, elements) -> {
             CategoryNode categoryNode = new CategoryNode(new CategoryTree(itemName, elements.size()));
-            elements.forEach(element -> {
-                LiteFlowElementNode node = new LiteFlowElementNode(element);
-                categoryNode.add(node);
-                elementCount.incrementAndGet();
-            });
-            root.add(categoryNode);
+            if (elements.size() > 0){
+                elements.forEach(element -> {
+                    LiteFlowElementNode node = new LiteFlowElementNode(element);
+                    categoryNode.add(node);
+                    elementCount.incrementAndGet();
+                });
+                root.add(categoryNode);
+            }
         });
 
 

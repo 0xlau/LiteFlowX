@@ -33,7 +33,9 @@
         <!-- Java to Chain 跳转 Ctrl+左键 或 Ctrl+B-->
         <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.JavaToChainGotoDeclarationHandler"/>
         <!-- ruleSource to File 跳转 Ctrl+左键 或 Ctrl+B-->
-        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.ruleSourceToFileGotoDeclarationHandler" />
+        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.RuleSourceToFileGotoDeclarationHandler" />
+        <!-- xml to Component 跳转 Ctrl+左键 或 Ctrl+B-->
+        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.XmlToComponentGotoDeclarationHandler" />
 
         <!-- 文件图标提供 -->
         <iconProvider id="liteflowx.FileIconProvider"

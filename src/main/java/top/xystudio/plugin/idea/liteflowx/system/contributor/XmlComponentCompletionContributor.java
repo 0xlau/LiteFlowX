@@ -14,7 +14,7 @@ import com.intellij.util.ProcessingContext;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
-import top.xystudio.plugin.idea.liteflowx.util.DomUtils;
+import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 public class XmlComponentCompletionContributor extends CompletionContributor {
 
@@ -79,7 +79,7 @@ public class XmlComponentCompletionContributor extends CompletionContributor {
         if (((XmlToken) element).getTokenType() != XmlElementType.XML_ATTRIBUTE_VALUE_TOKEN){
             return false;
         }
-        if (DomUtils.isLiteFlowXmlFile(element.getContainingFile())){
+        if (XmlUtils.isLiteFlowXmlFile(element.getContainingFile())){
             return true;
         }
         return false;

@@ -8,4 +8,9 @@ public class Clazz {
 
     public static final String LiteFlowConfig = "com.yomahub.liteflow.property.LiteflowConfig";
 
+    public static final String LiteflowResponse = "com.yomahub.liteflow.flow.LiteflowResponse";
+
+    public static final String FlowExecutor = "com.yomahub.liteflow.core.FlowExecutor";
+
+
 }
