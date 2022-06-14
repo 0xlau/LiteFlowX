@@ -1,21 +1,13 @@
 package top.xystudio.plugin.idea.liteflowx.service;
 
-import com.intellij.find.findUsages.PsiElement2UsageTargetAdapter;
-import com.intellij.find.usages.api.UsageSearcher;
-import com.intellij.ide.lightEdit.LightEditService;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
-import com.intellij.psi.javadoc.JavadocManager;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.PsiSearchHelper;
-import com.intellij.psi.search.UsageSearchContext;
-import com.intellij.usages.UsageSearchPresentation;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.javac.ast.api.JavacRef;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
 import top.xystudio.plugin.idea.liteflowx.constant.Interface;
@@ -26,9 +18,7 @@ import top.xystudio.plugin.idea.liteflowx.dom.modal.Nodes;
 import top.xystudio.plugin.idea.liteflowx.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LiteFlowService implements Serializable {
@@ -158,8 +148,12 @@ public class LiteFlowService implements Serializable {
      * @return
      */
     public boolean isLiteFlowClass(@NotNull PsiClass psiClass){
-        String qualifiedName = psiClass.getSuperClass().getQualifiedName();
-        if (qualifiedName.equals(Clazz.NodeComponent) || qualifiedName.equals(Clazz.NodeCondComponent)){
+        if (psiClass.getText().contains("abstract class")){
+            return false;
+        }
+        PsiClass nodeComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeComponent);
+        PsiClass nodeCondComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeCondComponent);
+        if (psiClass.isInheritor(nodeComponent, true) || psiClass.isInheritor(nodeCondComponent, true)){
             return true;
         }
         PsiAnnotation liteflowCmpDefine = psiClass.getAnnotation(Annotation.LiteflowCmpDefine);
@@ -175,7 +169,7 @@ public class LiteFlowService implements Serializable {
      */
     public boolean isLiteFlowSlot(@NotNull PsiClass psiClass){
         while (psiClass.getSuperClassType() != null &&
-                !psiClass.getSuperClassType().equals(PsiClassType.getJavaLangObject(PsiManager.getInstance(this.project), GlobalSearchScope.allScope(this.project)))){
+                !psiClass.getSuperClassType().equals(Clazz.JavaObject)){
             psiClass = psiClass.getSuperClass();
         }
         PsiClassType[] implementsListTypes = psiClass.getImplementsListTypes();
