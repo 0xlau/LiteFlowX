@@ -1,14 +1,10 @@
 package top.xystudio.plugin.idea.liteflowx.system.search;
 
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
-import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKey;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
+import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiJavaToken;
 import org.jetbrains.annotations.Nls;
@@ -23,7 +19,7 @@ public class JavaToChainGotoDeclarationHandler implements GotoDeclarationHandler
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
         Project project = sourceElement.getProject();
-        if (!(sourceElement instanceof PsiJavaToken)){
+        if (!isTargetElement(sourceElement)){
             return null;
         }
         String name = sourceElement.getText().replace("\"", "");
@@ -32,6 +28,16 @@ public class JavaToChainGotoDeclarationHandler implements GotoDeclarationHandler
             return null;
         }
         return new PsiElement[]{result.get()};
+    }
+
+    private boolean isTargetElement(PsiElement psiElement){
+        if (!(psiElement instanceof PsiJavaToken)){
+            return false;
+        }
+        if (((PsiJavaToken) psiElement).getTokenType() != JavaTokenType.STRING_LITERAL){
+            return false;
+        }
+        return true;
     }
 
     @Override

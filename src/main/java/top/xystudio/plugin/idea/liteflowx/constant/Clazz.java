@@ -12,5 +12,6 @@ public class Clazz {
 
     public static final String FlowExecutor = "com.yomahub.liteflow.core.FlowExecutor";
 
+    public static final String JavaObject = "java.lang.Object";
 
 }

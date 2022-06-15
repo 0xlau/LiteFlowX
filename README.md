@@ -32,18 +32,16 @@ English | [简体中文](./README.zh-CN.md)
 <!-- Plugin description -->
 <h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
-
-
-LiteFlowX plugin features:
-- Svg icons, easily identifiable icons.
-- Able to identify Component, Node, Chain, Slot.
-- Jump between Component, Node, Chain and XML files.
-- Java code and Chain jump to each other.
-- Automatic completion prompt of Xml, can prompt Component, Node, Chain.
-- Adapt to the declarative version of LiteFlow 2.6.14.
-- Provide LiteFLow toolbox, the Component, Node, Chain, Slot of the entire project is clear at a glance, and supports double-click to jump.
-- Identify LiteFlow's Component, Slot and Xml files in the project column and display them with specific icons.
+## 🍬 LiteFlowX Features:
+- Specific file Svg icons for easy identification of LiteFlow elements
+- Able to identify Component, Node, Chain, Slot
+- Jump between Component, Node, Chain and XML files
+- Java code and Chain jump to each other
+- Jump between Xml files and LiteFlow elements
+- Auto-complete prompt for Xml, able to prompt Component, Node, Chain
+- Provides LiteFLow toolbox
 - Support file jump to liteflow.ruleSource property
+- Both old and new versions of v2.6.x and v2.7.x are compatible
 - ...more features to come
 
 <!-- Plugin description end -->
@@ -62,8 +60,19 @@ For full details of install plugins, <a href="https://www.jetbrains.com/help/ide
 > 4. Select the plugin archive file and click **OK**.
 > 5. Click **OK** to apply the changes and restart the IDE if prompted.
 
-## 👀 Screenshot
-![演示1](https://s1.ax1x.com/2022/05/30/X1EPJg.png)
-![演示4](https://s1.ax1x.com/2022/05/30/X1ECFS.gif)
-![演示2](https://s1.ax1x.com/2022/05/30/X1ESdf.png)
-![演示3](https://s1.ax1x.com/2022/05/30/X1Epo8.png)
+## 🌈 Demonstration
+### Java to Chain
+![Java代码跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/JavaToChain.gif)
+
+### LiteFlowTool
+![LiteFlowTool工具箱](https://liteflow.yomahub.com/img/liteflowx/LiteFlowTool.gif)
+
+### Jump to ruleSource
+![ruleSource跳转](https://liteflow.yomahub.com/img/liteflowx/ruleSourceJump.gif)
+
+### Xml to Chain
+![Xml跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/XmlToChain.gif)
+
+### Xml to Component
+![Xml跳转Component](https://liteflow.yomahub.com/img/liteflowx/XmlToComponent.gif)
+![Xml跳转Component2](https://liteflow.yomahub.com/img/liteflowx/XmlToManyComponent.gif)
