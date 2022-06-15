@@ -32,16 +32,16 @@
 <!-- Plugin description -->
 <h3>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h3>
 
-目前 LiteFlowX 的特色:
-- Svg 图标，容易识别的图标。 
-- 能够识别Component、Node、Chain、Slot。
-- Component、Node、Chain和XML文件的互相跳转。
-- Java代码和Chain的互相跳转。
-- Xml的自动完成提示，能够提示Component、Node、Chain。
-- 对LiteFlow 2.6.14版本的声明式组件进行适配。
-- 提供LiteFLow工具箱，LiteFlowTool工具箱，整个工程的Component、Node、Chain、Slot一目了然，并且支持双击跳转。
-- 在工程栏目里对LiteFlow的Component、Slot和Xml文件进行识别，并且用特定的图标显示。
-- 支持对liteflow.ruleSource属性的文件跳转 
+## 🍬 LiteFlowX 特性
+- 特定的文件 Svg 图标，容易识别 LiteFlow 元素
+- 能够识别Component、Node、Chain、Slot
+- Component、Node、Chain和XML文件的互相跳转
+- Java 代码和 Chain 的互相跳转
+- Xml 文件与 LiteFlow 元素的互相跳转
+- Xml 的自动完成提示，能够提示Component、Node、Chain
+- 提供LiteFLow工具箱，整个工程的Component、Node、Chain、Slot一目了然，并且支持双击跳转
+- 支持对 liteflow.ruleSource 属性的文件跳转
+- v2.6.x 与 v2.7.x 的新旧版本双兼容
 - ...更多特性敬请期待
 
 <!-- Plugin description end -->
@@ -60,11 +60,22 @@
 > 4. 选择在第一步下载好的插件并点击 **OK**。
 > 5. 如果提示重启IDE，点击 **OK** 应用更改即可。
 
-## 👀 部分功能截图
-![演示1](https://s1.ax1x.com/2022/05/30/X1EPJg.png)
-![演示4](https://s1.ax1x.com/2022/05/30/X1ECFS.gif)
-![演示2](https://s1.ax1x.com/2022/05/30/X1ESdf.png)
-![演示3](https://s1.ax1x.com/2022/05/30/X1Epo8.png)
+## 🌈 功能演示
+### Java代码跳转到Chain
+![Java代码跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/JavaToChain.gif)
+
+### LiteFlowTool工具箱
+![LiteFlowTool工具箱](https://liteflow.yomahub.com/img/liteflowx/LiteFlowTool.gif)
+
+### ruleSource跳转
+![ruleSource跳转](https://liteflow.yomahub.com/img/liteflowx/ruleSourceJump.gif)
+
+### Xml跳转到Chain
+![Xml跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/XmlToChain.gif)
+
+### Xml跳转Component
+![Xml跳转Component](https://liteflow.yomahub.com/img/liteflowx/XmlToComponent.gif)
+![Xml跳转Component2](https://liteflow.yomahub.com/img/liteflowx/XmlToManyComponent.gif)
 
 
 
