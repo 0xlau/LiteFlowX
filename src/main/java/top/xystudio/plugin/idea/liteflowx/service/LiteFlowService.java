@@ -153,7 +153,7 @@ public class LiteFlowService implements Serializable {
         }
         PsiClass nodeComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeComponent);
         PsiClass nodeCondComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeCondComponent);
-        if (psiClass.isInheritor(nodeComponent, true) || psiClass.isInheritor(nodeCondComponent, true)){
+        if ((nodeComponent != null && psiClass.isInheritor(nodeComponent, true)) || (nodeCondComponent != null && psiClass.isInheritor(nodeCondComponent, true))){
             return true;
         }
         PsiAnnotation liteflowCmpDefine = psiClass.getAnnotation(Annotation.LiteflowCmpDefine);
