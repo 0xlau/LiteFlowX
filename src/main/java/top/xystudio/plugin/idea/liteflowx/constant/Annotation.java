@@ -8,5 +8,5 @@ public class Annotation {
 
     public static final String LiteflowCmpDefine = "com.yomahub.liteflow.annotation.LiteflowCmpDefine";
 
-    public static final String LiteflowCondCmpDefine = "com.yomahub.liteflow.annotation.LiteflowCondCmpDefine";
+    public static final String LiteflowSwitchCmpDefine = "com.yomahub.liteflow.annotation.LiteflowSwitchCmpDefine";
 }

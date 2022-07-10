@@ -109,3 +109,5 @@ tasks {
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
+
+sourceSets["main"].java.srcDirs("src/main/gen");

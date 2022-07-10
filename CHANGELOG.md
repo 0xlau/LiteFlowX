@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2022-07-10
+- 适配 LiteFlow 2.8.x 的特性
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5GD4S
+
 ## [0.1.1] - 2022-06-15
 - 修复 #I5BW1N 关于java代码编辑器中的chain错误跳转问题
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5BW1N

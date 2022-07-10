@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="LanguageInjectionConfiguration">
+    <injection language="LiteFlow" injector-id="xml">
+        <display-name>Chain (XmlTag)</display-name>
+        <place><![CDATA[
+            xmlTag()
+                .withLocalName(string().equalTo("chain"))
+        ]]></place>
+    </injection>
+</component>

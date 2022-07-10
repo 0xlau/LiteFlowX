@@ -7,7 +7,6 @@ import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
-import top.xystudio.plugin.idea.liteflowx.parse.RegexNodeEntity;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -15,10 +14,10 @@ import java.util.function.BiFunction;
 /**
  * 实现寻找Chain方法
  */
-public class findChainImpl implements BiFunction<Project, RegexNodeEntity, PsiElement> {
+public class findChainImpl implements BiFunction<Project, String, PsiElement> {
     @Override
-    public PsiElement apply(Project project, RegexNodeEntity regexNodeEntity) {
-        String componentId = regexNodeEntity.getId();
+    public PsiElement apply(Project project, String name) {
+        String componentId = name;
         if (componentId == null || componentId.equals("")){
             return null;
         }

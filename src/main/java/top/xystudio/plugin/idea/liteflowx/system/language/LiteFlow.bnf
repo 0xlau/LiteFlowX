@@ -1,0 +1,290 @@
+{
+    parserClass="top.xystudio.plugin.idea.liteflowx.system.language.parse.LiteFlowParser"
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="LiteFlow"
+    psiImplClassSuffix="Impl"
+    psiPackage="top.xystudio.plugin.idea.liteflowx.system.language.psi"
+    psiImplPackage="top.xystudio.plugin.idea.liteflowx.system.language.psi.impl"
+    psiImplUtilClass = "top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.LiteFlowLanguagePsiImplUtil"
+
+    elementTypeHolderClass="top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTypes"
+    elementTypePrefix = "LITEFLOW_"
+    elementTypeClass="top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowElementType"
+    tokenTypeClass="top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTokenType"
+
+ tokens = [
+
+    BRACE_LEFT           =  '{'
+    BRACE_RIGHT          =  '}'
+    BRACK_LEFT           =  '['
+    BRACK_RIGHT          =  ']'
+    PAREN_LEFT           =  '('
+    PAREN_RIGHT          =  ')'
+
+    COLON                =  ':'
+    SEMICOLON            =  ';'
+    COMMA                =  ','
+
+    EQ                   =  '=='
+    ASSIGN               =  '='
+    NOT_EQ               =  '!='
+    NOT                  =  '!'
+    PLUS_PLUS            =  '++'
+//    PLUS_ASSIGN          =  '+='
+    PLUS                 =  '+'
+    MINUS_MINUS          =  '--'
+//    MINUS_ASSIGN         =  '-='
+    MINUS                =  '-'
+    COND_OR              =  '||'
+//    BIT_OR_ASSIGN        =  '|='
+//    BIT_CLEAR_ASSIGN     =  '&^='
+//    BIT_CLEAR            =  '&^'
+//    BIT_TILDE            =  '&~'
+    COND_AND             =  '&&'
+//    BIT_AND_ASSIGN       =  '&='
+    BIT_AND              =  '&'
+//    EQ_TILDE             =  '=~'
+    BIT_OR               =  '|'
+//    SHIFT_LEFT_ASSIGN    =  '<<='
+    SHIFT_LEFT           =  '<<'
+//    SEND_CHANNEL         =  '<-'
+    LESS_OR_EQUAL        =  '<='
+    LESS                 =  '<'
+//    BIT_XOR_ASSIGN       =  '^='
+    BIT_XOR              =  '^'
+//    MUL_ASSIGN           =  '*='
+    MUL                  =  '*'
+//    QUOTIENT_ASSIGN      =  '/='
+    QUOTIENT             =  '/'
+//    REMAINDER_ASSIGN     =  '%='
+    REMAINDER            =  '%'
+//    SHIFT_RIGHT_ASSIGN   =  '>>='
+    SHIFT_RIGHT          =  '>>'
+    GREATER_OR_EQUAL     =  '>='
+    GREATER              =  '>'
+//    VAR_ASSIGN           =  ':='
+//    TRIPLE_DOT           =  '...'
+    DOT                  =  '.'
+    QUESTION             =  '?'
+//    LAMBDA_TARGET        =  '->'
+
+//    SEMICOLON_SYNTHETIC  = '<NL>'
+//    TYPE_                = 'type'
+//    raw_string           = 'raw_string'
+
+    // language common
+    identifier = 'regexp:[a-zA-Z\$_][a-zA-Z\d_]*'
+    block_comment = 'regexp:/\*\*(.|\r\n)*\*\*/'
+
+    //literal
+    space = "regexp:\s+"
+    string = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")"
+    number = "regexp:-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9]\d*N?M?|\d+(\.\d+)?([Ee][+-]?\d+)?M?)"
+    null = "null"
+    true = "true"
+    false = "false"
+
+    // qlexpress keywords
+    mod = "mod"
+    nor = "nor"
+    in = "in"
+    for = "for"
+    while = "while"
+    if = "if"
+    when = "when"
+    then = "then"
+    else = "else"
+    exportAlias = "exportAlias"
+    alias = "alias"
+    break = "break"
+    continue = "continue"
+    return = "return"
+    macro = "macro"
+    function = "function"
+    def = "def"
+    exportDef = "exportDef"
+    new = "new"
+    array = "array"
+    anonymousNewArray = "anonymousNewArray"
+    like = "like"
+    class = "class"
+    VClass = "VClass"
+    cast = "cast"
+
+    // liteflow keywords
+    THEN = "THEN"
+    WHEN = "WHEN"
+    SWITCH = "SWITCH"
+    PRE = "PRE"
+    FINALLY = "FINALLY"
+    any = "any"
+    id = "id"
+    ignoreError = "ignoreError"
+    tag = "tag"
+    threadPool = "threadPool"
+    to = "to"
+
+  ]
+
+}
+
+liteFlowFile ::= codes
+
+codes ::= statement*
+
+statement ::= (
+    ifStatement |
+    forStatement |
+    whileStatement |
+    block_comment |
+    (
+    assignStatement |
+//    allExpressStatement |
+    breakStatement |
+    continueStatement |
+    threeStatement |
+    fnInvokeStatement |
+    newStatement |
+    returnStatement |
+    opSelfStatement |
+    liteFlowStatement |
+    BRACE_LEFT statement* BRACE_RIGHT
+    ) SEMICOLON
+)
+
+/** Statement Start **/
+
+allExpressStatement ::= allExpress
+assignStatement ::= assignExpress
+threeStatement ::= threeExpress
+fnInvokeStatement ::= fnInvokeExpress
+newStatement::= newExpress
+returnStatement ::= return allExpress*
+ifStatement ::= if PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT {else ifStatement }* {else BRACE_LEFT codes BRACE_RIGHT}?
+breakStatement ::= break
+continueStatement ::= continue
+forStatement ::= for PAREN_LEFT [assignExpress] SEMICOLON [allExpress] SEMICOLON [(opSelfExpress | assignExpress)]  PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT
+whileStatement ::= while PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT
+opSelfStatement ::= opSelfExpress
+liteFlowStatement ::= liteFlowAllExpress
+
+/** Statement Start **/
+
+/** Express Start **/
+
+// 引用表达式
+refExpress ::= typeRef
+
+// 数组表达式
+arrayExpress ::= BRACK_LEFT [allExpress {COMMA (allExpress|op)}*] BRACK_RIGHT
+
+// 数组引用表达式
+useArrayExpress ::= refExpress BRACK_LEFT allExpress BRACK_RIGHT
+
+// new对象表达式
+newExpress ::= new fnInvokeExpress
+
+// 赋值表达式
+assignExpress ::= refExpress ASSIGN [PLUS|MINUS] allExpress
+
+// 自加自减表达式
+opSelfExpress ::= refExpress (PLUS_PLUS | MINUS_MINUS)
+
+// 等于号右边的表达式（整体）
+allExpress ::= (subAllExpress | PAREN_LEFT subAllExpress PAREN_RIGHT) {op (subAllExpress|PAREN_LEFT subAllExpress PAREN_RIGHT)}*
+               | {(subAllExpress | PAREN_LEFT subAllExpress PAREN_RIGHT) op}* (subAllExpress|PAREN_LEFT subAllExpress PAREN_RIGHT)
+
+// 等于号右边的表达式（细分）
+subAllExpress ::= opSelfExpress | useArrayExpress | arrayExpress | threeExpress | newExpress | liteFlowConditionExpress | fnInvokeExpress {op allExpress}* | express | PAREN_LEFT assignExpress PAREN_RIGHT
+
+// 三目表达式
+threeExpress ::= (fnInvokeExpress | express) QUESTION allExpress COLON allExpress
+
+// 普通表达式
+express ::=  opExpress | PAREN_LEFT opExpress PAREN_RIGHT  |  opExpress  {op (allExpress|PAREN_LEFT allExpress PAREN_RIGHT)}*
+
+// 操作符表达式
+opExpress ::= [NOT] ( (fnInvokeExpress|refExpress|value)| PAREN_LEFT (fnInvokeExpress|refExpress|value) PAREN_RIGHT) {op (allExpress|PAREN_LEFT allExpress PAREN_RIGHT)}*
+
+// 函数应用表达式：xxx(a,b,c)
+fnInvokeExpress ::= refExpress fnParamExpress
+
+// 函数应用分隔符表达式
+fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
+
+// LiteFlow 通用表达式
+liteFlowAllExpress ::=(liteFlowNodeRef [liteFlowTagExpress]) | liteFlowConditionExpress
+
+// LiteFlow Condition 表达式
+liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress
+
+// LiteFlow THEN() 表达式
+liteFlowThenExpress ::= THEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT [liteFlowIdExpress]
+
+// LiteFlow WHEN() 表达式
+liteFlowWhenExpress ::= WHEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { (liteFlowIdExpress | liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress) }*
+
+// LiteFlow SWITCH() 表达式
+liteFlowSwitchExpress ::= SWITCH PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { (liteFlowToExpress | liteFlowIdExpress) }*
+
+// LiteFlow PRE() 表达式
+liteFlowPreExpress ::= PRE PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+
+// LiteFlow FINALLY() 表达式
+liteFlowFinallyExpress ::= FINALLY PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+
+// LiteFlow .to() 表达式
+liteFlowToExpress ::= DOT to PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+
+// LiteFlow .id() 表达式
+liteFlowIdExpress ::= DOT id PAREN_LEFT string PAREN_RIGHT
+
+// LiteFlow .ignoreError() 表达式
+liteFlowIgnoreErrorExpress ::= DOT ignoreError PAREN_LEFT boolean PAREN_RIGHT
+
+// LiteFlow .any() 表达式
+liteFlowAnyExpress ::= DOT any PAREN_LEFT boolean PAREN_RIGHT
+
+// LiteFlow .threadPool() 表达式
+liteFlowThreadPoolExpress ::= DOT threadPool PAREN_LEFT string PAREN_RIGHT
+
+// LiteFlow .tag() 表达式
+liteFlowTagExpress ::= DOT tag PAREN_LEFT string PAREN_RIGHT
+
+/** Express End **/
+
+// Ref
+liteFlowNodeRef ::= identifier
+
+typeRef ::= identifier {DOT identifier}*
+
+// 操作符
+op ::=
+      PLUS                 // +
+    | MINUS                // -
+    | MUL                  // *
+    | QUOTIENT             // /
+    | REMAINDER            // %
+    | LESS                 // <
+    | LESS_OR_EQUAL        // <=
+    | GREATER              // >
+    | GREATER_OR_EQUAL     // >=
+    | EQ                   // ==
+    | NOT_EQ               // !=
+    | BIT_AND              // &
+    | BIT_OR               // |
+    | BIT_XOR              // ^
+    | NOT                  // !
+    | COND_OR              // ||
+    | COND_AND             // &&
+    | mod                  // MOD
+    | nor                  // NOR
+//    | BIT_TILDE            // &~
+//    | EQ_TILDE             // =~
+
+// 字符串 数字 布尔 空
+value ::= string|number|boolean|null
+
+boolean ::= true|false

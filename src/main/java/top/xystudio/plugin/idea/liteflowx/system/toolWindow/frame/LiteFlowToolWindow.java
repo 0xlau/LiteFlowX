@@ -26,11 +26,13 @@ public class LiteFlowToolWindow extends JPanel {
 
     private final Project project;
     private final LiteFlowTree liteFlowTree;
+    private final LiteFlowService liteFlowService;
 
     public LiteFlowToolWindow(@NotNull Project project) {
         super(new BorderLayout());
         this.project = project;
 
+        this.liteFlowService = LiteFlowService.getInstance(project);
         this.liteFlowTree = new LiteFlowTree(project);
 
         AnAction action = ActionManager.getInstance().getAction("LiteFlowTool.Toolbar");
@@ -68,16 +70,10 @@ public class LiteFlowToolWindow extends JPanel {
     private Map<String, List<LiteFlowElement>> getElements() {
         Map<String, List<LiteFlowElement>> map = new HashMap<>();
 
-        PsiClass[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowClass();
+        PsiClass[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
         map.put("Components", Arrays.stream(liteFlowComponents)
                 .sorted(Comparator.comparing(NavigationItem::getName))
-                .map(o -> new LiteFlowElement(LiteFlowElementType.COMPONENT, o.getName(), o))
-                .collect(Collectors.toList()));
-
-        PsiClass[] liteFlowSlots = LiteFlowService.getInstance(project).findAllLiteFlowSlot();
-        map.put("Slots", Arrays.stream(liteFlowSlots)
-                .sorted(Comparator.comparing(NavigationItem::getName))
-                .map(o -> new LiteFlowElement(LiteFlowElementType.SLOT, o.getName(), o))
+                .map(o -> new LiteFlowElement(LiteFlowElementType.COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o))
                 .collect(Collectors.toList()));
 
         PsiElement[] liteFlowChains = LiteFlowService.getInstance(project).findAllLiteFlowChain();
@@ -86,19 +82,6 @@ public class LiteFlowToolWindow extends JPanel {
                     if (o instanceof XmlTag){
                         String name = ((XmlTag) o).getAttributeValue("name");
                         return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o.getContainingFile());
-                    }
-                    return null;
-                })
-                .filter(o -> o != null)
-                .collect(Collectors.toList()));
-
-        PsiElement[] liteFlowNodes = LiteFlowService.getInstance(project).findAllLiteFlowNode();
-        map.put("Nodes", Arrays.stream(liteFlowNodes)
-                .map(o -> {
-                    if (o instanceof XmlTag){
-                        String id = ((XmlTag) o).getAttributeValue("id");
-                        String clazz = ((XmlTag) o).getAttributeValue("class");
-                        return new LiteFlowElement(LiteFlowElementType.NODE, id, clazz, o.getContainingFile());
                     }
                     return null;
                 })

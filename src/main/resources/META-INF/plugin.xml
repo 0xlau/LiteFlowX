@@ -8,8 +8,56 @@
     <depends>com.intellij.properties</depends>
     <depends>org.jetbrains.plugins.yaml</depends>
     <depends>com.intellij.modules.java</depends>
+    <depends>org.intellij.intelliLang</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="org.intellij.intelliLang">
+        <languageSupport
+                implementation="org.intellij.plugins.intelliLang.inject.xml.XmlLanguageInjectionSupport"/>
+        <injectionConfig config="language/xmlInjections.xml"/>
+    </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <fileType
+                name="LiteFlow File"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowFileType"
+                fieldName="INSTANCE"
+                language="LiteFlow"
+                extensions="elf"/>
+
+        <!-- LiteFLow跳转到声明 -->
+        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.ElfGotoDeclarationHandler"/>
+
+        <!-- LiteFlow处理ComponentRef -->
+        <annotator
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.annotator.LiteFlowNodeRefAnnotator"/>
+
+        <!-- LiteFlow语法解析 -->
+        <lang.parserDefinition language="LiteFlow" implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowParserDefinition"/>
+
+        <!-- LiteFlow语法高亮 -->
+        <lang.syntaxHighlighterFactory
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.highlight.LiteFlowSyntaxHighlighterFactory"/>
+
+        <!-- LiteFLow快速注释 -->
+        <lang.commenter
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.commenter.LiteFlowLanguageCommenter"/>
+
+        <!-- LiteFlow智能提示 -->
+        <completion.contributor
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.completion.LiteFlowBaseCompletionContributor"/>
+        <completion.contributor
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.completion.LiteFlowNodeRefCompletionContributor"/>
+
+        <!-- LiteFlow语法颜色设置页面 -->
+        <colorSettingsPage
+                implementation="top.xystudio.plugin.idea.liteflowx.system.language.highlight.LiteFLowLanguageColorSettingPage"/>
 
         <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
@@ -21,12 +69,7 @@
         <dom.fileMetaData id="liteflowx.FlowDescription" rootTagName="flow" implementation="top.xystudio.plugin.idea.liteflowx.dom.description.FlowDescription"/>
 
         <!--代码行插件，实现代码导航功能-->
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToClassLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToClassLineMarkerProvider"/>
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToChainLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToChainLineMarkerProvider"/>
-        <codeInsight.lineMarkerProvider id="liteflowx.XmlComponentToNodeLineMarkerProvider" language="XML"
-                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlComponentToNodeLineMarkerProvider"/>
+
         <codeInsight.lineMarkerProvider id="liteflowx.XmlNodeToClassLineMarkerProvider" language="XML"
                                         implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.XmlNodeToClassLineMarkerProvider"/>
 
@@ -34,17 +77,10 @@
         <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.JavaToChainGotoDeclarationHandler"/>
         <!-- ruleSource to File 跳转 Ctrl+左键 或 Ctrl+B-->
         <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.RuleSourceToFileGotoDeclarationHandler" />
-        <!-- xml to Component 跳转 Ctrl+左键 或 Ctrl+B-->
-        <gotoDeclarationHandler order="first" implementation="top.xystudio.plugin.idea.liteflowx.system.search.XmlToComponentGotoDeclarationHandler" />
 
         <!-- 文件图标提供 -->
         <iconProvider id="liteflowx.FileIconProvider"
                 implementation="top.xystudio.plugin.idea.liteflowx.system.provider.FileIconProvider"></iconProvider>
-
-        <!-- xml 自动完成 -->
-        <completion.contributor
-                language="XML"
-                implementationClass="top.xystudio.plugin.idea.liteflowx.system.contributor.XmlComponentCompletionContributor"/>
 
         <!-- 结构工具窗口 -->
         <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="true"

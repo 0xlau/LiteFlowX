@@ -26,24 +26,7 @@ public class FileIconProvider extends IconProvider {
         if (isLiteFlowComponentClassFile(element)){
             return LiteFlowIcons.COMPONENT_CLASS_FILE_ICON;
         }
-        if (isLiteFlowSlotClassFile(element)){
-            return LiteFlowIcons.SLOT_CLASS_FILE_ICON;
-        }
         return null;
-    }
-
-    private boolean isLiteFlowSlotClassFile(PsiElement element) {
-        Language language = element.getLanguage();
-        if (!language.isKindOf(JavaLanguage.INSTANCE)){
-            return false;
-        }
-        if (!(element instanceof PsiClass)){
-            return false;
-        }
-        if (!LiteFlowService.getInstance(element.getProject()).isLiteFlowSlot((PsiClass) element)){
-            return false;
-        }
-        return true;
     }
 
     private boolean isLiteFlowComponentClassFile(PsiElement element) {

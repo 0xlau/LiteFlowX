@@ -18,12 +18,6 @@ public interface LiteFlowIcons {
     /** XML文件图标 */
     Icon XML_FILE_ICON = IconLoader.getIcon("/images/xml_16x16.svg", LiteFlowIcons.class);
 
-    /** JSON文件图标 */
-    Icon JSON_FILE_ICON = IconLoader.getIcon("/images/json_16x16.svg", LiteFlowIcons.class);
-
-    /** YML文件图标 */
-    Icon YML_FILE_ICON = IconLoader.getIcon("/images/yml_16x16.svg", LiteFlowIcons.class);
-
     /** SLOT类文件图标 */
     Icon SLOT_CLASS_FILE_ICON = IconLoader.getIcon("/images/slot_16x16.svg", LiteFlowIcons.class);
 
@@ -32,5 +26,8 @@ public interface LiteFlowIcons {
 
     /** TOOLWINDOW图标 */
     Icon TOOL_WINDOW_ICON =  IconLoader.getIcon("/images/tool_13x13.svg", LiteFlowIcons.class);
+
+    /** 文件图标 */
+    Icon FILE_ICON =  IconLoader.getIcon("/images/file_16x16.svg", LiteFlowIcons.class);
 
 }
