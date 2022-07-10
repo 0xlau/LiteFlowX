@@ -12,8 +12,7 @@
     <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="org.intellij.intelliLang">
-        <languageSupport
-                implementation="org.intellij.plugins.intelliLang.inject.xml.XmlLanguageInjectionSupport"/>
+        <!-- LiteFlow Chain语法注入 -->
         <injectionConfig config="language/xmlInjections.xml"/>
     </extensions>
 
