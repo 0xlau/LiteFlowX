@@ -4,7 +4,7 @@ public class Clazz {
 
     public static final String NodeComponent = "com.yomahub.liteflow.core.NodeComponent";
 
-    public static final String NodeCondComponent = "com.yomahub.liteflow.core.NodeCondComponent";
+    public static final String NodeSwitchComponent = "com.yomahub.liteflow.core.NodeSwitchComponent";
 
     public static final String LiteFlowConfig = "com.yomahub.liteflow.property.LiteflowConfig";
 

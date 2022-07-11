@@ -26,10 +26,7 @@ public class XmlUtils {
     private static final String ROOT_TYPES = Flow.class.getSimpleName().toLowerCase();
 
     private static final ImmutableSet<String> TARGET_TYPES = ImmutableSet.of(
-            Then.class.getSimpleName().toLowerCase(),
-            When.class.getSimpleName().toLowerCase(),
-            Pre.class.getSimpleName().toLowerCase(),
-            Finally.class.getSimpleName().toLowerCase(),
+            Chain.class.getSimpleName().toLowerCase(),
             Node.class.getSimpleName().toLowerCase()
     );
 

@@ -10,7 +10,6 @@ import com.intellij.util.xml.DomService;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
-import top.xystudio.plugin.idea.liteflowx.constant.Interface;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
@@ -39,22 +38,6 @@ public class LiteFlowService implements Serializable {
     }
 
     /**
-     * 寻找所有的LiteFlowNode
-     * @return
-     */
-    public PsiElement[] findAllLiteFlowNode(){
-        Collection<PsiElement> result = new ArrayList<>();
-        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
-        for (DomFileElement<Flow> flow : flows) {
-            Nodes nodes = flow.getRootElement().getNodes();
-            for (Node node : nodes.getNodeList()) {
-                result.add(node.getXmlTag());
-            }
-        }
-        return result.toArray(new PsiElement[0]);
-    }
-
-    /**
      * 寻找所有的LiteFlowChain
      * @return
      */
@@ -63,20 +46,12 @@ public class LiteFlowService implements Serializable {
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
         for (DomFileElement<Flow> flow : flows) {
             for (Chain chain : flow.getRootElement().getChains()) {
-                result.add(chain.getXmlTag());
+                if (chain.getName().getStringValue() != null) {
+                    result.add(chain.getXmlTag());
+                }
             }
         }
         return result.toArray(new PsiElement[0]);
-    }
-
-    /**
-     * 寻找所有的LiteFlowClass
-     * @return
-     */
-    public PsiClass[] findAllLiteFlowClass(){
-        Collection<PsiClass> result = javaService.getAllClasses();
-        List<PsiClass> collect = result.stream().filter(this::isLiteFlowClass).collect(Collectors.toList());
-        return collect.toArray(new PsiClass[0]);
     }
 
     /**
@@ -87,19 +62,20 @@ public class LiteFlowService implements Serializable {
         Collection<PsiClass> result = new ArrayList<>();
         Collection<PsiClass> components = javaService.getClassesByAnnotationQualifiedName(Annotation.Component);
         Collection<PsiClass> liteFlowComponents = javaService.getClassesByAnnotationQualifiedName(Annotation.LiteflowComponent);
+
+        // 根据xml文件定义的node也归为Component
+        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<Flow> flow : flows) {
+            Nodes nodes = flow.getRootElement().getNodes();
+            for (Node node : nodes.getNodeList()) {
+                PsiClass aClass = javaService.getClassByQualifiedName(node.getClazz().getStringValue());
+                if (aClass != null) result.add(aClass);
+            }
+        }
+
         result.addAll(components);
         result.addAll(liteFlowComponents);
-        List<PsiClass> collect = result.stream().filter(this::isLiteFlowClass).collect(Collectors.toList());
-        return collect.toArray(new PsiClass[0]);
-    }
-
-    /**
-     * 寻找所有的LiteFlowSlot
-     * @return
-     */
-    public PsiClass[] findAllLiteFlowSlot(){
-        Collection<PsiClass> result = javaService.getAllClasses();
-        List<PsiClass> collect = result.stream().filter(this::isLiteFlowSlot).collect(Collectors.toList());
+        List<PsiClass> collect = result.stream().distinct().filter(this::isLiteFlowClass).collect(Collectors.toList());
         return collect.toArray(new PsiClass[0]);
     }
 
@@ -136,13 +112,25 @@ public class LiteFlowService implements Serializable {
             }
             return name;
         }
+
+        // 根据xml文件定义的node也归为Component
+        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<Flow> flow : flows) {
+            Nodes nodes = flow.getRootElement().getNodes();
+            for (Node node : nodes.getNodeList()) {
+                if (psiClass.getQualifiedName().equals(node.getClazz().getStringValue())){
+                    return node.getId().getStringValue();
+                }
+            }
+        }
+
         return null;
     }
 
     /**
      * 判断是不是LiteFlowClass
-     * 如果继承了NodeComponent或NodeCondComponent，则判断为是
-     * 如果没继承以上两个Class，而使用LiteFlowCmpDefine和LiteFlowCondCmpDefine的注解，同样判断为是
+     * 如果继承了NodeComponent或NodeSwitchComponent，则判断为是
+     * 如果没继承以上两个Class，而使用LiteFlowCmpDefine和LiteflowSwitchCmpDefine的注解，同样判断为是
      * 否则为不是
      * @param psiClass
      * @return
@@ -152,32 +140,13 @@ public class LiteFlowService implements Serializable {
             return false;
         }
         PsiClass nodeComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeComponent);
-        PsiClass nodeCondComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeCondComponent);
-        if (psiClass.isInheritor(nodeComponent, true) || psiClass.isInheritor(nodeCondComponent, true)){
+        PsiClass nodeSwitchComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeSwitchComponent);
+        if ((nodeSwitchComponent != null && psiClass.isInheritor(nodeSwitchComponent, true)) || (nodeComponent != null && psiClass.isInheritor(nodeComponent, true))){
             return true;
         }
         PsiAnnotation liteflowCmpDefine = psiClass.getAnnotation(Annotation.LiteflowCmpDefine);
-        PsiAnnotation liteflowCondCmpDefine = psiClass.getAnnotation(Annotation.LiteflowCondCmpDefine);
-        return liteflowCmpDefine != null || liteflowCondCmpDefine != null;
+        PsiAnnotation liteflowSwitchCmpDefine = psiClass.getAnnotation(Annotation.LiteflowSwitchCmpDefine);
+        return liteflowCmpDefine != null || liteflowSwitchCmpDefine != null;
     }
 
-    /**
-     * 判断是不是LiteFlowSlot
-     * 如果超类是接口SLot，则判断为是，否则不是
-     * @param psiClass
-     * @return
-     */
-    public boolean isLiteFlowSlot(@NotNull PsiClass psiClass){
-        while (psiClass.getSuperClassType() != null &&
-                !psiClass.getSuperClassType().equals(Clazz.JavaObject)){
-            psiClass = psiClass.getSuperClass();
-        }
-        PsiClassType[] implementsListTypes = psiClass.getImplementsListTypes();
-        for (PsiClassType implementsListType : implementsListTypes) {
-            if (implementsListType.equals(PsiClassType.getTypeByName(Interface.Slot, this.project, GlobalSearchScope.allScope(this.project)))){
-                return true;
-            }
-        }
-        return false;
-    }
 }

@@ -10,7 +10,7 @@ import com.intellij.psi.PsiJavaToken;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainImpl;
+import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
 
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class JavaToChainGotoDeclarationHandler implements GotoDeclarationHandler
             return null;
         }
         String name = sourceElement.getText().replace("\"", "");
-        Optional<? extends PsiElement> result = LiteFlowUtils.findTargetByName(project, name, new findChainImpl());
+        Optional<? extends PsiElement> result = LiteFlowUtils.findTargetByName(project, name, new findChainsImpl());
         if (!result.isPresent()){
             return null;
         }
