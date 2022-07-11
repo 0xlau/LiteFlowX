@@ -11,15 +11,6 @@ public interface LiteFlowLiteFlowWhenExpress extends PsiElement {
   List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList();
 
   @NotNull
-  List<LiteFlowLiteFlowAnyExpress> getLiteFlowAnyExpressList();
-
-  @NotNull
-  List<LiteFlowLiteFlowIdExpress> getLiteFlowIdExpressList();
-
-  @NotNull
-  List<LiteFlowLiteFlowIgnoreErrorExpress> getLiteFlowIgnoreErrorExpressList();
-
-  @NotNull
-  List<LiteFlowLiteFlowThreadPoolExpress> getLiteFlowThreadPoolExpressList();
+  List<LiteFlowLiteFlowWhenSubExpress> getLiteFlowWhenSubExpressList();
 
 }

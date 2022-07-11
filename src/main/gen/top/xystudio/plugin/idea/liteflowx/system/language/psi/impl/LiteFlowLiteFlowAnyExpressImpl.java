@@ -28,9 +28,9 @@ public class LiteFlowLiteFlowAnyExpressImpl extends ASTWrapperPsiElement impleme
   }
 
   @Override
-  @NotNull
+  @Nullable
   public LiteFlowBoolean getBoolean() {
-    return findNotNullChildByClass(LiteFlowBoolean.class);
+    return findChildByClass(LiteFlowBoolean.class);
   }
 
 }

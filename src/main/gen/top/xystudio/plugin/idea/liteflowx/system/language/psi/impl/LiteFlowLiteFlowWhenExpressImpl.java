@@ -35,26 +35,8 @@ public class LiteFlowLiteFlowWhenExpressImpl extends ASTWrapperPsiElement implem
 
   @Override
   @NotNull
-  public List<LiteFlowLiteFlowAnyExpress> getLiteFlowAnyExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowAnyExpress.class);
-  }
-
-  @Override
-  @NotNull
-  public List<LiteFlowLiteFlowIdExpress> getLiteFlowIdExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowIdExpress.class);
-  }
-
-  @Override
-  @NotNull
-  public List<LiteFlowLiteFlowIgnoreErrorExpress> getLiteFlowIgnoreErrorExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowIgnoreErrorExpress.class);
-  }
-
-  @Override
-  @NotNull
-  public List<LiteFlowLiteFlowThreadPoolExpress> getLiteFlowThreadPoolExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowThreadPoolExpress.class);
+  public List<LiteFlowLiteFlowWhenSubExpress> getLiteFlowWhenSubExpressList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowWhenSubExpress.class);
   }
 
 }

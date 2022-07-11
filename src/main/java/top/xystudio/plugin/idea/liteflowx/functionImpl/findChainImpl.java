@@ -24,7 +24,7 @@ public class findChainImpl implements BiFunction<Project, String, PsiElement> {
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, project, GlobalSearchScope.allScope(project));
         for (DomFileElement<Flow> flow : flows) {
             for (Chain chain : flow.getRootElement().getChains()) {
-                if (chain.getName().getStringValue().equals(componentId)){
+                if (chain.getName().getStringValue() != null && chain.getName().getStringValue().equals(componentId)){
                     return chain.getXmlTag();
                 }
             }

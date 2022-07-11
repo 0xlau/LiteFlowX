@@ -4,16 +4,12 @@ import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 import top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowLanguage;
-import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeRef;
+import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
 public class LiteFlowBaseCompletionContributor extends CompletionContributor {
 
@@ -41,11 +37,23 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
             new CompletionProvider<>() {
                 @Override
                 protected void addCompletions(@NotNull CompletionParameters parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet resultSet) {
-                    resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
-                    resultSet.addElement(LookupElementBuilder.create("WHEN").withInsertHandler(parenHandler));
-                    resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));
-                    resultSet.addElement(LookupElementBuilder.create("PRE").withInsertHandler(parenHandler));
-                    resultSet.addElement(LookupElementBuilder.create("SWITCH").withInsertHandler(switchHandler));
+
+                    PsiElement position = parameters.getPosition();
+
+                    if (position.getText().equals("IntellijIdeaRulezzz")){
+                        resultSet.addElement(LookupElementBuilder.create("id").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("any").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("ignoreError").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("threadPool").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("to").withInsertHandler(parenHandler));
+                    }else{
+                        resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("WHEN").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("PRE").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("SWITCH").withInsertHandler(switchHandler));
+                    }
+
                 }
             });
     }

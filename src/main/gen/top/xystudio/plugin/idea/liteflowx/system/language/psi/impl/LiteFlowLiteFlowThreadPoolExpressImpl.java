@@ -28,9 +28,9 @@ public class LiteFlowLiteFlowThreadPoolExpressImpl extends ASTWrapperPsiElement 
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getString() {
-    return findNotNullChildByType(LITEFLOW_STRING);
+    return findChildByType(LITEFLOW_STRING);
   }
 
 }

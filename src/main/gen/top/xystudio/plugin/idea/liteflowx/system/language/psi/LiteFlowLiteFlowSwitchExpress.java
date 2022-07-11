@@ -11,9 +11,6 @@ public interface LiteFlowLiteFlowSwitchExpress extends PsiElement {
   List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList();
 
   @NotNull
-  List<LiteFlowLiteFlowIdExpress> getLiteFlowIdExpressList();
-
-  @NotNull
-  List<LiteFlowLiteFlowToExpress> getLiteFlowToExpressList();
+  List<LiteFlowLiteFlowSwitchSubExpress> getLiteFlowSwitchSubExpressList();
 
 }

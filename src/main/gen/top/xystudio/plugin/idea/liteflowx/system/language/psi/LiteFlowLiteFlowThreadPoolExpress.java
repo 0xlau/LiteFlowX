@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface LiteFlowLiteFlowThreadPoolExpress extends PsiElement {
 
-  @NotNull
+  @Nullable
   PsiElement getString();
 
 }

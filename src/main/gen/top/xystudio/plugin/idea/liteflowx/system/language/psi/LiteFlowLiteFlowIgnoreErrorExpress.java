@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface LiteFlowLiteFlowIgnoreErrorExpress extends PsiElement {
 
-  @NotNull
+  @Nullable
   LiteFlowBoolean getBoolean();
 
 }

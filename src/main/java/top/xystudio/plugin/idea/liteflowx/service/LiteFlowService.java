@@ -46,7 +46,9 @@ public class LiteFlowService implements Serializable {
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
         for (DomFileElement<Flow> flow : flows) {
             for (Chain chain : flow.getRootElement().getChains()) {
-                result.add(chain.getXmlTag());
+                if (chain.getName().getStringValue() != null) {
+                    result.add(chain.getXmlTag());
+                }
             }
         }
         return result.toArray(new PsiElement[0]);

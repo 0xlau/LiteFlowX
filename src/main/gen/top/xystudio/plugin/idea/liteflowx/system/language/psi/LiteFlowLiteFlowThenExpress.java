@@ -11,6 +11,6 @@ public interface LiteFlowLiteFlowThenExpress extends PsiElement {
   List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList();
 
   @Nullable
-  LiteFlowLiteFlowIdExpress getLiteFlowIdExpress();
+  LiteFlowLiteFlowThenSubExpress getLiteFlowThenSubExpress();
 
 }

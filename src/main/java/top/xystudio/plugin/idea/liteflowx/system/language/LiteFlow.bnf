@@ -158,7 +158,8 @@ forStatement ::= for PAREN_LEFT [assignExpress] SEMICOLON [allExpress] SEMICOLON
 whileStatement ::= while PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT
 
 //allExpressStatement ::= allExpress
-assignStatement ::= assignExpress SEMICOLON
+assignStatement ::= assignExpress SEMICOLON {pin=1 recoverWhile=recover_assignStatement}
+private assignStatement ::= !(SEMICOLON | assignStatement | liteFlowStatement)
 threeStatement ::= threeExpress SEMICOLON
 fnInvokeStatement ::= fnInvokeExpress SEMICOLON
 newStatement::= newExpress SEMICOLON
@@ -166,7 +167,8 @@ returnStatement ::= return allExpress* SEMICOLON
 breakStatement ::= break SEMICOLON
 continueStatement ::= continue SEMICOLON
 opSelfStatement ::= opSelfExpress SEMICOLON
-liteFlowStatement ::= liteFlowConditionExpress SEMICOLON
+liteFlowStatement ::= liteFlowConditionExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
+private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement)
 
 /** Statement Start **/
 
@@ -213,43 +215,46 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::= liteFlowConditionExpress | (liteFlowNodeRef [liteFlowTagExpress])
+liteFlowAllExpress ::= liteFlowConditionExpress | (liteFlowNodeRef [DOT liteFlowTagExpress])
 
 // LiteFlow Condition 表达式
 liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress
 
 // LiteFlow THEN() 表达式
-liteFlowThenExpress ::= THEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT [liteFlowIdExpress]
+liteFlowThenExpress ::= THEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT [liteFlowThenSubExpress] {pin=1}
+liteFlowThenSubExpress ::= DOT liteFlowIdExpress {pin=1}
 
 // LiteFlow WHEN() 表达式
-liteFlowWhenExpress ::= WHEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { (liteFlowIdExpress | liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress) }*
+liteFlowWhenExpress ::= WHEN PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { liteFlowWhenSubExpress }* {pin=1}
+liteFlowWhenSubExpress ::= DOT (liteFlowIdExpress | liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress) {pin=1}
 
 // LiteFlow SWITCH() 表达式
-liteFlowSwitchExpress ::= SWITCH PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { (liteFlowToExpress | liteFlowIdExpress) }*
+liteFlowSwitchExpress ::= SWITCH PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT { liteFlowSwitchSubExpress }* {pin=1}
+liteFlowSwitchSubExpress ::= DOT (liteFlowToExpress | liteFlowIdExpress) {pin=1}
 
 // LiteFlow PRE() 表达式
-liteFlowPreExpress ::= PRE PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+liteFlowPreExpress ::= PRE PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT {pin=1}
 
 // LiteFlow FINALLY() 表达式
-liteFlowFinallyExpress ::= FINALLY PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+liteFlowFinallyExpress ::= FINALLY PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT {pin=1}
 
 // LiteFlow .to() 表达式
-liteFlowToExpress ::= DOT to PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT
+liteFlowToExpress ::= to PAREN_LEFT [liteFlowAllExpress {COMMA liteFlowAllExpress}*] PAREN_RIGHT {pin=1}
 
 // LiteFlow .id() 表达式
-liteFlowIdExpress ::= DOT id PAREN_LEFT string PAREN_RIGHT
+liteFlowIdExpress ::= id PAREN_LEFT string PAREN_RIGHT {pin=1}
 
 // LiteFlow .ignoreError() 表达式
-liteFlowIgnoreErrorExpress ::= DOT ignoreError PAREN_LEFT boolean PAREN_RIGHT
+liteFlowIgnoreErrorExpress ::= ignoreError PAREN_LEFT boolean PAREN_RIGHT {pin=1}
 
 // LiteFlow .any() 表达式
-liteFlowAnyExpress ::= DOT any PAREN_LEFT boolean PAREN_RIGHT
+liteFlowAnyExpress ::= any PAREN_LEFT boolean PAREN_RIGHT {pin=1}
 
 // LiteFlow .threadPool() 表达式
-liteFlowThreadPoolExpress ::= DOT threadPool PAREN_LEFT string PAREN_RIGHT
+liteFlowThreadPoolExpress ::= threadPool PAREN_LEFT string PAREN_RIGHT {pin=1}
 
 // LiteFlow .tag() 表达式
-liteFlowTagExpress ::= DOT tag PAREN_LEFT string PAREN_RIGHT
+liteFlowTagExpress ::= tag PAREN_LEFT string PAREN_RIGHT {pin=1}
 
 /** Express End **/
 
