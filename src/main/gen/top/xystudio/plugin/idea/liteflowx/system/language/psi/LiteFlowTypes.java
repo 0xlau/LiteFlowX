@@ -9,7 +9,6 @@ import top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.*;
 public interface LiteFlowTypes {
 
   IElementType LITEFLOW_ALL_EXPRESS = new LiteFlowElementType("LITEFLOW_ALL_EXPRESS");
-  IElementType LITEFLOW_ALL_EXPRESS_STATEMENT = new LiteFlowElementType("LITEFLOW_ALL_EXPRESS_STATEMENT");
   IElementType LITEFLOW_ARRAY_EXPRESS = new LiteFlowElementType("LITEFLOW_ARRAY_EXPRESS");
   IElementType LITEFLOW_ASSIGN_EXPRESS = new LiteFlowElementType("LITEFLOW_ASSIGN_EXPRESS");
   IElementType LITEFLOW_ASSIGN_STATEMENT = new LiteFlowElementType("LITEFLOW_ASSIGN_STATEMENT");
@@ -135,9 +134,6 @@ public interface LiteFlowTypes {
       IElementType type = node.getElementType();
       if (type == LITEFLOW_ALL_EXPRESS) {
         return new LiteFlowAllExpressImpl(node);
-      }
-      else if (type == LITEFLOW_ALL_EXPRESS_STATEMENT) {
-        return new LiteFlowAllExpressStatementImpl(node);
       }
       else if (type == LITEFLOW_ARRAY_EXPRESS) {
         return new LiteFlowArrayExpressImpl(node);

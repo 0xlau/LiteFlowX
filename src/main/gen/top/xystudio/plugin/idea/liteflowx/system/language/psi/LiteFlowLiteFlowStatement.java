@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface LiteFlowLiteFlowStatement extends PsiElement {
 
   @NotNull
-  LiteFlowLiteFlowAllExpress getLiteFlowAllExpress();
+  LiteFlowLiteFlowConditionExpress getLiteFlowConditionExpress();
 
 }

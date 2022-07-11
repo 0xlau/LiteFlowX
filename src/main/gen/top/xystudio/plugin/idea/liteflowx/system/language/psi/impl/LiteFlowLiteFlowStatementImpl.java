@@ -29,8 +29,8 @@ public class LiteFlowLiteFlowStatementImpl extends ASTWrapperPsiElement implemen
 
   @Override
   @NotNull
-  public LiteFlowLiteFlowAllExpress getLiteFlowAllExpress() {
-    return findNotNullChildByClass(LiteFlowLiteFlowAllExpress.class);
+  public LiteFlowLiteFlowConditionExpress getLiteFlowConditionExpress() {
+    return findNotNullChildByClass(LiteFlowLiteFlowConditionExpress.class);
   }
 
 }

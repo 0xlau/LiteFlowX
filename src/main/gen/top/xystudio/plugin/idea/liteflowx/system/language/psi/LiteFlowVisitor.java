@@ -11,10 +11,6 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitAllExpressStatement(@NotNull LiteFlowAllExpressStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitArrayExpress(@NotNull LiteFlowArrayExpress o) {
     visitPsiElement(o);
   }

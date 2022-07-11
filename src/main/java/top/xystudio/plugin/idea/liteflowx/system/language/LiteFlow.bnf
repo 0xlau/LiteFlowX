@@ -139,9 +139,7 @@ statement ::= (
     forStatement |
     whileStatement |
     block_comment |
-    (
     assignStatement |
-//    allExpressStatement |
     breakStatement |
     continueStatement |
     threeStatement |
@@ -151,24 +149,24 @@ statement ::= (
     opSelfStatement |
     liteFlowStatement |
     BRACE_LEFT statement* BRACE_RIGHT
-    ) SEMICOLON
 )
 
 /** Statement Start **/
 
-allExpressStatement ::= allExpress
-assignStatement ::= assignExpress
-threeStatement ::= threeExpress
-fnInvokeStatement ::= fnInvokeExpress
-newStatement::= newExpress
-returnStatement ::= return allExpress*
 ifStatement ::= if PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT {else ifStatement }* {else BRACE_LEFT codes BRACE_RIGHT}?
-breakStatement ::= break
-continueStatement ::= continue
 forStatement ::= for PAREN_LEFT [assignExpress] SEMICOLON [allExpress] SEMICOLON [(opSelfExpress | assignExpress)]  PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT
 whileStatement ::= while PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRACE_RIGHT
-opSelfStatement ::= opSelfExpress
-liteFlowStatement ::= liteFlowAllExpress
+
+//allExpressStatement ::= allExpress
+assignStatement ::= assignExpress SEMICOLON
+threeStatement ::= threeExpress SEMICOLON
+fnInvokeStatement ::= fnInvokeExpress SEMICOLON
+newStatement::= newExpress SEMICOLON
+returnStatement ::= return allExpress* SEMICOLON
+breakStatement ::= break SEMICOLON
+continueStatement ::= continue SEMICOLON
+opSelfStatement ::= opSelfExpress SEMICOLON
+liteFlowStatement ::= liteFlowConditionExpress SEMICOLON
 
 /** Statement Start **/
 
@@ -215,7 +213,7 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::=(liteFlowNodeRef [liteFlowTagExpress]) | liteFlowConditionExpress
+liteFlowAllExpress ::= liteFlowConditionExpress | (liteFlowNodeRef [liteFlowTagExpress])
 
 // LiteFlow Condition 表达式
 liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress
