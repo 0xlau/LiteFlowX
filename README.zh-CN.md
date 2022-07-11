@@ -21,7 +21,7 @@
 </p>
 
 
-![LITEFLOWX](https://s1.ax1x.com/2022/05/12/O0Aw4K.png)
+![LITEFLOWX](https://s1.ax1x.com/2022/07/11/jcgzKf.png)
 
 <div align="center">
 
@@ -33,15 +33,14 @@
 <h3>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h3>
 
 ## 🍬 LiteFlowX 特性
+- 支持 LiteFlow 2.8.x 新的规则表达式语法（自动提示、语法高亮、语法检测）
 - 特定的文件 Svg 图标，容易识别 LiteFlow 元素
-- 能够识别Component、Node、Chain、Slot
-- Component、Node、Chain和XML文件的互相跳转
+- 能够识别Component、Chain
 - Java 代码和 Chain 的互相跳转
 - Xml 文件与 LiteFlow 元素的互相跳转
-- Xml 的自动完成提示，能够提示Component、Node、Chain
-- 提供LiteFLow工具箱，整个工程的Component、Node、Chain、Slot一目了然，并且支持双击跳转
+- Xml 的自动完成提示，能够提示Component、Chain
+- 提供LiteFLow工具箱，整个工程的Component、Chain，并且支持双击跳转
 - 支持对 liteflow.ruleSource 属性的文件跳转
-- v2.6.x 与 v2.7.x 的新旧版本双兼容
 - ...更多特性敬请期待
 
 <!-- Plugin description end -->

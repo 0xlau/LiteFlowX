@@ -21,7 +21,7 @@
 </p>
 
 
-![LITEFLOWX](https://s1.ax1x.com/2022/05/12/O0Aw4K.png)
+![LITEFLOWX](https://s1.ax1x.com/2022/07/11/jcgzKf.png)
 
 <div align="center">
 
@@ -33,15 +33,14 @@ English | [简体中文](./README.zh-CN.md)
 <h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
 ## 🍬 LiteFlowX Features:
+- Support for LiteFlow 2.8.x new expression language
 - Specific file Svg icons for easy identification of LiteFlow elements
-- Able to identify Component, Node, Chain, Slot
-- Jump between Component, Node, Chain and XML files
+- Able to identify Component and Chain
 - Java code and Chain jump to each other
 - Jump between Xml files and LiteFlow elements
-- Auto-complete prompt for Xml, able to prompt Component, Node, Chain
+- Auto-complete prompt for elf language, able to prompt Component, Chain and local variables
 - Provides LiteFLow toolbox
 - Support file jump to liteflow.ruleSource property
-- Both old and new versions of v2.6.x and v2.7.x are compatible
 - ...more features to come
 
 <!-- Plugin description end -->
