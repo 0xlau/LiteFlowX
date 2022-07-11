@@ -58,6 +58,11 @@
         <colorSettingsPage
                 implementation="top.xystudio.plugin.idea.liteflowx.system.language.highlight.LiteFLowLanguageColorSettingPage"/>
 
+        <!-- China处理 -->
+        <annotator
+                language="XML"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.annotator.XmlChainAnnotator"/>
+
         <projectService id="liteflowx.JavaService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.JavaService"/>
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
         <projectService id="liteflowx.FileService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.FileService"/>

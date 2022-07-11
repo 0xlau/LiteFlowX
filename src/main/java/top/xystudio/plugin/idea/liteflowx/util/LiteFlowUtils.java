@@ -16,8 +16,9 @@ public class LiteFlowUtils {
      * @param biFunction
      * @return
      */
-    public static Optional<? extends PsiElement> findTargetByName(Project project, String name, BiFunction<Project, String, PsiElement> biFunction) {
-        return Optional.ofNullable(biFunction.apply(project, name));
+    public static Optional<? extends PsiElement> findTargetByName(Project project, String name, BiFunction<Project, String, List<? extends PsiElement>> biFunction) {
+        List<? extends PsiElement> result = biFunction.apply(project, name);
+        return Optional.ofNullable(result.size() == 0? null : result.get(0));
     }
 
     /**

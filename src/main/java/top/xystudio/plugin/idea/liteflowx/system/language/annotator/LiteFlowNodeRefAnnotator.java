@@ -7,8 +7,8 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainImpl;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentImpl;
+import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
+import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findElfLocalVariablesImpl;
 import top.xystudio.plugin.idea.liteflowx.system.language.highlight.LiteFlowSyntaxHighlighter;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.LiteFlowLiteFlowNodeRefImpl;
@@ -44,7 +44,7 @@ public class LiteFlowNodeRefAnnotator implements Annotator {
         }
 
         // 判断全局Component
-        Optional<? extends PsiElement> pe_component = LiteFlowUtils.findTargetByName(project, symbol, new findComponentImpl());
+        Optional<? extends PsiElement> pe_component = LiteFlowUtils.findTargetByName(project, symbol, new findComponentsImpl());
         if (pe_component.isPresent()){
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element.getTextRange())
@@ -54,7 +54,7 @@ public class LiteFlowNodeRefAnnotator implements Annotator {
         }
 
         // 判断全局Chain
-        Optional<? extends PsiElement> pe_chain = LiteFlowUtils.findTargetByName(project, symbol, new findChainImpl());
+        Optional<? extends PsiElement> pe_chain = LiteFlowUtils.findTargetByName(project, symbol, new findChainsImpl());
         if (pe_chain.isPresent()){
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element.getTextRange())

@@ -8,16 +8,14 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainImpl;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentImpl;
+import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
+import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findElfLocalVariablesImpl;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeRef;
-import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTokenType;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ElfGotoDeclarationHandler implements GotoDeclarationHandler {
     @Override
@@ -31,8 +29,8 @@ public class ElfGotoDeclarationHandler implements GotoDeclarationHandler {
         String name = sourceElement.getText();
 
         List<PsiElement> result = new ArrayList<>();
-        PsiElement component = LiteFlowUtils.findTargetByName(project, name, new findComponentImpl()).orElse(null);
-        PsiElement chain = LiteFlowUtils.findTargetByName(project, name, new findChainImpl()).orElse(null);
+        PsiElement component = LiteFlowUtils.findTargetByName(project, name, new findComponentsImpl()).orElse(null);
+        PsiElement chain = LiteFlowUtils.findTargetByName(project, name, new findChainsImpl()).orElse(null);
         List<? extends PsiElement> localVars = LiteFlowUtils.findTargetsByName(project, name, new findElfLocalVariablesImpl(sourceElement.getContainingFile())).orElse(null);
 
         if (component != null)  {result.add(component);}
