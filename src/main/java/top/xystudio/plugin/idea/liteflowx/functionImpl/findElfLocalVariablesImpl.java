@@ -25,14 +25,16 @@ public class findElfLocalVariablesImpl implements BiFunction<Project, String, Li
         List<LiteFlowStatement> result = new ArrayList<>();
 
         LiteFlowCodes liteFlowCodes = PsiTreeUtil.getChildOfType(this.liteFlowFile, LiteFlowCodes.class);
+        if (liteFlowCodes == null){
+            return result;
+        }
         for (LiteFlowStatement liteFlowStatement : liteFlowCodes.getStatementList()) {
             try{
-                if(name.equals(liteFlowStatement.getAssignStatement().getAssignExpress().getRefExpress().getTypeRef().getText())){
+                if(liteFlowStatement.getAssignStatement() != null &&
+                        name.equals(liteFlowStatement.getAssignStatement().getAssignExpress().getRefExpress().getTypeRef().getText())){
                     result.add(liteFlowStatement);
                 }
-            }catch (Exception e){
-                continue;
-            }
+            }catch (Exception ignored){ }
         }
         return result;
 

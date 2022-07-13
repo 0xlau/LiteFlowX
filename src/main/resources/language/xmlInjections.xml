@@ -3,8 +3,7 @@
     <injection language="LiteFlow" injector-id="xml">
         <display-name>Chain (XmlTag)</display-name>
         <place><![CDATA[
-            xmlTag()
-                .withLocalName(string().equalTo("chain"))
-        ]]></place>
+            xmlTag().withLocalName(string().equalTo("chain")).inVirtualFile(virtualFile().withName(string().contains(".el.xml")))
+            ]]></place>
     </injection>
 </component>
