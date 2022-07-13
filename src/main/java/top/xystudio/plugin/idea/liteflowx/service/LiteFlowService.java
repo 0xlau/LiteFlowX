@@ -46,7 +46,7 @@ public class LiteFlowService implements Serializable {
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
         for (DomFileElement<Flow> flow : flows) {
             for (Chain chain : flow.getRootElement().getChains()) {
-                if (chain.getName().getStringValue() != null) {
+                if (chain.getName().getStringValue() != null && StringUtil.isNotEmpty(chain.getName().getStringValue())) {
                     result.add(chain.getXmlTag());
                 }
             }
@@ -68,15 +68,17 @@ public class LiteFlowService implements Serializable {
         for (DomFileElement<Flow> flow : flows) {
             Nodes nodes = flow.getRootElement().getNodes();
             for (Node node : nodes.getNodeList()) {
-                PsiClass aClass = javaService.getClassByQualifiedName(node.getClazz().getStringValue());
-                if (aClass != null) result.add(aClass);
+                String clazzValue = node.getClazz().getStringValue();
+                if (clazzValue == null) {continue;}
+                PsiClass aClass = javaService.getClassByQualifiedName(clazzValue);
+                if (aClass == null) {continue;}
+                result.add(aClass);
             }
         }
 
         result.addAll(components);
         result.addAll(liteFlowComponents);
-        List<PsiClass> collect = result.stream().distinct().filter(this::isLiteFlowClass).collect(Collectors.toList());
-        return collect.toArray(new PsiClass[0]);
+        return result.stream().distinct().filter(this::isLiteFlowClass).toArray(PsiClass[]::new);
     }
 
     /**
@@ -90,11 +92,16 @@ public class LiteFlowService implements Serializable {
             return null;
         }
 
+        String className = psiClass.getName();
+        if (className == null){
+            return null;
+        }
+
         String componentValue = JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.Component, "value");
         if (componentValue != null){
-            /** 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
+            /* 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
             if (componentValue.equals("")){
-                componentValue = StringUtils.lowerFirst(psiClass.getName());
+                componentValue = StringUtils.lowerFirst(className);
             }
             return componentValue;
         }
@@ -106,9 +113,9 @@ public class LiteFlowService implements Serializable {
 
         String name = StringUtil.isEmpty(liteFlowComponentValue)? liteFlowComponentId : liteFlowComponentValue;
         if (name != null){
-            /** 如果获取的value或者id值为空，则默认使用字符串首字母小写的Class名称 */
+            /* 如果获取的value或者id值为空，则默认使用字符串首字母小写的Class名称 */
             if (name.equals("")){
-                name = StringUtils.lowerFirst(psiClass.getName());
+                name = StringUtils.lowerFirst(className);
             }
             return name;
         }
@@ -118,8 +125,13 @@ public class LiteFlowService implements Serializable {
         for (DomFileElement<Flow> flow : flows) {
             Nodes nodes = flow.getRootElement().getNodes();
             for (Node node : nodes.getNodeList()) {
-                if (psiClass.getQualifiedName().equals(node.getClazz().getStringValue())){
-                    return node.getId().getStringValue();
+                String clazzValue = node.getClazz().getStringValue();
+                String idValue = node.getId().getStringValue();
+                if (psiClass.getQualifiedName()==null || clazzValue == null || idValue==null) {
+                    continue;
+                }
+                if (psiClass.getQualifiedName().equals(clazzValue)){
+                    return idValue;
                 }
             }
         }

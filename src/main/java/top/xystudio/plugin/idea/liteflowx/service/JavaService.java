@@ -32,7 +32,7 @@ public class JavaService implements Serializable {
 
     /**
      * 获取项目里的所有Class
-     * @return
+     * @return 返回所有工程里的Class
      */
     public Collection<PsiClass> getAllClasses() {
         return AllClassesSearch.search(GlobalSearchScope.projectScope(project), project).findAll();
@@ -40,8 +40,8 @@ public class JavaService implements Serializable {
 
     /**
      * 获取一个全名为qualifiedName的Class
-     * @param qualifiedName
-     * @return
+     * @param qualifiedName 类的全名
+     * @return 返回一个PsiClass对象
      */
     public PsiClass getClassByQualifiedName(@NotNull String qualifiedName) {
         return javaPsiFacade.findClass(qualifiedName, GlobalSearchScope.allScope(this.project));

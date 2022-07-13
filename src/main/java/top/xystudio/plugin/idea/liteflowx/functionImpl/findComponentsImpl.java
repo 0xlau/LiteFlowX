@@ -15,9 +15,8 @@ import java.util.function.BiFunction;
 public class findComponentsImpl implements BiFunction<Project, String, List<? extends PsiElement>> {
     @Override
     public List<? extends PsiElement> apply(Project project, String name) {
-        String componentId = name;
 
-        if (componentId == null || componentId.equals("")){
+        if (name == null || name.equals("")){
             return null;
         }
 
@@ -26,7 +25,7 @@ public class findComponentsImpl implements BiFunction<Project, String, List<? ex
         for (PsiClass psiClass : allComponent) {
 
             String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentNameByPsiClass(psiClass);
-            if (componentName != null && componentName.equals(componentId)){
+            if (componentName != null && componentName.equals(name)){
                 result.add(psiClass);
             }
 

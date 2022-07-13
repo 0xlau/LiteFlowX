@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2022-07-14
+- 修复 因旧表达式存在而导致的报错
+- 修复 因qualifiedName参数为null而导致的IllegalArgumentException
+- 优化 部分代码的对Null值得判断
+
 ## [1.0.0] - 2022-07-10
 - 适配 LiteFlow 2.8.x 的特性
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5GD4S
