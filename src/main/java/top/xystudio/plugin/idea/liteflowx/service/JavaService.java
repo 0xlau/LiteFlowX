@@ -5,7 +5,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.searches.AllClassesSearch;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,9 +16,9 @@ public class JavaService implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Project project;
+    private final Project project;
 
-    private JavaPsiFacade javaPsiFacade;
+    private final JavaPsiFacade javaPsiFacade;
 
     public JavaService(Project project) {
         this.project = project;
@@ -28,14 +27,6 @@ public class JavaService implements Serializable {
 
     public static JavaService getInstance(@NotNull Project project) {
         return ServiceManager.getService(project, JavaService.class);
-    }
-
-    /**
-     * 获取项目里的所有Class
-     * @return 返回所有工程里的Class
-     */
-    public Collection<PsiClass> getAllClasses() {
-        return AllClassesSearch.search(GlobalSearchScope.projectScope(project), project).findAll();
     }
 
     /**
