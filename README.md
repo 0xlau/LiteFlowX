@@ -15,7 +15,7 @@
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
 <img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX&style=for-the-badge" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2018.3-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.1-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge"/>
 
 </p>
@@ -60,18 +60,23 @@ For full details of install plugins, <a href="https://www.jetbrains.com/help/ide
 > 5. Click **OK** to apply the changes and restart the IDE if prompted.
 
 ## 🌈 Demonstration
-### Java to Chain
-![Java代码跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/JavaToChain.gif)
+### Smart prompt
+![智能提示ComponentChain](https://liteflow.yomahub.com/img/liteflowx/chaincomponent.gif)
 
-### LiteFlowTool
-![LiteFlowTool工具箱](https://liteflow.yomahub.com/img/liteflowx/LiteFlowTool.gif)
+### Pre detection
+![预检测Chain未命名或重复](https://liteflow.yomahub.com/img/liteflowx/chaindep.gif)
 
-### Jump to ruleSource
-![ruleSource跳转](https://liteflow.yomahub.com/img/liteflowx/ruleSourceJump.gif)
+### Custom keywords color
+![自定义elf语法关键字颜色](https://liteflow.yomahub.com/img/liteflowx/changecolor.gif)
 
-### Xml to Chain
-![Xml跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/XmlToChain.gif)
+### Jump to
+![支持Component和Chain跳转](https://liteflow.yomahub.com/img/liteflowx/componentjump.gif)
 
-### Xml to Component
-![Xml跳转Component](https://liteflow.yomahub.com/img/liteflowx/XmlToComponent.gif)
-![Xml跳转Component2](https://liteflow.yomahub.com/img/liteflowx/XmlToManyComponent.gif)
+### Local variables
+![支持局部变量](https://liteflow.yomahub.com/img/liteflowx/localvar.gif)
+
+### Language injection
+![支持.el.xml的chain标签自动注入elf语法](https://liteflow.yomahub.com/img/liteflowx/newelxml.gif)
+
+### LiteFlow ToolBox
+![LiteFlow 工具箱](https://liteflow.yomahub.com/img/liteflowx/toolbox.gif)
