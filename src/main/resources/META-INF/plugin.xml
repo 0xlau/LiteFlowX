@@ -36,6 +36,16 @@
         <!-- LiteFlow语法解析 -->
         <lang.parserDefinition language="LiteFlow" implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowParserDefinition"/>
 
+        <!-- LiteFlow括号匹配 -->
+        <lang.braceMatcher language="LiteFlow"
+                           implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.editing.LiteFlowBraceMatcher"/>
+
+        <!-- LiteFlowEnterBetweenBracesDelegate -->
+        <enterBetweenBracesDelegate language="LiteFlow" implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.editing.LiteFlowEnterBetweenBracesDelegate"/>
+
+        <!-- LiteFlow自动缩进 -->
+        <lineIndentProvider implementation="top.xystudio.plugin.idea.liteflowx.system.language.editing.LiteFlowLineIndentProvider" />
+
         <!-- LiteFlow语法高亮 -->
         <lang.syntaxHighlighterFactory
                 language="LiteFlow"
@@ -44,7 +54,7 @@
         <!-- LiteFLow快速注释 -->
         <lang.commenter
                 language="LiteFlow"
-                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.commenter.LiteFlowLanguageCommenter"/>
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.editing.LiteFlowCommenter"/>
 
         <!-- LiteFlow智能提示 -->
         <completion.contributor

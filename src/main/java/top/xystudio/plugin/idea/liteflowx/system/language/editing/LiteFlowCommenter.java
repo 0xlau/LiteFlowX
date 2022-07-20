@@ -1,9 +1,9 @@
-package top.xystudio.plugin.idea.liteflowx.system.language.commenter;
+package top.xystudio.plugin.idea.liteflowx.system.language.editing;
 
 import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.Nullable;
 
-public class LiteFlowLanguageCommenter implements Commenter {
+public class LiteFlowCommenter implements Commenter {
 
     @Nullable
     @Override
