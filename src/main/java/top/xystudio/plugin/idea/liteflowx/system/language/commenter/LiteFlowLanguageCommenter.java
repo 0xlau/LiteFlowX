@@ -8,7 +8,7 @@ public class LiteFlowLanguageCommenter implements Commenter {
     @Nullable
     @Override
     public String getLineCommentPrefix() {
-        return null;
+        return "//";
     }
 
     @Nullable

@@ -75,9 +75,10 @@
 //    raw_string           = 'raw_string'
 
     // language common
-    identifier = 'regexp:[a-zA-Z\$_][a-zA-Z\d_]*'
-    block_comment = 'regexp:/\*\*(.|\r\n)*\*\*/'
-
+    identifier = 'regexp:[a-zA-Z_][a-zA-Z\d_]*'
+    line_comment = 'regexp://.*'
+//    block_comment="regexp:/\*\*(.|\n)*?\*\*/"
+    block_comment = "regexp:/\*\* !([^]* \*\*/ [^]*) (\*\*/)?"
     //literal
     space = "regexp:\s+"
     string = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")"
@@ -135,10 +136,11 @@ liteFlowFile ::= codes
 codes ::= statement*
 
 statement ::= (
+    line_comment |
+    block_comment |
     ifStatement |
     forStatement |
     whileStatement |
-    block_comment |
     assignStatement |
     breakStatement |
     continueStatement |
@@ -168,7 +170,7 @@ breakStatement ::= break SEMICOLON
 continueStatement ::= continue SEMICOLON
 opSelfStatement ::= opSelfExpress SEMICOLON
 liteFlowStatement ::= liteFlowConditionExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
-private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement)
+private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | line_comment | block_comment | fnInvokeStatement)
 
 /** Statement Start **/
 
@@ -215,7 +217,7 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::= liteFlowConditionExpress | (liteFlowNodeRef [DOT liteFlowTagExpress])
+liteFlowAllExpress ::= ([block_comment | line_comment] liteFlowConditionExpress) | ([block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress])
 
 // LiteFlow Condition 表达式
 liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress

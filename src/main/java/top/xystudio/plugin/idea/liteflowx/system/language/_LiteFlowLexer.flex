@@ -25,8 +25,9 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 EOL=\R
 WHITE_SPACE=\s+
 
-IDENTIFIER=[a-zA-Z\$_][a-zA-Z\d_]*
-BLOCK_COMMENT="/"\*\*(.|\r\n)*\*\*"/"
+IDENTIFIER=[a-zA-Z_][a-zA-Z\d_]*
+LINE_COMMENT="//".*
+BLOCK_COMMENT="/"\*\* !([^]* \*\*"/" [^]*) (\*\*"/")?
 SPACE=[ \t\n\x0B\f\r]+
 STRING=('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\'|\\)*\")
 NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-9]+)?M?)
@@ -107,6 +108,7 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "to"                     { return LITEFLOW_TO; }
 
   {IDENTIFIER}             { return LITEFLOW_IDENTIFIER; }
+  {LINE_COMMENT}           { return LITEFLOW_LINE_COMMENT; }
   {BLOCK_COMMENT}          { return LITEFLOW_BLOCK_COMMENT; }
   {SPACE}                  { return LITEFLOW_SPACE; }
   {STRING}                 { return LITEFLOW_STRING; }

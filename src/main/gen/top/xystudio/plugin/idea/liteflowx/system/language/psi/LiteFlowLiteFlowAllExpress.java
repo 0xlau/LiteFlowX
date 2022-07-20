@@ -16,4 +16,10 @@ public interface LiteFlowLiteFlowAllExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowTagExpress getLiteFlowTagExpress();
 
+  @Nullable
+  PsiElement getBlockComment();
+
+  @Nullable
+  PsiElement getLineComment();
+
 }
