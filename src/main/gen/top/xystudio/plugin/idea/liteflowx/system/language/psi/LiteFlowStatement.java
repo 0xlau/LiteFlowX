@@ -49,4 +49,7 @@ public interface LiteFlowStatement extends PsiElement {
   @Nullable
   PsiElement getBlockComment();
 
+  @Nullable
+  PsiElement getLineComment();
+
 }

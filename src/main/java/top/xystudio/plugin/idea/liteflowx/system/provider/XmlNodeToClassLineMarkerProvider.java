@@ -7,7 +7,6 @@ import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
 import top.xystudio.plugin.idea.liteflowx.service.JavaService;
 
@@ -28,6 +27,9 @@ public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
         }
         else if (domElement instanceof Node){
             String classValue = ((Node) domElement).getClazz().getStringValue();
+            if (classValue == null){
+                return Optional.empty();
+            }
             PsiClass clazz = JavaService.getInstance(element.getProject()).getClassByQualifiedName(classValue);
             if (clazz != null) {
                 return Optional.of(new PsiElement[]{clazz});
@@ -39,7 +41,7 @@ public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
     @Override
     public @NotNull String getTooltip(PsiElement element, @NotNull PsiElement target) {
         String text = null;
-        if (text == null && element instanceof PsiClass) {
+        if (element instanceof PsiClass) {
             PsiClass psiClass = (PsiClass) element;
             text = psiClass.getQualifiedName();
         }
@@ -50,7 +52,7 @@ public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
     }
 
     @Override
-    public @Nullable Icon getIcon() {
+    public @NotNull Icon getIcon() {
         return LiteFlowIcons.COMPONENT_LINE_MARKER_ICON;
     }
 

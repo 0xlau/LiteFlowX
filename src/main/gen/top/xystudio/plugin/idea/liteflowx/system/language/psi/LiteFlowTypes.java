@@ -98,6 +98,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LESS = new LiteFlowTokenType("<");
   IElementType LITEFLOW_LESS_OR_EQUAL = new LiteFlowTokenType("<=");
   IElementType LITEFLOW_LIKE = new LiteFlowTokenType("like");
+  IElementType LITEFLOW_LINE_COMMENT = new LiteFlowTokenType("line_comment");
   IElementType LITEFLOW_MACRO = new LiteFlowTokenType("macro");
   IElementType LITEFLOW_MINUS = new LiteFlowTokenType("-");
   IElementType LITEFLOW_MINUS_MINUS = new LiteFlowTokenType("--");

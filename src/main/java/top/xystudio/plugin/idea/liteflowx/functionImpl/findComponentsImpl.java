@@ -15,12 +15,10 @@ import java.util.function.BiFunction;
 public class findComponentsImpl implements BiFunction<Project, String, List<? extends PsiElement>> {
     @Override
     public List<? extends PsiElement> apply(Project project, String name) {
-
+        List<PsiClass> result = new ArrayList<>();
         if (name == null || name.equals("")){
-            return null;
+            return result;
         }
-
-        List<PsiClass> result =new ArrayList<>();
         PsiClass[] allComponent = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
         for (PsiClass psiClass : allComponent) {
 

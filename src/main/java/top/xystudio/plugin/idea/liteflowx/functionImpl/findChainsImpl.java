@@ -19,10 +19,10 @@ import java.util.function.BiFunction;
 public class findChainsImpl implements BiFunction<Project, String, List<? extends PsiElement>> {
     @Override
     public List<? extends PsiElement> apply(Project project, String name) {
-        if (name == null || name.equals("")){
-            return null;
-        }
         List<XmlTag> result = new ArrayList<>();
+        if (name == null || name.equals("")){
+            return result;
+        }
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, project, GlobalSearchScope.allScope(project));
         for (DomFileElement<Flow> flow : flows) {
             for (Chain chain : flow.getRootElement().getChains()) {

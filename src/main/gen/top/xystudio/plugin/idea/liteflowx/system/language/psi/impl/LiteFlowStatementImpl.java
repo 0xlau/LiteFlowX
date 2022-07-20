@@ -111,4 +111,10 @@ public class LiteFlowStatementImpl extends ASTWrapperPsiElement implements LiteF
     return findChildByType(LITEFLOW_BLOCK_COMMENT);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getLineComment() {
+    return findChildByType(LITEFLOW_LINE_COMMENT);
+  }
+
 }

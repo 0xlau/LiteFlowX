@@ -3,7 +3,9 @@ package top.xystudio.plugin.idea.liteflowx.service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiAnnotation;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
@@ -17,20 +19,21 @@ import top.xystudio.plugin.idea.liteflowx.dom.modal.Nodes;
 import top.xystudio.plugin.idea.liteflowx.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class LiteFlowService implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Project project;
+    private final Project project;
 
-    private JavaService javaService;
+    private final JavaService javaService;
 
     public LiteFlowService(Project project){
         this.project = project;
-        this.javaService = javaService.getInstance(project);
+        this.javaService = JavaService.getInstance(project);
     }
 
     public static LiteFlowService getInstance(@NotNull Project project){
@@ -39,7 +42,7 @@ public class LiteFlowService implements Serializable {
 
     /**
      * 寻找所有的LiteFlowChain
-     * @return
+     * @return 返回所有Chain的XmlTag
      */
     public PsiElement[] findAllLiteFlowChain(){
         Collection<PsiElement> result = new ArrayList<>();
@@ -56,7 +59,7 @@ public class LiteFlowService implements Serializable {
 
     /**
      * 寻找所有的LiteFlowComponent
-     * @return
+     * @return 返回所有PsiClass
      */
     public PsiClass[] findAllLiteFlowComponent(){
         Collection<PsiClass> result = new ArrayList<>();
@@ -83,8 +86,8 @@ public class LiteFlowService implements Serializable {
 
     /**
      * 根据Class获取LiteFlowComponent的名称
-     * @param psiClass
-     * @return
+     * @param psiClass psi类
+     * @return 返回LiteFlowComponent的名称
      */
     public String getLiteFlowComponentNameByPsiClass(@NotNull PsiClass psiClass){
 
@@ -144,8 +147,8 @@ public class LiteFlowService implements Serializable {
      * 如果继承了NodeComponent或NodeSwitchComponent，则判断为是
      * 如果没继承以上两个Class，而使用LiteFlowCmpDefine和LiteflowSwitchCmpDefine的注解，同样判断为是
      * 否则为不是
-     * @param psiClass
-     * @return
+     * @param psiClass psi类
+     * @return 返回true或者false
      */
     public boolean isLiteFlowClass(@NotNull PsiClass psiClass){
         if (psiClass.getText().contains("abstract class")){

@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2022-07-21
+- 新增 #I5HPMC 支持EL中的注释
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5HPMC
+- 新增 #I5H8RL 新增 IDEA-222.* 的支持
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5H8RL
+- 新增 识别括号并高亮
+- 新增 自动缩进
+- 修复 抛出 java.lang.NullPointerException 异常的问题
+
 ## [1.0.1] - 2022-07-14
 - 修复 因旧表达式存在而导致的报错
 - 修复 因qualifiedName参数为null而导致的IllegalArgumentException

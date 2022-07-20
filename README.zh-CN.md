@@ -15,7 +15,7 @@
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
 <img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX&style=for-the-badge" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2018.3-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.1-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge"/>
 
 </p>
@@ -60,22 +60,26 @@
 > 5. 如果提示重启IDE，点击 **OK** 应用更改即可。
 
 ## 🌈 功能演示
-### Java代码跳转到Chain
-![Java代码跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/JavaToChain.gif)
+### 智能提示Component和Chain
+![智能提示ComponentChain](https://liteflow.yomahub.com/img/liteflowx/chaincomponent.gif)
 
-### LiteFlowTool工具箱
-![LiteFlowTool工具箱](https://liteflow.yomahub.com/img/liteflowx/LiteFlowTool.gif)
+### 预检测Chain未命名或重复
+![预检测Chain未命名或重复](https://liteflow.yomahub.com/img/liteflowx/chaindep.gif)
 
-### ruleSource跳转
-![ruleSource跳转](https://liteflow.yomahub.com/img/liteflowx/ruleSourceJump.gif)
+### 自定义elf语法关键字颜色
+![自定义elf语法关键字颜色](https://liteflow.yomahub.com/img/liteflowx/changecolor.gif)
 
-### Xml跳转到Chain
-![Xml跳转到Chain](https://liteflow.yomahub.com/img/liteflowx/XmlToChain.gif)
+### 支持Component和Chain跳转
+![支持Component和Chain跳转](https://liteflow.yomahub.com/img/liteflowx/componentjump.gif)
 
-### Xml跳转Component
-![Xml跳转Component](https://liteflow.yomahub.com/img/liteflowx/XmlToComponent.gif)
-![Xml跳转Component2](https://liteflow.yomahub.com/img/liteflowx/XmlToManyComponent.gif)
+### 支持局部变量
+![支持局部变量](https://liteflow.yomahub.com/img/liteflowx/localvar.gif)
 
+### 支持.el.xml的chain标签自动注入elf语法
+![支持.el.xml的chain标签自动注入elf语法](https://liteflow.yomahub.com/img/liteflowx/newelxml.gif)
+
+### LiteFlow 工具箱
+![LiteFlow 工具箱](https://liteflow.yomahub.com/img/liteflowx/toolbox.gif)
 
 
 

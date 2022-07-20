@@ -18,6 +18,9 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BLOCK_COMMENT =
             createTextAttributesKey("blockComment", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
+    public static final TextAttributesKey LINE_COMMENT =
+            createTextAttributesKey("lineComment", DefaultLanguageHighlighterColors.LINE_COMMENT);
+
     public static final TextAttributesKey QLEXPRESS_VARIABLES =
             createTextAttributesKey("QLExpressVariables", DefaultLanguageHighlighterColors.LOCAL_VARIABLE);
 
@@ -43,7 +46,8 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("SIMPLE_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[] { BAD_CHARACTER };
-    private static final TextAttributesKey[] COMMENTS_KEYS = new TextAttributesKey[] { BLOCK_COMMENT };
+    private static final TextAttributesKey[] BLOCK_COMMENTS_KEYS = new TextAttributesKey[] { BLOCK_COMMENT };
+    private static final TextAttributesKey[] LINE_COMMENTS_KEYS = new TextAttributesKey[] { LINE_COMMENT };
     private static final TextAttributesKey[] QLEXPRESS_KEYWORDS_KEYS = new TextAttributesKey[] { QLEXPRESS_KEYWORDS };
     private static final TextAttributesKey[] LITEFLOW_KEYWORDS_KEYS = new TextAttributesKey[] { LITEFLOW_KEYWORDS };
     private static final TextAttributesKey[] STRING_KEYS = new TextAttributesKey[] { STRING };
@@ -88,7 +92,9 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
         ) {
             return LITEFLOW_KEYWORDS_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_BLOCK_COMMENT)) {
-            return COMMENTS_KEYS;
+            return BLOCK_COMMENTS_KEYS;        }
+        else if (tokenType.equals(LiteFlowTypes.LITEFLOW_LINE_COMMENT)) {
+            return LINE_COMMENTS_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_NUMBER)) {
             return NUMBER_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_BOOLEAN)) {

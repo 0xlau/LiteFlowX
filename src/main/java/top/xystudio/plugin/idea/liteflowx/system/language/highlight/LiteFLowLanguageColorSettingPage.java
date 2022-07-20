@@ -17,6 +17,7 @@ public class LiteFLowLanguageColorSettingPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[] {
             
             new AttributesDescriptor("BlockComment", LiteFlowSyntaxHighlighter.BLOCK_COMMENT),
+            new AttributesDescriptor("LineComment", LiteFlowSyntaxHighlighter.LINE_COMMENT),
 
             new AttributesDescriptor("QLExpressKeyWords", LiteFlowSyntaxHighlighter.QLEXPRESS_KEYWORDS),
             new AttributesDescriptor("QLExpressVariables", LiteFlowSyntaxHighlighter.QLEXPRESS_VARIABLES),
