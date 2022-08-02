@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.0.3] - 2022-08-02
+- 新增 #I5K13V 支持 liteflow v2.8.3 的替补组件特性
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5K13V
+- 新增 #I5JQXV 支持 liteflow v2.8.3 的组件名包装
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5JQXV
+
 ## [1.0.2] - 2022-07-21
 - 新增 #I5HPMC 支持EL中的注释
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5HPMC
