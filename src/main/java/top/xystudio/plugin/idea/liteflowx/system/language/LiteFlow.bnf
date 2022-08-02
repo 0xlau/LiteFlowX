@@ -126,6 +126,7 @@
     tag = "tag"
     threadPool = "threadPool"
     to = "to"
+    node = "node"
 
   ]
 
@@ -161,7 +162,7 @@ whileStatement ::= while PAREN_LEFT allExpress PAREN_RIGHT BRACE_LEFT codes BRAC
 
 //allExpressStatement ::= allExpress
 assignStatement ::= assignExpress SEMICOLON {pin=1 recoverWhile=recover_assignStatement}
-private assignStatement ::= !(SEMICOLON | assignStatement | liteFlowStatement)
+private recover_assignStatement ::= !(SEMICOLON | assignStatement | liteFlowStatement)
 threeStatement ::= threeExpress SEMICOLON
 fnInvokeStatement ::= fnInvokeExpress SEMICOLON
 newStatement::= newExpress SEMICOLON
@@ -199,7 +200,7 @@ allExpress ::= (subAllExpress | PAREN_LEFT subAllExpress PAREN_RIGHT) {op (subAl
                | {(subAllExpress | PAREN_LEFT subAllExpress PAREN_RIGHT) op}* (subAllExpress|PAREN_LEFT subAllExpress PAREN_RIGHT)
 
 // 等于号右边的表达式（细分）
-subAllExpress ::= opSelfExpress | useArrayExpress | arrayExpress | threeExpress | newExpress | liteFlowConditionExpress | fnInvokeExpress {op allExpress}* | express | PAREN_LEFT assignExpress PAREN_RIGHT
+subAllExpress ::= opSelfExpress | useArrayExpress | arrayExpress | threeExpress | newExpress | liteFlowNodeStringExpress | liteFlowConditionExpress | fnInvokeExpress {op allExpress}* | express | PAREN_LEFT assignExpress PAREN_RIGHT
 
 // 三目表达式
 threeExpress ::= (fnInvokeExpress | express) QUESTION allExpress COLON allExpress
@@ -217,7 +218,7 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::= ([block_comment | line_comment] liteFlowConditionExpress) | ([block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress])
+liteFlowAllExpress ::= ([block_comment | line_comment] liteFlowConditionExpress) | ([block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress]) | ([block_comment | line_comment] liteFlowNodeStringExpress)
 
 // LiteFlow Condition 表达式
 liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress
@@ -258,9 +259,15 @@ liteFlowThreadPoolExpress ::= threadPool PAREN_LEFT string PAREN_RIGHT {pin=1}
 // LiteFlow .tag() 表达式
 liteFlowTagExpress ::= tag PAREN_LEFT string PAREN_RIGHT {pin=1}
 
+// LiteFlow node("") 表达式
+liteFlowNodeStringExpress ::= node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {pin=1}
+
 /** Express End **/
 
 // Ref
+
+liteFlowNodeStringRef ::= string
+
 liteFlowNodeRef ::= identifier
 
 typeRef ::= identifier {DOT identifier}*

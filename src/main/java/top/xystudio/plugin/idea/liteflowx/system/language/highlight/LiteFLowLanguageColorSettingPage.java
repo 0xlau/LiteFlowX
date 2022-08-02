@@ -54,7 +54,7 @@ public class LiteFLowLanguageColorSettingPage implements ColorSettingsPage {
                 "THEN(\n" +
                 "    A,\n" +
                 "    WHEN(\n" +
-                "        THEN(B, C),\n" +
+                "        THEN(node(\"B\"), C),\n" +
                 "        THEN(D, E, F),\n" +
                 "        THEN(\n" +
                 "            SWITCH(G).to(\n" +

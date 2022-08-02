@@ -64,7 +64,7 @@ public class LiteFlowNodeRefAnnotator implements Annotator {
 
         }
 
-        holder.newAnnotation(HighlightSeverity.ERROR, String.format("Cannot resolve symbol '%s'", symbol))
+        holder.newAnnotation(HighlightSeverity.ERROR, String.format("未找到被定义为 '%s' 的组件、链路或局部变量", symbol))
                 .range(element.getTextRange())
                 .highlightType(ProblemHighlightType.LIKE_UNKNOWN_SYMBOL)
                 .create();

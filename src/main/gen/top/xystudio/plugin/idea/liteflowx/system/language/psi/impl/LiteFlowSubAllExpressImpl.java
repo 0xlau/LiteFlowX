@@ -65,6 +65,12 @@ public class LiteFlowSubAllExpressImpl extends ASTWrapperPsiElement implements L
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowNodeStringExpress getLiteFlowNodeStringExpress() {
+    return findChildByClass(LiteFlowLiteFlowNodeStringExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowNewExpress getNewExpress() {
     return findChildByClass(LiteFlowNewExpress.class);
   }

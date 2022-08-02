@@ -34,14 +34,14 @@ public class XmlChainAnnotator implements Annotator {
         }
         String name = ((XmlTag) element.getParent()).getAttributeValue("name");
         if (StringUtil.isEmpty(name)){
-            holder.newAnnotation(HighlightSeverity.ERROR, "Missing 'name' attribute!")
+            holder.newAnnotation(HighlightSeverity.ERROR, "缺少 'name' 属性值")
                     .range(element.getTextRange())
                     .highlightType(ProblemHighlightType.ERROR)
                     .create();
         }else {
             Optional<? extends List<? extends PsiElement>> optional = LiteFlowUtils.findTargetsByName(element.getProject(), name, new findChainsImpl());
             if ( optional.isPresent() && optional.get().size() > 1) {
-                holder.newAnnotation(HighlightSeverity.ERROR, "Duplicated Chain!")
+                holder.newAnnotation(HighlightSeverity.ERROR, String.format("重复命名的链路 '%s' ", name))
                         .range(element.getTextRange())
                         .highlightType(ProblemHighlightType.ERROR)
                         .create();
