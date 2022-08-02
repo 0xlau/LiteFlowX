@@ -25,6 +25,14 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
             context.getEditor().getCaretModel().getCurrentCaret().moveToOffset(selectionEndOffset);
         };
 
+        InsertHandler<LookupElement> parenQuoteHandler = (context, item) -> {
+            Document document = context.getDocument();
+            int selectionEndOffset = context.getSelectionEndOffset();
+            document.insertString(selectionEndOffset, "(\"\")");
+            selectionEndOffset += 2;
+            context.getEditor().getCaretModel().getCurrentCaret().moveToOffset(selectionEndOffset);
+        };
+
         InsertHandler<LookupElement> switchHandler = (context, item) -> {
             Document document = context.getDocument();
             int selectionEndOffset = context.getSelectionEndOffset();
@@ -53,6 +61,7 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("PRE").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("SWITCH").withInsertHandler(switchHandler));
+                        resultSet.addElement(LookupElementBuilder.create("node").withInsertHandler(parenQuoteHandler));
                     }
 
                 }

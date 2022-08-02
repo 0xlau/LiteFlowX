@@ -26,6 +26,9 @@ public interface LiteFlowSubAllExpress extends PsiElement {
   LiteFlowLiteFlowConditionExpress getLiteFlowConditionExpress();
 
   @Nullable
+  LiteFlowLiteFlowNodeStringExpress getLiteFlowNodeStringExpress();
+
+  @Nullable
   LiteFlowNewExpress getNewExpress();
 
   @NotNull

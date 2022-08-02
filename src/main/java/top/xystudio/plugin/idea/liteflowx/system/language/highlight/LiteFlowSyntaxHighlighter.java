@@ -89,6 +89,7 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_THREADPOOL)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TAG)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_NODE)
         ) {
             return LITEFLOW_KEYWORDS_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_BLOCK_COMMENT)) {
