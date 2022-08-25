@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowLiteFlowSwitchSubExpress extends PsiElement {
+public interface LiteFlowLiteFlowIf3SubExpress extends PsiElement {
 
   @Nullable
   LiteFlowLiteFlowIdExpress getLiteFlowIdExpress();

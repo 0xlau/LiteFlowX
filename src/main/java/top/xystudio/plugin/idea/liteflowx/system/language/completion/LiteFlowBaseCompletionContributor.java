@@ -55,7 +55,10 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("threadPool").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("to").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("tag").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("ELIF").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("ELSE").withInsertHandler(parenHandler));
                     }else{
+                        resultSet.addElement(LookupElementBuilder.create("IF").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("WHEN").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));

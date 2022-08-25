@@ -11,6 +11,12 @@ public interface LiteFlowLiteFlowConditionExpress extends PsiElement {
   LiteFlowLiteFlowFinallyExpress getLiteFlowFinallyExpress();
 
   @Nullable
+  LiteFlowLiteFlowIf2Express getLiteFlowIf2Express();
+
+  @Nullable
+  LiteFlowLiteFlowIf3Express getLiteFlowIf3Express();
+
+  @Nullable
   LiteFlowLiteFlowPreExpress getLiteFlowPreExpress();
 
   @Nullable

@@ -11,14 +11,14 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
-public class LiteFlowLiteFlowSwitchSubExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowSwitchSubExpress {
+public class LiteFlowLiteFlowIf3SubExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowIf3SubExpress {
 
-  public LiteFlowLiteFlowSwitchSubExpressImpl(@NotNull ASTNode node) {
+  public LiteFlowLiteFlowIf3SubExpressImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiteFlowVisitor visitor) {
-    visitor.visitLiteFlowSwitchSubExpress(this);
+    visitor.visitLiteFlowIf3SubExpress(this);
   }
 
   @Override
