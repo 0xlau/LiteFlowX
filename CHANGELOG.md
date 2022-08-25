@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.0.4] - 2022-08-25
+- 新增 #I5NWWJ 支持 LiteFlow v2.8.5 的IF关键字特性
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5NWWJ
+- 修复 SWITCH() 允许输入多个表达式的问题
+
+
 ## [1.0.3] - 2022-08-02
 - 新增 #I5K13V 支持 liteflow v2.8.3 的替补组件特性
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5K13V

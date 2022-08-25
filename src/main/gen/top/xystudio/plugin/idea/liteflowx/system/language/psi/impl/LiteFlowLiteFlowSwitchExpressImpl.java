@@ -28,15 +28,27 @@ public class LiteFlowLiteFlowSwitchExpressImpl extends ASTWrapperPsiElement impl
   }
 
   @Override
-  @NotNull
-  public List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowAllExpress.class);
+  @Nullable
+  public LiteFlowLiteFlowNodeRef getLiteFlowNodeRef() {
+    return findChildByClass(LiteFlowLiteFlowNodeRef.class);
   }
 
   @Override
-  @NotNull
-  public List<LiteFlowLiteFlowSwitchSubExpress> getLiteFlowSwitchSubExpressList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowSwitchSubExpress.class);
+  @Nullable
+  public LiteFlowLiteFlowSwitchSubExpress getLiteFlowSwitchSubExpress() {
+    return findChildByClass(LiteFlowLiteFlowSwitchSubExpress.class);
+  }
+
+  @Override
+  @Nullable
+  public LiteFlowLiteFlowTagExpress getLiteFlowTagExpress() {
+    return findChildByClass(LiteFlowLiteFlowTagExpress.class);
+  }
+
+  @Override
+  @Nullable
+  public LiteFlowLiteFlowToExpress getLiteFlowToExpress() {
+    return findChildByClass(LiteFlowLiteFlowToExpress.class);
   }
 
 }

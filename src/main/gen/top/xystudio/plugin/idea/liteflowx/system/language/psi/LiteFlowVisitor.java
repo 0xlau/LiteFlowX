@@ -83,6 +83,38 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowIf2ElifExpress(@NotNull LiteFlowLiteFlowIf2ElifExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf2ElifSubExpress(@NotNull LiteFlowLiteFlowIf2ElifSubExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf2ElseExpress(@NotNull LiteFlowLiteFlowIf2ElseExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf2ElseSubExpress(@NotNull LiteFlowLiteFlowIf2ElseSubExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf2Express(@NotNull LiteFlowLiteFlowIf2Express o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf2SubExpress(@NotNull LiteFlowLiteFlowIf2SubExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf3Express(@NotNull LiteFlowLiteFlowIf3Express o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowIf3SubExpress(@NotNull LiteFlowLiteFlowIf3SubExpress o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowIgnoreErrorExpress(@NotNull LiteFlowLiteFlowIgnoreErrorExpress o) {
     visitPsiElement(o);
   }

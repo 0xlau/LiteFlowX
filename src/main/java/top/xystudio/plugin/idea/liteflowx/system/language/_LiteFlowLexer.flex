@@ -100,6 +100,9 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "SWITCH"                 { return LITEFLOW_SWITCH; }
   "PRE"                    { return LITEFLOW_PRE; }
   "FINALLY"                { return LITEFLOW_FINALLY; }
+  "IF"                     { return LITEFLOW_LIF; }
+  "ELIF"                   { return LITEFLOW_LELIF; }
+  "ELSE"                   { return LITEFLOW_LELSE; }
   "any"                    { return LITEFLOW_ANY; }
   "id"                     { return LITEFLOW_ID; }
   "ignoreError"            { return LITEFLOW_IGNOREERROR; }
