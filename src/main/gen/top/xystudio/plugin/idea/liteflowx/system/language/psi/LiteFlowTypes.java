@@ -16,6 +16,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_BREAK_STATEMENT = new LiteFlowElementType("LITEFLOW_BREAK_STATEMENT");
   IElementType LITEFLOW_CODES = new LiteFlowElementType("LITEFLOW_CODES");
   IElementType LITEFLOW_CONTINUE_STATEMENT = new LiteFlowElementType("LITEFLOW_CONTINUE_STATEMENT");
+  IElementType LITEFLOW_EL_VARIABLE_REF = new LiteFlowElementType("LITEFLOW_EL_VARIABLE_REF");
   IElementType LITEFLOW_EXPRESS = new LiteFlowElementType("LITEFLOW_EXPRESS");
   IElementType LITEFLOW_FN_INVOKE_EXPRESS = new LiteFlowElementType("LITEFLOW_FN_INVOKE_EXPRESS");
   IElementType LITEFLOW_FN_INVOKE_STATEMENT = new LiteFlowElementType("LITEFLOW_FN_INVOKE_STATEMENT");
@@ -25,6 +26,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_ALL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ALL_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ANY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ANY_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_CONDITION_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_CONDITION_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_DATA_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DATA_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_FINALLY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FINALLY_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ID_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ID_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS");
@@ -37,6 +39,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF");
+  IElementType LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_STRING_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_STRING_REF");
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
@@ -88,6 +91,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_COND_AND = new LiteFlowTokenType("&&");
   IElementType LITEFLOW_COND_OR = new LiteFlowTokenType("||");
   IElementType LITEFLOW_CONTINUE = new LiteFlowTokenType("continue");
+  IElementType LITEFLOW_DATA = new LiteFlowTokenType("data");
   IElementType LITEFLOW_DEF = new LiteFlowTokenType("def");
   IElementType LITEFLOW_DOT = new LiteFlowTokenType(".");
   IElementType LITEFLOW_ELSE = new LiteFlowTokenType("else");
@@ -174,6 +178,9 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_CONTINUE_STATEMENT) {
         return new LiteFlowContinueStatementImpl(node);
       }
+      else if (type == LITEFLOW_EL_VARIABLE_REF) {
+        return new LiteFlowElVariableRefImpl(node);
+      }
       else if (type == LITEFLOW_EXPRESS) {
         return new LiteFlowExpressImpl(node);
       }
@@ -200,6 +207,9 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_CONDITION_EXPRESS) {
         return new LiteFlowLiteFlowConditionExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_DATA_EXPRESS) {
+        return new LiteFlowLiteFlowDataExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_FINALLY_EXPRESS) {
         return new LiteFlowLiteFlowFinallyExpressImpl(node);
@@ -236,6 +246,9 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_NODE_REF) {
         return new LiteFlowLiteFlowNodeRefImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS) {
+        return new LiteFlowLiteFlowNodeRefExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS) {
         return new LiteFlowLiteFlowNodeStringExpressImpl(node);

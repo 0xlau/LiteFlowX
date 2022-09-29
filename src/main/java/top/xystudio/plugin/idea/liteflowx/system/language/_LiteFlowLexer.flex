@@ -109,6 +109,7 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "tag"                    { return LITEFLOW_TAG; }
   "threadPool"             { return LITEFLOW_THREADPOOL; }
   "to"                     { return LITEFLOW_TO; }
+  "data"                   { return LITEFLOW_DATA; }
   "node"                   { return LITEFLOW_NODE; }
 
   {IDENTIFIER}             { return LITEFLOW_IDENTIFIER; }

@@ -365,6 +365,18 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // identifier
+  public static boolean elVariableRef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "elVariableRef")) return false;
+    if (!nextTokenIs(b, LITEFLOW_IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LITEFLOW_IDENTIFIER);
+    exit_section_(b, m, LITEFLOW_EL_VARIABLE_REF, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // opExpress | PAREN_LEFT opExpress PAREN_RIGHT  |  opExpress  {op (allExpress|PAREN_LEFT allExpress PAREN_RIGHT)}*
   public static boolean express(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "express")) return false;
@@ -659,115 +671,15 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ([block_comment | line_comment] liteFlowConditionExpress) | ([block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress]) | ([block_comment | line_comment] liteFlowNodeStringExpress)
+  // liteFlowConditionExpress | liteFlowNodeRefExpress | liteFlowNodeStringExpress
   public static boolean liteFlowAllExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowAllExpress")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_ALL_EXPRESS, "<lite flow all express>");
-    r = liteFlowAllExpress_0(b, l + 1);
-    if (!r) r = liteFlowAllExpress_1(b, l + 1);
-    if (!r) r = liteFlowAllExpress_2(b, l + 1);
+    r = liteFlowConditionExpress(b, l + 1);
+    if (!r) r = liteFlowNodeRefExpress(b, l + 1);
+    if (!r) r = liteFlowNodeStringExpress(b, l + 1);
     exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // [block_comment | line_comment] liteFlowConditionExpress
-  private static boolean liteFlowAllExpress_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = liteFlowAllExpress_0_0(b, l + 1);
-    r = r && liteFlowConditionExpress(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [block_comment | line_comment]
-  private static boolean liteFlowAllExpress_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_0_0")) return false;
-    liteFlowAllExpress_0_0_0(b, l + 1);
-    return true;
-  }
-
-  // block_comment | line_comment
-  private static boolean liteFlowAllExpress_0_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_0_0_0")) return false;
-    boolean r;
-    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
-    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
-    return r;
-  }
-
-  // [block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress]
-  private static boolean liteFlowAllExpress_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = liteFlowAllExpress_1_0(b, l + 1);
-    r = r && liteFlowNodeRef(b, l + 1);
-    r = r && liteFlowAllExpress_1_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [block_comment | line_comment]
-  private static boolean liteFlowAllExpress_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_1_0")) return false;
-    liteFlowAllExpress_1_0_0(b, l + 1);
-    return true;
-  }
-
-  // block_comment | line_comment
-  private static boolean liteFlowAllExpress_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_1_0_0")) return false;
-    boolean r;
-    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
-    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
-    return r;
-  }
-
-  // [DOT liteFlowTagExpress]
-  private static boolean liteFlowAllExpress_1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_1_2")) return false;
-    liteFlowAllExpress_1_2_0(b, l + 1);
-    return true;
-  }
-
-  // DOT liteFlowTagExpress
-  private static boolean liteFlowAllExpress_1_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_1_2_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, LITEFLOW_DOT);
-    r = r && liteFlowTagExpress(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [block_comment | line_comment] liteFlowNodeStringExpress
-  private static boolean liteFlowAllExpress_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_2")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = liteFlowAllExpress_2_0(b, l + 1);
-    r = r && liteFlowNodeStringExpress(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [block_comment | line_comment]
-  private static boolean liteFlowAllExpress_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_2_0")) return false;
-    liteFlowAllExpress_2_0_0(b, l + 1);
-    return true;
-  }
-
-  // block_comment | line_comment
-  private static boolean liteFlowAllExpress_2_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowAllExpress_2_0_0")) return false;
-    boolean r;
-    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
-    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
     return r;
   }
 
@@ -787,11 +699,37 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express
+  // [block_comment | line_comment] (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express)
   public static boolean liteFlowConditionExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_CONDITION_EXPRESS, "<lite flow condition express>");
+    r = liteFlowConditionExpress_0(b, l + 1);
+    r = r && liteFlowConditionExpress_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [block_comment | line_comment]
+  private static boolean liteFlowConditionExpress_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_0")) return false;
+    liteFlowConditionExpress_0_0(b, l + 1);
+    return true;
+  }
+
+  // block_comment | line_comment
+  private static boolean liteFlowConditionExpress_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
+    return r;
+  }
+
+  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express
+  private static boolean liteFlowConditionExpress_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_1")) return false;
+    boolean r;
     r = liteFlowThenExpress(b, l + 1);
     if (!r) r = liteFlowWhenExpress(b, l + 1);
     if (!r) r = liteFlowSwitchExpress(b, l + 1);
@@ -799,7 +737,30 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     if (!r) r = liteFlowFinallyExpress(b, l + 1);
     if (!r) r = liteFlowIf2Express(b, l + 1);
     if (!r) r = liteFlowIf3Express(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // data PAREN_LEFT (string | elVariableRef) PAREN_RIGHT
+  public static boolean liteFlowDataExpress(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowDataExpress")) return false;
+    if (!nextTokenIs(b, LITEFLOW_DATA)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_DATA_EXPRESS, null);
+    r = consumeTokens(b, 1, LITEFLOW_DATA, LITEFLOW_PAREN_LEFT);
+    p = r; // pin = 1
+    r = r && report_error_(b, liteFlowDataExpress_2(b, l + 1));
+    r = p && consumeToken(b, LITEFLOW_PAREN_RIGHT) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // string | elVariableRef
+  private static boolean liteFlowDataExpress_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowDataExpress_2")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_STRING);
+    if (!r) r = elVariableRef(b, l + 1);
     return r;
   }
 
@@ -1148,18 +1109,126 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT
+  // [block_comment | line_comment] liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
+  public static boolean liteFlowNodeRefExpress(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS, "<lite flow node ref express>");
+    r = liteFlowNodeRefExpress_0(b, l + 1);
+    r = r && liteFlowNodeRef(b, l + 1);
+    r = r && liteFlowNodeRefExpress_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [block_comment | line_comment]
+  private static boolean liteFlowNodeRefExpress_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_0")) return false;
+    liteFlowNodeRefExpress_0_0(b, l + 1);
+    return true;
+  }
+
+  // block_comment | line_comment
+  private static boolean liteFlowNodeRefExpress_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
+    return r;
+  }
+
+  // {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
+  private static boolean liteFlowNodeRefExpress_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowNodeRefExpress_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowNodeRefExpress_2", c)) break;
+    }
+    return true;
+  }
+
+  // DOT (liteFlowTagExpress | liteFlowDataExpress)
+  private static boolean liteFlowNodeRefExpress_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LITEFLOW_DOT);
+    r = r && liteFlowNodeRefExpress_2_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // liteFlowTagExpress | liteFlowDataExpress
+  private static boolean liteFlowNodeRefExpress_2_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_2_0_1")) return false;
+    boolean r;
+    r = liteFlowTagExpress(b, l + 1);
+    if (!r) r = liteFlowDataExpress(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // [block_comment | line_comment] node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
   public static boolean liteFlowNodeStringExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowNodeStringExpress")) return false;
-    if (!nextTokenIs(b, LITEFLOW_NODE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS, null);
-    r = consumeTokens(b, 1, LITEFLOW_NODE, LITEFLOW_PAREN_LEFT);
-    p = r; // pin = 1
+    Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS, "<lite flow node string express>");
+    r = liteFlowNodeStringExpress_0(b, l + 1);
+    r = r && consumeTokens(b, 1, LITEFLOW_NODE, LITEFLOW_PAREN_LEFT);
+    p = r; // pin = 2
     r = r && report_error_(b, liteFlowNodeStringRef(b, l + 1));
-    r = p && consumeToken(b, LITEFLOW_PAREN_RIGHT) && r;
+    r = p && report_error_(b, consumeToken(b, LITEFLOW_PAREN_RIGHT)) && r;
+    r = p && liteFlowNodeStringExpress_5(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // [block_comment | line_comment]
+  private static boolean liteFlowNodeStringExpress_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeStringExpress_0")) return false;
+    liteFlowNodeStringExpress_0_0(b, l + 1);
+    return true;
+  }
+
+  // block_comment | line_comment
+  private static boolean liteFlowNodeStringExpress_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeStringExpress_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
+    return r;
+  }
+
+  // {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
+  private static boolean liteFlowNodeStringExpress_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeStringExpress_5")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowNodeStringExpress_5_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowNodeStringExpress_5", c)) break;
+    }
+    return true;
+  }
+
+  // DOT (liteFlowTagExpress | liteFlowDataExpress)
+  private static boolean liteFlowNodeStringExpress_5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeStringExpress_5_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LITEFLOW_DOT);
+    r = r && liteFlowNodeStringExpress_5_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // liteFlowTagExpress | liteFlowDataExpress
+  private static boolean liteFlowNodeStringExpress_5_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowNodeStringExpress_5_0_1")) return false;
+    boolean r;
+    r = liteFlowTagExpress(b, l + 1);
+    if (!r) r = liteFlowDataExpress(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */

@@ -5,13 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowLiteFlowNodeStringExpress extends PsiElement {
+public interface LiteFlowLiteFlowNodeRefExpress extends PsiElement {
 
   @NotNull
   List<LiteFlowLiteFlowDataExpress> getLiteFlowDataExpressList();
 
-  @Nullable
-  LiteFlowLiteFlowNodeStringRef getLiteFlowNodeStringRef();
+  @NotNull
+  LiteFlowLiteFlowNodeRef getLiteFlowNodeRef();
 
   @NotNull
   List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList();

@@ -129,6 +129,7 @@
     tag = "tag"
     threadPool = "threadPool"
     to = "to"
+    data = "data"
     node = "node"
 
   ]
@@ -221,10 +222,16 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::= ([block_comment | line_comment] liteFlowConditionExpress) | ([block_comment | line_comment] liteFlowNodeRef [DOT liteFlowTagExpress]) | ([block_comment | line_comment] liteFlowNodeStringExpress)
+liteFlowAllExpress ::= liteFlowConditionExpress | liteFlowNodeRefExpress | liteFlowNodeStringExpress
+
+// LiteFlow node("") 表达式
+liteFlowNodeStringExpress ::= [block_comment | line_comment] node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress)}* {pin=2}
+
+// LiteFlow Node引用表达式
+liteFlowNodeRefExpress ::= [block_comment | line_comment] liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express
+liteFlowConditionExpress ::= [block_comment | line_comment] (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express)
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT liteFlowNodeRef [DOT liteFlowTagExpress] COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -276,8 +283,8 @@ liteFlowThreadPoolExpress ::= threadPool PAREN_LEFT string PAREN_RIGHT {pin=1}
 // LiteFlow .tag() 表达式
 liteFlowTagExpress ::= tag PAREN_LEFT string PAREN_RIGHT {pin=1}
 
-// LiteFlow node("") 表达式
-liteFlowNodeStringExpress ::= node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {pin=1}
+// liteFlow .data() 表达式
+liteFlowDataExpress ::= data PAREN_LEFT (string | elVariableRef) PAREN_RIGHT {pin=1}
 
 /** Express End **/
 
@@ -286,6 +293,8 @@ liteFlowNodeStringExpress ::= node PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT 
 liteFlowNodeStringRef ::= string
 
 liteFlowNodeRef ::= identifier
+
+elVariableRef ::= identifier
 
 typeRef ::= identifier {DOT identifier}*
 

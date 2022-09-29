@@ -89,6 +89,7 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_THREADPOOL)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TAG)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_DATA)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_NODE)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LIF)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LELIF)

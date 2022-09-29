@@ -28,4 +28,10 @@ public interface LiteFlowLiteFlowConditionExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowWhenExpress getLiteFlowWhenExpress();
 
+  @Nullable
+  PsiElement getBlockComment();
+
+  @Nullable
+  PsiElement getLineComment();
+
 }

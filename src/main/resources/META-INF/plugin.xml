@@ -33,6 +33,11 @@
                 language="LiteFlow"
                 implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.annotator.LiteFlowNodeRefAnnotator"/>
 
+        <!-- LiteFlow处理ElVariableRef -->
+        <annotator
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.annotator.ElVariableRefAnnotator"/>
+
         <!-- LiteFlow语法解析 -->
         <lang.parserDefinition language="LiteFlow" implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowParserDefinition"/>
 
@@ -63,6 +68,9 @@
         <completion.contributor
                 language="LiteFlow"
                 implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.completion.LiteFlowNodeRefCompletionContributor"/>
+        <completion.contributor
+                language="LiteFlow"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.completion.ElVariableRefCompletionContributor"/>
 
         <!-- LiteFlow语法颜色设置页面 -->
         <colorSettingsPage
