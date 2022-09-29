@@ -94,6 +94,12 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LIF)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LELIF)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LELSE)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_LFOR)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_LWHILE)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_DO)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_UNODE)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_UTO)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_LBREAK)
         ) {
             return LITEFLOW_KEYWORDS_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_BLOCK_COMMENT)) {

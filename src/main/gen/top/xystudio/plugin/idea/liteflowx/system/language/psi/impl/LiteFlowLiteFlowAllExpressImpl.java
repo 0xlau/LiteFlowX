@@ -39,10 +39,4 @@ public class LiteFlowLiteFlowAllExpressImpl extends ASTWrapperPsiElement impleme
     return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
   }
 
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowNodeStringExpress getLiteFlowNodeStringExpress() {
-    return findChildByClass(LiteFlowLiteFlowNodeStringExpress.class);
-  }
-
 }

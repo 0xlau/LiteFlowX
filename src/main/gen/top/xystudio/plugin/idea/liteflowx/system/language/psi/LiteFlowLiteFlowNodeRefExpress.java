@@ -7,13 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface LiteFlowLiteFlowNodeRefExpress extends PsiElement {
 
-  @NotNull
-  List<LiteFlowLiteFlowDataExpress> getLiteFlowDataExpressList();
+  @Nullable
+  LiteFlowLiteFlowNodeRefSubExpress getLiteFlowNodeRefSubExpress();
 
-  @NotNull
-  LiteFlowLiteFlowNodeRef getLiteFlowNodeRef();
-
-  @NotNull
-  List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList();
+  @Nullable
+  LiteFlowLiteFlowNodeStringSubExpress getLiteFlowNodeStringSubExpress();
 
 }
