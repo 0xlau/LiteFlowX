@@ -69,16 +69,4 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
     return findChildByClass(LiteFlowLiteFlowWhenExpress.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getBlockComment() {
-    return findChildByType(LITEFLOW_BLOCK_COMMENT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getLineComment() {
-    return findChildByType(LITEFLOW_LINE_COMMENT);
-  }
-
 }

@@ -45,16 +45,4 @@ public class LiteFlowLiteFlowNodeRefExpressImpl extends ASTWrapperPsiElement imp
     return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowTagExpress.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getBlockComment() {
-    return findChildByType(LITEFLOW_BLOCK_COMMENT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getLineComment() {
-    return findChildByType(LITEFLOW_LINE_COMMENT);
-  }
-
 }

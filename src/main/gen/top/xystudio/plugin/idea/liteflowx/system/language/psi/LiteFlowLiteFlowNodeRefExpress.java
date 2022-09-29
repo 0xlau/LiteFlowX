@@ -16,10 +16,4 @@ public interface LiteFlowLiteFlowNodeRefExpress extends PsiElement {
   @NotNull
   List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList();
 
-  @Nullable
-  PsiElement getBlockComment();
-
-  @Nullable
-  PsiElement getLineComment();
-
 }
