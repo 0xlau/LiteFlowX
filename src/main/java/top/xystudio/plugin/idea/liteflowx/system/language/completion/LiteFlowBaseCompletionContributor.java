@@ -9,7 +9,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowLanguage;
-import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
 public class LiteFlowBaseCompletionContributor extends CompletionContributor {
 
