@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LiteFlowService implements Serializable {
 
@@ -58,10 +59,10 @@ public class LiteFlowService implements Serializable {
     }
 
     /**
-     * 寻找所有的LiteFlowComponent
+     * 寻找所有的LiteFlowComponent涉及到的PsiClass（!脚本组件可能扫不到）
      * @return 返回所有PsiClass
      */
-    public PsiClass[] findAllLiteFlowComponent(){
+    private Collection<PsiClass> _getAllLiteFlowPsiClass(){
         Collection<PsiClass> result = new ArrayList<>();
         Collection<PsiClass> components = javaService.getClassesByAnnotationQualifiedName(Annotation.Component);
         Collection<PsiClass> liteFlowComponents = javaService.getClassesByAnnotationQualifiedName(Annotation.LiteflowComponent);
@@ -81,6 +82,41 @@ public class LiteFlowService implements Serializable {
 
         result.addAll(components);
         result.addAll(liteFlowComponents);
+        return result.stream().distinct().collect(Collectors.toList());
+    }
+
+    public PsiClass[] findAllLiteFlowNormalComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowNormalComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowIfComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowIfComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowSwitchComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowSwitchComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowForComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowForComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowWhileComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowWhileComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowBreakComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
+        return result.stream().distinct().filter(this::isLiteFlowBreakComponentClass).toArray(PsiClass[]::new);
+    }
+
+    public PsiClass[] findAllLiteFlowComponent(){
+        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
         return result.stream().distinct().filter(this::isLiteFlowClass).toArray(PsiClass[]::new);
     }
 
@@ -142,26 +178,59 @@ public class LiteFlowService implements Serializable {
         return null;
     }
 
+    private boolean _isLiteFlow(@NotNull PsiClass psiClass, @NotNull String clazz, @NotNull String annotation){
+        if (psiClass.getText().contains("abstract class")){
+            return false;
+        }
+        PsiClass nodeClazz = JavaService.getInstance(project).getClassByQualifiedName(clazz);
+        if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
+            return true;
+        }
+        PsiAnnotation psiClassAnnotation = psiClass.getAnnotation(annotation);
+        return psiClassAnnotation != null;
+    }
+
+    public boolean isLiteFlowNormalComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeComponent, Annotation.LiteflowCmpDefine);
+    }
+
+    public boolean isLiteFlowSwitchComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeSwitchComponent, Annotation.LiteflowSwitchCmpDefine);
+    }
+
+    public boolean isLiteFlowIfComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeIfComponent, Annotation.LiteflowIfCmpDefine);
+    }
+
+    public boolean isLiteFlowForComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeForComponent, Annotation.LiteflowForCmpDefine);
+    }
+
+    public boolean isLiteFlowWhileComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeWhileComponent, Annotation.LiteflowWhileCmpDefine);
+    }
+
+    public boolean isLiteFlowBreakComponentClass(@NotNull PsiClass psiClass){
+        return _isLiteFlow(psiClass, Clazz.NodeBreakComponent, Annotation.LiteflowBreakCmpDefine);
+    }
+
     /**
      * 判断是不是LiteFlowClass
-     * 如果继承了NodeComponent或NodeSwitchComponent，则判断为是
-     * 如果没继承以上两个Class，而使用LiteFlowCmpDefine和LiteflowSwitchCmpDefine的注解，同样判断为是
+     * 如果继承了LiteFlow的指定Component，则判断为是
+     * 如果没继承以上两个Class，而使用声明式注解，同样判断为是
      * 否则为不是
      * @param psiClass psi类
      * @return 返回true或者false
      */
     public boolean isLiteFlowClass(@NotNull PsiClass psiClass){
-        if (psiClass.getText().contains("abstract class")){
-            return false;
-        }
-        PsiClass nodeComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeComponent);
-        PsiClass nodeSwitchComponent = JavaService.getInstance(project).getClassByQualifiedName(Clazz.NodeSwitchComponent);
-        if ((nodeSwitchComponent != null && psiClass.isInheritor(nodeSwitchComponent, true)) || (nodeComponent != null && psiClass.isInheritor(nodeComponent, true))){
-            return true;
-        }
-        PsiAnnotation liteflowCmpDefine = psiClass.getAnnotation(Annotation.LiteflowCmpDefine);
-        PsiAnnotation liteflowSwitchCmpDefine = psiClass.getAnnotation(Annotation.LiteflowSwitchCmpDefine);
-        return liteflowCmpDefine != null || liteflowSwitchCmpDefine != null;
+        return (
+                isLiteFlowIfComponentClass(psiClass)    ||
+                isLiteFlowSwitchComponentClass(psiClass)||
+                isLiteFlowForComponentClass(psiClass)   ||
+                isLiteFlowWhileComponentClass(psiClass) ||
+                isLiteFlowBreakComponentClass(psiClass) ||
+                isLiteFlowNormalComponentClass(psiClass)
+        );
     }
 
 }

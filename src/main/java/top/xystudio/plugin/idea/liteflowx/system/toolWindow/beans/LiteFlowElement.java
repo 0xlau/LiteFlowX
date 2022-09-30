@@ -30,7 +30,12 @@ public class LiteFlowElement {
         this.psiElement = psiElement;
 
         switch (elementType){
-            case COMPONENT:
+            case NORMAL_COMPONENT:
+            case IF_COMPONENT:
+            case FOR_COMPONENT:
+            case BREAK_COMPONENT:
+            case WHILE_COMPONENT:
+            case SWITCH_COMPONENT:
             case SLOT:
                 this.subName = ((PsiClass)psiElement).getQualifiedName();
                 break;
@@ -90,8 +95,18 @@ public class LiteFlowElement {
     @NotNull
     public Icon getIcon() {
         switch (liteFlowElementType){
-            case COMPONENT:
-                return LiteFlowIcons.COMPONENT_CLASS_FILE_ICON;
+            case NORMAL_COMPONENT:
+                return LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
+            case WHILE_COMPONENT:
+                return LiteFlowIcons.WHI_COMPONENT_CLASS_FILE_ICON;
+            case FOR_COMPONENT:
+                return LiteFlowIcons.FOR_COMPONENT_CLASS_FILE_ICON;
+            case IF_COMPONENT:
+                return LiteFlowIcons.IF_COMPONENT_CLASS_FILE_ICON;
+            case SWITCH_COMPONENT:
+                return LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
+            case BREAK_COMPONENT:
+                return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
             case NODE:
                 return LiteFlowIcons.NODE_LINE_MARKER_ICON;
             case CHAIN:

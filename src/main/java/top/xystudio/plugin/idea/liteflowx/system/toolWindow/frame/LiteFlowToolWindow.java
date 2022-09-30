@@ -73,7 +73,21 @@ public class LiteFlowToolWindow extends JPanel {
         PsiClass[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
         map.put("Components", Arrays.stream(liteFlowComponents)
                 .sorted(Comparator.comparing(NavigationItem::getName))
-                .map(o -> new LiteFlowElement(LiteFlowElementType.COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o))
+                .map(o -> {
+                    if (liteFlowService.isLiteFlowIfComponentClass(o)){
+                        return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    } else if (liteFlowService.isLiteFlowSwitchComponentClass(o)) {
+                        return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    }else if (liteFlowService.isLiteFlowForComponentClass(o)) {
+                        return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    }else if (liteFlowService.isLiteFlowWhileComponentClass(o)) {
+                        return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    }else if (liteFlowService.isLiteFlowBreakComponentClass(o)) {
+                        return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    }else {
+                        return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    }
+                })
                 .collect(Collectors.toList()));
 
         PsiElement[] liteFlowChains = LiteFlowService.getInstance(project).findAllLiteFlowChain();

@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16">
+    <defs>
+        <g id="bg-white" fill="#fff">
+            <path d="M250.5 321.7c-4.5 2.5-8.2 6.2-10.7 10.7-7.5 13.4-2.6 30.4 10.8 37.9l228.5 126.9c16.6 9.2 36.7 9.3 53.5 0.3L769.3 370c4.6-2.5 8.4-6.2 11-10.7 7.6-13.4 2.9-30.4-10.4-38L539.4 190c-17-9.7-37.8-9.7-54.9-0.1l-234 131.8zM538.4 119l308.2 173.7c16.9 9.5 27.3 27.4 27.4 46.7v345.1c0 19.4-10.5 37.2-27.3 46.7L538.4 905.1c-16.4 9.2-36.4 9.2-52.8 0L177.4 731.2c-16.9-9.5-27.3-27.4-27.3-46.8v-345c0-19.4 10.5-37.3 27.4-46.8l308.2-173.7c16.3-9.2 36.3-9.2 52.7 0.1z"></path>
+            <rect x="150" y="550" rx="25" ry="25" width="752" height="444"/>
+        </g>
+        <g id="bg">
+            <path d="M250.5 321.7c-4.5 2.5-8.2 6.2-10.7 10.7-7.5 13.4-2.6 30.4 10.8 37.9l228.5 126.9c16.6 9.2 36.7 9.3 53.5 0.3L769.3 370c4.6-2.5 8.4-6.2 11-10.7 7.6-13.4 2.9-30.4-10.4-38L539.4 190c-17-9.7-37.8-9.7-54.9-0.1l-234 131.8zM538.4 119l308.2 173.7c16.9 9.5 27.3 27.4 27.4 46.7v345.1c0 19.4-10.5 37.2-27.3 46.7L538.4 905.1c-16.4 9.2-36.4 9.2-52.8 0L177.4 731.2c-16.9-9.5-27.3-27.4-27.3-46.8v-345c0-19.4 10.5-37.3 27.4-46.8l308.2-173.7c16.3-9.2 36.3-9.2 52.7 0.1z" fill="#6db23f"></path>
+            <rect x="150" y="550" rx="25" ry="25" width="752" height="444" style="fill:#f57c00"/>
+        </g>
+        <mask id="hold">
+            <use xlink:href="#bg-white"></use>
+            <text x="520" y="920" fill="black" stroke-width="1" text-anchor="middle" dominant-baseline="middle" style="font-size:440px;font-family:'Consolas','Monaco';">SW</text>
+        </mask>
+    </defs>
+    <use xlink:href="#bg" mask="url(#hold)"></use>
+</svg>

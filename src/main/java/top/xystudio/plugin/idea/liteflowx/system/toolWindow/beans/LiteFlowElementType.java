@@ -8,7 +8,12 @@ import java.util.Arrays;
 public enum LiteFlowElementType {
 
     Element,
-    COMPONENT,
+    NORMAL_COMPONENT,
+    IF_COMPONENT,
+    SWITCH_COMPONENT,
+    FOR_COMPONENT,
+    WHILE_COMPONENT,
+    BREAK_COMPONENT,
     CHAIN,
     NODE,
     SLOT;
