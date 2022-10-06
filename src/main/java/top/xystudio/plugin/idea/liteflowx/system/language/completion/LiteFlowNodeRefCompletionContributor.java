@@ -70,7 +70,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                             }
                             if (text != null) {
                                 resultSet.addElement(
-                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_LINE_MARKER_ICON).withTypeText("Chain").bold()
+                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_LINE_MARKER_ICON_12x12).withTypeText("Chain").bold()
                                 );
                             }
                         }

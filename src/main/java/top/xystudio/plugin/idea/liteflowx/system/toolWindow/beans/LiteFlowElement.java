@@ -106,7 +106,7 @@ public class LiteFlowElement {
             case BREAK_COMPONENT:
                 return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
             case CHAIN:
-                return LiteFlowIcons.CHAIN_LINE_MARKER_ICON;
+                return LiteFlowIcons.CHAIN_LINE_MARKER_ICON_14x14;
             case Element:
             default:
                 return LiteFlowIcons.TOOL_WINDOW_ICON;
