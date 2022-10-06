@@ -36,10 +36,8 @@ public class LiteFlowElement {
             case BREAK_COMPONENT:
             case WHILE_COMPONENT:
             case SWITCH_COMPONENT:
-            case SLOT:
                 this.subName = ((PsiClass)psiElement).getQualifiedName();
                 break;
-            case NODE:
             case CHAIN:
                 this.subName = psiElement.getContainingFile().getVirtualFile().getName();
                 break;
@@ -107,12 +105,8 @@ public class LiteFlowElement {
                 return LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
             case BREAK_COMPONENT:
                 return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
-            case NODE:
-                return LiteFlowIcons.NODE_LINE_MARKER_ICON;
             case CHAIN:
                 return LiteFlowIcons.CHAIN_LINE_MARKER_ICON;
-            case SLOT:
-                return LiteFlowIcons.SLOT_CLASS_FILE_ICON;
             case Element:
             default:
                 return LiteFlowIcons.TOOL_WINDOW_ICON;

@@ -14,9 +14,7 @@ public enum LiteFlowElementType {
     FOR_COMPONENT,
     WHILE_COMPONENT,
     BREAK_COMPONENT,
-    CHAIN,
-    NODE,
-    SLOT;
+    CHAIN;
 
     @NotNull
     public static LiteFlowElementType[] getValues(){
