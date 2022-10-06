@@ -179,6 +179,11 @@ public class LiteFlowService implements Serializable {
     }
 
     private boolean _isLiteFlow(@NotNull PsiClass psiClass, @NotNull String clazz, @NotNull String annotation){
+        // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
+        if (psiClass.getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
+            return false;
+        }
+        // 排除使用了 abstract 的 Class
         if (psiClass.getText().contains("abstract class")){
             return false;
         }
