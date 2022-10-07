@@ -223,6 +223,9 @@ public class LiteFlowService implements Serializable {
             if (psiMethod.getContainingClass().getText().contains("abstract class")){
                 return false;
             }
+            if (!psiMethod.getContainingClass().hasAnnotation(Annotation.Component) && !psiMethod.getContainingClass().hasAnnotation(Annotation.LiteflowComponent)){
+                return false;
+            }
             if (psiMethod.getContainingClass().hasAnnotation(Annotation.LiteflowCmpDefine)){
                 return false;
             }
@@ -290,8 +293,7 @@ public class LiteFlowService implements Serializable {
             return false;
         }
         for (PsiMethod method : psiClass.getMethods()) {
-            String nodeId = javaService.getAnnotationAttributeValue(method, Annotation.LiteflowMethod, "nodeId");
-            if (!StringUtil.isEmpty(nodeId)){
+            if (isLiteFlowComponent(method)) {
                 return true;
             }
         }
