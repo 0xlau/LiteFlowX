@@ -12,6 +12,7 @@ import com.intellij.util.xml.DomService;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
+import top.xystudio.plugin.idea.liteflowx.constant.NodeTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
@@ -178,7 +179,7 @@ public class LiteFlowService implements Serializable {
         return null;
     }
 
-    private boolean _isLiteFlow(@NotNull PsiClass psiClass, @NotNull String clazz, @NotNull String annotation){
+    private boolean _isLiteFlow(@NotNull PsiClass psiClass, @NotNull String clazz, @NotNull String nodeTypeEnum){
         // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
         if (psiClass.getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
             return false;
@@ -191,32 +192,35 @@ public class LiteFlowService implements Serializable {
         if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
             return true;
         }
-        PsiAnnotation psiClassAnnotation = psiClass.getAnnotation(annotation);
-        return psiClassAnnotation != null;
+        String nodeType = javaService.getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowCmpDefine, "value");
+        if (nodeType == null){
+            return false;
+        }
+        return nodeTypeEnum.equals(nodeType);
     }
 
     public boolean isLiteFlowNormalComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeComponent, Annotation.LiteflowCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeComponent, NodeTypeEnum.COMMON);
     }
 
     public boolean isLiteFlowSwitchComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeSwitchComponent, Annotation.LiteflowSwitchCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeSwitchComponent, NodeTypeEnum.SWITCH);
     }
 
     public boolean isLiteFlowIfComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeIfComponent, Annotation.LiteflowIfCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeIfComponent, NodeTypeEnum.IF);
     }
 
     public boolean isLiteFlowForComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeForComponent, Annotation.LiteflowForCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeForComponent, NodeTypeEnum.FOR);
     }
 
     public boolean isLiteFlowWhileComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeWhileComponent, Annotation.LiteflowWhileCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeWhileComponent, NodeTypeEnum.WHILE);
     }
 
     public boolean isLiteFlowBreakComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeBreakComponent, Annotation.LiteflowBreakCmpDefine);
+        return _isLiteFlow(psiClass, Clazz.NodeBreakComponent, NodeTypeEnum.BREAK);
     }
 
     /**
