@@ -3,6 +3,7 @@ package top.xystudio.plugin.idea.liteflowx.service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
@@ -68,8 +69,8 @@ public class JavaService implements Serializable {
             return null;
         }
         /*处理注解value是引用表达式*/
-        if (attributeValue instanceof PsiReferenceExpressionImpl) {
-            PsiElement resolve = ((PsiReferenceExpressionImpl) attributeValue).resolve();
+        if (attributeValue instanceof PsiReferenceExpressionImpl || attributeValue instanceof ClsReferenceExpressionImpl) {
+            PsiElement resolve = ((PsiReferenceExpression) attributeValue).resolve();
             if (resolve == null) {
                 return null;
             }
