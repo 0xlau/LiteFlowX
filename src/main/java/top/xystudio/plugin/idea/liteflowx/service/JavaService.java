@@ -54,13 +54,13 @@ public class JavaService implements Serializable {
 
     /**
      * 获取Class的指定注解属性值
-     * @param psiClass Class类对象
+     * @param psiModifierListOwner Class类对象
      * @param qualifiedName 注解的全名
      * @param attribute 属性名
      * @return 属性值
      */
-    public String getAnnotationAttributeValueByClass(@NotNull PsiClass psiClass, @NotNull String qualifiedName, String attribute) {
-        PsiAnnotation annotation = psiClass.getAnnotation(qualifiedName);
+    public String getAnnotationAttributeValue(@NotNull PsiModifierListOwner psiModifierListOwner, @NotNull String qualifiedName, String attribute) {
+        PsiAnnotation annotation = psiModifierListOwner.getAnnotation(qualifiedName);
         if (annotation == null) {
             return null;
         }

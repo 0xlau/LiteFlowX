@@ -3,7 +3,6 @@ package top.xystudio.plugin.idea.liteflowx.service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -137,7 +136,7 @@ public class LiteFlowService implements Serializable {
             return null;
         }
 
-        String componentValue = JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.Component, "value");
+        String componentValue = JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.Component, "value");
         if (componentValue != null){
             /* 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
             if (componentValue.equals("")){
@@ -147,9 +146,9 @@ public class LiteFlowService implements Serializable {
         }
 
         String liteFlowComponentValue =
-                JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "value");
+                JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "value");
         String liteFlowComponentId =
-                JavaService.getInstance(this.project).getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowComponent, "id");
+                JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "id");
 
         String name = StringUtil.isEmpty(liteFlowComponentValue)? liteFlowComponentId : liteFlowComponentValue;
         if (name != null){
@@ -192,7 +191,7 @@ public class LiteFlowService implements Serializable {
         if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
             return true;
         }
-        String nodeType = javaService.getAnnotationAttributeValueByClass(psiClass, Annotation.LiteflowCmpDefine, "value");
+        String nodeType = javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowCmpDefine, "value");
         if (nodeType == null){
             return false;
         }
