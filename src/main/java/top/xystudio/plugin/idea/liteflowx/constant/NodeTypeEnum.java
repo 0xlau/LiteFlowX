@@ -2,7 +2,7 @@ package top.xystudio.plugin.idea.liteflowx.constant;
 
 public class NodeTypeEnum {
 
-    public static final String COMMON = "COMMON(common,普通, false, NodeComponent.class)";
+    public static final String COMMON = "COMMON(common, 普通, false, NodeComponent.class)";
 
     public static final String SWITCH = "SWITCH(switch, 选择, false, NodeSwitchComponent.class)";
 

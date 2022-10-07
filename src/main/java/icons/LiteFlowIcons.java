@@ -20,6 +20,8 @@ public interface LiteFlowIcons {
     /** COMPONENT类文件图标 */
     Icon NORMAL_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/component_14x14.svg", LiteFlowIcons.class);
 
+    Icon MULTI_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/components_14x14.svg", LiteFlowIcons.class);
+
     Icon IF_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/if_component_14x14.svg", LiteFlowIcons.class);
 
     Icon SW_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/switch_component_14x14.svg", LiteFlowIcons.class);
