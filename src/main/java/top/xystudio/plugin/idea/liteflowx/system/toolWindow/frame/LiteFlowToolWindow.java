@@ -6,6 +6,7 @@ import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.JBSplitter;
 import org.jetbrains.annotations.NotNull;
@@ -70,23 +71,42 @@ public class LiteFlowToolWindow extends JPanel {
     private Map<String, List<LiteFlowElement>> getElements() {
         Map<String, List<LiteFlowElement>> map = new HashMap<>();
 
-        PsiClass[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
+        PsiElement[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
         map.put("Components", Arrays.stream(liteFlowComponents)
-                .sorted(Comparator.comparing(NavigationItem::getName))
+//                .sorted(Comparator.comparing(NavigationItem::getName))
                 .map(o -> {
-                    if (liteFlowService.isLiteFlowIfComponentClass(o)){
-                        return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
-                    } else if (liteFlowService.isLiteFlowSwitchComponentClass(o)) {
-                        return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
-                    }else if (liteFlowService.isLiteFlowForComponentClass(o)) {
-                        return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
-                    }else if (liteFlowService.isLiteFlowWhileComponentClass(o)) {
-                        return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
-                    }else if (liteFlowService.isLiteFlowBreakComponentClass(o)) {
-                        return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
-                    }else {
-                        return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o);
+                    if (o instanceof PsiClass){
+                        PsiClass c = (PsiClass) o;
+                        if (liteFlowService.isLiteFlowIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        } else if (liteFlowService.isLiteFlowSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c),c);
+                        }else if (liteFlowService.isLiteFlowForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }
+                    } else if (o instanceof PsiMethod) {
+                        PsiMethod c = (PsiMethod) o;
+                        if (liteFlowService.isLiteFlowIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        } else if (liteFlowService.isLiteFlowSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c),c);
+                        }else if (liteFlowService.isLiteFlowForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }
                     }
+                    return null;
                 })
                 .collect(Collectors.toList()));
 

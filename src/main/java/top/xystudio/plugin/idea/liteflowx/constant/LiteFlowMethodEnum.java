@@ -30,5 +30,13 @@ public class LiteFlowMethodEnum {
 
     public static final String AFTER_PROCESS = "AFTER_PROCESS(afterProcess, false)";
 
+    public static final String[] NECESSARY_PROCESS = new String[]{
+            PROCESS,
+            PROCESS_IF,
+            PROCESS_BREAK,
+            PROCESS_SWITCH,
+            PROCESS_FOR,
+            PROCESS_WHILE
+    };
 
 }

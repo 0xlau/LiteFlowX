@@ -5,12 +5,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
+import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
+import top.xystudio.plugin.idea.liteflowx.constant.LiteFlowMethodEnum;
 import top.xystudio.plugin.idea.liteflowx.constant.NodeTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
@@ -22,7 +25,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LiteFlowService implements Serializable {
 
@@ -62,10 +64,12 @@ public class LiteFlowService implements Serializable {
      * 寻找所有的LiteFlowComponent涉及到的PsiClass（!脚本组件可能扫不到）
      * @return 返回所有PsiClass
      */
-    private Collection<PsiClass> _getAllLiteFlowPsiClass(){
-        Collection<PsiClass> result = new ArrayList<>();
-        Collection<PsiClass> components = javaService.getClassesByAnnotationQualifiedName(Annotation.Component);
+
+    public PsiElement[] findAllLiteFlowComponent(){
+        Collection<PsiElement> result = new ArrayList<>();
+        Collection<PsiClass> springComponents = javaService.getClassesByAnnotationQualifiedName(Annotation.Component);
         Collection<PsiClass> liteFlowComponents = javaService.getClassesByAnnotationQualifiedName(Annotation.LiteflowComponent);
+        Collection<PsiMethod> methodComponents = javaService.getMethodsByAnnotationQualifiedName(Annotation.LiteflowMethod);
 
         // 根据xml文件定义的node也归为Component
         List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
@@ -80,46 +84,28 @@ public class LiteFlowService implements Serializable {
             }
         }
 
-        result.addAll(components);
+        result.addAll(springComponents);
         result.addAll(liteFlowComponents);
-        return result.stream().distinct().collect(Collectors.toList());
+        result.addAll(methodComponents);
+        return result.stream().distinct().filter(this::isLiteFlowComponent).toArray(PsiElement[]::new);
     }
 
-    public PsiClass[] findAllLiteFlowNormalComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowNormalComponentClass).toArray(PsiClass[]::new);
+    /**
+     * 根据Method获取LiteFlowComponent的名称
+     * @param psiMethod psi方法
+     * @return 返回LiteFlowComponent的名称
+     */
+    public String getLiteFlowComponentNameByPsiMethod(@NotNull PsiMethod psiMethod){
+        if (!this.isLiteFlowComponent(psiMethod)){
+            return null;
+        }
+        String componentValue = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "nodeId");
+        if (StringUtil.isEmpty(componentValue)){
+            return null;
+        }
+        return componentValue;
     }
-
-    public PsiClass[] findAllLiteFlowIfComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowIfComponentClass).toArray(PsiClass[]::new);
-    }
-
-    public PsiClass[] findAllLiteFlowSwitchComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowSwitchComponentClass).toArray(PsiClass[]::new);
-    }
-
-    public PsiClass[] findAllLiteFlowForComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowForComponentClass).toArray(PsiClass[]::new);
-    }
-
-    public PsiClass[] findAllLiteFlowWhileComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowWhileComponentClass).toArray(PsiClass[]::new);
-    }
-
-    public PsiClass[] findAllLiteFlowBreakComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowBreakComponentClass).toArray(PsiClass[]::new);
-    }
-
-    public PsiClass[] findAllLiteFlowComponent(){
-        Collection<PsiClass> result = _getAllLiteFlowPsiClass();
-        return result.stream().distinct().filter(this::isLiteFlowClass).toArray(PsiClass[]::new);
-    }
-
+    
     /**
      * 根据Class获取LiteFlowComponent的名称
      * @param psiClass psi类
@@ -127,7 +113,7 @@ public class LiteFlowService implements Serializable {
      */
     public String getLiteFlowComponentNameByPsiClass(@NotNull PsiClass psiClass){
 
-        if (!this.isLiteFlowClass(psiClass)){
+        if (!this.isLiteFlowComponent(psiClass)){
             return null;
         }
 
@@ -136,7 +122,7 @@ public class LiteFlowService implements Serializable {
             return null;
         }
 
-        String componentValue = JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.Component, "value");
+        String componentValue = javaService.getAnnotationAttributeValue(psiClass, Annotation.Component, "value");
         if (componentValue != null){
             /* 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
             if (componentValue.equals("")){
@@ -146,9 +132,9 @@ public class LiteFlowService implements Serializable {
         }
 
         String liteFlowComponentValue =
-                JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "value");
+                javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "value");
         String liteFlowComponentId =
-                JavaService.getInstance(this.project).getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "id");
+                javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "id");
 
         String name = StringUtil.isEmpty(liteFlowComponentValue)? liteFlowComponentId : liteFlowComponentValue;
         if (name != null){
@@ -178,66 +164,108 @@ public class LiteFlowService implements Serializable {
         return null;
     }
 
-    private boolean _isLiteFlow(@NotNull PsiClass psiClass, @NotNull String clazz, @NotNull String nodeTypeEnum){
-        // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
-        if (psiClass.getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
+    private boolean _isLiteFlow(@NotNull PsiElement psiElement, @NotNull String clazz, @NotNull String nodeTypeEnum){
+        if (psiElement instanceof PsiClass){
+            PsiClass psiClass = (PsiClass) psiElement;
+            // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
+            if (psiClass.getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
+                return false;
+            }
+            // 排除使用了 abstract 的 Class
+            if (psiClass.getText().contains("abstract class")){
+                return false;
+            }
+            PsiClass nodeClazz = JavaService.getInstance(project).getClassByQualifiedName(clazz);
+            if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
+                return true;
+            }
+            String nodeType = javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowCmpDefine, "value");
+            if (nodeType == null){
+                return false;
+            }
+            return nodeTypeEnum.equals(nodeType);
+        } else if (psiElement instanceof PsiMethod) {
+            PsiMethod psiMethod = (PsiMethod) psiElement;
+            // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
+            if (psiMethod.getContainingClass().getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
+                return false;
+            }
+            // 排除使用了 abstract 的 Class
+            if (psiMethod.getContainingClass().getText().contains("abstract class")){
+                return false;
+            }
+            if (psiMethod.getContainingClass().hasAnnotation(Annotation.LiteflowCmpDefine)){
+                return false;
+            }
+            if (psiMethod.getContainingClass().isInheritor(javaService.getClassByQualifiedName(Clazz.NodeComponent), true)){
+                return false;
+            }
+            String liteFlowMethod = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "value");
+            if (!ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, liteFlowMethod)){
+                return false;
+            }
+            String nodeId = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "nodeId");
+            if (StringUtil.isEmpty(nodeId)){
+                return false;
+            }
+            String nodeType = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "nodeType");
+            return nodeTypeEnum.equals(nodeType);
+        } else {
             return false;
         }
-        // 排除使用了 abstract 的 Class
-        if (psiClass.getText().contains("abstract class")){
+
+    }
+
+    public boolean isLiteFlowNormalComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeComponent, NodeTypeEnum.COMMON);
+    }
+
+    public boolean isLiteFlowSwitchComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeSwitchComponent, NodeTypeEnum.SWITCH);
+    }
+
+    public boolean isLiteFlowIfComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeIfComponent, NodeTypeEnum.IF);
+    }
+
+    public boolean isLiteFlowForComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeForComponent, NodeTypeEnum.FOR);
+    }
+
+    public boolean isLiteFlowWhileComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeWhileComponent, NodeTypeEnum.WHILE);
+    }
+
+    public boolean isLiteFlowBreakComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeBreakComponent, NodeTypeEnum.BREAK);
+    }
+
+    public boolean isLiteFlowMultiComponent(@NotNull PsiClass psiClass){
+        if (psiClass.hasAnnotation(Annotation.LiteflowCmpDefine)){
             return false;
         }
-        PsiClass nodeClazz = JavaService.getInstance(project).getClassByQualifiedName(clazz);
-        if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
-            return true;
+        for (PsiMethod method : psiClass.getMethods()) {
+            String nodeId = javaService.getAnnotationAttributeValue(method, Annotation.LiteflowMethod, "nodeId");
+            if (!StringUtil.isEmpty(nodeId)){
+                return true;
+            }
         }
-        String nodeType = javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowCmpDefine, "value");
-        if (nodeType == null){
-            return false;
-        }
-        return nodeTypeEnum.equals(nodeType);
-    }
-
-    public boolean isLiteFlowNormalComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeComponent, NodeTypeEnum.COMMON);
-    }
-
-    public boolean isLiteFlowSwitchComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeSwitchComponent, NodeTypeEnum.SWITCH);
-    }
-
-    public boolean isLiteFlowIfComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeIfComponent, NodeTypeEnum.IF);
-    }
-
-    public boolean isLiteFlowForComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeForComponent, NodeTypeEnum.FOR);
-    }
-
-    public boolean isLiteFlowWhileComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeWhileComponent, NodeTypeEnum.WHILE);
-    }
-
-    public boolean isLiteFlowBreakComponentClass(@NotNull PsiClass psiClass){
-        return _isLiteFlow(psiClass, Clazz.NodeBreakComponent, NodeTypeEnum.BREAK);
+        return false;
     }
 
     /**
-     * 判断是不是LiteFlowClass
-     * 如果继承了LiteFlow的指定Component，则判断为是
-     * 如果没继承以上两个Class，而使用声明式注解，同样判断为是
-     * 否则为不是
-     * @param psiClass psi类
+     * 判断是不是LiteFlowComponent
+     * @param psiElement psi元素
      * @return 返回true或者false
      */
-    public boolean isLiteFlowClass(@NotNull PsiClass psiClass){
+    public boolean isLiteFlowComponent(@NotNull PsiElement psiElement){
         return (
-                isLiteFlowIfComponentClass(psiClass)    ||
-                isLiteFlowSwitchComponentClass(psiClass)||
-                isLiteFlowForComponentClass(psiClass)   ||
-                isLiteFlowWhileComponentClass(psiClass) ||
-                isLiteFlowBreakComponentClass(psiClass) ||
-                isLiteFlowNormalComponentClass(psiClass)
+                isLiteFlowIfComponent(psiElement)    ||
+                isLiteFlowSwitchComponent(psiElement)||
+                isLiteFlowForComponent(psiElement)   ||
+                isLiteFlowWhileComponent(psiElement) ||
+                isLiteFlowBreakComponent(psiElement) ||
+                isLiteFlowNormalComponent(psiElement)
         );
     }
 

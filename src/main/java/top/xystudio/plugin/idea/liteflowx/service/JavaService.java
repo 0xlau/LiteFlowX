@@ -6,10 +6,12 @@ import com.intellij.psi.*;
 import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.AnnotatedElementsSearch;
 import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.lang.reflect.AnnotatedElement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -49,7 +51,20 @@ public class JavaService implements Serializable {
         if (psiClass == null) {
             return new ArrayList<>();
         }
-        return ClassesWithAnnotatedMembersSearch.search(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+        return AnnotatedElementsSearch.searchPsiClasses(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+    }
+
+    /**
+     * 获取含有指定Annotation的所有Method
+     * @param qualifiedName 注解的全名
+     * @return 含有指定qualifiedName的注解的所有Method
+     */
+    public Collection<PsiMethod> getMethodsByAnnotationQualifiedName(@NotNull String qualifiedName) {
+        PsiClass psiClass = getClassByQualifiedName(qualifiedName);
+        if (psiClass == null) {
+            return new ArrayList<>();
+        }
+        return AnnotatedElementsSearch.searchPsiMethods(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
     }
 
     /**

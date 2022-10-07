@@ -18,6 +18,27 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
+        <!-- LiteFlow @LiteFlowMethod用法检测 -->
+        <annotator
+                language="JAVA"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.annotator.LiteFlowMethodUsageAnnotator"
+        />
+        <!-- LiteFlow @LiteFlowMethod NodeId重复检测 -->
+        <annotator
+                language="JAVA"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.annotator.LiteFlowMethodNodeIdExistAnnotator"
+        />
+
+        <!-- LiteFlow @LiteFlowCmpDefine用法检测 -->
+        <annotator
+                language="JAVA"
+                implementationClass="top.xystudio.plugin.idea.liteflowx.system.annotator.LiteFlowCmpDefineUsageAnnotator"
+        />
+
+        <!-- LiteFlow @LiteFlowMethod 行图标 -->
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.system.provider.LiteFlowMethodLineMarkerProvider"/>
+
         <fileType
                 name="LiteFlow File"
                 implementationClass="top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowFileType"

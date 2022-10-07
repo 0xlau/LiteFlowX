@@ -34,23 +34,26 @@ public class FileIconProvider extends IconProvider {
         if (!(element instanceof PsiClass)){
             return null;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIfComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIfComponent(element)){
             return LiteFlowIcons.IF_COMPONENT_CLASS_FILE_ICON;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowSwitchComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowSwitchComponent(element)){
             return LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowForComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowForComponent(element)){
             return LiteFlowIcons.FOR_COMPONENT_CLASS_FILE_ICON;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowWhileComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowWhileComponent(element)){
             return LiteFlowIcons.WHI_COMPONENT_CLASS_FILE_ICON;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBreakComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBreakComponent(element)){
             return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
         }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowNormalComponentClass((PsiClass) element)){
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowNormalComponent(element)){
             return LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowMultiComponent((PsiClass) element)){
+            return LiteFlowIcons.MULTI_COMPONENT_CLASS_FILE_ICON;
         }
         return null;
     }

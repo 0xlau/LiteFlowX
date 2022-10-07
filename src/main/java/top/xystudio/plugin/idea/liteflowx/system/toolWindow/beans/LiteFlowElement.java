@@ -2,6 +2,7 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans;
 
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiMethod;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +37,11 @@ public class LiteFlowElement {
             case BREAK_COMPONENT:
             case WHILE_COMPONENT:
             case SWITCH_COMPONENT:
-                this.subName = ((PsiClass)psiElement).getQualifiedName();
+                if (psiElement instanceof PsiClass){
+                    this.subName = ((PsiClass)psiElement).getQualifiedName();
+                } else if (psiElement instanceof PsiMethod) {
+                    this.subName = ((PsiMethod)psiElement).getContainingClass().getQualifiedName() + "#" + ((PsiMethod)psiElement).getName();
+                }
                 break;
             case CHAIN:
                 this.subName = psiElement.getContainingFile().getVirtualFile().getName();
