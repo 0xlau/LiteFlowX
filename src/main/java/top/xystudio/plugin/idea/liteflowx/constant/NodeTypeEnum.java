@@ -26,5 +26,6 @@ public class NodeTypeEnum {
 
     public static final String BREAK_SCRIPT = "BREAK_SCRIPT(break_script, 循环跳出脚本, true, ScriptBreakComponent.class)";
 
+    public static final String[] SCRIPTS = {"script", "if_script", "for_script", "while_script", "break_script", "switch_script"};
 
 }

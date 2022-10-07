@@ -7,6 +7,7 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.xml.XmlTag;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
 import org.apache.commons.lang.ArrayUtils;
@@ -20,6 +21,7 @@ import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
 import top.xystudio.plugin.idea.liteflowx.dom.modal.Nodes;
 import top.xystudio.plugin.idea.liteflowx.util.StringUtils;
+import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -76,6 +78,15 @@ public class LiteFlowService implements Serializable {
         for (DomFileElement<Flow> flow : flows) {
             Nodes nodes = flow.getRootElement().getNodes();
             for (Node node : nodes.getNodeList()) {
+                String id = node.getId().getStringValue();
+                if (StringUtil.isEmpty(id)){continue;}
+
+                String type = node.getType().getStringValue();
+                if (ArrayUtils.contains(NodeTypeEnum.SCRIPTS, type)){
+                    result.add(node.getXmlTag());
+                    continue;
+                }
+
                 String clazzValue = node.getClazz().getStringValue();
                 if (clazzValue == null) {continue;}
                 PsiClass aClass = javaService.getClassByQualifiedName(clazzValue);
@@ -88,6 +99,24 @@ public class LiteFlowService implements Serializable {
         result.addAll(liteFlowComponents);
         result.addAll(methodComponents);
         return result.stream().distinct().filter(this::isLiteFlowComponent).toArray(PsiElement[]::new);
+    }
+
+    /**
+     * 根据XmlTag获取LiteFlowComponent的名称
+     * @param xmlTag xmlTag
+     * @return 返回LiteFlowComponent的名称
+     */
+    public String getLiteFlowComponentNameByXmlTag(@NotNull XmlTag xmlTag){
+
+        Node node = XmlUtils.transformToDomElement(xmlTag, Node.class);
+        if (node == null){
+            return null;
+        }
+        String componentValue = node.getId().getStringValue();
+        if (StringUtil.isEmpty(componentValue)){
+            return null;
+        }
+        return componentValue;
     }
 
     /**
@@ -240,6 +269,22 @@ public class LiteFlowService implements Serializable {
         return _isLiteFlow(psiElement, Clazz.NodeBreakComponent, NodeTypeEnum.BREAK);
     }
 
+    private boolean isLiteFlowScriptComponent(PsiElement psiElement) {
+        if (!(psiElement instanceof XmlTag)){
+            return false;
+        }
+        Node node = XmlUtils.transformToDomElement(psiElement, Node.class);
+        if (node == null){
+            return false;
+        }
+        String id = node.getId().getStringValue();
+        String type = node.getType().getStringValue();
+        if (ArrayUtils.contains(NodeTypeEnum.SCRIPTS, type) && StringUtil.isNotEmpty(id)){
+            return true;
+        }
+        return false;
+    }
+
     public boolean isLiteFlowMultiComponent(@NotNull PsiClass psiClass){
         if (psiClass.hasAnnotation(Annotation.LiteflowCmpDefine)){
             return false;
@@ -265,8 +310,11 @@ public class LiteFlowService implements Serializable {
                 isLiteFlowForComponent(psiElement)   ||
                 isLiteFlowWhileComponent(psiElement) ||
                 isLiteFlowBreakComponent(psiElement) ||
-                isLiteFlowNormalComponent(psiElement)
+                isLiteFlowNormalComponent(psiElement)||
+                isLiteFlowScriptComponent(psiElement)
         );
     }
+
+
 
 }

@@ -32,6 +32,8 @@ public interface LiteFlowIcons {
 
     Icon BRK_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/break_component_14x14.svg", LiteFlowIcons.class);
 
+    Icon SRT_COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/script_component_14x14.svg", LiteFlowIcons.class);
+
     /** TOOLWINDOW图标 */
     Icon TOOL_WINDOW_ICON =  IconLoader.getIcon("/images/tool_13x13.svg", LiteFlowIcons.class);
 

@@ -3,6 +3,7 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.xml.XmlTag;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,20 +37,24 @@ public class LiteFlowElement {
             case FOR_COMPONENT:
             case BREAK_COMPONENT:
             case WHILE_COMPONENT:
-            case SWITCH_COMPONENT:
-                if (psiElement instanceof PsiClass){
-                    this.subName = ((PsiClass)psiElement).getQualifiedName();
+            case SWITCH_COMPONENT: {
+                if (psiElement instanceof PsiClass) {
+                    this.subName = ((PsiClass) psiElement).getQualifiedName();
                 } else if (psiElement instanceof PsiMethod) {
-                    this.subName = ((PsiMethod)psiElement).getContainingClass().getQualifiedName() + "#" + ((PsiMethod)psiElement).getName();
+                    this.subName = ((PsiMethod) psiElement).getContainingClass().getQualifiedName() + "#" + ((PsiMethod) psiElement).getName();
                 }
                 break;
-            case CHAIN:
+            }
+            case SCRIPT_COMPONENT:
+            case CHAIN:{
                 this.subName = psiElement.getContainingFile().getVirtualFile().getName();
                 break;
+            }
             case Element:
-            default:
+            default: {
                 this.subName = null;
                 break;
+            }
         }
     }
 
@@ -98,6 +103,8 @@ public class LiteFlowElement {
     @NotNull
     public Icon getIcon() {
         switch (liteFlowElementType){
+            case SCRIPT_COMPONENT:
+                return LiteFlowIcons.SRT_COMPONENT_CLASS_FILE_ICON;
             case NORMAL_COMPONENT:
                 return LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
             case WHILE_COMPONENT:

@@ -30,9 +30,9 @@ public class XmlUtils {
             Node.class.getSimpleName().toLowerCase()
     );
 
-//    public static <T> T transformToDomElement(PsiElement element, Class<T> c){
-//        return (T) DomManager.getDomManager(element.getProject()).getDomElement((XmlTag) element);
-//    }
+    public static <T> T transformToDomElement(PsiElement element, Class<T> c){
+        return (T) DomManager.getDomManager(element.getProject()).getDomElement((XmlTag) element);
+    }
 
 //    public static <T extends DomElement> List<DomFileElement<T>> findDomElements(@NotNull Project project, Class<T> clazz){
 //        GlobalSearchScope globalSearchScope = GlobalSearchScope.allScope(project);

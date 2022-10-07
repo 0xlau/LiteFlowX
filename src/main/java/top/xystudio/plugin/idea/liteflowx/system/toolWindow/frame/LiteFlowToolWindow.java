@@ -4,6 +4,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -105,6 +106,9 @@ public class LiteFlowToolWindow extends JPanel {
                         }else {
                             return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }
+                    } else if (o instanceof XmlTag){
+                        XmlTag c = (XmlTag) o;
+                        return new LiteFlowElement(LiteFlowElementType.SCRIPT_COMPONENT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c.getContainingFile());
                     }
                     return null;
                 })

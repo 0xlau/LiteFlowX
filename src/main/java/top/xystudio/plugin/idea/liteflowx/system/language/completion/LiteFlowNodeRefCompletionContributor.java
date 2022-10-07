@@ -73,6 +73,16 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                                                     .bold()
                                     );
                                 }
+                            } else if (psiElement instanceof XmlTag) {
+                                String componentName = liteFlowService.getLiteFlowComponentNameByXmlTag((XmlTag) psiElement);
+                                if (componentName != null){
+                                    resultSet.addElement(
+                                            LookupElementBuilder.create(componentName)
+                                                    .withIcon(LiteFlowIcons.SRT_COMPONENT_CLASS_FILE_ICON)
+                                                    .withTypeText("Script-Component")
+                                                    .bold()
+                                    );
+                                }
                             }
                         }
                         /** 搜索全部LiteFlowChain */

@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.xml.XmlTag;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public class findComponentsImpl implements BiFunction<Project, String, List<? ex
                 }
             } else if (psiElement instanceof PsiMethod) {
                 String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentNameByPsiMethod((PsiMethod) psiElement);
+                if (componentName != null && componentName.equals(name)){
+                    result.add(psiElement);
+                }
+            } else if (psiElement instanceof XmlTag){
+                String componentName = LiteFlowService.getInstance(project).getLiteFlowComponentNameByXmlTag((XmlTag) psiElement);
                 if (componentName != null && componentName.equals(name)){
                     result.add(psiElement);
                 }
