@@ -26,7 +26,7 @@ public interface LiteFlowIcons {
     Icon BRK_COMPONENT_ICON =  IconLoader.getIcon("/images/break.svg", LiteFlowIcons.class);
 
     /** SCRIPT类文件图标 */
-    Icon COMMON_SCRIPT_ICON = IconLoader.getIcon("/images/script.svg", LiteFlowIcons.class);
+    Icon COMMON_SCRIPT_ICON = IconLoader.getIcon("/images/script_common.svg", LiteFlowIcons.class);
 
     Icon IF_SCRIPT_ICON =  IconLoader.getIcon("/images/script_if.svg", LiteFlowIcons.class);
 
@@ -45,7 +45,7 @@ public interface LiteFlowIcons {
     Icon LITEFLOWX_ICON =  IconLoader.getIcon("/images/liteflowx.svg", LiteFlowIcons.class);
 
     /** XML 文件图标 */
-    Icon XML_ICON = IconLoader.getIcon("/images/xml_16x16.svg", LiteFlowIcons.class);
+    Icon XML_ICON = IconLoader.getIcon("/images/xml.svg", LiteFlowIcons.class);
 
 
 
