@@ -2,6 +2,28 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-10-09
+- 新增 #I5TUH1 LiteFlow 2.9.0 的 data 属性特性的适配
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5TUH1
+- 新增 #I5TU26 LiteFlow 2.9.0 循环组件语法的适配
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5TU26
+- 新增 #I5U36H LiteFlow 2.9.0 版本中EL对*.xml检测生效
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5U36H
+- 新增 #I5UA9R LiteFlow 2.9.0 重构后的声明式组件的适配
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5UA9R
+- 新增 #I5TU3E 细分化Component类型的特性
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5TU3E
+- 修复 #I5Q35D ELF语法无法正常解析注释的问题
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5Q35D
+- 修复 #I5U3QH 核心源码不应该显示组件图标的问题
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5U3QH
+- 修复 #I5O84M 不能正常识别node的XML标签的问题
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5O84M
+- 优化 插件内核源码架构
+- 优化 插件内的所有图标，简洁清爽！
+- 优化 LiteFlowTool 工具箱的副标题显示内容
+- 修复 LiteFlowTool 工具箱双击无法跳转对应Chain的问题
+
 ## [1.0.4] - 2022-08-25
 - 新增 #I5NWWJ 支持 LiteFlow v2.8.5 的IF关键字特性
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5NWWJ

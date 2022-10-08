@@ -2,9 +2,9 @@ package top.xystudio.plugin.idea.liteflowx.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 public class LiteFlowUtils {

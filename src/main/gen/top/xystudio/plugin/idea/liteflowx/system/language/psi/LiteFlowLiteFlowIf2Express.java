@@ -14,9 +14,6 @@ public interface LiteFlowLiteFlowIf2Express extends PsiElement {
   LiteFlowLiteFlowIf2SubExpress getLiteFlowIf2SubExpress();
 
   @NotNull
-  LiteFlowLiteFlowNodeRef getLiteFlowNodeRef();
-
-  @Nullable
-  LiteFlowLiteFlowTagExpress getLiteFlowTagExpress();
+  LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
 }

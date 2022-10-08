@@ -16,6 +16,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_BREAK_STATEMENT = new LiteFlowElementType("LITEFLOW_BREAK_STATEMENT");
   IElementType LITEFLOW_CODES = new LiteFlowElementType("LITEFLOW_CODES");
   IElementType LITEFLOW_CONTINUE_STATEMENT = new LiteFlowElementType("LITEFLOW_CONTINUE_STATEMENT");
+  IElementType LITEFLOW_EL_VARIABLE_REF = new LiteFlowElementType("LITEFLOW_EL_VARIABLE_REF");
   IElementType LITEFLOW_EXPRESS = new LiteFlowElementType("LITEFLOW_EXPRESS");
   IElementType LITEFLOW_FN_INVOKE_EXPRESS = new LiteFlowElementType("LITEFLOW_FN_INVOKE_EXPRESS");
   IElementType LITEFLOW_FN_INVOKE_STATEMENT = new LiteFlowElementType("LITEFLOW_FN_INVOKE_STATEMENT");
@@ -24,8 +25,13 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_IF_STATEMENT = new LiteFlowElementType("LITEFLOW_IF_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_ALL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ALL_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ANY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ANY_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_BREAK_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_BREAK_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_CONDITION_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_CONDITION_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_DATA_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DATA_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_DO_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DO_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_FINALLY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FINALLY_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_FOR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FOR_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_FOR_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FOR_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ID_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ID_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELIF_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELIF_SUB_EXPRESS");
@@ -37,8 +43,10 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF");
-  IElementType LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_STRING_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_STRING_REF");
+  IElementType LITEFLOW_LITE_FLOW_NODE_STRING_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_STRING_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_SWITCH_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SWITCH_EXPRESS");
@@ -50,6 +58,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_TO_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_TO_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_WHEN_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_WHEN_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_WHEN_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_WHEN_SUB_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_WHILE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_WHILE_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_WHILE_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_WHILE_SUB_EXPRESS");
   IElementType LITEFLOW_NEW_EXPRESS = new LiteFlowElementType("LITEFLOW_NEW_EXPRESS");
   IElementType LITEFLOW_NEW_STATEMENT = new LiteFlowElementType("LITEFLOW_NEW_STATEMENT");
   IElementType LITEFLOW_OP = new LiteFlowElementType("LITEFLOW_OP");
@@ -88,7 +98,9 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_COND_AND = new LiteFlowTokenType("&&");
   IElementType LITEFLOW_COND_OR = new LiteFlowTokenType("||");
   IElementType LITEFLOW_CONTINUE = new LiteFlowTokenType("continue");
+  IElementType LITEFLOW_DATA = new LiteFlowTokenType("data");
   IElementType LITEFLOW_DEF = new LiteFlowTokenType("def");
+  IElementType LITEFLOW_DO = new LiteFlowTokenType("DO");
   IElementType LITEFLOW_DOT = new LiteFlowTokenType(".");
   IElementType LITEFLOW_ELSE = new LiteFlowTokenType("else");
   IElementType LITEFLOW_EQ = new LiteFlowTokenType("==");
@@ -105,13 +117,16 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_IF = new LiteFlowTokenType("if");
   IElementType LITEFLOW_IGNOREERROR = new LiteFlowTokenType("ignoreError");
   IElementType LITEFLOW_IN = new LiteFlowTokenType("in");
+  IElementType LITEFLOW_LBREAK = new LiteFlowTokenType("BREAK");
   IElementType LITEFLOW_LELIF = new LiteFlowTokenType("ELIF");
   IElementType LITEFLOW_LELSE = new LiteFlowTokenType("ELSE");
   IElementType LITEFLOW_LESS = new LiteFlowTokenType("<");
   IElementType LITEFLOW_LESS_OR_EQUAL = new LiteFlowTokenType("<=");
+  IElementType LITEFLOW_LFOR = new LiteFlowTokenType("FOR");
   IElementType LITEFLOW_LIF = new LiteFlowTokenType("IF");
   IElementType LITEFLOW_LIKE = new LiteFlowTokenType("like");
   IElementType LITEFLOW_LINE_COMMENT = new LiteFlowTokenType("line_comment");
+  IElementType LITEFLOW_LWHILE = new LiteFlowTokenType("WHILE");
   IElementType LITEFLOW_MACRO = new LiteFlowTokenType("macro");
   IElementType LITEFLOW_MINUS = new LiteFlowTokenType("-");
   IElementType LITEFLOW_MINUS_MINUS = new LiteFlowTokenType("--");
@@ -143,6 +158,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_THREADPOOL = new LiteFlowTokenType("threadPool");
   IElementType LITEFLOW_TO = new LiteFlowTokenType("to");
   IElementType LITEFLOW_TRUE = new LiteFlowTokenType("true");
+  IElementType LITEFLOW_UNODE = new LiteFlowTokenType("NODE");
+  IElementType LITEFLOW_UTO = new LiteFlowTokenType("TO");
   IElementType LITEFLOW_VCLASS = new LiteFlowTokenType("VClass");
   IElementType LITEFLOW_WHEN = new LiteFlowTokenType("WHEN");
   IElementType LITEFLOW_WHILE = new LiteFlowTokenType("while");
@@ -174,6 +191,9 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_CONTINUE_STATEMENT) {
         return new LiteFlowContinueStatementImpl(node);
       }
+      else if (type == LITEFLOW_EL_VARIABLE_REF) {
+        return new LiteFlowElVariableRefImpl(node);
+      }
       else if (type == LITEFLOW_EXPRESS) {
         return new LiteFlowExpressImpl(node);
       }
@@ -198,11 +218,26 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_ANY_EXPRESS) {
         return new LiteFlowLiteFlowAnyExpressImpl(node);
       }
+      else if (type == LITEFLOW_LITE_FLOW_BREAK_EXPRESS) {
+        return new LiteFlowLiteFlowBreakExpressImpl(node);
+      }
       else if (type == LITEFLOW_LITE_FLOW_CONDITION_EXPRESS) {
         return new LiteFlowLiteFlowConditionExpressImpl(node);
       }
+      else if (type == LITEFLOW_LITE_FLOW_DATA_EXPRESS) {
+        return new LiteFlowLiteFlowDataExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_DO_EXPRESS) {
+        return new LiteFlowLiteFlowDoExpressImpl(node);
+      }
       else if (type == LITEFLOW_LITE_FLOW_FINALLY_EXPRESS) {
         return new LiteFlowLiteFlowFinallyExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_FOR_EXPRESS) {
+        return new LiteFlowLiteFlowForExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_FOR_SUB_EXPRESS) {
+        return new LiteFlowLiteFlowForSubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_ID_EXPRESS) {
         return new LiteFlowLiteFlowIdExpressImpl(node);
@@ -237,11 +272,17 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_NODE_REF) {
         return new LiteFlowLiteFlowNodeRefImpl(node);
       }
-      else if (type == LITEFLOW_LITE_FLOW_NODE_STRING_EXPRESS) {
-        return new LiteFlowLiteFlowNodeStringExpressImpl(node);
+      else if (type == LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS) {
+        return new LiteFlowLiteFlowNodeRefExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS) {
+        return new LiteFlowLiteFlowNodeRefSubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_NODE_STRING_REF) {
         return new LiteFlowLiteFlowNodeStringRefImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_NODE_STRING_SUB_EXPRESS) {
+        return new LiteFlowLiteFlowNodeStringSubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_PRE_EXPRESS) {
         return new LiteFlowLiteFlowPreExpressImpl(node);
@@ -275,6 +316,12 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_WHEN_SUB_EXPRESS) {
         return new LiteFlowLiteFlowWhenSubExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_WHILE_EXPRESS) {
+        return new LiteFlowLiteFlowWhileExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_WHILE_SUB_EXPRESS) {
+        return new LiteFlowLiteFlowWhileSubExpressImpl(node);
       }
       else if (type == LITEFLOW_NEW_EXPRESS) {
         return new LiteFlowNewExpressImpl(node);

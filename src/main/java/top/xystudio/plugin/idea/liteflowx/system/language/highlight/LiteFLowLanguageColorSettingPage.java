@@ -38,7 +38,7 @@ public class LiteFLowLanguageColorSettingPage implements ColorSettingsPage {
     @Nullable
     @Override
     public Icon getIcon() {
-        return LiteFlowIcons.FILE_ICON;
+        return LiteFlowIcons.LITEFLOWX_ICON;
     }
 
     @NotNull

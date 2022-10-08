@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.xml.XmlTagImpl;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlTag;
@@ -51,15 +52,37 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                         }
 
                         /** 搜索全部LiteFlowComponent */
-                        for (PsiClass psiClass : liteFlowService.findAllLiteFlowComponent()) {
-                            String componentName = liteFlowService.getLiteFlowComponentNameByPsiClass(psiClass);
-                            if (componentName != null){
-                                resultSet.addElement(
-                                        JavaLookupElementBuilder.forClass(psiClass, componentName)
-                                                .withIcon(LiteFlowIcons.COMPONENT_LINE_MARKER_ICON)
-                                                .withTypeText("Component")
-                                                .bold()
-                                );
+                        for (PsiElement psiElement : liteFlowService.findAllLiteFlowComponent()) {
+                            if (psiElement instanceof PsiClass){
+                                String componentName = liteFlowService.getLiteFlowComponentNameByPsiClass((PsiClass) psiElement);
+                                if (componentName != null){
+                                    resultSet.addElement(
+                                            JavaLookupElementBuilder.forClass((PsiClass) psiElement, componentName)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
+                                                    .withTypeText("Component")
+                                                    .bold()
+                                    );
+                                }
+                            } else if (psiElement instanceof PsiMethod) {
+                                String componentName = liteFlowService.getLiteFlowComponentNameByPsiMethod((PsiMethod) psiElement);
+                                if (componentName != null){
+                                    resultSet.addElement(
+                                            LookupElementBuilder.create(componentName)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
+                                                    .withTypeText("Component")
+                                                    .bold()
+                                    );
+                                }
+                            } else if (psiElement instanceof XmlTag) {
+                                String componentName = liteFlowService.getLiteFlowComponentNameByXmlTag((XmlTag) psiElement);
+                                if (componentName != null){
+                                    resultSet.addElement(
+                                            LookupElementBuilder.create(componentName)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
+                                                    .withTypeText("Script-Component")
+                                                    .bold()
+                                    );
+                                }
                             }
                         }
                         /** 搜索全部LiteFlowChain */
@@ -70,7 +93,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                             }
                             if (text != null) {
                                 resultSet.addElement(
-                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_LINE_MARKER_ICON).withTypeText("Chain").bold()
+                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_ICON).withTypeText("Chain").bold()
                                 );
                             }
                         }

@@ -21,26 +21,41 @@ public class FileIconProvider extends IconProvider {
     @Override
     public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
         if (isLiteFlowXmlFile(element)){
-            return LiteFlowIcons.XML_FILE_ICON;
+            return LiteFlowIcons.XML_ICON;
         }
-        if (isLiteFlowComponentClassFile(element)){
-            return LiteFlowIcons.COMPONENT_CLASS_FILE_ICON;
-        }
-        return null;
+        return getLiteFlowFileIcon(element);
     }
 
-    private boolean isLiteFlowComponentClassFile(PsiElement element) {
+    private Icon getLiteFlowFileIcon(PsiElement element) {
         Language language = element.getLanguage();
         if (!language.isKindOf(JavaLanguage.INSTANCE)){
-            return false;
+            return null;
         }
         if (!(element instanceof PsiClass)){
-            return false;
+            return null;
         }
-        if (!LiteFlowService.getInstance(element.getProject()).isLiteFlowClass((PsiClass) element)){
-            return false;
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIfComponent(element)){
+            return LiteFlowIcons.IF_COMPONENT_ICON;
         }
-        return true;
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowSwitchComponent(element)){
+            return LiteFlowIcons.SW_COMPONENT_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowForComponent(element)){
+            return LiteFlowIcons.FOR_COMPONENT_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowWhileComponent(element)){
+            return LiteFlowIcons.WHI_COMPONENT_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBreakComponent(element)){
+            return LiteFlowIcons.BRK_COMPONENT_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowNormalComponent(element)){
+            return LiteFlowIcons.COMMON_COMPONENT_ICON;
+        }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowMultiComponent((PsiClass) element)){
+            return LiteFlowIcons.MULTI_COMPONENT_ICON;
+        }
+        return null;
     }
 
     private boolean isLiteFlowXmlFile(PsiElement element) {

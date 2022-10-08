@@ -3,9 +3,10 @@ package top.xystudio.plugin.idea.liteflowx.service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
+import com.intellij.psi.search.searches.AnnotatedElementsSearch;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -48,18 +49,31 @@ public class JavaService implements Serializable {
         if (psiClass == null) {
             return new ArrayList<>();
         }
-        return ClassesWithAnnotatedMembersSearch.search(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+        return AnnotatedElementsSearch.searchPsiClasses(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+    }
+
+    /**
+     * 获取含有指定Annotation的所有Method
+     * @param qualifiedName 注解的全名
+     * @return 含有指定qualifiedName的注解的所有Method
+     */
+    public Collection<PsiMethod> getMethodsByAnnotationQualifiedName(@NotNull String qualifiedName) {
+        PsiClass psiClass = getClassByQualifiedName(qualifiedName);
+        if (psiClass == null) {
+            return new ArrayList<>();
+        }
+        return AnnotatedElementsSearch.searchPsiMethods(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
     }
 
     /**
      * 获取Class的指定注解属性值
-     * @param psiClass Class类对象
+     * @param psiModifierListOwner Class类对象
      * @param qualifiedName 注解的全名
      * @param attribute 属性名
      * @return 属性值
      */
-    public String getAnnotationAttributeValueByClass(@NotNull PsiClass psiClass, @NotNull String qualifiedName, String attribute) {
-        PsiAnnotation annotation = psiClass.getAnnotation(qualifiedName);
+    public String getAnnotationAttributeValue(@NotNull PsiModifierListOwner psiModifierListOwner, @NotNull String qualifiedName, String attribute) {
+        PsiAnnotation annotation = psiModifierListOwner.getAnnotation(qualifiedName);
         if (annotation == null) {
             return null;
         }
@@ -68,8 +82,8 @@ public class JavaService implements Serializable {
             return null;
         }
         /*处理注解value是引用表达式*/
-        if (attributeValue instanceof PsiReferenceExpressionImpl) {
-            PsiElement resolve = ((PsiReferenceExpressionImpl) attributeValue).resolve();
+        if (attributeValue instanceof PsiReferenceExpressionImpl || attributeValue instanceof ClsReferenceExpressionImpl) {
+            PsiElement resolve = ((PsiReferenceExpression) attributeValue).resolve();
             if (resolve == null) {
                 return null;
             }

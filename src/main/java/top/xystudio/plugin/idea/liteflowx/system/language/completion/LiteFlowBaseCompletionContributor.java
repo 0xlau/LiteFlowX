@@ -9,7 +9,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.system.language.LiteFlowLanguage;
-import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
 public class LiteFlowBaseCompletionContributor extends CompletionContributor {
 
@@ -36,7 +35,15 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
         InsertHandler<LookupElement> switchHandler = (context, item) -> {
             Document document = context.getDocument();
             int selectionEndOffset = context.getSelectionEndOffset();
-            document.insertString(selectionEndOffset, "().to()");
+            document.insertString(selectionEndOffset, "().TO()");
+            selectionEndOffset += 1;
+            context.getEditor().getCaretModel().getCurrentCaret().moveToOffset(selectionEndOffset);
+        };
+
+        InsertHandler<LookupElement> loopHandler = (context, item) -> {
+            Document document = context.getDocument();
+            int selectionEndOffset = context.getSelectionEndOffset();
+            document.insertString(selectionEndOffset, "().DO()");
             selectionEndOffset += 1;
             context.getEditor().getCaretModel().getCurrentCaret().moveToOffset(selectionEndOffset);
         };
@@ -53,10 +60,13 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("any").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("ignoreError").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("threadPool").withInsertHandler(parenHandler));
-                        resultSet.addElement(LookupElementBuilder.create("to").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("TO").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("DO").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("tag").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("data").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("ELIF").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("ELSE").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("BREAK").withInsertHandler(parenHandler));
                     }else{
                         resultSet.addElement(LookupElementBuilder.create("IF").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
@@ -64,7 +74,9 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("PRE").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("SWITCH").withInsertHandler(switchHandler));
-                        resultSet.addElement(LookupElementBuilder.create("node").withInsertHandler(parenQuoteHandler));
+                        resultSet.addElement(LookupElementBuilder.create("FOR").withInsertHandler(loopHandler));
+                        resultSet.addElement(LookupElementBuilder.create("WHILE").withInsertHandler(loopHandler));
+                        resultSet.addElement(LookupElementBuilder.create("NODE").withInsertHandler(parenQuoteHandler));
                     }
 
                 }

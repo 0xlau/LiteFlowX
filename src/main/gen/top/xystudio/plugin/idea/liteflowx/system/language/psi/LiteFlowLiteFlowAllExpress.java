@@ -11,18 +11,6 @@ public interface LiteFlowLiteFlowAllExpress extends PsiElement {
   LiteFlowLiteFlowConditionExpress getLiteFlowConditionExpress();
 
   @Nullable
-  LiteFlowLiteFlowNodeRef getLiteFlowNodeRef();
-
-  @Nullable
-  LiteFlowLiteFlowNodeStringExpress getLiteFlowNodeStringExpress();
-
-  @Nullable
-  LiteFlowLiteFlowTagExpress getLiteFlowTagExpress();
-
-  @Nullable
-  PsiElement getBlockComment();
-
-  @Nullable
-  PsiElement getLineComment();
+  LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
 }

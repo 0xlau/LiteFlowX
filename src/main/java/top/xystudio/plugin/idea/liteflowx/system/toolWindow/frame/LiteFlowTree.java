@@ -9,8 +9,8 @@ import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElement;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.CategoryTree;
+import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElement;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.renderer.LiteFlowTreeCellRenderer;
 
 import javax.swing.*;

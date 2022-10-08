@@ -53,7 +53,7 @@ public class XmlNodeToClassLineMarkerProvider extends XmlLineMarkerProvider{
 
     @Override
     public @NotNull Icon getIcon() {
-        return LiteFlowIcons.COMPONENT_LINE_MARKER_ICON;
+        return LiteFlowIcons.COMMON_COMPONENT_ICON;
     }
 
     @Override

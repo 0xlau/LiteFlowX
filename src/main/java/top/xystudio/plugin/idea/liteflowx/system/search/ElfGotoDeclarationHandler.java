@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findElfLocalVariablesImpl;
+import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowElVariableRef;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeRef;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeStringRef;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
@@ -52,6 +53,17 @@ public class ElfGotoDeclarationHandler implements GotoDeclarationHandler {
             }
             return result.toArray(new PsiElement[0]);
 
+        }else if (isVariableRefElement(sourceElement)){
+
+            // 识别 局部变量
+            String name = sourceElement.getText();
+            List<PsiElement> result = new ArrayList<>();
+            LiteFlowUtils.findTargetByName(project, name, new findElfLocalVariablesImpl(sourceElement.getContainingFile())).ifPresent(result::add);
+            if (result.size() == 0){
+                return null;
+            }
+            return result.toArray(new PsiElement[0]);
+
         }
 
         return null;
@@ -72,6 +84,16 @@ public class ElfGotoDeclarationHandler implements GotoDeclarationHandler {
         }
 
         return psiElement.getParent() instanceof LiteFlowLiteFlowNodeRef;
+
+    }
+
+    private boolean isVariableRefElement(PsiElement psiElement) {
+
+        if (psiElement.getParent() == null){
+            return false;
+        }
+
+        return psiElement.getParent() instanceof LiteFlowElVariableRef;
 
     }
 

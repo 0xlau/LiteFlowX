@@ -1,25 +1,16 @@
 package top.xystudio.plugin.idea.liteflowx.util;
 
 import com.google.common.collect.ImmutableSet;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
-import com.intellij.util.xml.DomElement;
-import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomManager;
-import com.intellij.util.xml.DomService;
-import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.*;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
+import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
+import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
 
 public class XmlUtils {
 
@@ -30,9 +21,9 @@ public class XmlUtils {
             Node.class.getSimpleName().toLowerCase()
     );
 
-//    public static <T> T transformToDomElement(PsiElement element, Class<T> c){
-//        return (T) DomManager.getDomManager(element.getProject()).getDomElement((XmlTag) element);
-//    }
+    public static <T> T transformToDomElement(PsiElement element, Class<T> c){
+        return (T) DomManager.getDomManager(element.getProject()).getDomElement((XmlTag) element);
+    }
 
 //    public static <T extends DomElement> List<DomFileElement<T>> findDomElements(@NotNull Project project, Class<T> clazz){
 //        GlobalSearchScope globalSearchScope = GlobalSearchScope.allScope(project);

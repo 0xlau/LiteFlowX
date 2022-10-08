@@ -103,13 +103,20 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "IF"                     { return LITEFLOW_LIF; }
   "ELIF"                   { return LITEFLOW_LELIF; }
   "ELSE"                   { return LITEFLOW_LELSE; }
+  "FOR"                    { return LITEFLOW_LFOR; }
+  "WHILE"                  { return LITEFLOW_LWHILE; }
   "any"                    { return LITEFLOW_ANY; }
   "id"                     { return LITEFLOW_ID; }
   "ignoreError"            { return LITEFLOW_IGNOREERROR; }
   "tag"                    { return LITEFLOW_TAG; }
   "threadPool"             { return LITEFLOW_THREADPOOL; }
   "to"                     { return LITEFLOW_TO; }
+  "TO"                     { return LITEFLOW_UTO; }
+  "data"                   { return LITEFLOW_DATA; }
   "node"                   { return LITEFLOW_NODE; }
+  "NODE"                   { return LITEFLOW_UNODE; }
+  "DO"                     { return LITEFLOW_DO; }
+  "BREAK"                  { return LITEFLOW_LBREAK; }
 
   {IDENTIFIER}             { return LITEFLOW_IDENTIFIER; }
   {LINE_COMMENT}           { return LITEFLOW_LINE_COMMENT; }

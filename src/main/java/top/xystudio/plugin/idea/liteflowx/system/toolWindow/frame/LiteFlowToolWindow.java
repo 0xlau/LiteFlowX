@@ -1,11 +1,16 @@
 package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 
-import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.pom.Navigatable;
+import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.html.HtmlTag;
+import com.intellij.psi.impl.source.xml.XmlTagImpl;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.JBSplitter;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +23,10 @@ import top.xystudio.plugin.idea.liteflowx.util.AsyncUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LiteFlowToolWindow extends JPanel {
@@ -70,10 +77,58 @@ public class LiteFlowToolWindow extends JPanel {
     private Map<String, List<LiteFlowElement>> getElements() {
         Map<String, List<LiteFlowElement>> map = new HashMap<>();
 
-        PsiClass[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
+        PsiElement[] liteFlowComponents = LiteFlowService.getInstance(project).findAllLiteFlowComponent();
         map.put("Components", Arrays.stream(liteFlowComponents)
-                .sorted(Comparator.comparing(NavigationItem::getName))
-                .map(o -> new LiteFlowElement(LiteFlowElementType.COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(o), o))
+//                .sorted(Comparator.comparing(NavigationItem::getName))
+                .map(o -> {
+                    if (o instanceof PsiClass){
+                        PsiClass c = (PsiClass) o;
+                        if (liteFlowService.isLiteFlowIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        } else if (liteFlowService.isLiteFlowSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c),c);
+                        }else if (liteFlowService.isLiteFlowForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }
+                    } else if (o instanceof PsiMethod) {
+                        PsiMethod c = (PsiMethod) o;
+                        if (liteFlowService.isLiteFlowIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        } else if (liteFlowService.isLiteFlowSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c),c);
+                        }else if (liteFlowService.isLiteFlowForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }
+                    } else if (o instanceof XmlTag){
+                        XmlTagImpl c = (XmlTagImpl) o;
+                        if (liteFlowService.isLiteFlowScriptIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        } else if (liteFlowService.isLiteFlowScriptSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }
+                    }
+                    return null;
+                })
                 .collect(Collectors.toList()));
 
         PsiElement[] liteFlowChains = LiteFlowService.getInstance(project).findAllLiteFlowChain();
@@ -81,7 +136,7 @@ public class LiteFlowToolWindow extends JPanel {
                 .map(o -> {
                     if (o instanceof XmlTag){
                         String name = ((XmlTag) o).getAttributeValue("name");
-                        return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o.getContainingFile());
+                        return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o);
                     }
                     return null;
                 })

@@ -35,6 +35,12 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowForExpress getLiteFlowForExpress() {
+    return findChildByClass(LiteFlowLiteFlowForExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowIf2Express getLiteFlowIf2Express() {
     return findChildByClass(LiteFlowLiteFlowIf2Express.class);
   }
@@ -67,6 +73,12 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
   @Nullable
   public LiteFlowLiteFlowWhenExpress getLiteFlowWhenExpress() {
     return findChildByClass(LiteFlowLiteFlowWhenExpress.class);
+  }
+
+  @Override
+  @Nullable
+  public LiteFlowLiteFlowWhileExpress getLiteFlowWhileExpress() {
+    return findChildByClass(LiteFlowLiteFlowWhileExpress.class);
   }
 
 }

@@ -6,28 +6,47 @@ import javax.swing.*;
 
 public interface LiteFlowIcons {
 
-    /** 组件LINEMARKER图标 */
-    Icon COMPONENT_LINE_MARKER_ICON = IconLoader.getIcon("/images/component_12x12.svg", LiteFlowIcons.class);
+    /** CHAIN 图标 */
+    Icon CHAIN_ICON = IconLoader.getIcon("/images/chain.svg", LiteFlowIcons.class);
 
-    /** 节点LINEMARKER图标 */
-    Icon NODE_LINE_MARKER_ICON = IconLoader.getIcon("/images/node_12x12.svg", LiteFlowIcons.class);
-
-    /** 链条LINEMARKER图标 */
-    Icon CHAIN_LINE_MARKER_ICON = IconLoader.getIcon("/images/chain_12x12.svg", LiteFlowIcons.class);
-
-    /** XML文件图标 */
-    Icon XML_FILE_ICON = IconLoader.getIcon("/images/xml_16x16.svg", LiteFlowIcons.class);
-
-    /** SLOT类文件图标 */
-    Icon SLOT_CLASS_FILE_ICON = IconLoader.getIcon("/images/slot_16x16.svg", LiteFlowIcons.class);
+    /** 多组件 图标 */
+    Icon MULTI_COMPONENT_ICON =  IconLoader.getIcon("/images/multi.svg", LiteFlowIcons.class);
 
     /** COMPONENT类文件图标 */
-    Icon COMPONENT_CLASS_FILE_ICON =  IconLoader.getIcon("/images/component_16x16.svg", LiteFlowIcons.class);
+    Icon COMMON_COMPONENT_ICON =  IconLoader.getIcon("/images/common.svg", LiteFlowIcons.class);
+
+    Icon IF_COMPONENT_ICON =  IconLoader.getIcon("/images/if.svg", LiteFlowIcons.class);
+
+    Icon SW_COMPONENT_ICON =  IconLoader.getIcon("/images/switch.svg", LiteFlowIcons.class);
+
+    Icon FOR_COMPONENT_ICON =  IconLoader.getIcon("/images/for.svg", LiteFlowIcons.class);
+
+    Icon WHI_COMPONENT_ICON =  IconLoader.getIcon("/images/while.svg", LiteFlowIcons.class);
+
+    Icon BRK_COMPONENT_ICON =  IconLoader.getIcon("/images/break.svg", LiteFlowIcons.class);
+
+    /** SCRIPT类文件图标 */
+    Icon COMMON_SCRIPT_ICON = IconLoader.getIcon("/images/script_common.svg", LiteFlowIcons.class);
+
+    Icon IF_SCRIPT_ICON =  IconLoader.getIcon("/images/script_if.svg", LiteFlowIcons.class);
+
+    Icon SW_SCRIPT_ICON =  IconLoader.getIcon("/images/script_switch.svg", LiteFlowIcons.class);
+
+    Icon FOR_SCRIPT_ICON =  IconLoader.getIcon("/images/script_for.svg", LiteFlowIcons.class);
+
+    Icon WHI_SCRIPT_ICON =  IconLoader.getIcon("/images/script_while.svg", LiteFlowIcons.class);
+
+    Icon BRK_SCRIPT_ICON =  IconLoader.getIcon("/images/script_break.svg", LiteFlowIcons.class);
 
     /** TOOLWINDOW图标 */
     Icon TOOL_WINDOW_ICON =  IconLoader.getIcon("/images/tool_13x13.svg", LiteFlowIcons.class);
 
-    /** 文件图标 */
-    Icon FILE_ICON =  IconLoader.getIcon("/images/file_16x16.svg", LiteFlowIcons.class);
+    /** LITEFLOWX 图标 */
+    Icon LITEFLOWX_ICON =  IconLoader.getIcon("/images/liteflowx.svg", LiteFlowIcons.class);
+
+    /** XML 文件图标 */
+    Icon XML_ICON = IconLoader.getIcon("/images/xml.svg", LiteFlowIcons.class);
+
+
 
 }

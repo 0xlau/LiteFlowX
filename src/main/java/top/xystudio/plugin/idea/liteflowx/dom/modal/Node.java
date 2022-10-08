@@ -15,5 +15,7 @@ public interface Node extends DomElement {
     @Attribute("name")
     GenericAttributeValue<String> getName();
 
+    @Attribute("type")
+    GenericAttributeValue<String> getType();
 
 }

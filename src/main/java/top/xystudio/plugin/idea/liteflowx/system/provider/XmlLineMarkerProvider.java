@@ -1,12 +1,8 @@
 package top.xystudio.plugin.idea.liteflowx.system.provider;
 
-import com.google.common.collect.ImmutableSet;
 import com.intellij.ide.util.PsiElementListCellRenderer;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.*;
 import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 /**
