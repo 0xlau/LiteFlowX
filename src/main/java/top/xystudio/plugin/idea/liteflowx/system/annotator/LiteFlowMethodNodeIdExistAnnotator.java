@@ -22,6 +22,7 @@ import java.util.Optional;
 
 /**
  * 检测@LiteFlowMethod的NodeId重复问题
+ * （！暂停使用！）
  */
 public class LiteFlowMethodNodeIdExistAnnotator implements Annotator {
 
