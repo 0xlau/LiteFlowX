@@ -15,7 +15,7 @@
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
 <img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX&style=for-the-badge" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.1-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge"/>
 
 </p>
@@ -33,13 +33,12 @@ English | [简体中文](./README.zh-CN.md)
 <h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
 ## 🍬 LiteFlowX Features:
-- Support for LiteFlow 2.8.x new expression language
-- Specific file Svg icons for easy identification of LiteFlow elements
-- Able to identify Component and Chain
-- Java code and Chain jump to each other
-- Jump between Xml files and LiteFlow elements
-- Auto-complete prompt for elf language, able to prompt Component, Chain and local variables
-- Provides LiteFLow toolbox
+- Fully compatible with all features of LiteFlow v2.9.x
+- Supports ELF regular expressions (autosuggestion, syntax highlighting, syntax detection)
+- Subdivided component type icons to make components clear at a glance
+- Ability to identify components, links
+- More intelligent automatic prompts, which can be subdivided into components and links
+- Provides LiteFlow toolbox, components and links of the entire project, and supports double-click jumping
 - Support file jump to liteflow.ruleSource property
 - ...more features to come
 
