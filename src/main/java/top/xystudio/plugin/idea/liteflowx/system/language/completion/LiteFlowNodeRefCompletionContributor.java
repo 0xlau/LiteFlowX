@@ -58,7 +58,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                                 if (componentName != null){
                                     resultSet.addElement(
                                             JavaLookupElementBuilder.forClass((PsiClass) psiElement, componentName)
-                                                    .withIcon(LiteFlowIcons.COMPONENT_LINE_MARKER_ICON)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
                                                     .withTypeText("Component")
                                                     .bold()
                                     );
@@ -68,7 +68,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                                 if (componentName != null){
                                     resultSet.addElement(
                                             LookupElementBuilder.create(componentName)
-                                                    .withIcon(LiteFlowIcons.COMPONENT_LINE_MARKER_ICON)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
                                                     .withTypeText("Component")
                                                     .bold()
                                     );
@@ -78,7 +78,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                                 if (componentName != null){
                                     resultSet.addElement(
                                             LookupElementBuilder.create(componentName)
-                                                    .withIcon(LiteFlowIcons.SRT_COMPONENT_CLASS_FILE_ICON)
+                                                    .withIcon(LiteFlowIcons.COMMON_SCRIPT_ICON)
                                                     .withTypeText("Script-Component")
                                                     .bold()
                                     );
@@ -93,7 +93,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                             }
                             if (text != null) {
                                 resultSet.addElement(
-                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_LINE_MARKER_ICON_12x12).withTypeText("Chain").bold()
+                                        LookupElementBuilder.create(element, text).withIcon(LiteFlowIcons.CHAIN_ICON).withTypeText("Chain").bold()
                                 );
                             }
                         }

@@ -103,21 +103,21 @@ public class LiteFlowElement {
     public Icon getIcon() {
         switch (liteFlowElementType){
             case SCRIPT_COMPONENT:
-                return LiteFlowIcons.SRT_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.COMMON_SCRIPT_ICON;
             case NORMAL_COMPONENT:
-                return LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.COMMON_COMPONENT_ICON;
             case WHILE_COMPONENT:
-                return LiteFlowIcons.WHI_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.WHI_COMPONENT_ICON;
             case FOR_COMPONENT:
-                return LiteFlowIcons.FOR_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.FOR_COMPONENT_ICON;
             case IF_COMPONENT:
-                return LiteFlowIcons.IF_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.IF_COMPONENT_ICON;
             case SWITCH_COMPONENT:
-                return LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.SW_COMPONENT_ICON;
             case BREAK_COMPONENT:
-                return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
+                return LiteFlowIcons.BRK_COMPONENT_ICON;
             case CHAIN:
-                return LiteFlowIcons.CHAIN_LINE_MARKER_ICON_14x14;
+                return LiteFlowIcons.CHAIN_ICON;
             case Element:
             default:
                 return LiteFlowIcons.TOOL_WINDOW_ICON;

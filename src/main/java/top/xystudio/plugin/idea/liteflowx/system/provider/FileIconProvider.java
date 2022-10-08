@@ -21,7 +21,7 @@ public class FileIconProvider extends IconProvider {
     @Override
     public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
         if (isLiteFlowXmlFile(element)){
-            return LiteFlowIcons.XML_FILE_ICON;
+            return LiteFlowIcons.XML_ICON;
         }
         return getLiteFlowFileIcon(element);
     }
@@ -35,25 +35,25 @@ public class FileIconProvider extends IconProvider {
             return null;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIfComponent(element)){
-            return LiteFlowIcons.IF_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.IF_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowSwitchComponent(element)){
-            return LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.SW_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowForComponent(element)){
-            return LiteFlowIcons.FOR_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.FOR_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowWhileComponent(element)){
-            return LiteFlowIcons.WHI_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.WHI_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBreakComponent(element)){
-            return LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.BRK_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowNormalComponent(element)){
-            return LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.COMMON_COMPONENT_ICON;
         }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowMultiComponent((PsiClass) element)){
-            return LiteFlowIcons.MULTI_COMPONENT_CLASS_FILE_ICON;
+            return LiteFlowIcons.MULTI_COMPONENT_ICON;
         }
         return null;
     }

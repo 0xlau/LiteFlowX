@@ -39,22 +39,22 @@ public class LiteFlowMethodLineMarkerProvider extends RelatedItemLineMarkerProvi
         Icon icon;
         String tip = "";
         if (nodeType.equals(NodeTypeEnum.COMMON)){
-            icon = LiteFlowIcons.NORMAL_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.COMMON_COMPONENT_ICON;
             tip = "Common component";
         } else if (nodeType.equals(NodeTypeEnum.IF)) {
-            icon = LiteFlowIcons.IF_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.IF_COMPONENT_ICON;
             tip = "If component";
         } else if (nodeType.equals(NodeTypeEnum.SWITCH)) {
-            icon = LiteFlowIcons.SW_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.SW_COMPONENT_ICON;
             tip = "SWITCH component";
         } else if (nodeType.equals(NodeTypeEnum.FOR)) {
-            icon = LiteFlowIcons.FOR_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.FOR_COMPONENT_ICON;
             tip = "For component";
         } else if (nodeType.equals(NodeTypeEnum.WHILE)) {
-            icon = LiteFlowIcons.WHI_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.WHI_COMPONENT_ICON;
             tip = "While component";
         } else if (nodeType.equals(NodeTypeEnum.BREAK)) {
-            icon = LiteFlowIcons.BRK_COMPONENT_CLASS_FILE_ICON;
+            icon = LiteFlowIcons.BRK_COMPONENT_ICON;
             tip = "Break component";
         } else {
             return;
