@@ -7,12 +7,9 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
-import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findElfLocalVariablesImpl;
 import top.xystudio.plugin.idea.liteflowx.system.language.highlight.LiteFlowSyntaxHighlighter;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.LiteFlowElVariableRefImpl;
-import top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.LiteFlowLiteFlowNodeRefImpl;
 import top.xystudio.plugin.idea.liteflowx.util.LiteFlowUtils;
 
 import java.util.List;

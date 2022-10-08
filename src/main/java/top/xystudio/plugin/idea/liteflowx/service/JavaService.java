@@ -7,11 +7,9 @@ import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.AnnotatedElementsSearch;
-import com.intellij.psi.search.searches.ClassesWithAnnotatedMembersSearch;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.lang.reflect.AnnotatedElement;
 import java.util.ArrayList;
 import java.util.Collection;
 

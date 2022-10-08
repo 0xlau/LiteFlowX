@@ -7,7 +7,6 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.Clazz;

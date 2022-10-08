@@ -2,10 +2,9 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.renderer;
 
 import com.intellij.ui.ColoredTreeCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
-import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElement;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.CategoryTree;
+import top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans.LiteFlowElement;
 import top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame.LiteFlowTree;
 
 import javax.swing.*;

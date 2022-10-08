@@ -1,10 +1,8 @@
 package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 
-import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -20,8 +18,10 @@ import top.xystudio.plugin.idea.liteflowx.util.AsyncUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LiteFlowToolWindow extends JPanel {

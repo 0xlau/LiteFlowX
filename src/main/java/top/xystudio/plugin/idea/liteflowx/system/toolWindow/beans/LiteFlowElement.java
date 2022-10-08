@@ -3,7 +3,6 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.xml.XmlTag;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
