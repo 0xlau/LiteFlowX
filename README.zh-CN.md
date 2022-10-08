@@ -15,7 +15,7 @@
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
 <img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX&style=for-the-badge" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.1-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge"/>
 
 </p>
@@ -33,13 +33,12 @@
 <h3>LiteFlowX 是一款 IDEA 插件，它能够大幅度提高你在使用<a href="https://gitee.com/dromara/liteFlow"> LiteFlow 框架 </a>进行开发时的工作效率。</h3>
 
 ## 🍬 LiteFlowX 特性
-- 支持 LiteFlow 2.8.x 新的规则表达式语法（自动提示、语法高亮、语法检测）
-- 特定的文件 Svg 图标，容易识别 LiteFlow 元素
-- 能够识别Component、Chain
-- Java 代码和 Chain 的互相跳转
-- Xml 文件与 LiteFlow 元素的互相跳转
-- Xml 的自动完成提示，能够提示Component、Chain
-- 提供LiteFLow工具箱，整个工程的Component、Chain，并且支持双击跳转
+- 全面适配 LiteFlow v2.9.x 的所有特性
+- 支持 ELF 规则表达式（自动提示、语法高亮、语法检测）
+- 细分化的组件类型图标，让组件一目了然
+- 能够识别组件、链路
+- 更加智能的自动提示，可细分化后的组件、链路
+- 提供LiteFlow工具箱，整个工程的组件、链路，并且支持双击跳转
 - 支持对 liteflow.ruleSource 属性的文件跳转
 - ...更多特性敬请期待
 
