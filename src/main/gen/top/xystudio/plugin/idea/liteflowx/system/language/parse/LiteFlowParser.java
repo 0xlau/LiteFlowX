@@ -713,11 +713,38 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress
+  // [block_comment | line_comment] (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) [block_comment | line_comment]
   public static boolean liteFlowConditionExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_CONDITION_EXPRESS, "<lite flow condition express>");
+    r = liteFlowConditionExpress_0(b, l + 1);
+    r = r && liteFlowConditionExpress_1(b, l + 1);
+    r = r && liteFlowConditionExpress_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [block_comment | line_comment]
+  private static boolean liteFlowConditionExpress_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_0")) return false;
+    liteFlowConditionExpress_0_0(b, l + 1);
+    return true;
+  }
+
+  // block_comment | line_comment
+  private static boolean liteFlowConditionExpress_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
+    return r;
+  }
+
+  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress
+  private static boolean liteFlowConditionExpress_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_1")) return false;
+    boolean r;
     r = liteFlowThenExpress(b, l + 1);
     if (!r) r = liteFlowWhenExpress(b, l + 1);
     if (!r) r = liteFlowSwitchExpress(b, l + 1);
@@ -727,7 +754,22 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     if (!r) r = liteFlowIf3Express(b, l + 1);
     if (!r) r = liteFlowForExpress(b, l + 1);
     if (!r) r = liteFlowWhileExpress(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // [block_comment | line_comment]
+  private static boolean liteFlowConditionExpress_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_2")) return false;
+    liteFlowConditionExpress_2_0(b, l + 1);
+    return true;
+  }
+
+  // block_comment | line_comment
+  private static boolean liteFlowConditionExpress_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowConditionExpress_2_0")) return false;
+    boolean r;
+    r = consumeToken(b, LITEFLOW_BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, LITEFLOW_LINE_COMMENT);
     return r;
   }
 
