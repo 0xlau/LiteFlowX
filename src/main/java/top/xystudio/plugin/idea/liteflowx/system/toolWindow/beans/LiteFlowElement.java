@@ -1,8 +1,10 @@
 package top.xystudio.plugin.idea.liteflowx.system.toolWindow.beans;
 
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiMethod;
+import com.intellij.openapi.editor.Document;
+import com.intellij.pom.Navigatable;
+import com.intellij.psi.*;
+import com.intellij.psi.xml.XmlTag;
+import com.intellij.util.DocumentUtil;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +15,7 @@ import java.util.Objects;
 
 public class LiteFlowElement {
 
-    private final NavigatablePsiElement psiElement;
+    private final PsiElement psiElement;
     @Nullable
     private LiteFlowElementType liteFlowElementType;
     @Nullable
@@ -21,7 +23,10 @@ public class LiteFlowElement {
     @Nullable
     private String subName;
 
-    public LiteFlowElement(LiteFlowElementType elementType, @Nullable String name, @Nullable NavigatablePsiElement psiElement) {
+    public LiteFlowElement(LiteFlowElementType elementType, @Nullable String name, @Nullable PsiElement psiElement) {
+
+        Document document = PsiDocumentManager.getInstance(psiElement.getProject()).getDocument(psiElement.getContainingFile());
+        int lineNumber = document.getLineNumber(psiElement.getTextOffset()) + 1;
 
         this.setLiteFlowElementType(elementType);
 
@@ -31,6 +36,17 @@ public class LiteFlowElement {
         this.psiElement = psiElement;
 
         switch (elementType){
+            case NORMAL_SCRIPT:
+            case IF_SCRIPT:
+            case SWITCH_SCRIPT:
+            case FOR_SCRIPT:
+            case WHILE_SCRIPT:
+            case BREAK_SCRIPT:{
+                if (psiElement instanceof XmlTag){
+                    this.subName = psiElement.getContainingFile().getVirtualFile().getName() + ": " + lineNumber;
+                }
+                break;
+            }
             case NORMAL_COMPONENT:
             case IF_COMPONENT:
             case FOR_COMPONENT:
@@ -40,13 +56,12 @@ public class LiteFlowElement {
                 if (psiElement instanceof PsiClass) {
                     this.subName = ((PsiClass) psiElement).getQualifiedName();
                 } else if (psiElement instanceof PsiMethod) {
-                    this.subName = ((PsiMethod) psiElement).getContainingClass().getQualifiedName() + "#" + ((PsiMethod) psiElement).getName();
+                    this.subName = ((PsiMethod) psiElement).getContainingClass().getQualifiedName() + "# " + ((PsiMethod) psiElement).getName();
                 }
                 break;
             }
-            case SCRIPT_COMPONENT:
             case CHAIN:{
-                this.subName = psiElement.getContainingFile().getVirtualFile().getName();
+                this.subName = psiElement.getContainingFile().getVirtualFile().getName() + ": " + lineNumber;
                 break;
             }
             case Element:
@@ -57,23 +72,14 @@ public class LiteFlowElement {
         }
     }
 
-    public LiteFlowElement(LiteFlowElementType elementType, @Nullable String name, @Nullable String subName, @Nullable NavigatablePsiElement psiElement) {
-        this.setLiteFlowElementType(elementType);
-        if (name != null) {
-            this.setName(name);
-        }
-        this.psiElement = psiElement;
-        this.subName = subName;
-    }
-
     public void navigate(boolean focus) {
         if (psiElement != null) {
-            psiElement.navigate(focus);
+            ((Navigatable)psiElement).navigate(focus);
         }
     }
 
     @Nullable
-    public NavigatablePsiElement getPsiElement() {
+    public PsiElement getPsiElement() {
         return psiElement;
     }
 
@@ -102,8 +108,18 @@ public class LiteFlowElement {
     @NotNull
     public Icon getIcon() {
         switch (liteFlowElementType){
-            case SCRIPT_COMPONENT:
+            case NORMAL_SCRIPT:
                 return LiteFlowIcons.COMMON_SCRIPT_ICON;
+            case IF_SCRIPT:
+                return LiteFlowIcons.IF_SCRIPT_ICON;
+            case FOR_SCRIPT:
+                return LiteFlowIcons.FOR_SCRIPT_ICON;
+            case SWITCH_SCRIPT:
+                return LiteFlowIcons.SW_SCRIPT_ICON;
+            case WHILE_SCRIPT:
+                return LiteFlowIcons.WHI_SCRIPT_ICON;
+            case BREAK_SCRIPT:
+                return LiteFlowIcons.BRK_SCRIPT_ICON;
             case NORMAL_COMPONENT:
                 return LiteFlowIcons.COMMON_COMPONENT_ICON;
             case WHILE_COMPONENT:

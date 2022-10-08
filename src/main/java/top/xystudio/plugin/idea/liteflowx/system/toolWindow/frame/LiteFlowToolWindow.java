@@ -3,9 +3,14 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.pom.Navigatable;
+import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.html.HtmlTag;
+import com.intellij.psi.impl.source.xml.XmlTagImpl;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.JBSplitter;
 import org.jetbrains.annotations.NotNull;
@@ -107,8 +112,20 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }
                     } else if (o instanceof XmlTag){
-                        XmlTag c = (XmlTag) o;
-                        return new LiteFlowElement(LiteFlowElementType.SCRIPT_COMPONENT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c.getContainingFile());
+                        XmlTagImpl c = (XmlTagImpl) o;
+                        if (liteFlowService.isLiteFlowScriptIfComponent(o)){
+                            return new LiteFlowElement(LiteFlowElementType.IF_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        } else if (liteFlowService.isLiteFlowScriptSwitchComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.SWITCH_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptForComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.FOR_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptWhileComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.WHILE_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptBreakComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BREAK_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else {
+                            return new LiteFlowElement(LiteFlowElementType.NORMAL_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }
                     }
                     return null;
                 })
@@ -119,7 +136,7 @@ public class LiteFlowToolWindow extends JPanel {
                 .map(o -> {
                     if (o instanceof XmlTag){
                         String name = ((XmlTag) o).getAttributeValue("name");
-                        return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o.getContainingFile());
+                        return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o);
                     }
                     return null;
                 })

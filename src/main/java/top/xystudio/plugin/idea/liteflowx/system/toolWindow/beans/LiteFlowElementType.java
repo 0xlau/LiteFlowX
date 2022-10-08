@@ -15,7 +15,12 @@ public enum LiteFlowElementType {
     WHILE_COMPONENT,
     BREAK_COMPONENT,
     CHAIN,
-    SCRIPT_COMPONENT;
+    IF_SCRIPT,
+    SWITCH_SCRIPT,
+    FOR_SCRIPT,
+    WHILE_SCRIPT,
+    BREAK_SCRIPT,
+    NORMAL_SCRIPT;
 
     @NotNull
     public static LiteFlowElementType[] getValues(){

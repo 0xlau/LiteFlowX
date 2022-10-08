@@ -78,7 +78,7 @@ public class LiteFlowNodeRefCompletionContributor extends CompletionContributor 
                                 if (componentName != null){
                                     resultSet.addElement(
                                             LookupElementBuilder.create(componentName)
-                                                    .withIcon(LiteFlowIcons.COMMON_SCRIPT_ICON)
+                                                    .withIcon(LiteFlowIcons.COMMON_COMPONENT_ICON)
                                                     .withTypeText("Script-Component")
                                                     .bold()
                                     );

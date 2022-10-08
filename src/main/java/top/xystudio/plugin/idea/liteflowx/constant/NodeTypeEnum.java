@@ -14,18 +14,16 @@ public class NodeTypeEnum {
 
     public static final String BREAK = "BREAK(break, 循环跳出, false, NodeBreakComponent.class)";
 
-    public static final String SCRIPT = "SCRIPT(script, 脚本, true, ScriptCommonComponent.class)";
+    public static final String SCRIPT = "script";
 
-    public static final String SWITCH_SCRIPT = "SWITCH_SCRIPT(switch_script, 选择脚本, true, ScriptSwitchComponent.class)";
+    public static final String SWITCH_SCRIPT = "switch_script";
 
-    public static final String IF_SCRIPT = "IF_SCRIPT(if_script, 条件脚本, true, ScriptIfComponent.class)";
+    public static final String IF_SCRIPT = "if_script";
 
-    public static final String FOR_SCRIPT = "FOR_SCRIPT(for_script, 循环次数脚本, true, ScriptForComponent.class)";
+    public static final String FOR_SCRIPT = "for_script";
 
-    public static final String WHILE_SCRIPT = "WHILE_SCRIPT(while_script, 循环条件脚本, true, ScriptWhileComponent.class)";
+    public static final String WHILE_SCRIPT = "while_script";
 
-    public static final String BREAK_SCRIPT = "BREAK_SCRIPT(break_script, 循环跳出脚本, true, ScriptBreakComponent.class)";
-
-    public static final String[] SCRIPTS = {"script", "if_script", "for_script", "while_script", "break_script", "switch_script"};
-
+    public static final String BREAK_SCRIPT = "break_script";
+    public static final String[] SCRIPTS = {SCRIPT, SWITCH_SCRIPT, IF_SCRIPT, FOR_SCRIPT, WHILE_SCRIPT, BREAK_SCRIPT};
 }
