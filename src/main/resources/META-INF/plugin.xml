@@ -10,6 +10,7 @@
     <depends>com.intellij.modules.java</depends>
     <depends>org.intellij.intelliLang</depends>
     <depends>com.intellij.java</depends>
+    <depends optional="true" config-file="LiteFlowX-optionalJavaScript.xml">JavaScript</depends>
 
     <extensions defaultExtensionNs="org.intellij.intelliLang">
         <!-- LiteFlow Chain语法注入 -->
