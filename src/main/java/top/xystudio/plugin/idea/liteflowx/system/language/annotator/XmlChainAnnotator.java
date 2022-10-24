@@ -32,6 +32,9 @@ public class XmlChainAnnotator implements Annotator {
         if (!element.getText().equalsIgnoreCase("chain")){
             return;
         }
+        if (!(element.getParent() instanceof XmlTag)){
+            return;
+        }
         String name = ((XmlTag) element.getParent()).getAttributeValue("name");
         if (StringUtil.isEmpty(name)){
             holder.newAnnotation(HighlightSeverity.ERROR, "缺少 'name' 属性值")
