@@ -1,4 +1,6 @@
 <idea-plugin>
-    <extensions defaultExtensionNs="JavaScript">
+    <extensions defaultExtensionNs="org.intellij.intelliLang">
+        <!-- LiteFlow Js语法注入Xml -->
+        <injectionConfig config="language/jsInjections.xml"/>
     </extensions>
 </idea-plugin>
