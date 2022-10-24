@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.1.1] - 2022-10-24
+- 新增 #I5VMP4 在xml中新增对groovy以及javascript语法的支持
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5VMP4
+- 修复 #I5WQME 无法识别多行注释问题
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5WQME
+
 ## [1.1.0] - 2022-10-09
 - 新增 #I5TUH1 LiteFlow 2.9.0 的 data 属性特性的适配
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5TUH1
