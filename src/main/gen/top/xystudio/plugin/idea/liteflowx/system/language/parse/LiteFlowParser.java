@@ -713,7 +713,7 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [block_comment | line_comment] (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) [block_comment | line_comment]
+  // {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) {block_comment | line_comment}*
   public static boolean liteFlowConditionExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress")) return false;
     boolean r;
@@ -725,10 +725,14 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [block_comment | line_comment]
+  // {block_comment | line_comment}*
   private static boolean liteFlowConditionExpress_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress_0")) return false;
-    liteFlowConditionExpress_0_0(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowConditionExpress_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowConditionExpress_0", c)) break;
+    }
     return true;
   }
 
@@ -757,10 +761,14 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [block_comment | line_comment]
+  // {block_comment | line_comment}*
   private static boolean liteFlowConditionExpress_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress_2")) return false;
-    liteFlowConditionExpress_2_0(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowConditionExpress_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowConditionExpress_2", c)) break;
+    }
     return true;
   }
 
@@ -1156,7 +1164,7 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [block_comment | line_comment] (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) [block_comment | line_comment]
+  // {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
   public static boolean liteFlowNodeRefExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowNodeRefExpress")) return false;
     boolean r;
@@ -1168,10 +1176,14 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [block_comment | line_comment]
+  // {block_comment | line_comment}*
   private static boolean liteFlowNodeRefExpress_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_0")) return false;
-    liteFlowNodeRefExpress_0_0(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowNodeRefExpress_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowNodeRefExpress_0", c)) break;
+    }
     return true;
   }
 
@@ -1193,10 +1205,14 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [block_comment | line_comment]
+  // {block_comment | line_comment}*
   private static boolean liteFlowNodeRefExpress_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowNodeRefExpress_2")) return false;
-    liteFlowNodeRefExpress_2_0(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!liteFlowNodeRefExpress_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "liteFlowNodeRefExpress_2", c)) break;
+    }
     return true;
   }
 

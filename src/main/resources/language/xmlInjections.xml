@@ -3,7 +3,18 @@
     <injection language="LiteFlow" injector-id="xml">
         <display-name>Chain (XmlTag)</display-name>
         <place><![CDATA[
-            xmlTag().withLocalName(string().equalTo("chain")).inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            xmlTag().withLocalName(string().equalTo("chain"))
+                    .withParent(xmlTag().withLocalName(string().equalTo("flow")))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+
+    <injection language="Groovy" injector-id="xml">
+        <display-name>NodeScript (XmlTag)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "groovy")
+                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
             ]]></place>
     </injection>
 </component>

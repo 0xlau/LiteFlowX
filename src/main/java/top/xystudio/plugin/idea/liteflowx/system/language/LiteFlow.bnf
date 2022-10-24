@@ -235,10 +235,10 @@ liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef
 liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
 
 // LiteFlow Node引用表达式
-liteFlowNodeRefExpress ::= [block_comment | line_comment] (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) [block_comment | line_comment]
+liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= [block_comment | line_comment] (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) [block_comment | line_comment]
+liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT liteFlowNodeRefExpress COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}

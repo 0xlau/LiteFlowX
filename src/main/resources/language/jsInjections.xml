@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="LanguageInjectionConfiguration">
+    <injection language="JavaScript" injector-id="xml">
+        <display-name>NodeScript (XmlTag)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "js")
+                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+</component>
