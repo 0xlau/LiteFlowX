@@ -74,9 +74,6 @@
 ### 支持局部变量
 ![支持局部变量](https://liteflow.yomahub.com/img/liteflowx/localvar.gif)
 
-### 支持.el.xml的chain标签自动注入elf语法
-![支持.el.xml的chain标签自动注入elf语法](https://liteflow.yomahub.com/img/liteflowx/newelxml.gif)
-
 ### LiteFlow 工具箱
 ![LiteFlow 工具箱](https://liteflow.yomahub.com/img/liteflowx/toolbox.gif)
 

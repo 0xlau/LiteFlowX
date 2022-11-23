@@ -234,7 +234,8 @@ public class LiteFlowService implements Serializable {
             if (psiMethod.getContainingClass().hasAnnotation(Annotation.LiteflowCmpDefine)){
                 return false;
             }
-            if (psiMethod.getContainingClass().isInheritor(javaService.getClassByQualifiedName(Clazz.NodeComponent), true)){
+            PsiClass nodeComponent = javaService.getClassByQualifiedName(Clazz.NodeComponent);
+            if (nodeComponent != null && psiMethod.getContainingClass().isInheritor(nodeComponent, true)){
                 return false;
             }
             String liteFlowMethod = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "value");

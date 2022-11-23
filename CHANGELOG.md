@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.1.2] - 2022-11-23
+- 修复 #I5X8XV com/intellij/psi/impl/source/PsiClassImpl.isInheritor must not be null 的问题
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5X8XV
+- 修复 com.intellij.psi.impl.source.xml.XmlElementContentGroupImpl cannot be cast to class com.intellij.psi.xml.XmlTag 的问题
+
 ## [1.1.1] - 2022-10-24
 - 新增 #I5VMP4 在xml中新增对groovy以及javascript语法的支持
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I5VMP4
