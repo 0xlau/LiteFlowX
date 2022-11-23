@@ -74,8 +74,5 @@ For full details of install plugins, <a href="https://www.jetbrains.com/help/ide
 ### Local variables
 ![支持局部变量](https://liteflow.yomahub.com/img/liteflowx/localvar.gif)
 
-### Language injection
-![支持.el.xml的chain标签自动注入elf语法](https://liteflow.yomahub.com/img/liteflowx/newelxml.gif)
-
 ### LiteFlow ToolBox
 ![LiteFlow 工具箱](https://liteflow.yomahub.com/img/liteflowx/toolbox.gif)
