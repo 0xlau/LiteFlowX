@@ -1,6 +1,12 @@
 # LiteFlowX Changelog
 
 ## [Unreleased]
+## [1.1.3] - 2022-12-11
+- 新增 #I65E2V SWITCH表达式的DEFAULT用法
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I65E2V
+- 新增 #I65E31 脚本组件对Python语言以及Lua语言的支持
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I65E31
+- 兼容 IDEA-2022.3 版本
 
 ## [1.1.2] - 2022-11-23
 - 修复 #I5X8XV com/intellij/psi/impl/source/PsiClassImpl.isInheritor must not be null 的问题
