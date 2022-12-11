@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowLiteFlowToExpress extends PsiElement {
-
-  @NotNull
-  List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList();
+public interface LiteFlowLiteFlowDefaultExpress extends PsiElement {
 
   @Nullable
-  LiteFlowLiteFlowDefaultExpress getLiteFlowDefaultExpress();
+  LiteFlowLiteFlowAllExpress getLiteFlowAllExpress();
 
 }

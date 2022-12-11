@@ -117,6 +117,7 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "NODE"                   { return LITEFLOW_UNODE; }
   "DO"                     { return LITEFLOW_DO; }
   "BREAK"                  { return LITEFLOW_LBREAK; }
+  "DEFAULT"                { return LITEFLOW_DEFAULT; }
 
   {IDENTIFIER}             { return LITEFLOW_IDENTIFIER; }
   {LINE_COMMENT}           { return LITEFLOW_LINE_COMMENT; }

@@ -29,6 +29,12 @@ public class LiteFlowLiteFlowSwitchExpressImpl extends ASTWrapperPsiElement impl
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowDefaultExpress getLiteFlowDefaultExpress() {
+    return findChildByClass(LiteFlowLiteFlowDefaultExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress() {
     return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
   }

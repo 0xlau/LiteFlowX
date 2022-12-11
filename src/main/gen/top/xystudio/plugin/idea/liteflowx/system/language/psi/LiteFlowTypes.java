@@ -28,6 +28,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_BREAK_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_BREAK_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_CONDITION_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_CONDITION_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_DATA_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DATA_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_DEFAULT_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DEFAULT_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_DO_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DO_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_FINALLY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FINALLY_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_FOR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_FOR_EXPRESS");
@@ -100,6 +101,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_CONTINUE = new LiteFlowTokenType("continue");
   IElementType LITEFLOW_DATA = new LiteFlowTokenType("data");
   IElementType LITEFLOW_DEF = new LiteFlowTokenType("def");
+  IElementType LITEFLOW_DEFAULT = new LiteFlowTokenType("DEFAULT");
   IElementType LITEFLOW_DO = new LiteFlowTokenType("DO");
   IElementType LITEFLOW_DOT = new LiteFlowTokenType(".");
   IElementType LITEFLOW_ELSE = new LiteFlowTokenType("else");
@@ -226,6 +228,9 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_DATA_EXPRESS) {
         return new LiteFlowLiteFlowDataExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_DEFAULT_EXPRESS) {
+        return new LiteFlowLiteFlowDefaultExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_DO_EXPRESS) {
         return new LiteFlowLiteFlowDoExpressImpl(node);

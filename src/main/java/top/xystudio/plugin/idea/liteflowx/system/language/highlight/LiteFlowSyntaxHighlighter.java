@@ -100,6 +100,7 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_UNODE)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_UTO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LBREAK)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_DEFAULT)
         ) {
             return LITEFLOW_KEYWORDS_KEYS;
         } else if (tokenType.equals(LiteFlowTypes.LITEFLOW_BLOCK_COMMENT)) {
