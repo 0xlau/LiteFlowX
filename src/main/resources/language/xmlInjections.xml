@@ -10,9 +10,27 @@
     </injection>
 
     <injection language="Groovy" injector-id="xml">
-        <display-name>NodeScript (XmlTag)</display-name>
+        <display-name>NodeScript (XmlTag in Groovy)</display-name>
         <place><![CDATA[
             xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "groovy")
+                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+
+    <injection language="Python" injector-id="xml">
+        <display-name>NodeScript (XmlTag in Python)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "python")
+                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+
+    <injection language="Lua" injector-id="xml">
+        <display-name>NodeScript (XmlTag in Python)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "lua")
                     .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
                     .inVirtualFile(virtualFile().withName(string().contains(".xml")))
             ]]></place>
