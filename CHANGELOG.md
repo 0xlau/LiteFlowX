@@ -1,6 +1,10 @@
 # LiteFlowX Changelog
 
 ## [Unreleased]
+## [1.1.4] - 2023-01-18
+- 新增 #I6AY1G 对 ITERATOR 关键字的支持
+  - https://gitee.com/liupeiqiang/LiteFlowX/issues/I6AY1G
+
 ## [1.1.3] - 2022-12-11
 - 新增 #I65E2V SWITCH表达式的DEFAULT用法
   - https://gitee.com/liupeiqiang/LiteFlowX/issues/I65E2V
