@@ -95,6 +95,7 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LELIF)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LELSE)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LFOR)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_LITERATOR)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_LWHILE)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_DO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_UNODE)

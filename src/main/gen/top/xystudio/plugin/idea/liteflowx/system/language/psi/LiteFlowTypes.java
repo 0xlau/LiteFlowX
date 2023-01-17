@@ -43,6 +43,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_IF_3_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_ITERATOR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ITERATOR_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS");
@@ -128,6 +130,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LIF = new LiteFlowTokenType("IF");
   IElementType LITEFLOW_LIKE = new LiteFlowTokenType("like");
   IElementType LITEFLOW_LINE_COMMENT = new LiteFlowTokenType("line_comment");
+  IElementType LITEFLOW_LITERATOR = new LiteFlowTokenType("ITERATOR");
   IElementType LITEFLOW_LWHILE = new LiteFlowTokenType("WHILE");
   IElementType LITEFLOW_MACRO = new LiteFlowTokenType("macro");
   IElementType LITEFLOW_MINUS = new LiteFlowTokenType("-");
@@ -273,6 +276,12 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS) {
         return new LiteFlowLiteFlowIgnoreErrorExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_ITERATOR_EXPRESS) {
+        return new LiteFlowLiteFlowIteratorExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS) {
+        return new LiteFlowLiteFlowIteratorSubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_NODE_REF) {
         return new LiteFlowLiteFlowNodeRefImpl(node);

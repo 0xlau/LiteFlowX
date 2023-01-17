@@ -10,6 +10,8 @@ public class Clazz {
 
     public static final String NodeForComponent = "com.yomahub.liteflow.core.NodeForComponent";
 
+    public static final String NodeIteratorComponent = "com.yomahub.liteflow.core.NodeIteratorComponent";
+
     public static final String NodeWhileComponent = "com.yomahub.liteflow.core.NodeWhileComponent";
 
     public static final String NodeBreakComponent = "com.yomahub.liteflow.core.NodeBreakComponent";

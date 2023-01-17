@@ -124,6 +124,7 @@
     LELIF = "ELIF"
     LELSE = "ELSE"
     LFOR = "FOR"
+    LITERATOR = "ITERATOR"
     LWHILE = "WHILE"
     any = "any"
     id = "id"
@@ -239,7 +240,7 @@ liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlo
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowWhileExpress) {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT liteFlowNodeRefExpress COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -270,6 +271,10 @@ liteFlowSwitchSubExpress ::= DOT liteFlowIdExpress {pin=1}
 // liteFlow FOR() 表达式
 liteFlowForExpress ::= LFOR PAREN_LEFT (number | liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowForSubExpress] {pin = 1}
 liteFlowForSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
+
+// liteFlow ITERATOR() 表达式
+liteFlowIteratorExpress ::= LITERATOR PAREN_LEFT (liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowIteratorSubExpress] {pin = 1}
+liteFlowIteratorSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
 
 // liteFlow WHILE() 表达式
 liteFlowWhileExpress ::= LWHILE PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT liteFlowDoExpress [liteFlowWhileSubExpress] {pin = 1}

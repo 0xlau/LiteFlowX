@@ -21,6 +21,9 @@ public interface LiteFlowIcons {
 
     Icon FOR_COMPONENT_ICON =  IconLoader.getIcon("/images/for.svg", LiteFlowIcons.class);
 
+
+    Icon ITERATOR_COMPONENT_ICON =  IconLoader.getIcon("/images/iterator.svg", LiteFlowIcons.class);
+
     Icon WHI_COMPONENT_ICON =  IconLoader.getIcon("/images/while.svg", LiteFlowIcons.class);
 
     Icon BRK_COMPONENT_ICON =  IconLoader.getIcon("/images/break.svg", LiteFlowIcons.class);
