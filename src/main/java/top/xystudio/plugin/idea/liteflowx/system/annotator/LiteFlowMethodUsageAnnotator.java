@@ -41,6 +41,9 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
                 if (value.equals(LiteFlowMethodEnum.PROCESS_FOR) && nodeType.equals(NodeTypeEnum.FOR)){
                     return;
                 }
+                if (value.equals(LiteFlowMethodEnum.PROCESS_ITERATOR) && nodeType.equals(NodeTypeEnum.ITERATOR)){
+                    return;
+                }
                 if (value.equals(LiteFlowMethodEnum.PROCESS_IF) && nodeType.equals(NodeTypeEnum.IF)){
                     return;
                 }

@@ -10,6 +10,8 @@ public class LiteFlowMethodEnum {
 
     public static final String PROCESS_FOR = "PROCESS_FOR(processFor, true)";
 
+    public static final String PROCESS_ITERATOR = "PROCESS_ITERATOR(processIterator, true)";
+
     public static final String PROCESS_WHILE = "PROCESS_WHILE(processWhile, true)";
 
     public static final String PROCESS_BREAK = "PROCESS_BREAK(processBreak, true)";
@@ -36,6 +38,7 @@ public class LiteFlowMethodEnum {
             PROCESS_BREAK,
             PROCESS_SWITCH,
             PROCESS_FOR,
+            PROCESS_ITERATOR,
             PROCESS_WHILE
     };
 

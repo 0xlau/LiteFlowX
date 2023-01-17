@@ -282,6 +282,10 @@ public class LiteFlowService implements Serializable {
         return _isLiteFlow(psiElement, Clazz.NodeForComponent, NodeTypeEnum.FOR);
     }
 
+    public boolean isLiteFlowIteratorComponent(@NotNull PsiElement psiElement){
+        return _isLiteFlow(psiElement, Clazz.NodeIteratorComponent, NodeTypeEnum.ITERATOR);
+    }
+
     public boolean isLiteFlowWhileComponent(@NotNull PsiElement psiElement){
         return _isLiteFlow(psiElement, Clazz.NodeWhileComponent, NodeTypeEnum.WHILE);
     }
@@ -336,6 +340,7 @@ public class LiteFlowService implements Serializable {
                 isLiteFlowIfComponent(psiElement)               ||
                 isLiteFlowSwitchComponent(psiElement)           ||
                 isLiteFlowForComponent(psiElement)              ||
+                isLiteFlowIteratorComponent(psiElement)         ||
                 isLiteFlowWhileComponent(psiElement)            ||
                 isLiteFlowBreakComponent(psiElement)            ||
                 isLiteFlowNormalComponent(psiElement)           ||

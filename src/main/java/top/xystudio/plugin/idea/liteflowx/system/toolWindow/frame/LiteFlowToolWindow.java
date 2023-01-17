@@ -3,14 +3,10 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.pom.Navigatable;
-import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.html.HtmlTag;
 import com.intellij.psi.impl.source.xml.XmlTagImpl;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.JBSplitter;
 import org.jetbrains.annotations.NotNull;
@@ -89,6 +85,8 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c),c);
                         }else if (liteFlowService.isLiteFlowForComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowIteratorComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.ITERATOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
                         }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
                         }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
@@ -104,6 +102,8 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.SWITCH_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c),c);
                         }else if (liteFlowService.isLiteFlowForComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.FOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowIteratorComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.ITERATOR_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }else if (liteFlowService.isLiteFlowWhileComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }else if (liteFlowService.isLiteFlowBreakComponent(o)) {

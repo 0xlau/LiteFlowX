@@ -104,6 +104,7 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "ELIF"                   { return LITEFLOW_LELIF; }
   "ELSE"                   { return LITEFLOW_LELSE; }
   "FOR"                    { return LITEFLOW_LFOR; }
+  "ITERATOR"               { return LITEFLOW_LITERATOR; }
   "WHILE"                  { return LITEFLOW_LWHILE; }
   "any"                    { return LITEFLOW_ANY; }
   "id"                     { return LITEFLOW_ID; }

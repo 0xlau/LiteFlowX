@@ -43,6 +43,9 @@ public class FileIconProvider extends IconProvider {
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowForComponent(element)){
             return LiteFlowIcons.FOR_COMPONENT_ICON;
         }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIteratorComponent(element)){
+            return LiteFlowIcons.ITERATOR_COMPONENT_ICON;
+        }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowWhileComponent(element)){
             return LiteFlowIcons.WHI_COMPONENT_ICON;
         }
