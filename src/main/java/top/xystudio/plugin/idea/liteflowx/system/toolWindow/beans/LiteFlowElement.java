@@ -50,6 +50,7 @@ public class LiteFlowElement {
             case NORMAL_COMPONENT:
             case IF_COMPONENT:
             case FOR_COMPONENT:
+            case ITERATOR_COMPONENT:
             case BREAK_COMPONENT:
             case WHILE_COMPONENT:
             case SWITCH_COMPONENT: {
@@ -124,6 +125,8 @@ public class LiteFlowElement {
                 return LiteFlowIcons.COMMON_COMPONENT_ICON;
             case WHILE_COMPONENT:
                 return LiteFlowIcons.WHI_COMPONENT_ICON;
+            case ITERATOR_COMPONENT:
+                return LiteFlowIcons.ITERATOR_COMPONENT_ICON;
             case FOR_COMPONENT:
                 return LiteFlowIcons.FOR_COMPONENT_ICON;
             case IF_COMPONENT:

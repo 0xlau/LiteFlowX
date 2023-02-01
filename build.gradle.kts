@@ -9,7 +9,7 @@ plugins {
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.4.0"
+    id("org.jetbrains.intellij") version "1.12.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
 }
@@ -27,11 +27,14 @@ repositories {
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     pluginName.set(properties("pluginName"))
-    version.set(properties("platformVersion"))
-    type.set(properties("platformType"))
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
+
+//    version.set(properties("platformVersion"))
+//    type.set(properties("platformType"))
+    sandboxDir.set(properties("platformSandboxDir"))
+    localPath.set(properties("platformLocalPath"))
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin

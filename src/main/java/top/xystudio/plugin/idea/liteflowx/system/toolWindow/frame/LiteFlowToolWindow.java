@@ -3,6 +3,7 @@ package top.xystudio.plugin.idea.liteflowx.system.toolWindow.frame;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -135,8 +136,11 @@ public class LiteFlowToolWindow extends JPanel {
         map.put("Chains", Arrays.stream(liteFlowChains)
                 .map(o -> {
                     if (o instanceof XmlTag){
-                        String name = ((XmlTag) o).getAttributeValue("name");
-                        return new LiteFlowElement(LiteFlowElementType.CHAIN, name, o);
+                        String id = ((XmlTag) o).getAttributeValue("id");
+                        if (StringUtil.isEmpty(id)){
+                            id = ((XmlTag) o).getAttributeValue("name");
+                        }
+                        return new LiteFlowElement(LiteFlowElementType.CHAIN, id, o);
                     }
                     return null;
                 })

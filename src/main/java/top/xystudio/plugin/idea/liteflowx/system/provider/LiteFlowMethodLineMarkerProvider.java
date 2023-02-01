@@ -50,6 +50,9 @@ public class LiteFlowMethodLineMarkerProvider extends RelatedItemLineMarkerProvi
         } else if (nodeType.equals(NodeTypeEnum.FOR)) {
             icon = LiteFlowIcons.FOR_COMPONENT_ICON;
             tip = "For component";
+        } else if (nodeType.equals(NodeTypeEnum.ITERATOR)) {
+            icon = LiteFlowIcons.ITERATOR_COMPONENT_ICON;
+            tip = "Iterator component";
         } else if (nodeType.equals(NodeTypeEnum.WHILE)) {
             icon = LiteFlowIcons.WHI_COMPONENT_ICON;
             tip = "While component";

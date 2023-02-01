@@ -35,16 +35,19 @@ public class XmlChainAnnotator implements Annotator {
         if (!(element.getParent() instanceof XmlTag)){
             return;
         }
-        String name = ((XmlTag) element.getParent()).getAttributeValue("name");
-        if (StringUtil.isEmpty(name)){
-            holder.newAnnotation(HighlightSeverity.ERROR, "缺少 'name' 属性值")
+        String id = ((XmlTag) element.getParent()).getAttributeValue("id");
+        if (StringUtil.isEmpty(id)){
+            id = ((XmlTag) element.getParent()).getAttributeValue("name");
+        }
+        if (StringUtil.isEmpty(id)){
+            holder.newAnnotation(HighlightSeverity.ERROR, "缺少 'id' 或 'name' 属性值")
                     .range(element.getTextRange())
                     .highlightType(ProblemHighlightType.ERROR)
                     .create();
         }else {
-            Optional<? extends List<? extends PsiElement>> optional = LiteFlowUtils.findTargetsByName(element.getProject(), name, new findChainsImpl());
+            Optional<? extends List<? extends PsiElement>> optional = LiteFlowUtils.findTargetsByName(element.getProject(), id, new findChainsImpl());
             if ( optional.isPresent() && optional.get().size() > 1) {
-                holder.newAnnotation(HighlightSeverity.ERROR, String.format("重复命名的链路 '%s' ", name))
+                holder.newAnnotation(HighlightSeverity.ERROR, String.format("重复命名的链路 '%s' ", id))
                         .range(element.getTextRange())
                         .highlightType(ProblemHighlightType.ERROR)
                         .create();
