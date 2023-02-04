@@ -27,7 +27,7 @@ public interface LiteFlowToolWindowService {
      * @param toolWindow toolWindow
      */
     default void init(@NotNull ToolWindow toolWindow) {
-        ContentFactory contentFactory = ContentFactory.getInstance();
+        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(getContent(), "", false);
         toolWindow.getContentManager().addContent(content);
     }
