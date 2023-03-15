@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowElVariableRef extends PsiElement {
+public interface LiteFlowLiteFlowCatchExpress extends PsiElement {
 
-  @NotNull
-  PsiElement getIdentifier();
+  @Nullable
+  LiteFlowLiteFlowAllExpress getLiteFlowAllExpress();
+
+  @Nullable
+  LiteFlowLiteFlowDoExpress getLiteFlowDoExpress();
 
 }

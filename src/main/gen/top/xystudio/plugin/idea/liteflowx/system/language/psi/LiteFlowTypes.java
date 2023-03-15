@@ -26,6 +26,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_ALL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ALL_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ANY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ANY_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_BREAK_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_BREAK_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_CATCH_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_CATCH_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_CONDITION_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_CONDITION_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_DATA_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DATA_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_DEFAULT_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_DEFAULT_EXPRESS");
@@ -122,6 +123,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_IGNOREERROR = new LiteFlowTokenType("ignoreError");
   IElementType LITEFLOW_IN = new LiteFlowTokenType("in");
   IElementType LITEFLOW_LBREAK = new LiteFlowTokenType("BREAK");
+  IElementType LITEFLOW_LCATCH = new LiteFlowTokenType("CATCH");
   IElementType LITEFLOW_LELIF = new LiteFlowTokenType("ELIF");
   IElementType LITEFLOW_LELSE = new LiteFlowTokenType("ELSE");
   IElementType LITEFLOW_LESS = new LiteFlowTokenType("<");
@@ -225,6 +227,9 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_BREAK_EXPRESS) {
         return new LiteFlowLiteFlowBreakExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_CATCH_EXPRESS) {
+        return new LiteFlowLiteFlowCatchExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_CONDITION_EXPRESS) {
         return new LiteFlowLiteFlowConditionExpressImpl(node);

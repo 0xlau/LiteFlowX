@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface LiteFlowLiteFlowConditionExpress extends PsiElement {
 
   @Nullable
+  LiteFlowLiteFlowCatchExpress getLiteFlowCatchExpress();
+
+  @Nullable
   LiteFlowLiteFlowFinallyExpress getLiteFlowFinallyExpress();
 
   @Nullable

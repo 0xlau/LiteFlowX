@@ -1,15 +1,15 @@
 // This is a generated file. Not intended for manual editing.
 package top.xystudio.plugin.idea.liteflowx.system.language.parse;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import com.intellij.lang.PsiParser;
-import com.intellij.psi.tree.IElementType;
-
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTypes.*;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.lang.PsiParser;
+import com.intellij.lang.LightPsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class LiteFlowParser implements PsiParser, LightPsiParser {
@@ -713,7 +713,41 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress) {block_comment | line_comment}*
+  // LCATCH PAREN_LEFT liteFlowAllExpress PAREN_RIGHT [DOT liteFlowDoExpress]
+  public static boolean liteFlowCatchExpress(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowCatchExpress")) return false;
+    if (!nextTokenIs(b, LITEFLOW_LCATCH)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, LITEFLOW_LITE_FLOW_CATCH_EXPRESS, null);
+    r = consumeTokens(b, 1, LITEFLOW_LCATCH, LITEFLOW_PAREN_LEFT);
+    p = r; // pin = 1
+    r = r && report_error_(b, liteFlowAllExpress(b, l + 1));
+    r = p && report_error_(b, consumeToken(b, LITEFLOW_PAREN_RIGHT)) && r;
+    r = p && liteFlowCatchExpress_4(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // [DOT liteFlowDoExpress]
+  private static boolean liteFlowCatchExpress_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowCatchExpress_4")) return false;
+    liteFlowCatchExpress_4_0(b, l + 1);
+    return true;
+  }
+
+  // DOT liteFlowDoExpress
+  private static boolean liteFlowCatchExpress_4_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowCatchExpress_4_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LITEFLOW_DOT);
+    r = r && liteFlowDoExpress(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {block_comment | line_comment}*
   public static boolean liteFlowConditionExpress(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress")) return false;
     boolean r;
@@ -745,7 +779,7 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress
+  // liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress
   private static boolean liteFlowConditionExpress_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowConditionExpress_1")) return false;
     boolean r;
@@ -759,6 +793,7 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
     if (!r) r = liteFlowForExpress(b, l + 1);
     if (!r) r = liteFlowIteratorExpress(b, l + 1);
     if (!r) r = liteFlowWhileExpress(b, l + 1);
+    if (!r) r = liteFlowCatchExpress(b, l + 1);
     return r;
   }
 

@@ -120,6 +120,7 @@
     SWITCH = "SWITCH"
     PRE = "PRE"
     FINALLY = "FINALLY"
+    LCATCH = "CATCH"
     LIF = "IF"
     LELIF = "ELIF"
     LELSE = "ELSE"
@@ -240,7 +241,7 @@ liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlo
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress) {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT liteFlowNodeRefExpress COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -267,6 +268,9 @@ liteFlowWhenSubExpress ::= DOT (liteFlowIdExpress | liteFlowIgnoreErrorExpress |
 // LiteFlow SWITCH() 表达式
 liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT (liteFlowToExpress | liteFlowDefaultExpress) [ liteFlowSwitchSubExpress ] {pin=1}
 liteFlowSwitchSubExpress ::= DOT liteFlowIdExpress {pin=1}
+
+// LiteFlow CATCH() 表达式
+liteFlowCatchExpress ::= LCATCH PAREN_LEFT liteFlowAllExpress PAREN_RIGHT [DOT liteFlowDoExpress] {pin = 1}
 
 // liteFlow FOR() 表达式
 liteFlowForExpress ::= LFOR PAREN_LEFT (number | liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowForSubExpress] {pin = 1}

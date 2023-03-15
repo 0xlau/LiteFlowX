@@ -79,6 +79,10 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowCatchExpress(@NotNull LiteFlowLiteFlowCatchExpress o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowConditionExpress(@NotNull LiteFlowLiteFlowConditionExpress o) {
     visitPsiElement(o);
   }

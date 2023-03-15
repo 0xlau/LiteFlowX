@@ -69,6 +69,7 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("BREAK").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("DEFAULT").withInsertHandler(parenHandler));
                     }else{
+                        resultSet.addElement(LookupElementBuilder.create("CATCH").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("IF").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("WHEN").withInsertHandler(parenHandler));
