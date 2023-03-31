@@ -11,6 +11,9 @@ public interface LiteFlowLiteFlowIf2ElifExpress extends PsiElement {
   LiteFlowLiteFlowAllExpress getLiteFlowAllExpress();
 
   @Nullable
+  LiteFlowLiteFlowAllLogicExpress getLiteFlowAllLogicExpress();
+
+  @Nullable
   LiteFlowLiteFlowIf2ElifSubExpress getLiteFlowIf2ElifSubExpress();
 
   @Nullable
