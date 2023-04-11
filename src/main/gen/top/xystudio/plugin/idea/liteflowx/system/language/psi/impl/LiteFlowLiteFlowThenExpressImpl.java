@@ -33,10 +33,4 @@ public class LiteFlowLiteFlowThenExpressImpl extends ASTWrapperPsiElement implem
     return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowAllExpress.class);
   }
 
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowThenSubExpress getLiteFlowThenSubExpress() {
-    return findChildByClass(LiteFlowLiteFlowThenSubExpress.class);
-  }
-
 }

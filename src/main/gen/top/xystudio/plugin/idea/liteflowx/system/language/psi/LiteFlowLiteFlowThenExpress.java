@@ -10,7 +10,4 @@ public interface LiteFlowLiteFlowThenExpress extends PsiElement {
   @NotNull
   List<LiteFlowLiteFlowAllExpress> getLiteFlowAllExpressList();
 
-  @Nullable
-  LiteFlowLiteFlowThenSubExpress getLiteFlowThenSubExpress();
-
 }

@@ -40,11 +40,9 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELIF_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELIF_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELIF_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_ELSE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELSE_EXPRESS");
-  IElementType LITEFLOW_LITE_FLOW_IF_2_ELSE_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_ELSE_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_2_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_2_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IF_3_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_EXPRESS");
-  IElementType LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ITERATOR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ITERATOR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS");
@@ -59,10 +57,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_SWITCH_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SWITCH_EXPRESS");
-  IElementType LITEFLOW_LITE_FLOW_SWITCH_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SWITCH_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_TAG_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_TAG_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_THEN_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_THEN_EXPRESS");
-  IElementType LITEFLOW_LITE_FLOW_THEN_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_THEN_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_THREAD_POOL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_THREAD_POOL_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_TO_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_TO_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_WHEN_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_WHEN_EXPRESS");
@@ -278,9 +274,6 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_IF_2_ELSE_EXPRESS) {
         return new LiteFlowLiteFlowIf2ElseExpressImpl(node);
       }
-      else if (type == LITEFLOW_LITE_FLOW_IF_2_ELSE_SUB_EXPRESS) {
-        return new LiteFlowLiteFlowIf2ElseSubExpressImpl(node);
-      }
       else if (type == LITEFLOW_LITE_FLOW_IF_2_EXPRESS) {
         return new LiteFlowLiteFlowIf2ExpressImpl(node);
       }
@@ -289,9 +282,6 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_IF_3_EXPRESS) {
         return new LiteFlowLiteFlowIf3ExpressImpl(node);
-      }
-      else if (type == LITEFLOW_LITE_FLOW_IF_3_SUB_EXPRESS) {
-        return new LiteFlowLiteFlowIf3SubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_IGNORE_ERROR_EXPRESS) {
         return new LiteFlowLiteFlowIgnoreErrorExpressImpl(node);
@@ -335,17 +325,11 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_SWITCH_EXPRESS) {
         return new LiteFlowLiteFlowSwitchExpressImpl(node);
       }
-      else if (type == LITEFLOW_LITE_FLOW_SWITCH_SUB_EXPRESS) {
-        return new LiteFlowLiteFlowSwitchSubExpressImpl(node);
-      }
       else if (type == LITEFLOW_LITE_FLOW_TAG_EXPRESS) {
         return new LiteFlowLiteFlowTagExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_THEN_EXPRESS) {
         return new LiteFlowLiteFlowThenExpressImpl(node);
-      }
-      else if (type == LITEFLOW_LITE_FLOW_THEN_SUB_EXPRESS) {
-        return new LiteFlowLiteFlowThenSubExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_THREAD_POOL_EXPRESS) {
         return new LiteFlowLiteFlowThreadPoolExpressImpl(node);

@@ -14,9 +14,6 @@ public interface LiteFlowLiteFlowIf3Express extends PsiElement {
   LiteFlowLiteFlowAllLogicExpress getLiteFlowAllLogicExpress();
 
   @Nullable
-  LiteFlowLiteFlowIf3SubExpress getLiteFlowIf3SubExpress();
-
-  @Nullable
   LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
 }

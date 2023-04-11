@@ -10,7 +10,4 @@ public interface LiteFlowLiteFlowIf2ElseExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowAllExpress getLiteFlowAllExpress();
 
-  @Nullable
-  LiteFlowLiteFlowIf2ElseSubExpress getLiteFlowIf2ElseSubExpress();
-
 }

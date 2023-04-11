@@ -41,12 +41,6 @@ public class LiteFlowLiteFlowIf3ExpressImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
-  public LiteFlowLiteFlowIf3SubExpress getLiteFlowIf3SubExpress() {
-    return findChildByClass(LiteFlowLiteFlowIf3SubExpress.class);
-  }
-
-  @Override
-  @Nullable
   public LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress() {
     return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
   }

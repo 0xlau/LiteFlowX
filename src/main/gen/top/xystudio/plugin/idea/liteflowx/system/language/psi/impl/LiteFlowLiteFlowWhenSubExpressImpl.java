@@ -35,12 +35,6 @@ public class LiteFlowLiteFlowWhenSubExpressImpl extends ASTWrapperPsiElement imp
 
   @Override
   @Nullable
-  public LiteFlowLiteFlowIdExpress getLiteFlowIdExpress() {
-    return findChildByClass(LiteFlowLiteFlowIdExpress.class);
-  }
-
-  @Override
-  @Nullable
   public LiteFlowLiteFlowIgnoreErrorExpress getLiteFlowIgnoreErrorExpress() {
     return findChildByClass(LiteFlowLiteFlowIgnoreErrorExpress.class);
   }

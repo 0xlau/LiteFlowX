@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface LiteFlowLiteFlowWhileExpress extends PsiElement {
 
   @Nullable
+  LiteFlowLiteFlowAllLogicExpress getLiteFlowAllLogicExpress();
+
+  @Nullable
   LiteFlowLiteFlowDoExpress getLiteFlowDoExpress();
 
   @Nullable

@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface LiteFlowLiteFlowIf2ElifSubExpress extends PsiElement {
 
   @Nullable
-  LiteFlowLiteFlowIdExpress getLiteFlowIdExpress();
-
-  @Nullable
   LiteFlowLiteFlowIf2ElifExpress getLiteFlowIf2ElifExpress();
 
   @Nullable

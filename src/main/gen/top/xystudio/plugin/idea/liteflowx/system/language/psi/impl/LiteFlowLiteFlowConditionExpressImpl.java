@@ -46,6 +46,12 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
   }
 
   @Override
+  @NotNull
+  public List<LiteFlowLiteFlowIdExpress> getLiteFlowIdExpressList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowIdExpress.class);
+  }
+
+  @Override
   @Nullable
   public LiteFlowLiteFlowIf2Express getLiteFlowIf2Express() {
     return findChildByClass(LiteFlowLiteFlowIf2Express.class);
@@ -73,6 +79,12 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
   @Nullable
   public LiteFlowLiteFlowSwitchExpress getLiteFlowSwitchExpress() {
     return findChildByClass(LiteFlowLiteFlowSwitchExpress.class);
+  }
+
+  @Override
+  @NotNull
+  public List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowTagExpress.class);
   }
 
   @Override

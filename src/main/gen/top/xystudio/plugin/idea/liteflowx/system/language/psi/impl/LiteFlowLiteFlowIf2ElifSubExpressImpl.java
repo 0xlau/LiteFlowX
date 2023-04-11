@@ -29,12 +29,6 @@ public class LiteFlowLiteFlowIf2ElifSubExpressImpl extends ASTWrapperPsiElement 
 
   @Override
   @Nullable
-  public LiteFlowLiteFlowIdExpress getLiteFlowIdExpress() {
-    return findChildByClass(LiteFlowLiteFlowIdExpress.class);
-  }
-
-  @Override
-  @Nullable
   public LiteFlowLiteFlowIf2ElifExpress getLiteFlowIf2ElifExpress() {
     return findChildByClass(LiteFlowLiteFlowIf2ElifExpress.class);
   }

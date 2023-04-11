@@ -33,10 +33,4 @@ public class LiteFlowLiteFlowIf2ElseExpressImpl extends ASTWrapperPsiElement imp
     return findChildByClass(LiteFlowLiteFlowAllExpress.class);
   }
 
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowIf2ElseSubExpress getLiteFlowIf2ElseSubExpress() {
-    return findChildByClass(LiteFlowLiteFlowIf2ElseSubExpress.class);
-  }
-
 }

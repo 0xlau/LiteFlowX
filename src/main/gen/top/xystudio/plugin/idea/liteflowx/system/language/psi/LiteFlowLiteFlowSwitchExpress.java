@@ -14,9 +14,6 @@ public interface LiteFlowLiteFlowSwitchExpress extends PsiElement {
   LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
   @Nullable
-  LiteFlowLiteFlowSwitchSubExpress getLiteFlowSwitchSubExpress();
-
-  @Nullable
   LiteFlowLiteFlowToExpress getLiteFlowToExpress();
 
 }

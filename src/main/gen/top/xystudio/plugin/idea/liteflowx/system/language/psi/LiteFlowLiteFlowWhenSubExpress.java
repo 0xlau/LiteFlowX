@@ -11,9 +11,6 @@ public interface LiteFlowLiteFlowWhenSubExpress extends PsiElement {
   LiteFlowLiteFlowAnyExpress getLiteFlowAnyExpress();
 
   @Nullable
-  LiteFlowLiteFlowIdExpress getLiteFlowIdExpress();
-
-  @Nullable
   LiteFlowLiteFlowIgnoreErrorExpress getLiteFlowIgnoreErrorExpress();
 
   @Nullable

@@ -250,21 +250,19 @@ liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlo
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress)}* {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
-liteFlowIf2SubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress | liteFlowIdExpress ) {pin=1}
+liteFlowIf2SubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress ) {pin=1}
 
 liteFlowIf2ElifExpress ::= LELIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2ElifSubExpress] {pin=1}
-liteFlowIf2ElifSubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress | liteFlowIdExpress ) {pin=1}
+liteFlowIf2ElifSubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress ) {pin=1}
 
-liteFlowIf2ElseExpress ::= LELSE PAREN_LEFT liteFlowAllExpress PAREN_RIGHT [liteFlowIf2ElseSubExpress] {pin=1}
-liteFlowIf2ElseSubExpress ::= DOT (liteFlowIdExpress) {pin=1}
+liteFlowIf2ElseExpress ::= LELSE PAREN_LEFT liteFlowAllExpress PAREN_RIGHT {pin=1}
 
 // LiteFlow IF(_1, _2, _3) 表达式
-liteFlowIf3Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf3SubExpress] {pin=1}
-liteFlowIf3SubExpress ::= DOT liteFlowIdExpress {pin=1}
+liteFlowIf3Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress COMMA liteFlowAllExpress PAREN_RIGHT {pin=1}
 
 // LiteFlow AND() 表达式
 liteFlowAndExpress ::= LAND PAREN_LEFT liteFlowLogicExpress COMMA liteFlowLogicExpress {COMMA liteFlowLogicExpress}* PAREN_RIGHT {pin=1}
@@ -276,16 +274,14 @@ liteFlowOrExpress ::= LOR PAREN_LEFT liteFlowLogicExpress COMMA liteFlowLogicExp
 liteFlowNotExpress ::= LNOT PAREN_LEFT liteFlowLogicExpress PAREN_RIGHT {pin=1}
 
 // LiteFlow THEN() 表达式
-liteFlowThenExpress ::= THEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT [liteFlowThenSubExpress] {pin=1}
-liteFlowThenSubExpress ::= DOT liteFlowIdExpress {pin=1}
+liteFlowThenExpress ::= THEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT {pin=1}
 
 // LiteFlow WHEN() 表达式
 liteFlowWhenExpress ::= WHEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT { liteFlowWhenSubExpress }* {pin=1}
-liteFlowWhenSubExpress ::= DOT (liteFlowIdExpress | liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress) {pin=1}
+liteFlowWhenSubExpress ::= DOT (liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress)
 
 // LiteFlow SWITCH() 表达式
-liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT (liteFlowToExpress | liteFlowDefaultExpress) [ liteFlowSwitchSubExpress ] {pin=1}
-liteFlowSwitchSubExpress ::= DOT liteFlowIdExpress {pin=1}
+liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT (liteFlowToExpress | liteFlowDefaultExpress) {pin=1}
 
 // LiteFlow CATCH() 表达式
 liteFlowCatchExpress ::= LCATCH PAREN_LEFT liteFlowAllExpress PAREN_RIGHT [DOT liteFlowDoExpress] {pin = 1}
@@ -299,7 +295,7 @@ liteFlowIteratorExpress ::= LITERATOR PAREN_LEFT (liteFlowNodeRefExpress) PAREN_
 liteFlowIteratorSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
 
 // liteFlow WHILE() 表达式
-liteFlowWhileExpress ::= LWHILE PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT liteFlowDoExpress [liteFlowWhileSubExpress] {pin = 1}
+liteFlowWhileExpress ::= LWHILE PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowWhileSubExpress] {pin = 1}
 liteFlowWhileSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
 
 // LiteFlow PRE() 表达式

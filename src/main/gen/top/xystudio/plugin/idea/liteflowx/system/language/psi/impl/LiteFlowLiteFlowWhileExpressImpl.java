@@ -29,6 +29,12 @@ public class LiteFlowLiteFlowWhileExpressImpl extends ASTWrapperPsiElement imple
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowAllLogicExpress getLiteFlowAllLogicExpress() {
+    return findChildByClass(LiteFlowLiteFlowAllLogicExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowDoExpress getLiteFlowDoExpress() {
     return findChildByClass(LiteFlowLiteFlowDoExpress.class);
   }
