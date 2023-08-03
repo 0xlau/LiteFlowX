@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface LiteFlowLiteFlowForSubExpress extends PsiElement {
 
-  @Nullable
+  @NotNull
   LiteFlowLiteFlowBreakExpress getLiteFlowBreakExpress();
 
 }

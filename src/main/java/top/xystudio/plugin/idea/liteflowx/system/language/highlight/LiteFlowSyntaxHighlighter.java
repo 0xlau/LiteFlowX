@@ -87,6 +87,8 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_IGNOREERROR)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_ANY)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_THREADPOOL)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_PARALLEL)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_MAXWAITSECONDS)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TAG)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_DATA)

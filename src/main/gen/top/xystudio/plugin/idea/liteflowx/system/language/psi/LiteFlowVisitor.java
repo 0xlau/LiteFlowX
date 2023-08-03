@@ -163,6 +163,10 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowMaxWaitSeconds(@NotNull LiteFlowLiteFlowMaxWaitSeconds o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowNodeRef(@NotNull LiteFlowLiteFlowNodeRef o) {
     visitPsiElement(o);
   }
@@ -188,6 +192,10 @@ public class LiteFlowVisitor extends PsiElementVisitor {
   }
 
   public void visitLiteFlowOrExpress(@NotNull LiteFlowLiteFlowOrExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowParallelExpress(@NotNull LiteFlowLiteFlowParallelExpress o) {
     visitPsiElement(o);
   }
 

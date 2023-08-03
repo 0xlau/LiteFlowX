@@ -10,6 +10,9 @@ public interface LiteFlowLiteFlowNodeStringSubExpress extends PsiElement {
   @NotNull
   List<LiteFlowLiteFlowDataExpress> getLiteFlowDataExpressList();
 
+  @NotNull
+  List<LiteFlowLiteFlowMaxWaitSeconds> getLiteFlowMaxWaitSecondsList();
+
   @Nullable
   LiteFlowLiteFlowNodeStringRef getLiteFlowNodeStringRef();
 

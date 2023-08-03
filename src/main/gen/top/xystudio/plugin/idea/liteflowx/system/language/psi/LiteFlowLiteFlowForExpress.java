@@ -17,6 +17,9 @@ public interface LiteFlowLiteFlowForExpress extends PsiElement {
   LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
   @Nullable
+  LiteFlowLiteFlowParallelExpress getLiteFlowParallelExpress();
+
+  @Nullable
   PsiElement getNumber();
 
 }

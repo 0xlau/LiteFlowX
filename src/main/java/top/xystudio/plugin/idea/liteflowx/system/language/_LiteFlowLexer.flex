@@ -115,6 +115,8 @@ NUMBER=-?(0[xX][0-9a-fA-F]+|[0-9]|[1-9][0-9]*N?M?|[0-9]+(\.[0-9]+)?([Ee][+-]?[0-
   "ignoreError"            { return LITEFLOW_IGNOREERROR; }
   "tag"                    { return LITEFLOW_TAG; }
   "threadPool"             { return LITEFLOW_THREADPOOL; }
+  "maxWaitSeconds"         { return LITEFLOW_MAXWAITSECONDS; }
+  "parallel"               { return LITEFLOW_PARALLEL; }
   "to"                     { return LITEFLOW_TO; }
   "TO"                     { return LITEFLOW_UTO; }
   "data"                   { return LITEFLOW_DATA; }

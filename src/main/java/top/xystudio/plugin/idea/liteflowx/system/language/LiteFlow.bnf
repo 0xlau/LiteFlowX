@@ -135,6 +135,8 @@
     ignoreError = "ignoreError"
     tag = "tag"
     threadPool = "threadPool"
+    maxWaitSeconds = "maxWaitSeconds"
+    parallel = "parallel"
     to = "to"
     UTO = "TO"
     data = "data"
@@ -241,16 +243,16 @@ liteFlowAllLogicExpress ::= liteFlowAndExpress | liteFlowOrExpress | liteFlowNot
 liteFlowLogicExpress ::= liteFlowAllLogicExpress | liteFlowNodeRefExpress
 
 // LiteFlow node("")或NODE("") 子表达式
-liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress)}* {pin=1}
+liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds)}* {pin=1}
 
 // liteFlow Node引用 子表达式
-liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress)}*
+liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds)}*
 
 // LiteFlow Node引用表达式
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowFinallyExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress)}* {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress | liteFlowMaxWaitSeconds)}*) | liteFlowFinallyExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -287,16 +289,16 @@ liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT D
 liteFlowCatchExpress ::= LCATCH PAREN_LEFT liteFlowAllExpress PAREN_RIGHT [DOT liteFlowDoExpress] {pin = 1}
 
 // liteFlow FOR() 表达式
-liteFlowForExpress ::= LFOR PAREN_LEFT (number | liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowForSubExpress] {pin = 1}
-liteFlowForSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
+liteFlowForExpress ::= LFOR PAREN_LEFT (number | liteFlowNodeRefExpress) PAREN_RIGHT [DOT liteFlowParallelExpress] DOT liteFlowDoExpress [liteFlowForSubExpress] {pin = 1}
+liteFlowForSubExpress ::= DOT (liteFlowBreakExpress) {pin=2}
 
 // liteFlow ITERATOR() 表达式
-liteFlowIteratorExpress ::= LITERATOR PAREN_LEFT (liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowIteratorSubExpress] {pin = 1}
-liteFlowIteratorSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
+liteFlowIteratorExpress ::= LITERATOR PAREN_LEFT (liteFlowNodeRefExpress) PAREN_RIGHT [DOT liteFlowParallelExpress] DOT liteFlowDoExpress [liteFlowIteratorSubExpress] {pin = 1}
+liteFlowIteratorSubExpress ::= DOT (liteFlowBreakExpress) {pin=2}
 
 // liteFlow WHILE() 表达式
-liteFlowWhileExpress ::= LWHILE PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) PAREN_RIGHT DOT liteFlowDoExpress [liteFlowWhileSubExpress] {pin = 1}
-liteFlowWhileSubExpress ::= DOT (liteFlowBreakExpress) {pin=1}
+liteFlowWhileExpress ::= LWHILE PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) PAREN_RIGHT [DOT liteFlowParallelExpress] DOT liteFlowDoExpress [liteFlowWhileSubExpress] {pin = 1}
+liteFlowWhileSubExpress ::= DOT (liteFlowBreakExpress) {pin=2}
 
 // LiteFlow PRE() 表达式
 liteFlowPreExpress ::= PRE PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT {pin=1}
@@ -333,6 +335,12 @@ liteFlowTagExpress ::= tag PAREN_LEFT string PAREN_RIGHT {pin=1}
 
 // liteFlow .data() 表达式
 liteFlowDataExpress ::= data PAREN_LEFT (string | elVariableRef) PAREN_RIGHT {pin=1}
+
+// liteFlow .maxWaitSeconds() 表达式
+liteFlowMaxWaitSeconds ::= maxWaitSeconds PAREN_LEFT (number | elVariableRef) PAREN_RIGHT {pin=1}
+
+// liteFlow .parallel() 表达式
+liteFlowParallelExpress ::= parallel PAREN_LEFT boolean PAREN_RIGHT {pin=1}
 
 /** Express End **/
 

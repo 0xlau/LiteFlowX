@@ -28,9 +28,9 @@ public class LiteFlowLiteFlowWhileSubExpressImpl extends ASTWrapperPsiElement im
   }
 
   @Override
-  @Nullable
+  @NotNull
   public LiteFlowLiteFlowBreakExpress getLiteFlowBreakExpress() {
-    return findChildByClass(LiteFlowLiteFlowBreakExpress.class);
+    return findNotNullChildByClass(LiteFlowLiteFlowBreakExpress.class);
   }
 
 }

@@ -34,6 +34,12 @@ public class LiteFlowLiteFlowNodeStringSubExpressImpl extends ASTWrapperPsiEleme
   }
 
   @Override
+  @NotNull
+  public List<LiteFlowLiteFlowMaxWaitSeconds> getLiteFlowMaxWaitSecondsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowMaxWaitSeconds.class);
+  }
+
+  @Override
   @Nullable
   public LiteFlowLiteFlowNodeStringRef getLiteFlowNodeStringRef() {
     return findChildByClass(LiteFlowLiteFlowNodeStringRef.class);

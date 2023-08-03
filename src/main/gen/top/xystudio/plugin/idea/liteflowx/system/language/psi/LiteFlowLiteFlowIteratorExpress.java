@@ -16,4 +16,7 @@ public interface LiteFlowLiteFlowIteratorExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
+  @Nullable
+  LiteFlowLiteFlowParallelExpress getLiteFlowParallelExpress();
+
 }

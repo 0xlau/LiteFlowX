@@ -45,4 +45,10 @@ public class LiteFlowLiteFlowIteratorExpressImpl extends ASTWrapperPsiElement im
     return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
   }
 
+  @Override
+  @Nullable
+  public LiteFlowLiteFlowParallelExpress getLiteFlowParallelExpress() {
+    return findChildByClass(LiteFlowLiteFlowParallelExpress.class);
+  }
+
 }

@@ -28,6 +28,9 @@ public interface LiteFlowLiteFlowConditionExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowIteratorExpress getLiteFlowIteratorExpress();
 
+  @NotNull
+  List<LiteFlowLiteFlowMaxWaitSeconds> getLiteFlowMaxWaitSecondsList();
+
   @Nullable
   LiteFlowLiteFlowPreExpress getLiteFlowPreExpress();
 

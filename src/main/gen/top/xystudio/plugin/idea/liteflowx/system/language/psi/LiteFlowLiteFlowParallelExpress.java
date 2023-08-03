@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowLiteFlowIteratorSubExpress extends PsiElement {
+public interface LiteFlowLiteFlowParallelExpress extends PsiElement {
 
-  @NotNull
-  LiteFlowLiteFlowBreakExpress getLiteFlowBreakExpress();
+  @Nullable
+  LiteFlowBoolean getBoolean();
 
 }

@@ -11,14 +11,14 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
-public class LiteFlowLiteFlowForExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowForExpress {
+public class LiteFlowLiteFlowMaxWaitSecondsImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowMaxWaitSeconds {
 
-  public LiteFlowLiteFlowForExpressImpl(@NotNull ASTNode node) {
+  public LiteFlowLiteFlowMaxWaitSecondsImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiteFlowVisitor visitor) {
-    visitor.visitLiteFlowForExpress(this);
+    visitor.visitLiteFlowMaxWaitSeconds(this);
   }
 
   @Override
@@ -29,26 +29,8 @@ public class LiteFlowLiteFlowForExpressImpl extends ASTWrapperPsiElement impleme
 
   @Override
   @Nullable
-  public LiteFlowLiteFlowDoExpress getLiteFlowDoExpress() {
-    return findChildByClass(LiteFlowLiteFlowDoExpress.class);
-  }
-
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowForSubExpress getLiteFlowForSubExpress() {
-    return findChildByClass(LiteFlowLiteFlowForSubExpress.class);
-  }
-
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress() {
-    return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
-  }
-
-  @Override
-  @Nullable
-  public LiteFlowLiteFlowParallelExpress getLiteFlowParallelExpress() {
-    return findChildByClass(LiteFlowLiteFlowParallelExpress.class);
+  public LiteFlowElVariableRef getElVariableRef() {
+    return findChildByClass(LiteFlowElVariableRef.class);
   }
 
   @Override

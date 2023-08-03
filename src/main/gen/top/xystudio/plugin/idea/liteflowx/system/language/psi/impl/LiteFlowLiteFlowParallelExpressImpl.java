@@ -11,14 +11,14 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
-public class LiteFlowLiteFlowIteratorSubExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowIteratorSubExpress {
+public class LiteFlowLiteFlowParallelExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowParallelExpress {
 
-  public LiteFlowLiteFlowIteratorSubExpressImpl(@NotNull ASTNode node) {
+  public LiteFlowLiteFlowParallelExpressImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiteFlowVisitor visitor) {
-    visitor.visitLiteFlowIteratorSubExpress(this);
+    visitor.visitLiteFlowParallelExpress(this);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class LiteFlowLiteFlowIteratorSubExpressImpl extends ASTWrapperPsiElement
   }
 
   @Override
-  @NotNull
-  public LiteFlowLiteFlowBreakExpress getLiteFlowBreakExpress() {
-    return findNotNullChildByClass(LiteFlowLiteFlowBreakExpress.class);
+  @Nullable
+  public LiteFlowBoolean getBoolean() {
+    return findChildByClass(LiteFlowBoolean.class);
   }
 
 }
