@@ -125,10 +125,10 @@
 
         <!-- 文件图标提供 -->
         <iconProvider id="liteflowx.FileIconProvider"
-                implementation="top.xystudio.plugin.idea.liteflowx.system.provider.FileIconProvider"></iconProvider>
+                      implementation="top.xystudio.plugin.idea.liteflowx.system.provider.FileIconProvider"/>
 
         <!-- 结构工具窗口 -->
-        <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="true"
+        <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="false"
                 factoryClass="top.xystudio.plugin.idea.liteflowx.system.toolWindow.LiteFlowToolWindowFactory"/>
         
     </extensions>

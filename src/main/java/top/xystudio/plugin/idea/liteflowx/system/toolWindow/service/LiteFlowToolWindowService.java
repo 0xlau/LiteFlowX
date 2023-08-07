@@ -1,5 +1,6 @@
 package top.xystudio.plugin.idea.liteflowx.system.toolWindow.service;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -12,7 +13,7 @@ import javax.swing.*;
 public interface LiteFlowToolWindowService {
 
     static LiteFlowToolWindowService getInstance(@NotNull Project project) {
-        return ServiceManager.getService(project, LiteFlowToolWindowService.class);
+        return project.getService(LiteFlowToolWindowService.class);
     }
 
     /**
@@ -27,7 +28,7 @@ public interface LiteFlowToolWindowService {
      * @param toolWindow toolWindow
      */
     default void init(@NotNull ToolWindow toolWindow) {
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+        ContentFactory contentFactory = ApplicationManager.getApplication().getService(ContentFactory.class);
         Content content = contentFactory.createContent(getContent(), "", false);
         toolWindow.getContentManager().addContent(content);
     }
