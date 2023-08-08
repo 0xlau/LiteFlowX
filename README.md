@@ -76,3 +76,9 @@ For full details of install plugins, <a href="https://www.jetbrains.com/help/ide
 
 ### LiteFlow ToolBox
 ![LiteFlow 工具箱](https://liteflow.yomahub.com/img/liteflowx/toolbox.gif)
+
+## Thanks for free JetBrains Open Source license
+
+<a href="https://www.jetbrains.com/?from=LiteFlowX" target="_blank">
+<img src="https://user-images.githubusercontent.com/1787798/69898077-4f4e3d00-138f-11ea-81f9-96fb7c49da89.png" height="200"/>
+</a>
