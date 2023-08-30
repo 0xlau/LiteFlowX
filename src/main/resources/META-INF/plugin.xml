@@ -25,11 +25,6 @@
                 language="JAVA"
                 implementationClass="top.xystudio.plugin.idea.liteflowx.annotator.LiteFlowMethodUsageAnnotator"
         />
-        <!-- LiteFlow @LiteFlowMethod NodeId重复检测（！暂停使用！） -->
-<!--        <annotator-->
-<!--                language="JAVA"-->
-<!--                implementationClass="top.xystudio.plugin.idea.liteflowx.system.annotator.LiteFlowMethodNodeIdExistAnnotator"-->
-<!--        />-->
 
         <!-- LiteFlow @LiteFlowCmpDefine用法检测 -->
         <annotator

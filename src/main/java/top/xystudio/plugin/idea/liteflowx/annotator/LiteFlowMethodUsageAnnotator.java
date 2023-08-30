@@ -13,10 +13,13 @@ import top.xystudio.plugin.idea.liteflowx.common.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.common.constant.LiteFlowMethodEnum;
 import top.xystudio.plugin.idea.liteflowx.common.constant.NodeTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.service.JavaService;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowNodeService;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 
+import java.util.Objects;
+
 /**
- * 检测@LiteFlowMethod的NodeType和MethodEnum搭配形式
+ * 检测 @LiteFlowMethod 的 NodeTypeEnum 和 LiteFlowMethodEnum 搭配形式
  */
 public class LiteFlowMethodUsageAnnotator implements Annotator {
 
@@ -24,14 +27,15 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         Project project = element.getProject();
         JavaService javaService = project.getService(JavaService.class);
-        LiteFlowService liteFlowService = LiteFlowService.getInstance(project);
-        if (element instanceof PsiMethod && ((PsiMethod) element).hasAnnotation(Annotation.LiteflowMethod)){
-            if (!liteFlowService.isLiteFlowComponent(element)){
+        LiteFlowNodeService liteFlowNodeService = project.getService(LiteFlowNodeService.class);
+        if (element instanceof PsiMethod psiMethod && psiMethod.hasAnnotation(Annotation.LiteflowMethod)){
+            if (liteFlowNodeService.getLiteFlowNodeMetadata(psiMethod) == null){
                 return;
             }
-            String value = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "value");
-            String nodeType = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "nodeType");
-            if (ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, value)){
+            String value = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "value");
+            String nodeType = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "nodeType");
+            if (value == null || nodeType == null) return;
+            if (LiteFlowMethodEnum.isNecessaryProcess(value) && NodeTypeEnum.isStandardNodeType(nodeType)){
                 if (value.contains(LiteFlowMethodEnum.PROCESS) && nodeType.contains(NodeTypeEnum.COMMON)){
                     return;
                 }
@@ -53,8 +57,8 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
                 if (value.contains(LiteFlowMethodEnum.PROCESS_SWITCH) && nodeType.contains(NodeTypeEnum.SWITCH)){
                     return;
                 }
-                holder.newAnnotation(HighlightSeverity.WARNING, "LiteFlowMethodEnum 与 nodeType 不是最佳的搭配形式")
-                        .range(((PsiMethod) element).getAnnotation(Annotation.LiteflowMethod).getTextRange())
+                holder.newAnnotation(HighlightSeverity.WARNING, "LiteFlowMethodEnum and NodeTypeEnum are not the best combination.")
+                        .range(Objects.requireNonNull(psiMethod.getAnnotation(Annotation.LiteflowMethod)).getTextRange())
                         .highlightType(ProblemHighlightType.WARNING)
                         .create();
             }
