@@ -32,25 +32,25 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
             String value = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "value");
             String nodeType = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "nodeType");
             if (ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, value)){
-                if (value.equals(LiteFlowMethodEnum.PROCESS) && nodeType.equals(NodeTypeEnum.COMMON)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS) && nodeType.contains(NodeTypeEnum.COMMON)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_BREAK) && nodeType.equals(NodeTypeEnum.BREAK)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_BREAK) && nodeType.contains(NodeTypeEnum.BREAK)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_FOR) && nodeType.equals(NodeTypeEnum.FOR)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_FOR) && nodeType.contains(NodeTypeEnum.FOR)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_ITERATOR) && nodeType.equals(NodeTypeEnum.ITERATOR)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_ITERATOR) && nodeType.contains(NodeTypeEnum.ITERATOR)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_IF) && nodeType.equals(NodeTypeEnum.IF)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_IF) && nodeType.contains(NodeTypeEnum.IF)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_WHILE) && nodeType.equals(NodeTypeEnum.WHILE)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_WHILE) && nodeType.contains(NodeTypeEnum.WHILE)){
                     return;
                 }
-                if (value.equals(LiteFlowMethodEnum.PROCESS_SWITCH) && nodeType.equals(NodeTypeEnum.SWITCH)){
+                if (value.contains(LiteFlowMethodEnum.PROCESS_SWITCH) && nodeType.contains(NodeTypeEnum.SWITCH)){
                     return;
                 }
                 holder.newAnnotation(HighlightSeverity.WARNING, "LiteFlowMethodEnum 与 nodeType 不是最佳的搭配形式")

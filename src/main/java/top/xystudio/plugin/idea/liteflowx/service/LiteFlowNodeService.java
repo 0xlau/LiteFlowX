@@ -49,6 +49,8 @@ public final class LiteFlowNodeService {
 
     private final DomService domService;
 
+    private Future<?> currentReIndexExecution;
+
     public LiteFlowNodeService(@NotNull Project project){
         this.nodeSearchIndex = new PatriciaTrie<>();
         this.project = project;
@@ -76,8 +78,15 @@ public final class LiteFlowNodeService {
      */
     public void reIndex(){
 
-        clearSearchIndex();
-        index();
+        if (currentReIndexExecution != null && !currentReIndexExecution.isDone()){
+            currentReIndexExecution.cancel(false);
+        }
+        currentReIndexExecution = ApplicationManager.getApplication().executeOnPooledThread(() -> {
+            DumbService.getInstance(this.project).runWhenSmart(() -> {
+                this.clearSearchIndex();
+                this.index();
+            });
+        });
 
     }
 
@@ -231,7 +240,7 @@ public final class LiteFlowNodeService {
             return null;
         }
         for (String nodeType : NodeTypeEnum.StandardNodeType) {
-            if (StringUtil.equals(realNodeType, nodeType)){
+            if (realNodeType.contains(nodeType)){
                 metadata.setNodeType(LiteFlowNodeTypeEnum.getByNodeType(nodeType));
                 metadata.setId(this.getLiteFlowComponentId(targetClass));
                 metadata.setScript(false);
@@ -271,10 +280,11 @@ public final class LiteFlowNodeService {
             }
         }
         // 如果 @LiteflowMethod 的 value 值不在 NECESSARY_PROCESS 里面，则判断为不是声明式方法组件
+        boolean found = false;
         String liteFlowMethod = javaService.getAnnotationAttributeValue(targetMethod, Annotation.LiteflowMethod, "value");
-        if (!ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, liteFlowMethod)){
-            return null;
-        }
+        if (liteFlowMethod == null) return null;
+        if (!LiteFlowMethodEnum.isNecessaryProcess(liteFlowMethod)) return null;
+
         // 如果 @LiteflowMethod 的 nodeId 值是空，则判断为不是声明式方法组件
         String nodeId = javaService.getAnnotationAttributeValue(targetMethod, Annotation.LiteflowMethod, "nodeId");
         if (StringUtil.isEmpty(nodeId)){

@@ -30,10 +30,11 @@ public class LiteFlowNodeReIndexEvent implements ProjectActivity {
     @Nullable
     @Override
     public Object execute(@NotNull Project project, @NotNull Continuation<? super Unit> continuation) {
-        ApplicationManager.getApplication().getMessageBus().connect().subscribe(DumbService.DUMB_MODE, new DumbService.DumbModeListener() {
+        ApplicationManager.getApplication().getMessageBus().connect().subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
             @Override
-            public void exitDumbMode() {
-                DumbService.DumbModeListener.super.exitDumbMode();
+            public void selectionChanged(@NotNull FileEditorManagerEvent event) {
+                LiteFlowNodeService nodeService = project.getService(LiteFlowNodeService.class);
+                nodeService.reIndex();
             }
         });
         return null;
