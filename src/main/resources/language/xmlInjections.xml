@@ -35,4 +35,13 @@
                     .inVirtualFile(virtualFile().withName(string().contains(".xml")))
             ]]></place>
     </injection>
+
+    <injection language="JAVA" injector-id="xml">
+        <display-name>NodeScript (XmlTag in Java)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "java")
+                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
 </component>
