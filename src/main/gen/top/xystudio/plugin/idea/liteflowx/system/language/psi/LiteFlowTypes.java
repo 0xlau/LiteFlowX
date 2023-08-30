@@ -4,6 +4,8 @@ package top.xystudio.plugin.idea.liteflowx.system.language.psi;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import top.xystudio.plugin.idea.liteflowx.language.psi.LiteFlowElementType;
+import top.xystudio.plugin.idea.liteflowx.language.psi.LiteFlowTokenType;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.impl.*;
 
 public interface LiteFlowTypes {

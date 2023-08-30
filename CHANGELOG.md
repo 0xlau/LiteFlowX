@@ -21,7 +21,7 @@
 
 ## [1.1.5] - 2023-02-01
 - 修复 ITERATOR 关键字组件图标无法正常显示问题
-- 修复 .el.xml 文件中 chain 标签无法识别 id 属性问题
+- 修复 .el.xml 文件中 domChain 标签无法识别 id 属性问题
 
 ## [1.1.4] - 2023-01-18
 - 新增 #I6AY1G 对 ITERATOR 关键字的支持
@@ -168,7 +168,7 @@
 
 ## [0.0.1-alpha] - 2022-05-12
 ### Added
-- Identify components, nodes and chains.
+- Identify components, domNodes and chains.
 - Component and XmlTag can jump back and forth.
 - Component and JsonObject can jump back and forth.
 - Smart Prompts and AutoComplete

@@ -6,8 +6,8 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomChain;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomFlow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +23,13 @@ public class findChainsImpl implements BiFunction<Project, String, List<? extend
         if (name == null || name.equals("")){
             return result;
         }
-        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, project, GlobalSearchScope.allScope(project));
-        for (DomFileElement<Flow> flow : flows) {
-            for (Chain chain : flow.getRootElement().getChains()) {
-                if (chain.getId().getStringValue() != null && chain.getId().getStringValue().equals(name)){
-                    result.add(chain.getXmlTag());
-                }else if (chain.getName().getStringValue() != null && chain.getName().getStringValue().equals(name)){
-                    result.add(chain.getXmlTag());
+        List<DomFileElement<DomFlow>> flows = DomService.getInstance().getFileElements(DomFlow.class, project, GlobalSearchScope.allScope(project));
+        for (DomFileElement<DomFlow> flow : flows) {
+            for (DomChain domChain : flow.getRootElement().getChains()) {
+                if (domChain.getId().getStringValue() != null && domChain.getId().getStringValue().equals(name)){
+                    result.add(domChain.getXmlTag());
+                }else if (domChain.getName().getStringValue() != null && domChain.getName().getStringValue().equals(name)){
+                    result.add(domChain.getXmlTag());
                 }
             }
         }

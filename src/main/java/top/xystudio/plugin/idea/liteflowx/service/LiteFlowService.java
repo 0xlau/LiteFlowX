@@ -12,16 +12,16 @@ import com.intellij.util.xml.DomFileElement;
 import com.intellij.util.xml.DomService;
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
-import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
-import top.xystudio.plugin.idea.liteflowx.constant.Clazz;
-import top.xystudio.plugin.idea.liteflowx.constant.LiteFlowMethodEnum;
-import top.xystudio.plugin.idea.liteflowx.constant.NodeTypeEnum;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Chain;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Flow;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Node;
-import top.xystudio.plugin.idea.liteflowx.dom.modal.Nodes;
-import top.xystudio.plugin.idea.liteflowx.util.StringUtils;
-import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
+import top.xystudio.plugin.idea.liteflowx.common.constant.Annotation;
+import top.xystudio.plugin.idea.liteflowx.common.constant.Clazz;
+import top.xystudio.plugin.idea.liteflowx.common.constant.LiteFlowMethodEnum;
+import top.xystudio.plugin.idea.liteflowx.common.constant.NodeTypeEnum;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomChain;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomFlow;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNode;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNodes;
+import top.xystudio.plugin.idea.liteflowx.common.util.StringUtils;
+import top.xystudio.plugin.idea.liteflowx.common.util.XmlUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class LiteFlowService implements Serializable {
 
     public LiteFlowService(Project project){
         this.project = project;
-        this.javaService = JavaService.getInstance(project);
+        this.javaService = project.getService(JavaService.class);
     }
 
     public static LiteFlowService getInstance(@NotNull Project project){
@@ -51,13 +51,13 @@ public class LiteFlowService implements Serializable {
      */
     public PsiElement[] findAllLiteFlowChain(){
         Collection<PsiElement> result = new ArrayList<>();
-        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
-        for (DomFileElement<Flow> flow : flows) {
-            for (Chain chain : flow.getRootElement().getChains()) {
-                if (chain.getId().getStringValue() != null && StringUtil.isNotEmpty(chain.getId().getStringValue())) {
-                    result.add(chain.getXmlTag());
-                }else if (chain.getName().getStringValue() != null && StringUtil.isNotEmpty(chain.getName().getStringValue())) {
-                    result.add(chain.getXmlTag());
+        List<DomFileElement<DomFlow>> flows = DomService.getInstance().getFileElements(DomFlow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<DomFlow> flow : flows) {
+            for (DomChain domChain : flow.getRootElement().getChains()) {
+                if (domChain.getId().getStringValue() != null && StringUtil.isNotEmpty(domChain.getId().getStringValue())) {
+                    result.add(domChain.getXmlTag());
+                }else if (domChain.getName().getStringValue() != null && StringUtil.isNotEmpty(domChain.getName().getStringValue())) {
+                    result.add(domChain.getXmlTag());
                 }
             }
         }
@@ -76,27 +76,26 @@ public class LiteFlowService implements Serializable {
         Collection<PsiMethod> methodComponents = javaService.getMethodsByAnnotationQualifiedName(Annotation.LiteflowMethod);
 
         // 根据xml文件定义的node也归为Component
-        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
-        for (DomFileElement<Flow> flow : flows) {
-            Nodes nodes = flow.getRootElement().getNodes();
-            for (Node node : nodes.getNodeList()) {
-                String id = node.getId().getStringValue();
+        List<DomFileElement<DomFlow>> flows = DomService.getInstance().getFileElements(DomFlow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<DomFlow> flow : flows) {
+            DomNodes domNodes = flow.getRootElement().getNodes();
+            for (DomNode domNode : domNodes.getNodeList()) {
+                String id = domNode.getId().getStringValue();
                 if (StringUtil.isEmpty(id)) {continue;}
 
-                String type = node.getType().getStringValue();
-                if (ArrayUtils.contains(NodeTypeEnum.SCRIPTS, type)){
-                    result.add(node.getXmlTag());
+                String type = domNode.getType().getStringValue();
+                if (ArrayUtils.contains(NodeTypeEnum.ScriptNodeType, type)){
+                    result.add(domNode.getXmlTag());
                     continue;
                 }
 
-                String clazzValue = node.getClazz().getStringValue();
+                String clazzValue = domNode.getClazz().getStringValue();
                 if (clazzValue == null) {continue;}
                 PsiClass aClass = javaService.getClassByQualifiedName(clazzValue);
                 if (aClass == null) {continue;}
                 result.add(aClass);
             }
         }
-
         result.addAll(springComponents);
         result.addAll(liteFlowComponents);
         result.addAll(methodComponents);
@@ -113,11 +112,11 @@ public class LiteFlowService implements Serializable {
         if (!this.isLiteFlowComponent(xmlTag)){
             return null;
         }
-        Node node = XmlUtils.transformToDomElement(xmlTag, Node.class);
-        if (node == null){
+        DomNode domNode = XmlUtils.transformToDomElement(xmlTag, DomNode.class);
+        if (domNode == null){
             return null;
         }
-        String componentValue = node.getId().getStringValue();
+        String componentValue = domNode.getId().getStringValue();
         if (StringUtil.isEmpty(componentValue)){
             return null;
         }
@@ -180,12 +179,12 @@ public class LiteFlowService implements Serializable {
         }
 
         // 根据xml文件定义的node也归为Component
-        List<DomFileElement<Flow>> flows = DomService.getInstance().getFileElements(Flow.class, this.project, GlobalSearchScope.allScope(this.project));
-        for (DomFileElement<Flow> flow : flows) {
-            Nodes nodes = flow.getRootElement().getNodes();
-            for (Node node : nodes.getNodeList()) {
-                String clazzValue = node.getClazz().getStringValue();
-                String idValue = node.getId().getStringValue();
+        List<DomFileElement<DomFlow>> flows = DomService.getInstance().getFileElements(DomFlow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<DomFlow> flow : flows) {
+            DomNodes domNodes = flow.getRootElement().getNodes();
+            for (DomNode domNode : domNodes.getNodeList()) {
+                String clazzValue = domNode.getClazz().getStringValue();
+                String idValue = domNode.getId().getStringValue();
                 if (psiClass.getQualifiedName()==null || clazzValue == null || idValue==null) {
                     continue;
                 }
@@ -210,7 +209,7 @@ public class LiteFlowService implements Serializable {
             if (psiClass.getText().contains("abstract class")){
                 return false;
             }
-            PsiClass nodeClazz = JavaService.getInstance(project).getClassByQualifiedName(clazz);
+            PsiClass nodeClazz = javaService.getClassByQualifiedName(clazz);
             if (nodeClazz != null && psiClass.isInheritor(nodeClazz, true)){
                 return true;
             }
@@ -252,12 +251,12 @@ public class LiteFlowService implements Serializable {
             return nodeTypeEnum.equals(nodeType);
         } else if (psiElement instanceof XmlTag) {
             // 判断是否脚本组件
-            Node node = XmlUtils.transformToDomElement(psiElement, Node.class);
-            if (node == null){
+            DomNode domNode = XmlUtils.transformToDomElement(psiElement, DomNode.class);
+            if (domNode == null){
                 return false;
             }
-            String id = node.getId().getStringValue();
-            String type = node.getType().getStringValue();
+            String id = domNode.getId().getStringValue();
+            String type = domNode.getType().getStringValue();
             if (type.equals(nodeTypeEnum) && StringUtil.isNotEmpty(id)){
                 return true;
             }

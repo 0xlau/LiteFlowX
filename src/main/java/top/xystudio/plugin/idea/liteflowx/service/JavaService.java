@@ -1,6 +1,9 @@
 package top.xystudio.plugin.idea.liteflowx.service;
 
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
@@ -12,10 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-public class JavaService implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Service(Service.Level.PROJECT)
+public final class JavaService {
 
     private final Project project;
 
@@ -26,8 +29,13 @@ public class JavaService implements Serializable {
         this.javaPsiFacade = JavaPsiFacade.getInstance(project);
     }
 
-    public static JavaService getInstance(@NotNull Project project) {
-        return ServiceManager.getService(project, JavaService.class);
+    /**
+     * 获取一个全名为qualifiedName的Class
+     * @param qualifiedName 类的全名
+     * @return 返回一个PsiClass对象
+     */
+    public PsiClass getClassByQualifiedName(@NotNull String qualifiedName) {
+        return this.getClassByQualifiedName(qualifiedName, ModuleManager.getInstance(this.project).getModules());
     }
 
     /**
@@ -35,8 +43,14 @@ public class JavaService implements Serializable {
      * @param qualifiedName 类的全名
      * @return 返回一个PsiClass对象
      */
-    public PsiClass getClassByQualifiedName(@NotNull String qualifiedName) {
-        return javaPsiFacade.findClass(qualifiedName, GlobalSearchScope.allScope(this.project));
+    public PsiClass getClassByQualifiedName(@NotNull String qualifiedName, Module[] module) {
+        for (Module _m : module) {
+            PsiClass aClass = javaPsiFacade.findClass(qualifiedName, GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(_m));
+            if (aClass != null){
+                return aClass;
+            }
+        }
+        return null;
     }
 
     /**
@@ -45,11 +59,24 @@ public class JavaService implements Serializable {
      * @return 含有指定qualifiedName的注解的所有Class
      */
     public Collection<PsiClass> getClassesByAnnotationQualifiedName(@NotNull String qualifiedName) {
+        return this.getClassesByAnnotationQualifiedName(qualifiedName, ModuleManager.getInstance(this.project).getModules());
+    }
+
+    /**
+     * 获取含有指定Annotation的所有Class
+     * @param qualifiedName 注解的全名
+     * @return 含有指定qualifiedName的注解的所有Class
+     */
+    public Collection<PsiClass> getClassesByAnnotationQualifiedName(@NotNull String qualifiedName, Module[] module) {
+        Collection<PsiClass> result = new ArrayList<>();
         PsiClass psiClass = getClassByQualifiedName(qualifiedName);
         if (psiClass == null) {
-            return new ArrayList<>();
+            return result;
         }
-        return AnnotatedElementsSearch.searchPsiClasses(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+        for (Module _m : module) {
+            result.addAll(AnnotatedElementsSearch.searchPsiClasses(psiClass, GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(_m)).findAll());
+        }
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
     /**
@@ -58,12 +85,26 @@ public class JavaService implements Serializable {
      * @return 含有指定qualifiedName的注解的所有Method
      */
     public Collection<PsiMethod> getMethodsByAnnotationQualifiedName(@NotNull String qualifiedName) {
+        return this.getMethodsByAnnotationQualifiedName(qualifiedName, ModuleManager.getInstance(this.project).getModules());
+    }
+
+    /**
+     * 获取含有指定Annotation的所有Method
+     * @param qualifiedName 注解的全名
+     * @return 含有指定qualifiedName的注解的所有Method
+     */
+    public Collection<PsiMethod> getMethodsByAnnotationQualifiedName(@NotNull String qualifiedName, Module[] module) {
+        Collection<PsiMethod> result = new ArrayList<>();
         PsiClass psiClass = getClassByQualifiedName(qualifiedName);
         if (psiClass == null) {
-            return new ArrayList<>();
+            return result;
         }
-        return AnnotatedElementsSearch.searchPsiMethods(psiClass, GlobalSearchScope.projectScope(this.project)).findAll();
+        for (Module _m : module) {
+            result.addAll(AnnotatedElementsSearch.searchPsiMethods(psiClass, GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(_m)).findAll());
+        }
+        return result.stream().distinct().collect(Collectors.toList());
     }
+
 
     /**
      * 获取Class的指定注解属性值

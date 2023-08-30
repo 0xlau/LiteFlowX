@@ -3,8 +3,8 @@
     <injection language="JavaScript" injector-id="xml">
         <display-name>NodeScript (XmlTag)</display-name>
         <place><![CDATA[
-            xmlTag().withLocalName(string().equalTo("node")).withAttributeValue("language", "js")
-                    .withParent(xmlTag().withLocalName(string().equalTo("nodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
+            xmlTag().withLocalName(string().equalTo("domNode")).withAttributeValue("language", "js")
+                    .withParent(xmlTag().withLocalName(string().equalTo("domNodes")).withParent(xmlTag().withLocalName(string().equalTo("flow"))))
                     .inVirtualFile(virtualFile().withName(string().contains(".xml")))
             ]]></place>
     </injection>
