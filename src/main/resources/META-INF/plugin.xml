@@ -106,8 +106,6 @@
 
         <projectService id="liteflowx.LiteFlowService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.LiteFlowService"/>
         <projectService id="liteflowx.FileService" serviceImplementation="top.xystudio.plugin.idea.liteflowx.service.FileService"/>
-        <projectService id="liteflowx.LiteFlowToolWindowService" serviceInterface="top.xystudio.plugin.idea.liteflowx.toolWindow.service.LiteFlowToolWindowService"
-                        serviceImplementation="top.xystudio.plugin.idea.liteflowx.toolWindow.service.impl.LiteFlowToolWindowServiceImpl"/>
 
         <!-- flow.xml文件属性提示 -->
         <dom.fileMetaData id="liteflowx.FlowDescription" rootTagName="flow" implementation="top.xystudio.plugin.idea.liteflowx.common.dom.description.FlowDescription"/>
@@ -121,27 +119,11 @@
         <iconProvider id="liteflowx.FileIconProvider"
                       implementation="top.xystudio.plugin.idea.liteflowx.provider.FileIconProvider"/>
 
-        <!-- 结构工具窗口 -->
-        <toolWindow id="LiteFlowTool" icon="LiteFlowIcons.TOOL_WINDOW_ICON" anchor="right" order="last" canCloseContents="false"
-                factoryClass="top.xystudio.plugin.idea.liteflowx.toolWindow.LiteFlowToolWindowFactory"/>
-
         <!-- 索引 LiteFlow Node -->
         <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowNodeIndexEvent"/>
         <!-- 重新索引 LiteFlow Node -->
         <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowNodeReIndexEvent"/>
 
     </extensions>
-
-    <actions>
-
-        <group id="LiteFlowTool.Toolbar">
-
-            <action id="liteflowx.RefreshAction" class="top.xystudio.plugin.idea.liteflowx.toolWindow.actions.RefreshAction"/>
-
-            <separator text="Separator"/>
-
-        </group>
-
-    </actions>
 
 </idea-plugin>
