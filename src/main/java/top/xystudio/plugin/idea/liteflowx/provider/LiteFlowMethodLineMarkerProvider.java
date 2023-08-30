@@ -10,7 +10,10 @@ import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.common.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.common.constant.NodeTypeEnum;
+import top.xystudio.plugin.idea.liteflowx.common.enums.LiteFlowNodeTypeEnum;
+import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowNodeMetadata;
 import top.xystudio.plugin.idea.liteflowx.service.JavaService;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowNodeService;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 
 import javax.swing.*;
@@ -23,49 +26,55 @@ public class LiteFlowMethodLineMarkerProvider extends RelatedItemLineMarkerProvi
                                             @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
         Project project = element.getProject();
         JavaService javaService = project.getService(JavaService.class);
-        LiteFlowService liteFlowService = LiteFlowService.getInstance(project);
+        LiteFlowNodeService liteFlowNodeService = project.getService(LiteFlowNodeService.class);
 
-        if (!(element instanceof PsiMethod)) {
+        if (!(element instanceof PsiMethod psiMethod)) {
             return;
         }
-        if (!((PsiMethod) element).hasAnnotation(Annotation.LiteflowMethod)){
+        if (!psiMethod.hasAnnotation(Annotation.LiteflowMethod)){
             return;
         }
-        if (!liteFlowService.isLiteFlowComponent(element)) {
+        LiteFlowNodeMetadata metadata = liteFlowNodeService.getLiteFlowNodeMetadata(psiMethod);
+        if (metadata == null) {
             return;
         }
-        String nodeType = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "nodeType");
-        if (nodeType == null){
-            return;
-        }
-        Icon icon;
+        Icon icon = null;
         String tip = "";
-        if (nodeType.equals(NodeTypeEnum.COMMON)){
-            icon = LiteFlowIcons.COMMON_COMPONENT_ICON;
-            tip = "Common component";
-        } else if (nodeType.equals(NodeTypeEnum.IF)) {
-            icon = LiteFlowIcons.IF_COMPONENT_ICON;
-            tip = "If component";
-        } else if (nodeType.equals(NodeTypeEnum.SWITCH)) {
-            icon = LiteFlowIcons.SW_COMPONENT_ICON;
-            tip = "SWITCH component";
-        } else if (nodeType.equals(NodeTypeEnum.FOR)) {
-            icon = LiteFlowIcons.FOR_COMPONENT_ICON;
-            tip = "For component";
-        } else if (nodeType.equals(NodeTypeEnum.ITERATOR)) {
-            icon = LiteFlowIcons.ITERATOR_COMPONENT_ICON;
-            tip = "Iterator component";
-        } else if (nodeType.equals(NodeTypeEnum.WHILE)) {
-            icon = LiteFlowIcons.WHI_COMPONENT_ICON;
-            tip = "While component";
-        } else if (nodeType.equals(NodeTypeEnum.BREAK)) {
-            icon = LiteFlowIcons.BRK_COMPONENT_ICON;
-            tip = "Break component";
-        } else {
+        switch (metadata.getNodeType()){
+            case COMMON -> {
+                icon = LiteFlowIcons.COMMON_COMPONENT_ICON;
+                tip = "Component";
+            }
+            case IF -> {
+                icon = LiteFlowIcons.IF_COMPONENT_ICON;
+                tip = "IfComponent";
+            }
+            case FOR -> {
+                icon = LiteFlowIcons.FOR_COMPONENT_ICON;
+                tip = "ForComponent";
+            }
+            case BREAK -> {
+                icon = LiteFlowIcons.BRK_COMPONENT_ICON;
+                tip = "BreakComponent";
+            }
+            case SWITCH -> {
+                icon = LiteFlowIcons.SW_COMPONENT_ICON;
+                tip = "SwitchComponent";
+            }
+            case WHILE -> {
+                icon = LiteFlowIcons.WHI_COMPONENT_ICON;
+                tip = "WhileComponent";
+            }
+            case ITERATOR -> {
+                icon = LiteFlowIcons.ITERATOR_COMPONENT_ICON;
+                tip = "IteratorComponent";
+            }
+        }
+        if (icon == null){
             return;
         }
         NavigationGutterIconBuilder<PsiElement> builder =
-                NavigationGutterIconBuilder.create(icon).setTooltipTitle(tip).setTarget(null);
+                NavigationGutterIconBuilder.create(icon).setTooltipTitle(metadata.getId() + " - " + tip).setTarget(metadata.getPsiTarget());
         result.add(builder.createLineMarkerInfo(element));
     }
 

@@ -280,10 +280,14 @@ public final class LiteFlowNodeService {
             }
         }
         // 如果 @LiteflowMethod 的 value 值不在 NECESSARY_PROCESS 里面，则判断为不是声明式方法组件
-        boolean found = false;
         String liteFlowMethod = javaService.getAnnotationAttributeValue(targetMethod, Annotation.LiteflowMethod, "value");
         if (liteFlowMethod == null) return null;
         if (!LiteFlowMethodEnum.isNecessaryProcess(liteFlowMethod)) return null;
+
+        // 如果 @LiteflowMethod 的 nodeType 值不在 StandardNodeType 里面，则判断为不是声明式方法组件
+        String nodeType = javaService.getAnnotationAttributeValue(targetMethod, Annotation.LiteflowMethod, "nodeType");
+        if (nodeType == null) return null;
+        if (!NodeTypeEnum.isStandardNodeType(nodeType)) return null;
 
         // 如果 @LiteflowMethod 的 nodeId 值是空，则判断为不是声明式方法组件
         String nodeId = javaService.getAnnotationAttributeValue(targetMethod, Annotation.LiteflowMethod, "nodeId");
@@ -292,6 +296,7 @@ public final class LiteFlowNodeService {
         }
 
         metadata.setId(this.getLiteFlowComponentId(targetMethod));
+        metadata.setNodeType(LiteFlowNodeTypeEnum.getByNodeType(nodeType));
         metadata.setScript(false);
         metadata.setPsiTarget(targetMethod);
         metadata.setNaviTarget(targetMethod);

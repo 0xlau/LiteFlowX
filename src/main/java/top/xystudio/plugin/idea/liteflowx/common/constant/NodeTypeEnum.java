@@ -40,5 +40,5 @@ public class NodeTypeEnum {
     public static final String ITERATOR_SCRIPT = "iterator_script";
 
     public static final String BREAK_SCRIPT = "break_script";
-    public static final String[] ScriptNodeType = {SCRIPT, SWITCH_SCRIPT, IF_SCRIPT, FOR_SCRIPT, WHILE_SCRIPT, BREAK_SCRIPT, ITERATOR_SCRIPT};
+    public static final String[] ScriptNodeType = {SWITCH_SCRIPT, IF_SCRIPT, FOR_SCRIPT, WHILE_SCRIPT, BREAK_SCRIPT, ITERATOR_SCRIPT, SCRIPT};
 }
