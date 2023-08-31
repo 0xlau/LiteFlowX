@@ -1,5 +1,6 @@
 package top.xystudio.plugin.idea.liteflowx.common.metadata;
 
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.module.Module;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;

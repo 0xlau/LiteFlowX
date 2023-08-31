@@ -2,9 +2,7 @@ package top.xystudio.plugin.idea.liteflowx.service;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -26,16 +24,18 @@ import top.xystudio.plugin.idea.liteflowx.common.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.common.constant.Clazz;
 import top.xystudio.plugin.idea.liteflowx.common.constant.LiteFlowMethodEnum;
 import top.xystudio.plugin.idea.liteflowx.common.constant.NodeTypeEnum;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomFlow;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNode;
+import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNodes;
 import top.xystudio.plugin.idea.liteflowx.common.enums.DefineTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.common.enums.LiteFlowNodeTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowNodeMetadata;
 import top.xystudio.plugin.idea.liteflowx.common.util.StringUtils;
 import top.xystudio.plugin.idea.liteflowx.common.util.XmlUtils;
-import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomFlow;
-import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNode;
-import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomNodes;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Future;
 
 @Service(Service.Level.PROJECT)

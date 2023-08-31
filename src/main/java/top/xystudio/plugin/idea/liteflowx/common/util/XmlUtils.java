@@ -7,6 +7,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.psi.xml.XmlToken;
+import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomManager;
 import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomChain;
 import top.xystudio.plugin.idea.liteflowx.common.dom.modal.DomFlow;
@@ -21,7 +22,7 @@ public class XmlUtils {
             DomNode.class.getSimpleName().toLowerCase()
     );
 
-    public static <T> T transformToDomElement(PsiElement element, Class<T> c){
+    public static <T extends DomElement> T transformToDomElement(PsiElement element, Class<T> c){
         return (T) DomManager.getDomManager(element.getProject()).getDomElement((XmlTag) element);
     }
 

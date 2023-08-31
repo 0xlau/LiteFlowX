@@ -10,31 +10,38 @@ import com.intellij.psi.PsiJavaToken;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowChainMetadata;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
 import top.xystudio.plugin.idea.liteflowx.common.util.LiteFlowUtils;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowChainService;
 
 import java.util.Optional;
 
 public class JavaToChainGotoDeclarationHandler implements GotoDeclarationHandler {
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+
+        assert sourceElement != null;
+
         Project project = sourceElement.getProject();
+        LiteFlowChainService chainService = project.getService(LiteFlowChainService.class);
+
         if (!isTargetElement(sourceElement)){
             return null;
         }
-        String name = sourceElement.getText().replace("\"", "");
-        Optional<? extends PsiElement> result = LiteFlowUtils.findTargetByName(project, name, new findChainsImpl());
-        if (!result.isPresent()){
+        String id = sourceElement.getText().replace("\"", "");
+        LiteFlowChainMetadata metadata = chainService.getLiteFlowChainMetadataById(id);
+        if (metadata == null){
             return null;
         }
-        return new PsiElement[]{result.get()};
+        return new PsiElement[]{metadata.getPsiTarget()};
     }
 
     private boolean isTargetElement(PsiElement psiElement){
-        if (!(psiElement instanceof PsiJavaToken)){
+        if (!(psiElement instanceof PsiJavaToken psiJavaToken)){
             return false;
         }
-        if (((PsiJavaToken) psiElement).getTokenType() != JavaTokenType.STRING_LITERAL){
+        if (psiJavaToken.getTokenType() != JavaTokenType.STRING_LITERAL){
             return false;
         }
         return true;

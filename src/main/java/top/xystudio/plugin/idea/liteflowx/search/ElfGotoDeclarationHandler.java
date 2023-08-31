@@ -8,9 +8,13 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowChainMetadata;
+import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowNodeMetadata;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findChainsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findComponentsImpl;
 import top.xystudio.plugin.idea.liteflowx.functionImpl.findElfLocalVariablesImpl;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowChainService;
+import top.xystudio.plugin.idea.liteflowx.service.LiteFlowNodeService;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowElVariableRef;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeRef;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowLiteFlowNodeStringRef;
@@ -22,36 +26,34 @@ import java.util.List;
 public class ElfGotoDeclarationHandler implements GotoDeclarationHandler {
     @Override
     public PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+        assert sourceElement != null;
         Project project = sourceElement.getProject();
-
+        LiteFlowNodeService nodeService = project.getService(LiteFlowNodeService.class);
+        LiteFlowChainService chainService = project.getService(LiteFlowChainService.class);
         if (isNodeRefElement(sourceElement)){
 
             // 识别 普通组件
-            String name = sourceElement.getText();
-            List<PsiElement> result = new ArrayList<>();
-            PsiElement component = LiteFlowUtils.findTargetByName(project, name, new findComponentsImpl()).orElse(null);
-            PsiElement chain = LiteFlowUtils.findTargetByName(project, name, new findChainsImpl()).orElse(null);
-            List<? extends PsiElement> localVars = LiteFlowUtils.findTargetsByName(project, name, new findElfLocalVariablesImpl(sourceElement.getContainingFile())).orElse(null);
-
-            if (component != null)  {result.add(component);}
-            if (chain != null)  {result.add(chain);}
-            if (localVars != null) {result.addAll(localVars);}
-
-            if (result.size() == 0){
-                return null;
+            String id = sourceElement.getText();
+            LiteFlowNodeMetadata nodeMetadata = nodeService.getLiteFlowNodeMetadataById(id);
+            if (nodeMetadata != null){
+                return new PsiElement[]{nodeMetadata.getPsiTarget()};
             }
-            return result.toArray(new PsiElement[0]);
+            LiteFlowChainMetadata chainMetadata = chainService.getLiteFlowChainMetadataById(id);
+            if (chainMetadata != null){
+                return new PsiElement[]{chainMetadata.getPsiTarget()};
+            }
+            return null;
+
 
         }else if(isNodeStringRefElement(sourceElement)){
 
             // 识别 node("")
-            String name = sourceElement.getText().replace("\"", "");
-            List<PsiElement> result = new ArrayList<>();
-            LiteFlowUtils.findTargetByName(project, name, new findComponentsImpl()).ifPresent(result::add);
-            if (result.size() == 0){
+            String id = sourceElement.getText().replace("\"", "");
+            LiteFlowNodeMetadata metadata = nodeService.getLiteFlowNodeMetadataById(id);
+            if (metadata == null){
                 return null;
             }
-            return result.toArray(new PsiElement[0]);
+            return new PsiElement[]{metadata.getPsiTarget()};
 
         }else if (isVariableRefElement(sourceElement)){
 

@@ -115,9 +115,9 @@
                       implementation="top.xystudio.plugin.idea.liteflowx.provider.FileIconProvider"/>
 
         <!-- 索引 LiteFlow Node -->
-        <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowNodeIndexEvent"/>
+        <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowIndexEvent"/>
         <!-- 重新索引 LiteFlow Node -->
-        <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowNodeReIndexEvent"/>
+        <postStartupActivity implementation="top.xystudio.plugin.idea.liteflowx.event.LiteFlowReIndexEvent"/>
 
     </extensions>
 
