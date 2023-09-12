@@ -20,6 +20,13 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
+        <!-- LiteFlow 工具窗口 -->
+        <toolWindow id="LiteFlow Tools"
+                    factoryClass="top.xystudio.plugin.idea.liteflowx.toolwindow.LiteFlowToolWindowFactory"
+                    anchor="right"
+                    icon="LiteFlowIcons.TOOL_WINDOW_ICON"
+        />
+
         <!-- LiteFlow @LiteFlowMethod用法检测 -->
         <annotator
                 language="JAVA"

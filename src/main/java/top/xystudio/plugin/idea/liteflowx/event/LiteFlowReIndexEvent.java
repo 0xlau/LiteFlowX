@@ -23,7 +23,7 @@ public class LiteFlowReIndexEvent implements ProjectActivity {
         ApplicationManager.getApplication().getMessageBus().connect().subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
             @Override
             public void selectionChanged(@NotNull FileEditorManagerEvent event) {
-                nodeService.reIndex();
+                nodeService.reIndexOnPooledThread();
                 chainService.reIndex();
             }
         });

@@ -9,6 +9,7 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.xml.XmlTagImpl;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -76,7 +77,7 @@ public final class LiteFlowNodeService {
     /**
      * 重新索引
      */
-    public void reIndex(){
+    public void reIndexOnPooledThread(){
 
         if (currentReIndexExecution != null && !currentReIndexExecution.isDone()){
             currentReIndexExecution.cancel(false);
@@ -87,6 +88,16 @@ public final class LiteFlowNodeService {
                 this.index();
             });
         });
+
+    }
+
+    /**
+     * 重新索引
+     */
+    public void reIndexSync(){
+
+        this.clearSearchIndex();
+        this.index();
 
     }
 
@@ -130,6 +141,40 @@ public final class LiteFlowNodeService {
             nodeSearchIndex.put(metadata.getId(), metadata);
         }
 
+    }
+
+    /**
+     * 根据 PsiFile 获取 LiteFlowNodeMetadata 列表
+     * @param psiFile psiFile
+     * @return metadata
+     */
+    public LiteFlowNodeMetadata getLiteFlowNodeMetadataByPsiFile(PsiFile psiFile){
+
+        if (psiFile == null) return null;
+        for (LiteFlowNodeMetadata metadata : nodeSearchIndex.values()) {
+            if (metadata.getPsiTarget().getContainingFile() == psiFile){
+                return metadata;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据 PsiFile 和 defineTypeEnum 获取 LiteFlowNodeMetadata 列表
+     * @param psiFile psiFile
+     * @return List<LiteFlowNodeMetadata>
+     */
+    public List<LiteFlowNodeMetadata> listLiteFlowNodeMetadataByPsiFileAndDefineType(PsiFile psiFile, DefineTypeEnum defineTypeEnum){
+
+        List<LiteFlowNodeMetadata> result = new ArrayList<>();
+
+        if (psiFile == null) return result;
+        for (LiteFlowNodeMetadata metadata : nodeSearchIndex.values()) {
+            if (metadata.getPsiTarget().getContainingFile() == psiFile && metadata.getDefineType() == defineTypeEnum){
+                result.add(metadata);
+            }
+        }
+        return result;
     }
 
     /**
@@ -326,6 +371,7 @@ public final class LiteFlowNodeService {
         }
 
         metadata.setId(this.getLiteFlowComponentId(targetXmlTag));
+        metadata.setNodeType(LiteFlowNodeTypeEnum.getByNodeType(domNode.getType().getStringValue()));
         metadata.setName(domNode.getName().getStringValue());
         metadata.setScript(true);
         metadata.setPsiTarget(targetXmlTag);
