@@ -58,6 +58,7 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                     if (position.getText().equals("IntellijIdeaRulezzz")){
                         resultSet.addElement(LookupElementBuilder.create("id").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("any").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("must").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("ignoreError").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("threadPool").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("maxWaitSeconds").withInsertHandler(parenHandler));

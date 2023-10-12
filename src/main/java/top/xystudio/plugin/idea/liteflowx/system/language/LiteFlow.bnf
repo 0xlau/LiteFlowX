@@ -137,6 +137,7 @@
     threadPool = "threadPool"
     maxWaitSeconds = "maxWaitSeconds"
     parallel = "parallel"
+    must = "must"
     to = "to"
     UTO = "TO"
     data = "data"
@@ -145,6 +146,7 @@
     DO = "DO"
     LBREAK = "BREAK"
     DEFAULT = "DEFAULT"
+
   ]
 
 }
@@ -168,6 +170,7 @@ statement ::= (
     returnStatement |
     opSelfStatement |
     liteFlowStatement |
+    liteFlowPlaceHolderStatement |
     BRACE_LEFT statement* BRACE_RIGHT
 )
 
@@ -187,7 +190,8 @@ breakStatement ::= break SEMICOLON
 continueStatement ::= continue SEMICOLON
 opSelfStatement ::= opSelfExpress SEMICOLON
 liteFlowStatement ::= liteFlowConditionExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
-private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | line_comment | block_comment | fnInvokeStatement)
+liteFlowPlaceHolderStatement ::= liteFlowPlaceholderExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
+private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | liteFlowPlaceHolderStatement | line_comment | block_comment | fnInvokeStatement)
 
 /** Statement Start **/
 
@@ -232,6 +236,9 @@ fnInvokeExpress ::= refExpress fnParamExpress
 
 // 函数应用分隔符表达式
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
+
+// LiteFlow 占位符表达式
+liteFlowPlaceholderExpress ::= BRACE_LEFT (refExpress|number) BRACE_RIGHT ASSIGN liteFlowConditionExpress
 
 // LiteFlow 通用表达式
 liteFlowAllExpress ::= liteFlowConditionExpress | liteFlowNodeRefExpress
@@ -280,7 +287,7 @@ liteFlowThenExpress ::= THEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExp
 
 // LiteFlow WHEN() 表达式
 liteFlowWhenExpress ::= WHEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT { liteFlowWhenSubExpress }* {pin=1}
-liteFlowWhenSubExpress ::= DOT (liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress)
+liteFlowWhenSubExpress ::= DOT (liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress | liteFlowMustExpress)
 
 // LiteFlow SWITCH() 表达式
 liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT (liteFlowToExpress | liteFlowDefaultExpress) {pin=1}
@@ -326,6 +333,9 @@ liteFlowIgnoreErrorExpress ::= ignoreError PAREN_LEFT boolean PAREN_RIGHT {pin=1
 
 // LiteFlow .any() 表达式
 liteFlowAnyExpress ::= any PAREN_LEFT boolean PAREN_RIGHT {pin=1}
+
+// LiteFlow .must() 表达式
+liteFlowMustExpress ::= must PAREN_LEFT (liteFlowNodeRefExpress | string) {COMMA (liteFlowNodeRefExpress | string)}* PAREN_RIGHT {pin=1}
 
 // LiteFlow .threadPool() 表达式
 liteFlowThreadPoolExpress ::= threadPool PAREN_LEFT string PAREN_RIGHT {pin=1}

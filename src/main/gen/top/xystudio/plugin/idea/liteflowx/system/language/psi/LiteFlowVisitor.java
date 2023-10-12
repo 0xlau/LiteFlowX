@@ -167,6 +167,10 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowMustExpress(@NotNull LiteFlowLiteFlowMustExpress o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowNodeRef(@NotNull LiteFlowLiteFlowNodeRef o) {
     visitPsiElement(o);
   }
@@ -196,6 +200,14 @@ public class LiteFlowVisitor extends PsiElementVisitor {
   }
 
   public void visitLiteFlowParallelExpress(@NotNull LiteFlowLiteFlowParallelExpress o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowPlaceHolderStatement(@NotNull LiteFlowLiteFlowPlaceHolderStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitLiteFlowPlaceholderExpress(@NotNull LiteFlowLiteFlowPlaceholderExpress o) {
     visitPsiElement(o);
   }
 

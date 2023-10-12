@@ -48,6 +48,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_ITERATOR_SUB_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_LOGIC_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_LOGIC_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_MAX_WAIT_SECONDS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_MAX_WAIT_SECONDS");
+  IElementType LITEFLOW_LITE_FLOW_MUST_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_MUST_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NODE_REF_SUB_EXPRESS");
@@ -56,6 +57,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_NOT_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NOT_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_OR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_OR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_SWITCH_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SWITCH_EXPRESS");
@@ -146,6 +149,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_MINUS_MINUS = new LiteFlowTokenType("--");
   IElementType LITEFLOW_MOD = new LiteFlowTokenType("mod");
   IElementType LITEFLOW_MUL = new LiteFlowTokenType("*");
+  IElementType LITEFLOW_MUST = new LiteFlowTokenType("must");
   IElementType LITEFLOW_NEW = new LiteFlowTokenType("new");
   IElementType LITEFLOW_NODE = new LiteFlowTokenType("node");
   IElementType LITEFLOW_NOR = new LiteFlowTokenType("nor");
@@ -302,6 +306,9 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_MAX_WAIT_SECONDS) {
         return new LiteFlowLiteFlowMaxWaitSecondsImpl(node);
       }
+      else if (type == LITEFLOW_LITE_FLOW_MUST_EXPRESS) {
+        return new LiteFlowLiteFlowMustExpressImpl(node);
+      }
       else if (type == LITEFLOW_LITE_FLOW_NODE_REF) {
         return new LiteFlowLiteFlowNodeRefImpl(node);
       }
@@ -325,6 +332,12 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS) {
         return new LiteFlowLiteFlowParallelExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS) {
+        return new LiteFlowLiteFlowPlaceholderExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT) {
+        return new LiteFlowLiteFlowPlaceHolderStatementImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_PRE_EXPRESS) {
         return new LiteFlowLiteFlowPreExpressImpl(node);

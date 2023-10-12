@@ -26,6 +26,9 @@ public interface LiteFlowStatement extends PsiElement {
   LiteFlowIfStatement getIfStatement();
 
   @Nullable
+  LiteFlowLiteFlowPlaceHolderStatement getLiteFlowPlaceHolderStatement();
+
+  @Nullable
   LiteFlowLiteFlowStatement getLiteFlowStatement();
 
   @Nullable
