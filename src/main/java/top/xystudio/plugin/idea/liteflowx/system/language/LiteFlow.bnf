@@ -190,7 +190,7 @@ breakStatement ::= break SEMICOLON
 continueStatement ::= continue SEMICOLON
 opSelfStatement ::= opSelfExpress SEMICOLON
 liteFlowStatement ::= liteFlowConditionExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
-liteFlowPlaceHolderStatement ::= liteFlowPlaceholderExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
+liteFlowPlaceHolderStatement ::= liteFlowPlaceholderAssignExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
 private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | liteFlowPlaceHolderStatement | line_comment | block_comment | fnInvokeStatement)
 
 /** Statement Start **/
@@ -238,10 +238,10 @@ fnInvokeExpress ::= refExpress fnParamExpress
 fnParamExpress ::= {PAREN_LEFT [allExpress {COMMA (allExpress|op)}*] PAREN_RIGHT}+
 
 // LiteFlow 占位符表达式
-liteFlowPlaceholderExpress ::= BRACE_LEFT (refExpress|number) BRACE_RIGHT ASSIGN liteFlowConditionExpress
+liteFlowPlaceholderAssignExpress ::= liteFlowPlaceHolderRef ASSIGN liteFlowConditionExpress
 
 // LiteFlow 通用表达式
-liteFlowAllExpress ::= liteFlowConditionExpress | liteFlowNodeRefExpress
+liteFlowAllExpress ::= liteFlowConditionExpress | liteFlowNodeRefExpress | liteFlowPlaceHolderRef
 
 // LiteFlow 全部逻辑表达式
 liteFlowAllLogicExpress ::= liteFlowAndExpress | liteFlowOrExpress | liteFlowNotExpress
@@ -355,6 +355,8 @@ liteFlowParallelExpress ::= parallel PAREN_LEFT boolean PAREN_RIGHT {pin=1}
 /** Express End **/
 
 // Ref
+
+liteFlowPlaceHolderRef ::= BRACE_LEFT (refExpress|number) BRACE_RIGHT
 
 liteFlowNodeStringRef ::= string
 

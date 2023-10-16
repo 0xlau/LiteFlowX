@@ -13,4 +13,7 @@ public interface LiteFlowLiteFlowAllExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress();
 
+  @Nullable
+  LiteFlowLiteFlowPlaceHolderRef getLiteFlowPlaceHolderRef();
+
 }

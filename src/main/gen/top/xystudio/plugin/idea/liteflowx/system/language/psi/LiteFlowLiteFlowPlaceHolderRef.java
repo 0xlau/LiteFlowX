@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface LiteFlowLiteFlowPlaceHolderStatement extends PsiElement {
+public interface LiteFlowLiteFlowPlaceHolderRef extends PsiElement {
 
-  @NotNull
-  LiteFlowLiteFlowPlaceholderAssignExpress getLiteFlowPlaceholderAssignExpress();
+  @Nullable
+  LiteFlowRefExpress getRefExpress();
+
+  @Nullable
+  PsiElement getNumber();
 
 }

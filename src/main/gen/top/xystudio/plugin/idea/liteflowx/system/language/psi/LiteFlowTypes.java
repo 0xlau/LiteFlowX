@@ -57,7 +57,8 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_NOT_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_NOT_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_OR_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_OR_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS");
-  IElementType LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_PLACEHOLDER_ASSIGN_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACEHOLDER_ASSIGN_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF");
   IElementType LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_STATEMENT");
@@ -333,8 +334,11 @@ public interface LiteFlowTypes {
       else if (type == LITEFLOW_LITE_FLOW_PARALLEL_EXPRESS) {
         return new LiteFlowLiteFlowParallelExpressImpl(node);
       }
-      else if (type == LITEFLOW_LITE_FLOW_PLACEHOLDER_EXPRESS) {
-        return new LiteFlowLiteFlowPlaceholderExpressImpl(node);
+      else if (type == LITEFLOW_LITE_FLOW_PLACEHOLDER_ASSIGN_EXPRESS) {
+        return new LiteFlowLiteFlowPlaceholderAssignExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF) {
+        return new LiteFlowLiteFlowPlaceHolderRefImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT) {
         return new LiteFlowLiteFlowPlaceHolderStatementImpl(node);

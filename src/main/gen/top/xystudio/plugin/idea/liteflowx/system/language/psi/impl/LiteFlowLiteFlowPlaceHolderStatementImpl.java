@@ -29,8 +29,8 @@ public class LiteFlowLiteFlowPlaceHolderStatementImpl extends ASTWrapperPsiEleme
 
   @Override
   @NotNull
-  public LiteFlowLiteFlowPlaceholderExpress getLiteFlowPlaceholderExpress() {
-    return findNotNullChildByClass(LiteFlowLiteFlowPlaceholderExpress.class);
+  public LiteFlowLiteFlowPlaceholderAssignExpress getLiteFlowPlaceholderAssignExpress() {
+    return findNotNullChildByClass(LiteFlowLiteFlowPlaceholderAssignExpress.class);
   }
 
 }

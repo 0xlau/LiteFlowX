@@ -11,14 +11,14 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
-public class LiteFlowLiteFlowPlaceholderExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowPlaceholderExpress {
+public class LiteFlowLiteFlowPlaceholderAssignExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowPlaceholderAssignExpress {
 
-  public LiteFlowLiteFlowPlaceholderExpressImpl(@NotNull ASTNode node) {
+  public LiteFlowLiteFlowPlaceholderAssignExpressImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiteFlowVisitor visitor) {
-    visitor.visitLiteFlowPlaceholderExpress(this);
+    visitor.visitLiteFlowPlaceholderAssignExpress(this);
   }
 
   @Override
@@ -34,15 +34,9 @@ public class LiteFlowLiteFlowPlaceholderExpressImpl extends ASTWrapperPsiElement
   }
 
   @Override
-  @Nullable
-  public LiteFlowRefExpress getRefExpress() {
-    return findChildByClass(LiteFlowRefExpress.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getNumber() {
-    return findChildByType(LITEFLOW_NUMBER);
+  @NotNull
+  public LiteFlowLiteFlowPlaceHolderRef getLiteFlowPlaceHolderRef() {
+    return findNotNullChildByClass(LiteFlowLiteFlowPlaceHolderRef.class);
   }
 
 }

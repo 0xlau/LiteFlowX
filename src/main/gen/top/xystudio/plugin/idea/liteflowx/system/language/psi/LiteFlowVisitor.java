@@ -203,11 +203,15 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowPlaceHolderRef(@NotNull LiteFlowLiteFlowPlaceHolderRef o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowPlaceHolderStatement(@NotNull LiteFlowLiteFlowPlaceHolderStatement o) {
     visitPsiElement(o);
   }
 
-  public void visitLiteFlowPlaceholderExpress(@NotNull LiteFlowLiteFlowPlaceholderExpress o) {
+  public void visitLiteFlowPlaceholderAssignExpress(@NotNull LiteFlowLiteFlowPlaceholderAssignExpress o) {
     visitPsiElement(o);
   }
 
