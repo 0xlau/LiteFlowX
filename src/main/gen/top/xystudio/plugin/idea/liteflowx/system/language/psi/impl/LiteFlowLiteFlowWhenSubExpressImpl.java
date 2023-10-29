@@ -41,6 +41,12 @@ public class LiteFlowLiteFlowWhenSubExpressImpl extends ASTWrapperPsiElement imp
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowMustExpress getLiteFlowMustExpress() {
+    return findChildByClass(LiteFlowLiteFlowMustExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowThreadPoolExpress getLiteFlowThreadPoolExpress() {
     return findChildByClass(LiteFlowLiteFlowThreadPoolExpress.class);
   }

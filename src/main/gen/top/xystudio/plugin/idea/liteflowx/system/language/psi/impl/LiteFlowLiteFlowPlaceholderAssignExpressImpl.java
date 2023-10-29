@@ -11,14 +11,14 @@ import static top.xystudio.plugin.idea.liteflowx.system.language.psi.LiteFlowTyp
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import top.xystudio.plugin.idea.liteflowx.system.language.psi.*;
 
-public class LiteFlowLiteFlowAllExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowAllExpress {
+public class LiteFlowLiteFlowPlaceholderAssignExpressImpl extends ASTWrapperPsiElement implements LiteFlowLiteFlowPlaceholderAssignExpress {
 
-  public LiteFlowLiteFlowAllExpressImpl(@NotNull ASTNode node) {
+  public LiteFlowLiteFlowPlaceholderAssignExpressImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiteFlowVisitor visitor) {
-    visitor.visitLiteFlowAllExpress(this);
+    visitor.visitLiteFlowPlaceholderAssignExpress(this);
   }
 
   @Override
@@ -28,21 +28,15 @@ public class LiteFlowLiteFlowAllExpressImpl extends ASTWrapperPsiElement impleme
   }
 
   @Override
-  @Nullable
+  @NotNull
   public LiteFlowLiteFlowConditionExpress getLiteFlowConditionExpress() {
-    return findChildByClass(LiteFlowLiteFlowConditionExpress.class);
+    return findNotNullChildByClass(LiteFlowLiteFlowConditionExpress.class);
   }
 
   @Override
-  @Nullable
-  public LiteFlowLiteFlowNodeRefExpress getLiteFlowNodeRefExpress() {
-    return findChildByClass(LiteFlowLiteFlowNodeRefExpress.class);
-  }
-
-  @Override
-  @Nullable
+  @NotNull
   public LiteFlowLiteFlowPlaceHolderRef getLiteFlowPlaceHolderRef() {
-    return findChildByClass(LiteFlowLiteFlowPlaceHolderRef.class);
+    return findNotNullChildByClass(LiteFlowLiteFlowPlaceHolderRef.class);
   }
 
 }
