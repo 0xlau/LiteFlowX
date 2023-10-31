@@ -23,7 +23,7 @@ public class NavigateTreeCellRenderer extends ColoredTreeCellRenderer {
             case MAIN -> setIcon(AllIcons.Modules.SourceRoot);
             case TEST -> setIcon(AllIcons.Modules.TestRoot);
             case RESOURCE -> setIcon(AllIcons.Modules.ResourcesRoot);
-            case CLASS -> setIcon(AllIcons.Nodes.Class);
+            case CLASS -> setIcon(LiteFlowIcons.MULTI_COMPONENT_ICON);
             case COMPONENT -> {
                 switch (treeNode.getLiteFlowNode().getNodeType()){
                     case ITERATOR -> setIcon(LiteFlowIcons.ITERATOR_COMPONENT_ICON);
