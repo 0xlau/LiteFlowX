@@ -6,6 +6,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.compiled.ClsEnumConstantImpl;
 import com.intellij.psi.impl.compiled.ClsReferenceExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -127,6 +128,10 @@ public final class JavaService {
             PsiElement resolve = ((PsiReferenceExpression) attributeValue).resolve();
             if (resolve == null) {
                 return null;
+            }
+            // 如果表达式是枚举类型，则返回枚举类类名+.+value
+            if (resolve instanceof ClsEnumConstantImpl enumConstant){
+                return enumConstant.getType().getCanonicalText() + "." + enumConstant.getName();
             }
             String[] split = resolve.getText().split("=");
             int length = split.length;
