@@ -43,6 +43,10 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="top.xystudio.plugin.idea.liteflowx.provider.LiteFlowMethodLineMarkerProvider"/>
 
+        <!-- LiteFlow 对应执行Chain语句 行图标 -->
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="top.xystudio.plugin.idea.liteflowx.provider.LiteFlowFlowExecutorLineMarkerProvider"/>
+
         <fileType
                 name="LiteFlow File"
                 implementationClass="top.xystudio.plugin.idea.liteflowx.language.LiteFlowFileType"

@@ -41,6 +41,9 @@ public interface LiteFlowIcons {
 
     Icon BRK_SCRIPT_ICON =  IconLoader.getIcon("/images/scriptComponent/script_break.svg", LiteFlowIcons.class);
 
+    /** LINE-MARKER 图标 */
+    Icon FLOWEXECUTE_ICON =  IconLoader.getIcon("/images/lineMarker/flowExecute.svg", LiteFlowIcons.class);
+
     /** TOOLWINDOW图标 */
     Icon TOOL_WINDOW_ICON =  IconLoader.getIcon("/images/toolWindow/toolboxIcon.svg", LiteFlowIcons.class);
 
