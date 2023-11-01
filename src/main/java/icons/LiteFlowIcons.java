@@ -50,8 +50,8 @@ public interface LiteFlowIcons {
     /** LITEFLOWX 图标 */
     Icon LITEFLOWX_ICON =  IconLoader.getIcon("/images/liteflowx.svg", LiteFlowIcons.class);
 
-    /** XML 文件图标 */
-    Icon XML_ICON = LITEFLOWX_ICON;
+    /** ELF 配置图标 */
+    Icon ELF_CONFIG_FILE_ICON = IconLoader.getIcon("/images/ELFFileConfig.svg", LiteFlowIcons.class);
 
 
 

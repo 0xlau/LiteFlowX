@@ -15,7 +15,6 @@ import top.xystudio.plugin.idea.liteflowx.common.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.common.enums.DefineTypeEnum;
 import top.xystudio.plugin.idea.liteflowx.common.metadata.LiteFlowNodeMetadata;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowNodeService;
-import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 import top.xystudio.plugin.idea.liteflowx.common.util.XmlUtils;
 
 import javax.swing.*;
@@ -28,7 +27,7 @@ public class FileIconProvider extends IconProvider {
     public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
 
         if (isLiteFlowXmlFile(element)){
-            return LiteFlowIcons.XML_ICON;
+            return LiteFlowIcons.ELF_CONFIG_FILE_ICON;
         }
         return getLiteFlowFileIcon(element);
     }

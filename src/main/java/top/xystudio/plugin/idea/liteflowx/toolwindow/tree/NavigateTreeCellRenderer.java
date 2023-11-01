@@ -36,7 +36,7 @@ public class NavigateTreeCellRenderer extends ColoredTreeCellRenderer {
                     case COMMON -> setIcon(LiteFlowIcons.COMMON_COMPONENT_ICON);
                 }
             }
-            case ELF -> setIcon(LiteFlowIcons.LITEFLOWX_ICON);
+            case ELF -> setIcon(LiteFlowIcons.ELF_CONFIG_FILE_ICON);
             case CHAIN -> setIcon(LiteFlowIcons.CHAIN_ICON);
         }
 

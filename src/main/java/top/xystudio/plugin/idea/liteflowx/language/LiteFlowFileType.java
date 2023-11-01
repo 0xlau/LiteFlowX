@@ -35,6 +35,6 @@ public class LiteFlowFileType extends LanguageFileType {
 
     @Override
     public @Nullable Icon getIcon() {
-        return LiteFlowIcons.LITEFLOWX_ICON;
+        return LiteFlowIcons.ELF_CONFIG_FILE_ICON;
     }
 }

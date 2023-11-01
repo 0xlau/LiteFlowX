@@ -111,7 +111,7 @@ public final class NavigateWindowService {
                     node.setSubTitle(nodeMetadata.getName());
                 }else if(nodeMetadata != null && nodeMetadata.getDefineType() == DefineTypeEnum.DECLARED_METHOD){
                     node.setType(NavigateTreeNodeType.CLASS);
-                    node.setTitle(virtualFile.getNameWithoutExtension());
+                    node.setTitle(virtualFile.getName());
                     for (LiteFlowNodeMetadata metadata : this.liteFlowNodeService.listLiteFlowNodeMetadataByPsiFileAndDefineType(psiFile, DefineTypeEnum.DECLARED_METHOD)) {
                         node.addChildren(new NavigateTreeNode(metadata.getId(), metadata.getName(), NavigateTreeNodeType.COMPONENT).setLiteFlowNode(metadata));
                     }
