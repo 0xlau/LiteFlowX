@@ -4,6 +4,10 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.ui.IdeBorderFactory;
+import com.intellij.ui.ScrollPaneFactory;
+import com.intellij.ui.SideBorder;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBViewport;
 import com.intellij.ui.tree.ui.DefaultTreeUI;
 import com.intellij.ui.treeStructure.SimpleTree;
@@ -67,7 +71,11 @@ public class NavigatePanel extends JPanel implements NavigateWindowConstant {
         this.navigateTree.setUI(new DefaultTreeUI());
 
         JBViewport viewport = new JBViewport();
-        viewport.setView(this.navigateTree);
+        JBScrollPane scrollPane = new JBScrollPane(this.navigateTree);
+
+        scrollPane.setBorder(IdeBorderFactory.createBorder(SideBorder.NONE));
+        viewport.setView(scrollPane);
+
         this.add(this.toolWindowPanel.getComponent(), BorderLayout.NORTH);
         this.add(viewport, BorderLayout.CENTER);
     }

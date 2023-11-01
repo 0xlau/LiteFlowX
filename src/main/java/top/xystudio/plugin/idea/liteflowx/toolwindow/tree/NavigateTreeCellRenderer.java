@@ -2,6 +2,7 @@ package top.xystudio.plugin.idea.liteflowx.toolwindow.tree;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ui.ColoredTreeCellRenderer;
+import com.intellij.ui.SimpleTextAttributes;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +41,12 @@ public class NavigateTreeCellRenderer extends ColoredTreeCellRenderer {
         }
 
         // 设置文本
-        append(treeNode.getTitle());
+        append(treeNode.getTitle(), SimpleTextAttributes.REGULAR_ATTRIBUTES, true);
+        if (treeNode.getSubTitle() != null && !treeNode.getSubTitle().isEmpty()) {
+            append(" - [", SimpleTextAttributes.GRAY_ATTRIBUTES);
+            append(treeNode.getSubTitle(), SimpleTextAttributes.SIMPLE_CELL_ATTRIBUTES);
+            append("]", SimpleTextAttributes.GRAY_ATTRIBUTES);
+        }
 
     }
 }

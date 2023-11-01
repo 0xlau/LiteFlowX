@@ -12,6 +12,7 @@ public class NavigateTreeNode {
 
     public NavigateTreeNode(){
         this.title = "ROOT";
+        this.subTitle = "ROOT";
         this.type = NavigateTreeNodeType.ROOT;
     }
 
@@ -20,7 +21,15 @@ public class NavigateTreeNode {
         this.type = type;
     }
 
+    public NavigateTreeNode(String title, String subTitle, NavigateTreeNodeType type){
+        this.title = title;
+        this.subTitle = subTitle;
+        this.type = type;
+    }
+
     private String title;
+
+    private String subTitle;
 
     private NavigateTreeNodeType type;
 
@@ -31,6 +40,15 @@ public class NavigateTreeNode {
     private PsiFile liteFlowPsiFile;
 
     private List<NavigateTreeNode> children;
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public NavigateTreeNode setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+        return this;
+    }
 
     public String getTitle() {
         return title;

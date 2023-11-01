@@ -108,17 +108,18 @@ public final class NavigateWindowService {
                     node.setType(NavigateTreeNodeType.COMPONENT);
                     node.setLiteFlowNode(nodeMetadata);
                     node.setTitle(nodeMetadata.getId());
+                    node.setSubTitle(nodeMetadata.getName());
                 }else if(nodeMetadata != null && nodeMetadata.getDefineType() == DefineTypeEnum.DECLARED_METHOD){
                     node.setType(NavigateTreeNodeType.CLASS);
                     node.setTitle(virtualFile.getNameWithoutExtension());
                     for (LiteFlowNodeMetadata metadata : this.liteFlowNodeService.listLiteFlowNodeMetadataByPsiFileAndDefineType(psiFile, DefineTypeEnum.DECLARED_METHOD)) {
-                        node.addChildren(new NavigateTreeNode(metadata.getId(), NavigateTreeNodeType.COMPONENT).setLiteFlowNode(metadata));
+                        node.addChildren(new NavigateTreeNode(metadata.getId(), metadata.getName(), NavigateTreeNodeType.COMPONENT).setLiteFlowNode(metadata));
                     }
                 }else if(Objects.requireNonNull(psiFile).getLanguage().isKindOf(XMLLanguage.INSTANCE)){
                     node.setType(NavigateTreeNodeType.ELF);
                     node.setTitle(virtualFile.getName());
                     for (LiteFlowNodeMetadata metadata : this.liteFlowNodeService.listLiteFlowNodeMetadataByPsiFileAndDefineType(psiFile, DefineTypeEnum.XML)) {
-                        node.addChildren(new NavigateTreeNode(metadata.getId(), NavigateTreeNodeType.COMPONENT).setLiteFlowNode(metadata));
+                        node.addChildren(new NavigateTreeNode(metadata.getId(), metadata.getName(), NavigateTreeNodeType.COMPONENT).setLiteFlowNode(metadata));
                     }
                 }else{
                     continue;

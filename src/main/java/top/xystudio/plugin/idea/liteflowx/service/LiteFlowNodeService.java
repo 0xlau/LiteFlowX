@@ -259,6 +259,7 @@ public final class LiteFlowNodeService {
             if (liteFlowComponentClazz != null && targetClass.isInheritor(liteFlowComponentClazz, true)){
                 metadata.setNodeType(LiteFlowNodeTypeEnum.getByQualifiedName(qualifiedName));
                 metadata.setId(this.getLiteFlowComponentId(targetClass));
+                metadata.setName(this.getLiteFlowComponentName(targetClass));
                 metadata.setScript(false);
                 metadata.setPsiTarget(targetClass);
                 metadata.setNaviTarget(targetClass);
@@ -288,6 +289,7 @@ public final class LiteFlowNodeService {
             if (realNodeType.contains(nodeType)){
                 metadata.setNodeType(LiteFlowNodeTypeEnum.getByNodeType(nodeType));
                 metadata.setId(this.getLiteFlowComponentId(targetClass));
+                metadata.setName(this.getLiteFlowComponentName(targetClass));
                 metadata.setScript(false);
                 metadata.setPsiTarget(targetClass);
                 metadata.setNaviTarget(targetClass);
@@ -341,6 +343,7 @@ public final class LiteFlowNodeService {
         }
 
         metadata.setId(this.getLiteFlowComponentId(targetMethod));
+        metadata.setName(this.getLiteFlowComponentName(targetMethod));
         metadata.setNodeType(LiteFlowNodeTypeEnum.getByNodeType(nodeType));
         metadata.setScript(false);
         metadata.setPsiTarget(targetMethod);
@@ -466,6 +469,49 @@ public final class LiteFlowNodeService {
         return null;
     }
 
+    /**
+     * 根据Method获取LiteFlowComponent的name
+     * @param psiMethod psi方法
+     * @return 返回LiteFlowComponent的name
+     */
+    private @Nullable String getLiteFlowComponentName(@NotNull PsiMethod psiMethod){
+        String componentValue = javaService.getAnnotationAttributeValue(psiMethod, Annotation.LiteflowMethod, "nodeName");
+        if (StringUtil.isEmpty(componentValue)){
+            return null;
+        }
+        return componentValue;
+    }
+
+    /**
+     * 根据Class获取LiteFlowComponent的name
+     * @param psiClass psi类
+     * @return 返回LiteFlowComponent的name
+     */
+    private @Nullable String getLiteFlowComponentName(@NotNull PsiClass psiClass){
+
+        String liteFlowComponentName = javaService.getAnnotationAttributeValue(psiClass, Annotation.LiteflowComponent, "name");
+        if (liteFlowComponentName != null && !liteFlowComponentName.isEmpty()){
+            return liteFlowComponentName;
+        }
+
+        // 根据xml文件定义的node也归为Component
+        List<DomFileElement<DomFlow>> flows = DomService.getInstance().getFileElements(DomFlow.class, this.project, GlobalSearchScope.allScope(this.project));
+        for (DomFileElement<DomFlow> flow : flows) {
+            DomNodes domNodes = flow.getRootElement().getNodes();
+            for (DomNode domNode : domNodes.getNodeList()) {
+                String clazzValue = domNode.getClazz().getStringValue();
+                String nameValue = domNode.getName().getStringValue();
+                if (psiClass.getQualifiedName()==null || clazzValue == null || nameValue==null) {
+                    continue;
+                }
+                if (psiClass.getQualifiedName().equals(clazzValue)){
+                    return nameValue;
+                }
+            }
+        }
+
+        return null;
+    }
 
 
 
