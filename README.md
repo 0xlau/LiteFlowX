@@ -15,13 +15,14 @@
 <a href="https://plugins.jetbrains.com/plugin/19145-liteflowx">
 <img src="https://img.shields.io/jetbrains/plugin/v/19145?logo=JetBrains&label=LiteFlowX&style=for-the-badge" />
 </a>
-<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2020.3-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
+<img src="https://img.shields.io/badge/IntelliJ--IDEA->=2021.2-brightgreen?logo=IntelliJ IDEA&style=for-the-badge"/>
 <img src="https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge"/>
 
 </p>
 
-
-![LITEFLOWX](https://s1.ax1x.com/2022/07/11/jcgzKf.png)
+<p align="center">
+<img src="./img/banner.png" />
+</p>
 
 <div align="center">
 
@@ -80,5 +81,5 @@ For full details of install plugins, <a href="https://www.jetbrains.com/help/ide
 ## Thanks for free JetBrains Open Source license
 
 <a href="https://www.jetbrains.com/?from=LiteFlowX" target="_blank">
-<img src="https://user-images.githubusercontent.com/1787798/69898077-4f4e3d00-138f-11ea-81f9-96fb7c49da89.png" height="200"/>
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" height="200"/>
 </a>
