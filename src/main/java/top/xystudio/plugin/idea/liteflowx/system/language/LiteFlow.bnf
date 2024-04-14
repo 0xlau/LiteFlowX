@@ -372,7 +372,7 @@ liteFlowRetryExpress ::= retry PAREN_LEFT number {COMMA string}* PAREN_RIGHT {pi
 
 // Ref
 
-liteFlowPlaceHolderRef ::= BRACE_LEFT (refExpress|number) BRACE_RIGHT
+liteFlowPlaceHolderRef ::= BRACE_LEFT BRACE_LEFT (refExpress|number) BRACE_RIGHT BRACE_RIGHT
 
 liteFlowNodeStringRef ::= string
 

@@ -1812,22 +1812,22 @@ public class LiteFlowParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BRACE_LEFT (refExpress|number) BRACE_RIGHT
+  // BRACE_LEFT BRACE_LEFT (refExpress|number) BRACE_RIGHT BRACE_RIGHT
   public static boolean liteFlowPlaceHolderRef(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "liteFlowPlaceHolderRef")) return false;
     if (!nextTokenIs(b, LITEFLOW_BRACE_LEFT)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, LITEFLOW_BRACE_LEFT);
-    r = r && liteFlowPlaceHolderRef_1(b, l + 1);
-    r = r && consumeToken(b, LITEFLOW_BRACE_RIGHT);
+    r = consumeTokens(b, 0, LITEFLOW_BRACE_LEFT, LITEFLOW_BRACE_LEFT);
+    r = r && liteFlowPlaceHolderRef_2(b, l + 1);
+    r = r && consumeTokens(b, 0, LITEFLOW_BRACE_RIGHT, LITEFLOW_BRACE_RIGHT);
     exit_section_(b, m, LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF, r);
     return r;
   }
 
   // refExpress|number
-  private static boolean liteFlowPlaceHolderRef_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "liteFlowPlaceHolderRef_1")) return false;
+  private static boolean liteFlowPlaceHolderRef_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "liteFlowPlaceHolderRef_2")) return false;
     boolean r;
     r = refExpress(b, l + 1);
     if (!r) r = consumeToken(b, LITEFLOW_NUMBER);
