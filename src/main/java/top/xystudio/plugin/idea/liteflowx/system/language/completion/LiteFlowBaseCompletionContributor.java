@@ -62,6 +62,7 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("ignoreError").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("threadPool").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("maxWaitSeconds").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("maxWaitMilliseconds").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("parallel").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("TO").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("DO").withInsertHandler(parenHandler));
@@ -78,7 +79,9 @@ public class LiteFlowBaseCompletionContributor extends CompletionContributor {
                         resultSet.addElement(LookupElementBuilder.create("OR").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("NOT").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("THEN").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("SER").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("WHEN").withInsertHandler(parenHandler));
+                        resultSet.addElement(LookupElementBuilder.create("PAR").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("FINALLY").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("PRE").withInsertHandler(parenHandler));
                         resultSet.addElement(LookupElementBuilder.create("SWITCH").withInsertHandler(switchHandler));

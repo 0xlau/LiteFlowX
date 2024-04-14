@@ -1,5 +1,7 @@
 <idea-plugin require-restart="true" allow-bundled-update="true" url="https://gitee.com/liupeiqiang/LiteFlowX">
 
+    <idea-version since-build="203"/>
+
     <id>top.xystudio.plugin.idea.LiteFlowX</id>
     <name>LiteFlowX</name>
     <vendor email="237972113@qq.com" url="https://gitee.com/liupeiqiang/LiteFlowX">Coder-XiaoYi</vendor>

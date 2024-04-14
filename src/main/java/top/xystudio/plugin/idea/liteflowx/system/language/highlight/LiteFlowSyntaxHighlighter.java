@@ -80,6 +80,8 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
             return QLEXPRESS_KEYWORDS_KEYS;
         } else if(tokenType.equals(LiteFlowTypes.LITEFLOW_WHEN)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_THEN)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_PAR)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_SER)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_FINALLY)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_PRE)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_SWITCH)
@@ -90,6 +92,7 @@ public class LiteFlowSyntaxHighlighter extends SyntaxHighlighterBase {
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_THREADPOOL)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_PARALLEL)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_MAXWAITSECONDS)
+                || tokenType.equals(LiteFlowTypes.LITEFLOW_MAXWAITMILLISECONDS)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TO)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_TAG)
                 || tokenType.equals(LiteFlowTypes.LITEFLOW_DATA)

@@ -71,14 +71,32 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
 
   @Override
   @NotNull
+  public List<LiteFlowLiteFlowMaxWaitMilliseconds> getLiteFlowMaxWaitMillisecondsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowMaxWaitMilliseconds.class);
+  }
+
+  @Override
+  @NotNull
   public List<LiteFlowLiteFlowMaxWaitSeconds> getLiteFlowMaxWaitSecondsList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowMaxWaitSeconds.class);
   }
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowParExpress getLiteFlowParExpress() {
+    return findChildByClass(LiteFlowLiteFlowParExpress.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowPreExpress getLiteFlowPreExpress() {
     return findChildByClass(LiteFlowLiteFlowPreExpress.class);
+  }
+
+  @Override
+  @Nullable
+  public LiteFlowLiteFlowSerExpress getLiteFlowSerExpress() {
+    return findChildByClass(LiteFlowLiteFlowSerExpress.class);
   }
 
   @Override

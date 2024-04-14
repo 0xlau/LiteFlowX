@@ -117,6 +117,8 @@
     // liteflow keywords
     THEN = "THEN"
     WHEN = "WHEN"
+    SER = "SER"
+    PAR = "PAR"
     SWITCH = "SWITCH"
     PRE = "PRE"
     FINALLY = "FINALLY"
@@ -136,6 +138,7 @@
     tag = "tag"
     threadPool = "threadPool"
     maxWaitSeconds = "maxWaitSeconds"
+    maxWaitMilliseconds = "maxWaitMilliseconds"
     parallel = "parallel"
     must = "must"
     to = "to"
@@ -250,16 +253,16 @@ liteFlowAllLogicExpress ::= liteFlowAndExpress | liteFlowOrExpress | liteFlowNot
 liteFlowLogicExpress ::= liteFlowAllLogicExpress | liteFlowNodeRefExpress
 
 // LiteFlow node("")或NODE("") 子表达式
-liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds)}* {pin=1}
+liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}* {pin=1}
 
 // liteFlow Node引用 子表达式
-liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds)}*
+liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}*
 
 // LiteFlow Node引用表达式
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpress | liteFlowWhenExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress | liteFlowMaxWaitSeconds)}*) | liteFlowFinallyExpress) {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpress | liteFlowWhenExpress | liteFlowSerExpress | liteFlowParExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}*) | liteFlowFinallyExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -285,9 +288,15 @@ liteFlowNotExpress ::= LNOT PAREN_LEFT liteFlowLogicExpress PAREN_RIGHT {pin=1}
 // LiteFlow THEN() 表达式
 liteFlowThenExpress ::= THEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT {pin=1}
 
+// LiteFlow SER() 表达式
+liteFlowSerExpress ::= SER PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT {pin=1}
+
 // LiteFlow WHEN() 表达式
 liteFlowWhenExpress ::= WHEN PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT { liteFlowWhenSubExpress }* {pin=1}
 liteFlowWhenSubExpress ::= DOT (liteFlowIgnoreErrorExpress | liteFlowAnyExpress | liteFlowThreadPoolExpress | liteFlowMustExpress)
+
+// LiteFlow PAR() 表达式
+liteFlowParExpress ::= PAR PAREN_LEFT liteFlowAllExpress {COMMA liteFlowAllExpress}* PAREN_RIGHT { liteFlowWhenSubExpress }* {pin=1}
 
 // LiteFlow SWITCH() 表达式
 liteFlowSwitchExpress ::= SWITCH PAREN_LEFT liteFlowNodeRefExpress PAREN_RIGHT DOT (liteFlowToExpress | liteFlowDefaultExpress) {pin=1}
@@ -348,6 +357,9 @@ liteFlowDataExpress ::= data PAREN_LEFT (string | elVariableRef) PAREN_RIGHT {pi
 
 // liteFlow .maxWaitSeconds() 表达式
 liteFlowMaxWaitSeconds ::= maxWaitSeconds PAREN_LEFT (number | elVariableRef) PAREN_RIGHT {pin=1}
+
+// liteFlow .maxWaitSeconds() 表达式
+liteFlowMaxWaitMilliseconds ::= maxWaitMilliseconds PAREN_LEFT (number | elVariableRef) PAREN_RIGHT {pin=1}
 
 // liteFlow .parallel() 表达式
 liteFlowParallelExpress ::= parallel PAREN_LEFT boolean PAREN_RIGHT {pin=1}
