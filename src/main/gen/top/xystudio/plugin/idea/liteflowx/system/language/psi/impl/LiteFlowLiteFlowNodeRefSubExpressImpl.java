@@ -53,6 +53,12 @@ public class LiteFlowLiteFlowNodeRefSubExpressImpl extends ASTWrapperPsiElement 
 
   @Override
   @NotNull
+  public List<LiteFlowLiteFlowRetryExpress> getLiteFlowRetryExpressList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowRetryExpress.class);
+  }
+
+  @Override
+  @NotNull
   public List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowTagExpress.class);
   }

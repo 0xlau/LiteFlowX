@@ -63,6 +63,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACE_HOLDER_REF");
   IElementType LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PLACE_HOLDER_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_PRE_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_PRE_EXPRESS");
+  IElementType LITEFLOW_LITE_FLOW_RETRY_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_RETRY_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_SER_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SER_EXPRESS");
   IElementType LITEFLOW_LITE_FLOW_STATEMENT = new LiteFlowElementType("LITEFLOW_LITE_FLOW_STATEMENT");
   IElementType LITEFLOW_LITE_FLOW_SWITCH_EXPRESS = new LiteFlowElementType("LITEFLOW_LITE_FLOW_SWITCH_EXPRESS");
@@ -172,6 +173,7 @@ public interface LiteFlowTypes {
   IElementType LITEFLOW_QUESTION = new LiteFlowTokenType("?");
   IElementType LITEFLOW_QUOTIENT = new LiteFlowTokenType("/");
   IElementType LITEFLOW_REMAINDER = new LiteFlowTokenType("%");
+  IElementType LITEFLOW_RETRY = new LiteFlowTokenType("retry");
   IElementType LITEFLOW_RETURN = new LiteFlowTokenType("return");
   IElementType LITEFLOW_SEMICOLON = new LiteFlowTokenType(";");
   IElementType LITEFLOW_SER = new LiteFlowTokenType("SER");
@@ -357,6 +359,9 @@ public interface LiteFlowTypes {
       }
       else if (type == LITEFLOW_LITE_FLOW_PRE_EXPRESS) {
         return new LiteFlowLiteFlowPreExpressImpl(node);
+      }
+      else if (type == LITEFLOW_LITE_FLOW_RETRY_EXPRESS) {
+        return new LiteFlowLiteFlowRetryExpressImpl(node);
       }
       else if (type == LITEFLOW_LITE_FLOW_SER_EXPRESS) {
         return new LiteFlowLiteFlowSerExpressImpl(node);

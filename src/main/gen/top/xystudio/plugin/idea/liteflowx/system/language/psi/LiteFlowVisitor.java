@@ -227,6 +227,10 @@ public class LiteFlowVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteFlowRetryExpress(@NotNull LiteFlowLiteFlowRetryExpress o) {
+    visitPsiElement(o);
+  }
+
   public void visitLiteFlowSerExpress(@NotNull LiteFlowLiteFlowSerExpress o) {
     visitPsiElement(o);
   }

@@ -149,6 +149,7 @@
     DO = "DO"
     LBREAK = "BREAK"
     DEFAULT = "DEFAULT"
+    retry = "retry"
 
   ]
 
@@ -253,16 +254,16 @@ liteFlowAllLogicExpress ::= liteFlowAndExpress | liteFlowOrExpress | liteFlowNot
 liteFlowLogicExpress ::= liteFlowAllLogicExpress | liteFlowNodeRefExpress
 
 // LiteFlow node("")或NODE("") 子表达式
-liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}* {pin=1}
+liteFlowNodeStringSubExpress ::= (node | UNODE) PAREN_LEFT liteFlowNodeStringRef PAREN_RIGHT {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds | liteFlowRetryExpress)}* {pin=1}
 
 // liteFlow Node引用 子表达式
-liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}*
+liteFlowNodeRefSubExpress ::= liteFlowNodeRef {DOT (liteFlowTagExpress | liteFlowDataExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds | liteFlowRetryExpress)}*
 
 // LiteFlow Node引用表达式
 liteFlowNodeRefExpress ::= {block_comment | line_comment}* (liteFlowNodeRefSubExpress | liteFlowNodeStringSubExpress) {block_comment | line_comment}*
 
 // LiteFlow Condition 表达式
-liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpress | liteFlowWhenExpress | liteFlowSerExpress | liteFlowParExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds)}*) | liteFlowFinallyExpress) {block_comment | line_comment}*
+liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpress | liteFlowWhenExpress | liteFlowSerExpress | liteFlowParExpress | liteFlowSwitchExpress | liteFlowPreExpress | liteFlowIf2Express | liteFlowIf3Express | liteFlowForExpress | liteFlowIteratorExpress | liteFlowWhileExpress | liteFlowCatchExpress) {DOT (liteFlowIdExpress | liteFlowTagExpress | liteFlowMaxWaitSeconds | liteFlowMaxWaitMilliseconds | liteFlowRetryExpress)}*) | liteFlowFinallyExpress) {block_comment | line_comment}*
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
@@ -363,6 +364,9 @@ liteFlowMaxWaitMilliseconds ::= maxWaitMilliseconds PAREN_LEFT (number | elVaria
 
 // liteFlow .parallel() 表达式
 liteFlowParallelExpress ::= parallel PAREN_LEFT boolean PAREN_RIGHT {pin=1}
+
+// liteFlow .retry() 表达式
+liteFlowRetryExpress ::= retry PAREN_LEFT number {COMMA string}* PAREN_RIGHT {pin=1}
 
 /** Express End **/
 

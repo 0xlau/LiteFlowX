@@ -94,6 +94,12 @@ public class LiteFlowLiteFlowConditionExpressImpl extends ASTWrapperPsiElement i
   }
 
   @Override
+  @NotNull
+  public List<LiteFlowLiteFlowRetryExpress> getLiteFlowRetryExpressList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiteFlowLiteFlowRetryExpress.class);
+  }
+
+  @Override
   @Nullable
   public LiteFlowLiteFlowSerExpress getLiteFlowSerExpress() {
     return findChildByClass(LiteFlowLiteFlowSerExpress.class);

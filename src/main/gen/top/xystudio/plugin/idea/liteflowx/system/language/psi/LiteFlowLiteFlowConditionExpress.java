@@ -40,6 +40,9 @@ public interface LiteFlowLiteFlowConditionExpress extends PsiElement {
   @Nullable
   LiteFlowLiteFlowPreExpress getLiteFlowPreExpress();
 
+  @NotNull
+  List<LiteFlowLiteFlowRetryExpress> getLiteFlowRetryExpressList();
+
   @Nullable
   LiteFlowLiteFlowSerExpress getLiteFlowSerExpress();
 

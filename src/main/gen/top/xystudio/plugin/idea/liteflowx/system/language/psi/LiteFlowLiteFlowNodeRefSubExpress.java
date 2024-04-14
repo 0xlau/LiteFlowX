@@ -20,6 +20,9 @@ public interface LiteFlowLiteFlowNodeRefSubExpress extends PsiElement {
   LiteFlowLiteFlowNodeRef getLiteFlowNodeRef();
 
   @NotNull
+  List<LiteFlowLiteFlowRetryExpress> getLiteFlowRetryExpressList();
+
+  @NotNull
   List<LiteFlowLiteFlowTagExpress> getLiteFlowTagExpressList();
 
 }
