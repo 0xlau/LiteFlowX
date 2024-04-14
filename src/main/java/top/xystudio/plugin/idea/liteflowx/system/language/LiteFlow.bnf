@@ -267,10 +267,10 @@ liteFlowConditionExpress ::= {block_comment | line_comment}* (((liteFlowThenExpr
 
 // LiteFlow IF(_1, _2).ELIF(_3, _4).ELSE() 表达式
 liteFlowIf2Express ::= LIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2SubExpress] {pin=7}
-liteFlowIf2SubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress ) {pin=1}
+liteFlowIf2SubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress )
 
 liteFlowIf2ElifExpress ::= LELIF PAREN_LEFT (liteFlowAllLogicExpress | liteFlowNodeRefExpress) COMMA liteFlowAllExpress PAREN_RIGHT [liteFlowIf2ElifSubExpress] {pin=1}
-liteFlowIf2ElifSubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress ) {pin=1}
+liteFlowIf2ElifSubExpress ::= DOT ( liteFlowIf2ElifExpress | liteFlowIf2ElseExpress )
 
 liteFlowIf2ElseExpress ::= LELSE PAREN_LEFT liteFlowAllExpress PAREN_RIGHT {pin=1}
 
