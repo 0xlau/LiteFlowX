@@ -31,7 +31,7 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
             }
             String value = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "value");
             String nodeType = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "nodeType");
-            if (ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, value)){
+            if (ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, value.split("\\(")[0])){
                 if (value.equals(LiteFlowMethodEnum.PROCESS) && nodeType.equals(NodeTypeEnum.COMMON)){
                     return;
                 }
@@ -51,6 +51,9 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
                     return;
                 }
                 if (value.equals(LiteFlowMethodEnum.PROCESS_SWITCH) && nodeType.equals(NodeTypeEnum.SWITCH)){
+                    return;
+                }
+                if (value.equals(LiteFlowMethodEnum.PROCESS_BOOLEAN) && nodeType.equals(NodeTypeEnum.BOOLEAN)){
                     return;
                 }
                 holder.newAnnotation(HighlightSeverity.WARNING, "LiteFlowMethodEnum 与 nodeType 不是最佳的搭配形式")

@@ -6,13 +6,16 @@ import com.intellij.lang.java.JavaLanguage;
 import com.intellij.lang.xml.XMLLanguage;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import icons.LiteFlowIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.service.LiteFlowService;
 import top.xystudio.plugin.idea.liteflowx.util.XmlUtils;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * 文件图标提供
@@ -31,9 +34,29 @@ public class FileIconProvider extends IconProvider {
         if (!language.isKindOf(JavaLanguage.INSTANCE)){
             return null;
         }
-        if (!(element instanceof PsiClass)){
+        if (!(element instanceof PsiClass psiClass)){
             return null;
         }
+
+        Icon icon = getIcon(psiClass);
+        if (icon != null){
+            return icon;
+        }
+
+        // 多组件判断
+        if (!psiClass.hasAnnotation(Annotation.LiteflowCmpDefine)){
+            List<PsiMethod> liteFlowMethodComponents = LiteFlowService.getInstance(element.getProject()).collectLiteFlowComponentsInClass(psiClass);
+            if (liteFlowMethodComponents.size() > 1){
+                return LiteFlowIcons.MULTI_COMPONENT_ICON;
+            }else if(liteFlowMethodComponents.size() == 1){
+                return getIcon(liteFlowMethodComponents.get(0));
+            }
+        }
+
+        return null;
+    }
+
+    private Icon getIcon(PsiElement element){
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowIfComponent(element)){
             return LiteFlowIcons.IF_COMPONENT_ICON;
         }
@@ -52,11 +75,11 @@ public class FileIconProvider extends IconProvider {
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBreakComponent(element)){
             return LiteFlowIcons.BRK_COMPONENT_ICON;
         }
+        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowBooleanComponent(element)){
+            return LiteFlowIcons.BOL_COMPONENT_ICON;
+        }
         if (LiteFlowService.getInstance(element.getProject()).isLiteFlowNormalComponent(element)){
             return LiteFlowIcons.COMMON_COMPONENT_ICON;
-        }
-        if (LiteFlowService.getInstance(element.getProject()).isLiteFlowMultiComponent((PsiClass) element)){
-            return LiteFlowIcons.MULTI_COMPONENT_ICON;
         }
         return null;
     }

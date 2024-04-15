@@ -92,6 +92,8 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
                         }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
+                        }else if (liteFlowService.isLiteFlowBooleanComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BOOLEAN_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
                         }else {
                             return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiClass(c), c);
                         }
@@ -109,6 +111,8 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.WHILE_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }else if (liteFlowService.isLiteFlowBreakComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.BREAK_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
+                        }else if (liteFlowService.isLiteFlowBooleanComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BOOLEAN_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }else {
                             return new LiteFlowElement(LiteFlowElementType.NORMAL_COMPONENT, liteFlowService.getLiteFlowComponentNameByPsiMethod(c), c);
                         }
@@ -124,6 +128,8 @@ public class LiteFlowToolWindow extends JPanel {
                             return new LiteFlowElement(LiteFlowElementType.WHILE_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
                         }else if (liteFlowService.isLiteFlowScriptBreakComponent(o)) {
                             return new LiteFlowElement(LiteFlowElementType.BREAK_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
+                        }else if (liteFlowService.isLiteFlowScriptBooleanComponent(o)) {
+                            return new LiteFlowElement(LiteFlowElementType.BOOLEAN_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
                         }else {
                             return new LiteFlowElement(LiteFlowElementType.NORMAL_SCRIPT, liteFlowService.getLiteFlowComponentNameByXmlTag(c), c);
                         }

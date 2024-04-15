@@ -28,6 +28,8 @@ public interface LiteFlowIcons {
 
     Icon BRK_COMPONENT_ICON =  IconLoader.getIcon("/images/break.svg", LiteFlowIcons.class);
 
+    Icon BOL_COMPONENT_ICON =  IconLoader.getIcon("/images/bol.svg", LiteFlowIcons.class);
+
     /** SCRIPT类文件图标 */
     Icon COMMON_SCRIPT_ICON = IconLoader.getIcon("/images/script_common.svg", LiteFlowIcons.class);
 
@@ -40,6 +42,8 @@ public interface LiteFlowIcons {
     Icon WHI_SCRIPT_ICON =  IconLoader.getIcon("/images/script_while.svg", LiteFlowIcons.class);
 
     Icon BRK_SCRIPT_ICON =  IconLoader.getIcon("/images/script_break.svg", LiteFlowIcons.class);
+
+    Icon BOL_SCRIPT_ICON =  IconLoader.getIcon("/images/script_bol.svg", LiteFlowIcons.class);
 
     /** TOOLWINDOW图标 */
     Icon TOOL_WINDOW_ICON =  IconLoader.getIcon("/images/tool_13x13.svg", LiteFlowIcons.class);

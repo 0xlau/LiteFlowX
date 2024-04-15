@@ -16,6 +16,8 @@ public class Clazz {
 
     public static final String NodeBreakComponent = "com.yomahub.liteflow.core.NodeBreakComponent";
 
+    public static final String NodeBooleanComponent = "com.yomahub.liteflow.core.NodeBooleanComponent";
+
     public static final String LiteFlowConfig = "com.yomahub.liteflow.property.LiteflowConfig";
 
     public static final String LiteflowResponse = "com.yomahub.liteflow.flow.LiteflowResponse";

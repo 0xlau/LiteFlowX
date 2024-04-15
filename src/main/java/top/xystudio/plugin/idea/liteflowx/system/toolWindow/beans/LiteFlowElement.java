@@ -40,6 +40,7 @@ public class LiteFlowElement {
             case IF_SCRIPT:
             case SWITCH_SCRIPT:
             case FOR_SCRIPT:
+            case BOOLEAN_SCRIPT:
             case WHILE_SCRIPT:
             case BREAK_SCRIPT:{
                 if (psiElement instanceof XmlTag){
@@ -53,11 +54,12 @@ public class LiteFlowElement {
             case ITERATOR_COMPONENT:
             case BREAK_COMPONENT:
             case WHILE_COMPONENT:
+            case BOOLEAN_COMPONENT:
             case SWITCH_COMPONENT: {
                 if (psiElement instanceof PsiClass) {
                     this.subName = ((PsiClass) psiElement).getQualifiedName();
                 } else if (psiElement instanceof PsiMethod) {
-                    this.subName = ((PsiMethod) psiElement).getContainingClass().getQualifiedName() + "# " + ((PsiMethod) psiElement).getName();
+                    this.subName = ((PsiMethod) psiElement).getContainingClass().getQualifiedName() + " # " + ((PsiMethod) psiElement).getName() + "(...)";
                 }
                 break;
             }
@@ -121,6 +123,8 @@ public class LiteFlowElement {
                 return LiteFlowIcons.WHI_SCRIPT_ICON;
             case BREAK_SCRIPT:
                 return LiteFlowIcons.BRK_SCRIPT_ICON;
+            case BOOLEAN_SCRIPT:
+                return LiteFlowIcons.BOL_SCRIPT_ICON;
             case NORMAL_COMPONENT:
                 return LiteFlowIcons.COMMON_COMPONENT_ICON;
             case WHILE_COMPONENT:
@@ -135,6 +139,8 @@ public class LiteFlowElement {
                 return LiteFlowIcons.SW_COMPONENT_ICON;
             case BREAK_COMPONENT:
                 return LiteFlowIcons.BRK_COMPONENT_ICON;
+            case BOOLEAN_COMPONENT:
+                return LiteFlowIcons.BOL_COMPONENT_ICON;
             case CHAIN:
                 return LiteFlowIcons.CHAIN_ICON;
             case Element:

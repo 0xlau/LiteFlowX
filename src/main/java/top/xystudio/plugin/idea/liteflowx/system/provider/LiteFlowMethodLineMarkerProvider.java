@@ -59,6 +59,9 @@ public class LiteFlowMethodLineMarkerProvider extends RelatedItemLineMarkerProvi
         } else if (nodeType.equals(NodeTypeEnum.BREAK)) {
             icon = LiteFlowIcons.BRK_COMPONENT_ICON;
             tip = "Break component";
+        } else if (nodeType.equals(NodeTypeEnum.BOOLEAN)) {
+            icon = LiteFlowIcons.BOL_COMPONENT_ICON;
+            tip = "Break component";
         } else {
             return;
         }
