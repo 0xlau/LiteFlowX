@@ -21,7 +21,6 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-
         <!-- LiteFlow @LiteFlowMethod用法检测 -->
         <annotator
                 language="JAVA"

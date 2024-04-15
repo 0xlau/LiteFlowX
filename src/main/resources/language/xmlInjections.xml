@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="LanguageInjectionConfiguration">
+
+    <injection language="LiteFlow" injector-id="xml">
+        <display-name>Chain Route (XmlTag)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("route"))
+                    .withParent(xmlTag().withLocalName(string().equalTo("chain")))
+                    .withAncestor(2, xmlTag().withLocalName(string().equalTo("flow")))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+
+    <injection language="LiteFlow" injector-id="xml">
+        <display-name>Chain Body (XmlTag)</display-name>
+        <place><![CDATA[
+            xmlTag().withLocalName(string().equalTo("body"))
+                    .withParent(xmlTag().withLocalName(string().equalTo("chain")))
+                    .withAncestor(2, xmlTag().withLocalName(string().equalTo("flow")))
+                    .inVirtualFile(virtualFile().withName(string().contains(".xml")))
+            ]]></place>
+    </injection>
+
     <injection language="LiteFlow" injector-id="xml">
         <display-name>Chain (XmlTag)</display-name>
         <place><![CDATA[
             xmlTag().withLocalName(string().equalTo("chain"))
                     .withParent(xmlTag().withLocalName(string().equalTo("flow")))
+                    .withoutText(string().contains("<body>"))
+                    .withoutText(string().contains("</body>"))
+                    .withoutText(string().contains("<route>"))
+                    .withoutText(string().contains("</route>"))
                     .inVirtualFile(virtualFile().withName(string().contains(".xml")))
             ]]></place>
     </injection>

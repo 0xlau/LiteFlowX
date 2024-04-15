@@ -175,6 +175,7 @@ statement ::= (
     opSelfStatement |
     liteFlowStatement |
     liteFlowPlaceHolderStatement |
+    liteFlowAllLogicStatement |
     BRACE_LEFT statement* BRACE_RIGHT
 )
 
@@ -195,7 +196,8 @@ continueStatement ::= continue SEMICOLON
 opSelfStatement ::= opSelfExpress SEMICOLON
 liteFlowStatement ::= liteFlowConditionExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
 liteFlowPlaceHolderStatement ::= liteFlowPlaceholderAssignExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
-private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | liteFlowPlaceHolderStatement | line_comment | block_comment | fnInvokeStatement)
+liteFlowAllLogicStatement ::= liteFlowAllLogicExpress SEMICOLON {pin=1 recoverWhile=recover_liteFlowStatement}
+private recover_liteFlowStatement ::= !(SEMICOLON | liteFlowStatement | assignStatement | liteFlowPlaceHolderStatement | liteFlowAllLogicStatement | line_comment | block_comment | fnInvokeStatement)
 
 /** Statement Start **/
 

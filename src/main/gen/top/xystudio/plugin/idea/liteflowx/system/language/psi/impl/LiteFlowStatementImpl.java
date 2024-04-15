@@ -65,6 +65,12 @@ public class LiteFlowStatementImpl extends ASTWrapperPsiElement implements LiteF
 
   @Override
   @Nullable
+  public LiteFlowLiteFlowAllLogicStatement getLiteFlowAllLogicStatement() {
+    return findChildByClass(LiteFlowLiteFlowAllLogicStatement.class);
+  }
+
+  @Override
+  @Nullable
   public LiteFlowLiteFlowPlaceHolderStatement getLiteFlowPlaceHolderStatement() {
     return findChildByClass(LiteFlowLiteFlowPlaceHolderStatement.class);
   }
