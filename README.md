@@ -33,7 +33,7 @@ English | [简体中文](./README.zh-CN.md)
 <h3>LiteFlowX is designed to increase productivity when you use the <a href="https://github.com/dromara/liteflow">LiteFlow framework</a>.</h3>
 
 ## 🍬 LiteFlowX Features:
-- Fully compatible with all features of LiteFlow v2.9.x
+- Fully compatible with all features of LiteFlow v2.12.x
 - Supports ELF regular expressions (autosuggestion, syntax highlighting, syntax detection)
 - Subdivided component type icons to make components clear at a glance
 - Ability to identify components, links
