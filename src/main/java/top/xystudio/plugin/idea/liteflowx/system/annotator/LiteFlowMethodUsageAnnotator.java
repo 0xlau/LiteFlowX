@@ -7,7 +7,7 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import top.xystudio.plugin.idea.liteflowx.constant.Annotation;
 import top.xystudio.plugin.idea.liteflowx.constant.LiteFlowMethodEnum;
@@ -31,6 +31,11 @@ public class LiteFlowMethodUsageAnnotator implements Annotator {
             }
             String value = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "value");
             String nodeType = javaService.getAnnotationAttributeValue((PsiMethod) element, Annotation.LiteflowMethod, "nodeType");
+            if (value == null || nodeType == null){
+                return;
+            }
+            value = value.split("\\(")[0];
+            nodeType = nodeType.split("\\(")[0];
             if (ArrayUtils.contains(LiteFlowMethodEnum.NECESSARY_PROCESS, value.split("\\(")[0])){
                 if (value.equals(LiteFlowMethodEnum.PROCESS) && nodeType.equals(NodeTypeEnum.COMMON)){
                     return;

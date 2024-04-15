@@ -367,7 +367,8 @@ public class LiteFlowService implements Serializable {
                 isLiteFlowScriptSwitchComponent(psiElement)     ||
                 isLiteFlowScriptForComponent(psiElement)        ||
                 isLiteFlowScriptWhileComponent(psiElement)      ||
-                isLiteFlowScriptBreakComponent(psiElement)
+                isLiteFlowScriptBreakComponent(psiElement)      ||
+                isLiteFlowScriptBooleanComponent(psiElement)
         );
     }
 
