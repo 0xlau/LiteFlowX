@@ -173,7 +173,7 @@ public class LiteFlowService implements Serializable {
         String componentValue = javaService.getAnnotationAttributeValue(psiClass, Annotation.Component, "value");
         if (componentValue != null){
             /* 如果获取的value值为空，则默认使用字符串首字母小写的Class名称 */
-            if (componentValue.equals("")){
+            if (componentValue.isEmpty()){
                 componentValue = StringUtils.lowerFirst(className);
             }
             return componentValue;
@@ -187,7 +187,7 @@ public class LiteFlowService implements Serializable {
         String name = StringUtil.isEmpty(liteFlowComponentValue)? liteFlowComponentId : liteFlowComponentValue;
         if (name != null){
             /* 如果获取的value或者id值为空，则默认使用字符串首字母小写的Class名称 */
-            if (name.equals("")){
+            if (name.isEmpty()){
                 name = StringUtils.lowerFirst(className);
             }
             return name;
@@ -200,10 +200,11 @@ public class LiteFlowService implements Serializable {
             for (Node node : nodes.getNodeList()) {
                 String clazzValue = node.getClazz().getStringValue();
                 String idValue = node.getId().getStringValue();
-                if (psiClass.getQualifiedName()==null || clazzValue == null || idValue==null) {
+                String psiClassQualifiedName = psiClass.getQualifiedName();
+                if (psiClassQualifiedName == null || clazzValue == null || idValue == null) {
                     continue;
                 }
-                if (psiClass.getQualifiedName().equals(clazzValue)){
+                if (psiClassQualifiedName.equals(clazzValue)){
                     return idValue;
                 }
             }
@@ -213,8 +214,12 @@ public class LiteFlowService implements Serializable {
     }
 
     private boolean _isLiteFlow(PsiElement psiElement, String clazz, String nodeTypeEnum){
-        if (psiElement instanceof PsiClass psiClass){
+        if (psiElement instanceof PsiClass){
+            PsiClass psiClass = (PsiClass) psiElement;
             // 判断是否类组件
+            if (psiClass.getQualifiedName() == null){
+                return false;
+            }
             // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
             if (psiClass.getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
                 return false;
@@ -232,8 +237,12 @@ public class LiteFlowService implements Serializable {
                 return false;
             }
             return nodeTypeEnum.equals(nodeType.split("\\(")[0]);
-        } else if (psiElement instanceof PsiMethod psiMethod) {
+        } else if (psiElement instanceof PsiMethod) {
+            PsiMethod psiMethod = (PsiMethod) psiElement;
             // 判断是否方法声明组件
+            if (psiMethod.getContainingClass() == null || psiMethod.getContainingClass().getQualifiedName() == null){
+                return false;
+            }
             // 排除所有包名以 com.yomahub.liteflow.core. 开头的Class
             if (psiMethod.getContainingClass().getQualifiedName().indexOf("com.yomahub.liteflow.core.") == 0){
                 return false;

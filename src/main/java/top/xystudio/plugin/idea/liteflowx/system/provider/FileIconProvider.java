@@ -34,9 +34,11 @@ public class FileIconProvider extends IconProvider {
         if (!language.isKindOf(JavaLanguage.INSTANCE)){
             return null;
         }
-        if (!(element instanceof PsiClass psiClass)){
+        if (!(element instanceof PsiClass)){
             return null;
         }
+
+        PsiClass psiClass = (PsiClass) element;
 
         Icon icon = getIcon(psiClass);
         if (icon != null){
