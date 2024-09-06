@@ -21,6 +21,7 @@ import java.util.List;
  * 文件图标提供
  */
 public class FileIconProvider extends IconProvider {
+    private static final Icon nullIcon = new ImageIcon();
     @Override
     public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
         if (isLiteFlowXmlFile(element)){
@@ -40,8 +41,16 @@ public class FileIconProvider extends IconProvider {
 
         PsiClass psiClass = (PsiClass) element;
 
-        Icon icon = getIcon(psiClass);
+        Icon icon = JavaFileIconCache.getFromCache(element.getProject(), psiClass);
+        if (icon != null) {
+            if (icon == nullIcon) {
+                return null;
+            }
+            return icon;
+        }
+        icon = getIcon(psiClass);
         if (icon != null){
+            JavaFileIconCache.updateCache(element.getProject(), psiClass, icon);
             return icon;
         }
 
@@ -49,12 +58,16 @@ public class FileIconProvider extends IconProvider {
         if (!psiClass.hasAnnotation(Annotation.LiteflowCmpDefine)){
             List<PsiMethod> liteFlowMethodComponents = LiteFlowService.getInstance(element.getProject()).collectLiteFlowComponentsInClass(psiClass);
             if (liteFlowMethodComponents.size() > 1){
+                JavaFileIconCache.updateCache(element.getProject(), psiClass, LiteFlowIcons.MULTI_COMPONENT_ICON);
                 return LiteFlowIcons.MULTI_COMPONENT_ICON;
             }else if(liteFlowMethodComponents.size() == 1){
-                return getIcon(liteFlowMethodComponents.get(0));
+                icon = getIcon(liteFlowMethodComponents.get(0));
+                JavaFileIconCache.updateCache(element.getProject(), psiClass, icon);
+                return icon;
             }
         }
 
+        JavaFileIconCache.updateCache(element.getProject(), psiClass, nullIcon);
         return null;
     }
 
