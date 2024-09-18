@@ -10,32 +10,26 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.Icon;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author hongzhida
  * @date 2024-08-16
  */
 public class JavaFileIconCache {
-
-    private static CachedValue<Map<PsiClass, Icon>> cache;
+    private static final Map<Project, CachedValue<Map<PsiClass, Icon>>> projectCache = new ConcurrentHashMap<>();
 
     public static CachedValue<Map<PsiClass, Icon>> getCache(@NotNull Project project) {
-        if(cache == null) {
-            cache = CachedValuesManager.getManager(project).createCachedValue(() -> {
-                // Create and return the initial cache value
-                return CachedValueProvider.Result.create(new HashMap<>(), PsiModificationTracker.NEVER_CHANGED);
-            });
-        }
-        return cache;
+        return projectCache.computeIfAbsent(project, p-> CachedValuesManager.getManager(project).createCachedValue(() -> {
+            // Create and return the initial cache value
+            return CachedValueProvider.Result.create(new HashMap<>(), PsiModificationTracker.NEVER_CHANGED);
+        }));
     }
 
     public static void clearCache(Project project, PsiClass psiClass) {
-        if(cache != null) {
-            Map<PsiClass, Icon> map = getCache(project).getValue();
-            map.remove(psiClass);
-        };
+        Map<PsiClass, Icon> map = getCache(project).getValue();
+        map.remove(psiClass);
     }
 
     public static void updateCache(@NotNull Project project, PsiClass psiClass, Icon value) {
