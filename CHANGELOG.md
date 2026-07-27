@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- 兼容 IDEA 2025.1 版本
+
 ## [1.3.2] - 2024-08-20
 - 兼容 移除pluginUntilBuild
 
